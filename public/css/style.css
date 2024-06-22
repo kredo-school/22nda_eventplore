@@ -1,0 +1,106 @@
+
+/*
+
+colors
+color-red:#F7142B;
+color-green:#84947C;
+color-yellow:#F6E7D2;
+color-dg:#0C2C04;
+color-grey:#757B9D;
+color-black:#000000;
+
+ */
+
+ /* アイコンとロゴはページに合わせて自己調整 */
+ 
+
+.h1{
+    color:#0C2C04;
+}
+.h2{
+    color:#0C2C04;
+}
+.h3{
+    color:#0C2C04;
+}
+.h4{
+    color:#0C2C04;
+}
+.h5{
+    color:#0C2C04;
+}
+.h6{
+    color:#0C2C04;
+}
+.btn-green{
+    background-color:#84947C;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-family: "Raleway",sans-serif;
+    text-decoration: none;
+}
+.btn-yellow{
+    background-color:#F6E7D2;
+    color: #0C2C04;
+    font-weight: bold;
+    font-family: "Raleway",sans-serif;
+    text-decoration: none;
+}
+.btn-red{
+    background-color:#F7142B;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-family: "Raleway",sans-serif;
+    text-decoration: none;
+}
+.btn-outline-red{
+    color: #F7142B;
+    border-color: #F7142B;
+    font-weight: bold;
+    font-family: "Raleway",sans-serif;
+    text-decoration: none;
+}
+.btn-dg{
+    background-color: #0C2C04;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-family: "Raleway",sans-serif;
+    text-decoration: none;
+}
+.btn-outline-dg{
+    color: #0C2C04;
+    border-color: #0C2C04;
+    font-weight: bold;
+    font-family: "Raleway",sans-serif;
+    text-decoration: none;
+}
+.tag{
+    background-color: #F6E7D2;
+    border-radius: 50%;
+    color: #000000;
+    justify-content: center;
+    text-align: center;
+}
+.input{
+    border-color: #84947C;
+
+}
+.avatar-sm{
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.avatar-md{
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.avatar-lg{
+    width: 7rem;
+    height: 7rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
