@@ -1,0 +1,16 @@
+.navbar-top-bottom-border {
+    border-top: 2px solid #84947C;
+    border-bottom: 2px solid #84947C;
+}
+
+.navbar-fixed-height {
+    height: 80px;
+    margin: 0 auto;
+}
+
+.footer {
+    background-color: #f8f9fa; /* フッターの背景色 */
+    padding: 20px 0; /* フッターの内側の余白 */
+    border-top: 1px solid #84947C; /* 上部のボーダー */
+    border-bottom: 1px solid #84947C; /* 下部のボーダー */
+}
