@@ -8,4 +8,14 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/', )->name('home');
+
+Route::get('/event-owner/reservations/delete', function () {
+    return view('event-owners.reservations.show');
+});
+
+// Example: I'm creating a dashboard from admin page. I'll declare the route like this
+
+// Route::get('/admin/dashboard', function () {
+//     return view('admin-dashboard');
+// });
