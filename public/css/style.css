@@ -16,21 +16,27 @@ color-black:#000000;
 
 .h1{
     color:#0C2C04;
+    font-family: "EB Garamond";
 }
 .h2{
     color:#0C2C04;
+    font-family: "EB Garamond";
 }
 .h3{
     color:#0C2C04;
+    font-family: "EB Garamond";
 }
 .h4{
     color:#0C2C04;
+    font-family: "EB Garamond";
 }
 .h5{
     color:#0C2C04;
+    font-family: "EB Garamond";
 }
 .h6{
     color:#0C2C04;
+    font-family: "EB Garamond";
 }
 .btn-green{
     background-color:#84947C;
@@ -83,7 +89,6 @@ color-black:#000000;
 }
 .input{
     border-color: #84947C;
-
 }
 .avatar-sm{
     width: 2rem;
