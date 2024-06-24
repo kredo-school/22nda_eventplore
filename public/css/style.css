@@ -12,6 +12,9 @@ color-black:#000000;
  */
 
  /* アイコンとロゴはページに合わせて自己調整 */
+* {
+    font-family: "EB Garamond";
+}
 
  html,body{
     width: 100%;

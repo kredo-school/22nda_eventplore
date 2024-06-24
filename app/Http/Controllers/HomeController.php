@@ -23,6 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('event-owners.events.modal.delete');
+        return view('home');
     }
 }
