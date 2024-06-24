@@ -19,3 +19,5 @@ Route::get('/show-events', function () {
 Route::get('/auth/event-owners/sign-in', function () {
     return view('auth.event-owners.sign-in');
 });
+
+?>
