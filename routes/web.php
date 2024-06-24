@@ -10,7 +10,7 @@ Auth::routes();
 
 // Route::get('/', )->name('home');
 
-Route::get('/event-owner/reservations/delete', function () {
+Route::get('/event-owner/reservations', function () {
     return view('event-owners.reservations.show');
 });
 
