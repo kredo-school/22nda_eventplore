@@ -16,34 +16,34 @@ color-black:#000000;
     font-family: "EB Garamond";
 }
 
-html, body{
+ html,body{
     width: 100%;
     height: 100%;
-}
+ }
 
 .h1{
     color:#0C2C04;
-    font-family: "EB Garamond";
+    font-family: "EB Garamond"
 }
 .h2{
     color:#0C2C04;
-    font-family: "EB Garamond";
+    font-family: "EB Garamond"
 }
 .h3{
     color:#0C2C04;
-    font-family: "EB Garamond";
+    font-family: "EB Garamond"
 }
 .h4{
     color:#0C2C04;
-    font-family: "EB Garamond";
+    font-family: "EB Garamond"
 }
 .h5{
     color:#0C2C04;
-    font-family: "EB Garamond";
+    font-family: "EB Garamond"
 }
 .h6{
     color:#0C2C04;
-    font-family: "EB Garamond";
+    font-family: "EB Garamond"
 }
 .btn-green{
     background-color:#84947C;
@@ -69,6 +69,7 @@ html, body{
 .btn-outline-red{
     color: #F7142B;
     border-color: #F7142B;
+    background-color: #FFFFFF;
     font-weight: bold;
     font-family: "Raleway",sans-serif;
     text-decoration: none;
@@ -115,7 +116,6 @@ html, body{
     object-fit: cover;
     border-radius: 50%;
 }
-
 .btn-green:hover {
     color: #84947C;
     border-color: #84947C;
@@ -126,7 +126,7 @@ html, body{
     border-color: #F7142B;
 }
 
-.btn-yellow:hover {
-    color: #F6E7D2;
-    border-color: #F6E7D2;
+.btn-yellow:hover{
+    background-color:#F6E7D2;
+    border-color:#F6E7D2;
 }
