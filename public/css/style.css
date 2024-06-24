@@ -12,7 +12,9 @@ color-black:#000000;
  */
 
  /* アイコンとロゴはページに合わせて自己調整 */
- 
+* {
+    font-family: "EB Garamond";
+}
 
 .h1{
     color:#0C2C04;
