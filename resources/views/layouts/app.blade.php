@@ -27,14 +27,18 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white navbar-top-bottom-border navbar-fixed-height">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-light bg-white navbar-top-bottom-border navbar-fixed-height" style="font-family: 'EB Garamond', serif;">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="Logo" style="width: 64px; height: auto;">
                 </a>
@@ -63,8 +67,8 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        {{-- @guest
-                            @if (Route::has('login'))
+                        {{-- @guest --}}
+                            {{-- @if (Route::has('login'))
                             <li class="nav-item">
                                 <a class="nav-link btn btn-green" href="#">{{ __('SIGN-IN') }}</a>
                             </li>
@@ -78,17 +82,25 @@
 
                         {{-- @else --}}
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link  align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <i class="fa-solid fa-circle-user avatar-sm"></i>
+                                <a id="navbarDropdown" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="d-flex align-items-center justify-content-center">
+                                        <i class="fa-solid fa-circle-user fa-2xl"></i>
+                                    </span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Profile</a>
-                                    <a class="dropdown-item" href="#">My Event</a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fa-solid fa-circle-user"></i>&nbsp; Profile
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fa-solid fa-clipboard-list"></i>&nbsp; My Event
+                                    </a>
+                                    <hr>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i>
+                                        &nbsp; {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -101,16 +113,116 @@
                 </div>
             </div>
         </nav>
+        <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height pt-3">
+            <a href="" class="mx-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-user-tie fa-2xl"></i>
+                <span class="d-block mt-2">Business</span>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-icons fa-2xl"></i>
+                <span class="d-block mt-2">Hobbies</span>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-film fa-2xl"></i>
+                <span class="d-block mt-2">Movie</span>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-house-laptop fa-2xl"></i>
+                <span class="d-block mt-2">Online</span>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-utensils fa-2xl"></i>
+                <small class="d-block mt-2">Food/Drinks</small>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-paint-brush fa-2xl "></i>
+                <span class="d-block mt-2">Art</span>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-music fa-2xl"></i>
+                <span class="d-block mt-2">Music</span>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-leaf fa-2xl"></i>
+                <span class="d-block mt-2">Nature</span>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fas fa-theater-masks fa-2xl"></i>
+                <span class="d-block mt-2">Festival</span>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-regular fa-lightbulb fa-2xl"></i>
+                <small class="d-block mt-2">Illumination</small>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-torii-gate  fa-2xl"></i>
+                <small class="d-block mt-2">Culuture</small>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-icons fa-2xl"></i>
+                <span class="d-block mt-2">Sport</span>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-brands fa-first-order-alt fa-2xl"></i>
+                <small class="d-block mt-2">Fireworks</small>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fas fa-hand-holding-usd fa-xl"></i>
+                <span class="d-block mt-2">Free</span>
+            </a>
+            <a href="" class="ps-2 me-3 text-secondary text-decoration-none text-center border border-start border-end-0 border-top-0 border-bottom-0 border-3">
+                <i class="fa-brands fa-product-hunt fa-2xl"></i>
+                <span class="d-block mt-2">Parking</span>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-restroom fa-2xl"></i>
+                <span class="d-block mt-2">Toilet</span>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-train-subway fa-2xl"></i>
+                <small class="d-block mt-2">Train/Bus</small>
+            </a>
+            <a href="" class="me-3 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-cloud-sun fa-2xl"></i>
+                <span class="d-block mt-2">Outside</span>
+            </a>
+            <a href="" class="me-5 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-house-user fa-2xl"></i>
+                <span class="d-block mt-2">Inside</span>
+            </a>
+        </nav>
 
 
-        <main class="">
+        <main class="py-4">
             @yield('content')
         </main>
 
-        <footer class="footer">
-            <p>icon</p>
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <div class="d-flex">
+                            <a href="#" class="me-3 text-secondary text-decoration-none">
+                                <i class="fab fa-facebook fa-xl"></i>
+                            </a>
+                            <a href="#" class="me-3 text-secondary text-decoration-none fa-xl">
+                                <i class="fa-brands fa-x-twitter"></i>
+                            </a>
+                            <a href="#" class="me-3 text-secondary text-decoration-none fa-xl">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center" style="color: #84947C">
+                        <small>Copylight 2024 Eventplore</small>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <a href="#" class="me-3 text-decoration-none" style="color: #84947C">Terms of service</a>
+                        <a href="#" class=" text-decoration-none" style="color: #84947C">Support</a>
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
 </html>
