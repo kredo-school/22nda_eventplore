@@ -12,25 +12,35 @@ color-black:#000000;
  */
 
  /* アイコンとロゴはページに合わせて自己調整 */
- 
+
+html, body{
+    width: 100%;
+    height: 100%;
+}
 
 .h1{
     color:#0C2C04;
+    font-family: "EB Garamond";
 }
 .h2{
     color:#0C2C04;
+    font-family: "EB Garamond";
 }
 .h3{
     color:#0C2C04;
+    font-family: "EB Garamond";
 }
 .h4{
     color:#0C2C04;
+    font-family: "EB Garamond";
 }
 .h5{
     color:#0C2C04;
+    font-family: "EB Garamond";
 }
 .h6{
     color:#0C2C04;
+    font-family: "EB Garamond";
 }
 .btn-green{
     background-color:#84947C;
@@ -83,7 +93,6 @@ color-black:#000000;
 }
 .input{
     border-color: #84947C;
-
 }
 .avatar-sm{
     width: 2rem;
@@ -104,3 +113,17 @@ color-black:#000000;
     border-radius: 50%;
 }
 
+.btn-green:hover {
+    color: #84947C;
+    border-color: #84947C;
+}
+
+.btn-red:hover {
+    color: #F7142B;
+    border-color: #F7142B;
+}
+
+.btn-yellow:hover {
+    color: #F6E7D2;
+    border-color: #F6E7D2;
+}
