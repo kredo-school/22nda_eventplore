@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/auth/event-owners/sign-in', function () {
-    return view('auth.event-owners.sign-in');
+Route::get('/auth/event-owners/sign-up', function () {
+    return view('auth.event-owners.sign-up');
 });
 
 ?>
