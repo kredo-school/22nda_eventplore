@@ -27,18 +27,15 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-
-
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
 
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white navbar-top-bottom-border navbar-fixed-height" style="font-family: 'EB Garamond', serif;">
             <div class="container-fluid">
+                {{-- Logo --}}
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="Logo" style="width: 64px; height: auto;">
                 </a>
@@ -53,6 +50,7 @@
                     </ul>
 
                     <!-- Center Of Navbar -->
+                    {{-- only guests and users --}}
                     <form class="d-flex mx-auto">
                         <select class="form-select me-2">
                             <option selected>Search by Area</option>
@@ -63,11 +61,11 @@
                         <input type="date" class="form-control" placeholder="Calendar">
                     </form>
 
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         {{-- @guest --}}
+                            {{-- Sign in --}}
                             {{-- @if (Route::has('login'))
                             <li class="nav-item">
                                 <a class="nav-link btn btn-green" href="#">{{ __('SIGN-IN') }}</a>
@@ -81,7 +79,8 @@
                             @endif --}}
 
                         {{-- @else --}}
-                            <li class="nav-item dropdown">
+                            {{-- for users --}}
+                            {{-- <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="d-flex align-items-center justify-content-center">
                                         <i class="fa-solid fa-circle-user fa-2xl"></i>
@@ -90,16 +89,45 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">
-                                        <i class="fa-solid fa-circle-user"></i>&nbsp; Profile
+                                        <i class="fa-solid fa-circle-user fa-xl"></i>&nbsp; Profile
                                     </a>
                                     <a class="dropdown-item" href="#">
-                                        <i class="fa-solid fa-clipboard-list"></i>&nbsp; My Event
+                                        <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; My Event
                                     </a>
                                     <hr>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                        <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i>
+                                        <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>
+                                        &nbsp; {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li> --}}
+
+                            {{-- for event ownwers --}}
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="d-flex align-items-center justify-content-center">
+                                        <i class="fa-solid fa-circle-user fa-2xl" style="color: #0C2C04"></i>
+                                    </span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fa-solid fa-circle-user fa-xl"></i>&nbsp; Profile
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; Event Lists
+                                    </a>
+                                    <hr>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                        <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>
                                         &nbsp; {{ __('Logout') }}
                                     </a>
 
@@ -113,6 +141,8 @@
                 </div>
             </div>
         </nav>
+
+        {{-- Show up only Home and Event menu page --}}
         <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height pt-3">
             <a href="" class="mx-3 text-secondary text-decoration-none text-center">
                 <i class="fa-solid fa-user-tie fa-2xl"></i>
@@ -193,7 +223,7 @@
         </nav>
 
 
-        <main class="py-4">
+        <main class="">
             @yield('content')
         </main>
 
