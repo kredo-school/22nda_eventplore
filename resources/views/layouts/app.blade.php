@@ -23,13 +23,6 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
 </head>
 <body>
     <div id="app">
@@ -125,10 +118,9 @@
                                     </a>
                                     <hr>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                        <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>
-                                        &nbsp; {{ __('Logout') }}
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -142,88 +134,7 @@
             </div>
         </nav>
 
-        {{-- Show up only Home and Event menu page --}}
-        <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height pt-3">
-            <a href="" class="mx-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-user-tie fa-2xl"></i>
-                <span class="d-block mt-2">Business</span>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-icons fa-2xl"></i>
-                <span class="d-block mt-2">Hobbies</span>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-film fa-2xl"></i>
-                <span class="d-block mt-2">Movie</span>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-house-laptop fa-2xl"></i>
-                <span class="d-block mt-2">Online</span>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-utensils fa-2xl"></i>
-                <small class="d-block mt-2">Food/Drinks</small>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-paint-brush fa-2xl "></i>
-                <span class="d-block mt-2">Art</span>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-music fa-2xl"></i>
-                <span class="d-block mt-2">Music</span>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-leaf fa-2xl"></i>
-                <span class="d-block mt-2">Nature</span>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fas fa-theater-masks fa-2xl"></i>
-                <span class="d-block mt-2">Festival</span>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-regular fa-lightbulb fa-2xl"></i>
-                <small class="d-block mt-2">Illumination</small>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-torii-gate  fa-2xl"></i>
-                <small class="d-block mt-2">Culuture</small>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-icons fa-2xl"></i>
-                <span class="d-block mt-2">Sport</span>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-brands fa-first-order-alt fa-2xl"></i>
-                <small class="d-block mt-2">Fireworks</small>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fas fa-hand-holding-usd fa-xl"></i>
-                <span class="d-block mt-2">Free</span>
-            </a>
-            <a href="" class="ps-2 me-3 text-secondary text-decoration-none text-center border border-start border-end-0 border-top-0 border-bottom-0 border-3">
-                <i class="fa-brands fa-product-hunt fa-2xl"></i>
-                <span class="d-block mt-2">Parking</span>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-restroom fa-2xl"></i>
-                <span class="d-block mt-2">Toilet</span>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-train-subway fa-2xl"></i>
-                <small class="d-block mt-2">Train/Bus</small>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-cloud-sun fa-2xl"></i>
-                <span class="d-block mt-2">Outside</span>
-            </a>
-            <a href="" class="me-5 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-house-user fa-2xl"></i>
-                <span class="d-block mt-2">Inside</span>
-            </a>
-        </nav>
-
-
-        <main class="">
+        <main class="py-4">
             @yield('content')
         </main>
 
@@ -254,5 +165,6 @@
             </div>
         </footer>
     </div>
+
 </body>
 </html>
