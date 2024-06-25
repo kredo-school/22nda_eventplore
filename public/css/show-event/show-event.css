@@ -1,0 +1,19 @@
+.card-img-top{
+    height: 16rem;
+    object-fit: cover;
+}
+
+.btn-outline-dark{
+    font-family: "Raleway";
+    font-weight: bold;
+}
+
+.btn-green:hover {
+    color: #84947C;
+    border-color: #84947C;
+}
+
+.btn-red:hover {
+    color: #F7142B;
+    border-color: #F7142B;
+}
