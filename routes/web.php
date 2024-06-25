@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/layouts/app', function () {
-    return view('layouts.app');
+Route::get('/auth/event-owners/sign-up', function () {
+    return view('auth.event-owners.sign-up');
 });
+
+?>
