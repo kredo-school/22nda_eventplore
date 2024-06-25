@@ -17,3 +17,26 @@
     color: #F7142B;
     border-color: #F7142B;
 }
+
+.text-green {
+    color: #0C2C04;
+}
+table.rounded-corners {
+  border-spacing: 0;
+  border-collapse: separate;
+  border-radius: 10px;
+}
+
+th.table-dg {
+    background-color: #0C2C04;
+    color: white;
+}
+
+td.table-yellow {
+    background-color: #F6E7D2;
+}
+
+.trash-btn {
+    color: #F7142B;
+    background-color: transparent;
+}
