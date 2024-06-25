@@ -80,7 +80,7 @@
 
                         {{-- @else --}}
                             {{-- for users --}}
-                            {{-- <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="d-flex align-items-center justify-content-center">
                                         <i class="fa-solid fa-circle-user fa-2xl"></i>
@@ -106,10 +106,10 @@
                                         @csrf
                                     </form>
                                 </div>
-                            </li> --}}
+                            </li>
 
                             {{-- for event ownwers --}}
-                            <li class="nav-item dropdown">
+                            {{-- <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="d-flex align-items-center justify-content-center">
                                         <i class="fa-solid fa-circle-user fa-2xl" style="color: #0C2C04"></i>
@@ -135,7 +135,7 @@
                                         @csrf
                                     </form>
                                 </div>
-                            </li>
+                            </li> --}}
                         {{-- @endguest --}}
                     </ul>
                 </div>
