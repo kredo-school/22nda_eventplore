@@ -6,6 +6,10 @@ Route::get('/auth/event-owners/sign-in', function () {
     return view('auth.event-owners.sign-in');
 });
 
+Route::get('/auth/users/sign-in', function () {
+    return view('auth.users.sign-in');
+});
+
 // Example: I'm creating a dashboard from admin page. I'll declare the route like this
 
 // Route::get('/admin/dashboard', function () {
