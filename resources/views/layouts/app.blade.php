@@ -121,14 +121,14 @@
                                         <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; Event Lists
                                     </a>
                                     <hr>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="#"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                         <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>
                                         &nbsp; {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="#" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -142,7 +142,7 @@
         {{-- Show up only Home and Event menu page --}}
         <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height pt-3">
             <a href="" class="mx-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-user-tie fa-2xl"></i>
+                <i class="fa-solid fa-user-tie"></i>
                 <span class="d-block mt-2">Business</span>
             </a>
             <a href="" class="me-3 text-secondary text-decoration-none text-center">

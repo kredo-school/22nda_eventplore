@@ -23,7 +23,7 @@
                             <div class="col d-flex justify-content-end">
                                 <a href="" class="btn btn-outline-dark me-2"><i class="fa-solid fa-user-group me-1"></i>20</a>
                                 <a href="" class="btn btn-green me-2"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="" class="btn btn-red"><i class="fa-solid fa-trash-can"></i></a>
+                                <a href="" class="btn btn-red" data-bs-toggle="modal" data-bs-target="#eventowner-delete-event"><i class="fa-solid fa-trash-can"></i></a>
                             </div>
                         </div>
                         <div class="row align-items-center gx-1 mb-2">
@@ -63,7 +63,7 @@
                             <div class="col d-flex justify-content-end">
                                 <a href="" class="btn btn-outline-dark me-2"><i class="fa-solid fa-user-group me-1"></i>20</a>
                                 <a href="" class="btn btn-green me-2"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="" class="btn btn-red"><i class="fa-solid fa-trash-can"></i></a>
+                                <a href="" class="btn btn-red" data-bs-toggle="modal" data-bs-target="#eventowner-delete-event"><i class="fa-solid fa-trash-can"></i></a>
                             </div>
                         </div>
                         <div class="row align-items-center gx-1 mb-2">
@@ -103,7 +103,7 @@
                             <div class="col d-flex justify-content-end">
                                 <a href="" class="btn btn-outline-dark me-2"><i class="fa-solid fa-user-group me-1"></i>20</a>
                                 <a href="" class="btn btn-green me-2"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="" class="btn btn-red"><i class="fa-solid fa-trash-can"></i></a>
+                                <a href="" class="btn btn-red" data-bs-toggle="modal" data-bs-target="#eventowner-delete-event"><i class="fa-solid fa-trash-can"></i></a>
                             </div>
                         </div>
                         <div class="row align-items-center gx-1 mb-2">
@@ -143,7 +143,7 @@
                             <div class="col d-flex justify-content-end">
                                 <a href="" class="btn btn-outline-dark me-2"><i class="fa-solid fa-user-group me-1"></i>20</a>
                                 <a href="" class="btn btn-green me-2"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="" class="btn btn-red"><i class="fa-solid fa-trash-can"></i></a>
+                                <a href="" class="btn btn-red" data-bs-toggle="modal" data-bs-target="#eventowner-delete-event"><i class="fa-solid fa-trash-can"></i></a>
                             </div>
                         </div>
                         <div class="row align-items-center gx-1 mb-2">
@@ -183,7 +183,7 @@
                             <div class="col d-flex justify-content-end">
                                 <a href="" class="btn btn-outline-dark me-2"><i class="fa-solid fa-user-group me-1"></i>20</a>
                                 <a href="" class="btn btn-green me-2"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="" class="btn btn-red"><i class="fa-solid fa-trash-can"></i></a>
+                                <a href="" class="btn btn-red" data-bs-toggle="modal" data-bs-target="#eventowner-delete-event"><i class="fa-solid fa-trash-can"></i></a>
                             </div>
                         </div>
                         <div class="row align-items-center gx-1 mb-2">
@@ -223,7 +223,7 @@
                             <div class="col d-flex justify-content-end">
                                 <a href="" class="btn btn-outline-dark me-2"><i class="fa-solid fa-user-group me-1"></i>20</a>
                                 <a href="" class="btn btn-green me-2"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="" class="btn btn-red"><i class="fa-solid fa-trash-can"></i></a>
+                                <a href="" class="btn btn-red" data-bs-toggle="modal" data-bs-target="#eventowner-delete-event"><i class="fa-solid fa-trash-can"></i></a>
                             </div>
                         </div>
                         <div class="row align-items-center gx-1 mb-2">
@@ -254,5 +254,6 @@
 
         </div>
     </div>
+    @include('event-owners.events.modal.delete')
 
 @endsection

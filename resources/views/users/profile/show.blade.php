@@ -8,7 +8,7 @@
     <div class="background-image" style="background-image: url('{{ asset('images/profile/profileback.jpg') }}');"></div>
     <div class="content">
         <div class="card mx-auto">
-            <div class="card-body text-center">
+            <div class="card-body text-center" style="width: 600px; height: 400px;">
                 <i class="fa-solid fa-circle-user"></i>
                 <h3 class="card-title">John</h3>
                 <p class="text-muted">John Smith</p>
