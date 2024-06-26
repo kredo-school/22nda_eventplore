@@ -23,6 +23,9 @@ Route::get('/owners/reservation-list', function () {
 Route::get('/user/reservation-list', function () {
     return view('users.reservations.show');
 });
+Route::get('/home/event-menu', function () {
+    return view('home.event-menu');
+});
 
 ?>
 
