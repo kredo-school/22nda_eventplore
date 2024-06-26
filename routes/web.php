@@ -8,6 +8,9 @@ Auth::routes();
 Route::get('/auth/event-owners/sign-in', function () {
     return view('auth.event-owners.sign-in');
 });
+Route::get('/auth/users/sign-up', function () {
+    return view('auth.users.sign-up');
+});
 
 
 // Naoki
