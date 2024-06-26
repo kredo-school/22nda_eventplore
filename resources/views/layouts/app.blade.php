@@ -121,14 +121,14 @@
                                         <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; Event Lists
                                     </a>
                                     <hr>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="#"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                         <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>
                                         &nbsp; {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="#" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
