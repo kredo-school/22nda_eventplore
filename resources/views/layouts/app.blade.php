@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }} | @yield('title')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -26,9 +26,6 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -143,7 +140,7 @@
         </nav>
 
         {{-- Show up only Home and Event menu page --}}
-        <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height pt-3">
+        <nav class="navbar navbar-expand-md navbar-category navbar-light bg-white navbar-bottom-border navbar-fixed-height pt-3">
             <a href="" class="mx-3 text-secondary text-decoration-none text-center">
                 <i class="fa-solid fa-user-tie fa-2xl"></i>
                 <span class="d-block mt-2">Business</span>
