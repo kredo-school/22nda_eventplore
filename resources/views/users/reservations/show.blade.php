@@ -38,7 +38,7 @@
                 <td>2024/05/12</td>
                 <td>
                     <a href="" class="h6 border-0 me-3"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation">
+                    <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-reservation">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </td>
@@ -54,7 +54,7 @@
                 <td class="table-yellow">2024/05/12</td>
                 <td class="table-yellow">
                     <a href="" class="h6 border-0 me-3"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation">
+                    <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-reservation">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </td>
@@ -70,7 +70,7 @@
                 <td>2024/05/12</td>
                 <td>
                     <a href="" class="h6 border-0 me-3"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation">
+                    <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-reservation">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </td>
@@ -86,7 +86,7 @@
                 <td class="table-yellow">2024/05/12</td>
                 <td class="table-yellow">
                     <a href="" class="h6 border-0 me-3"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation">
+                    <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-reservation">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </td>
@@ -102,7 +102,7 @@
                 <td>2024/05/12</td>
                 <td>
                     <a href="" class="h6 border-0 me-3"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation">
+                    <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-reservation">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </td>
@@ -118,7 +118,7 @@
                 <td class="table-yellow">2024/05/12</td>
                 <td class="table-yellow">
                     <a href="" class="h6 border-0 me-3"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation">
+                    <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-reservation">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </td>
@@ -128,7 +128,7 @@
 
 </div>
 
-@include('event-owners.reservations.modal.delete')
+@include('users.reservations.modal.delete')
 
 @endsection
 

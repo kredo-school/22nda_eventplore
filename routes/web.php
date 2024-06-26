@@ -24,5 +24,6 @@ Route::get('/user/reservation-list', function () {
     return view('users.reservations.show');
 });
 
+
 ?>
 
