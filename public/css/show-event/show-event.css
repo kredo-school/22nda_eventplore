@@ -8,19 +8,6 @@
     font-weight: bold;
 }
 
-.btn-green:hover {
-    color: #84947C;
-    border-color: #84947C;
-}
-
-.btn-red:hover {
-    color: #F7142B;
-    border-color: #F7142B;
-}
-
-.text-green {
-    color: #0C2C04;
-}
 table.rounded-corners {
   border-spacing: 0;
   border-collapse: separate;

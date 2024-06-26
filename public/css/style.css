@@ -130,3 +130,8 @@ color-black:#000000;
     background-color:#F6E7D2;
     border-color:#F6E7D2;
 }
+
+.btn-outline-red:hover{
+    background-color:#F7142B;
+    color: #FFFFFF;
+}

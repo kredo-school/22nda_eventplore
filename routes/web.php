@@ -9,8 +9,16 @@ Route::get('/auth/event-owners/sign-in', function () {
     return view('auth.event-owners.sign-in');
 });
 
-Route::get('/reservation-list', function () {
+
+// Naoki
+Route::get('/owners/show-events', function () {
+    return view('event-owners.events.show');
+});
+Route::get('/owners/reservation-list', function () {
     return view('event-owners.reservations.show');
+});
+Route::get('/user/reservation-list', function () {
+    return view('users.reservations.show');
 });
 
 ?>

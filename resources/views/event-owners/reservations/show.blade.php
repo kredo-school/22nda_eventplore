@@ -48,19 +48,19 @@
                 </div>
             </div>
 
-            <div class="w-75 mt-5 d-grid mx-auto">
+            <div class="w-75 mt-4 d-grid mx-auto">
                 <div class="text-green">
-                    <div class="row align-items-center">
+                    <div class="row align-items-center gx-1 mb-2">
                         <div class="col h5">
-                            <i class="fa-solid fa-users fa-xl me-2"></i>Total People
+                            <i class="fa-solid fa-users fa-lg me-2"></i>Total People
                         </div>
                         <div class="col h2 text-end ms-3">
                             20,000
                         </div>
                     </div>
-                    <div class="row align-items-center">
+                    <div class="row align-items-center gx-1">
                         <div class="col h5">
-                            <i class="fa-solid fa-sack-dollar fa-xl ms-1 me-2"></i>Total Sales
+                            <i class="fa-solid fa-sack-dollar fa-lg ms-1 me-2"></i>Total Sales
                         </div>
                         <div class="col h2 text-end ms-3">
                             ¥1,000,000
@@ -72,7 +72,7 @@
         </div>
 
         <div class="col">
-            <table class="table text-center shadow rounded-2 overflow-hidden">
+            <table class="table text-center shadow rounded-2 overflow-hidden mb-5">
                 <thead>
                     <tr>
                         <th class="table-dg">#</th>
