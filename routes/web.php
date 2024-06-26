@@ -27,5 +27,6 @@ Route::get('/home/event-menu', function () {
     return view('home.event-menu');
 });
 
+
 ?>
 
