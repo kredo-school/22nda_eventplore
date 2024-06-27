@@ -9,6 +9,7 @@ Route::get('/auth/event-owners/sign-up', function () {
 });
 
 
+// kanako
 Route::get('/users/profile/show', function () {
     return view('users.profile.show');
 });
