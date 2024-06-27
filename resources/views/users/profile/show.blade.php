@@ -9,10 +9,10 @@
     <div class="content">
         <div class="card mx-auto">
             <div class="card-body text-center" style="width: 600px; height: 450px;">
-                <div class="position-absolute top-0 end-0 mt-2 me-2">
-                    <div class="dropdown">
+                <div class="position-absolute top-0 end-0 mt-2 me-5">
+                    <div class="dropdown custom-dropdown-container">
                         <button class="btn btn-outline-light btn-sm custom-dropdown" type="button" id="dropdownPro" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="fs-4 text-dark">&#8230;</span>
+                            <span class="fs-1 text-dark">&#8230;</span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownPro">
                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#user-profile-edit"><i class="fa-solid fa-pen-to-square"></i>&nbsp; Edit</a></li>
