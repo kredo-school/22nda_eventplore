@@ -140,7 +140,7 @@
         </nav>
 
         {{-- Show up only Home and Event menu page --}}
-        <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height navbar-category pt-3">
+        <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height navbar-category">
             <a href="" class="mx-2 text-secondary text-decoration-none text-center">
                 <i class="fa-solid fa-user-tie fa-2xl"></i>
                 <span class="d-block mt-2">Business</span>
