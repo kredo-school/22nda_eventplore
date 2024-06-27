@@ -8,12 +8,14 @@
 
 <div class="container py-4">
     <div class="mb-4 d-grid mx-auto">
+        {{-- title --}}
         <h2 class="h1 text-center mb-1"><i class="fa-solid fa-clipboard-list me-2"></i>Reservation list</h2>
     </div>
     <div class="row">
         <div class="col-4 me-2 mb-4">
+            {{-- event list --}}
             <div class="card shadow border-0">
-                <img src="images/event-test/event1.jpeg" alt="" class="rounded card-img-top">
+                <img src="{{ asset('images/event-test/event1.jpeg') }}" alt="" class="rounded card-img-top">
                 <div class="card-body">
                     <div class="row align-items-center mb-2">
                         <div class="col-5">
@@ -48,6 +50,7 @@
                 </div>
             </div>
 
+            {{-- total people & sales --}}
             <div class="w-75 mt-4 d-grid mx-auto">
                 <div class="text-green">
                     <div class="row align-items-center gx-1 mb-2">
@@ -68,9 +71,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
+        {{-- reservation table --}}
         <div class="col">
             <table class="table text-center shadow rounded-2 overflow-hidden mb-5">
                 <thead>

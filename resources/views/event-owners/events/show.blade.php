@@ -8,13 +8,17 @@
 
     <div class="container py-4">
         <div class="mb-4 d-grid mx-auto">
+            {{-- title --}}
             <h2 class="h1 text-center mb-3"><i class="fa-solid fa-clipboard-list me-2"></i>Event list</h2>
+            {{-- register button --}}
             <a href="#" class="btn btn-green mx-auto"><i class="fa-solid fa-circle-plus me-1"></i>Register Event</a>
         </div>
+        {{-- event list --}}
         <div class="row">
             <div class="col-4 mb-4">
                 <div class="card shadow border-0">
-                    <img src="images/event-test/event1.jpeg" alt="" class="rounded card-img-top">
+                    <img src="{{ asset('images/event-test/event1.jpeg') }}" alt="" class="rounded card-img-top">
+                   
                     <div class="card-body">
                         <div class="row align-items-center mb-3">
                             <div class="col-5">
@@ -54,7 +58,7 @@
 
             <div class="col-4 mb-4">
                 <div class="card shadow border-0">
-                    <img src="images/event-test/fireworktest.png" alt="" class="rounded card-img-top">
+                    <img src="{{ asset('images/event-test/fireworktest.png') }}" alt="" class="rounded card-img-top">
                     <div class="card-body">
                         <div class="row align-items-center mb-3">
                             <div class="col-5">
@@ -94,7 +98,7 @@
 
             <div class="col-4 mb-4">
                 <div class="card shadow border-0">
-                    <img src="images/event-test/concert-event.jpg" alt="" class="rounded card-img-top">
+                    <img src="{{ asset('images/event-test/concert-event.jpg') }}" alt="" class="rounded card-img-top">
                     <div class="card-body">
                         <div class="row align-items-center mb-3">
                             <div class="col-5">
@@ -134,7 +138,7 @@
 
             <div class="col-4 mb-4">
                 <div class="card shadow border-0">
-                    <img src="images/event-test/festival_test.jpg" alt="" class="rounded card-img-top">
+                    <img src="{{ asset('images/event-test/festival_test.jpg') }}" alt="" class="rounded card-img-top">
                     <div class="card-body">
                         <div class="row align-items-center mb-3">
                             <div class="col-5">
@@ -174,7 +178,7 @@
 
             <div class="col-4 mb-4">
                 <div class="card shadow border-0">
-                    <img src="images/event-test/IMG_7560.JPG" alt="" class="rounded card-img-top">
+                    <img src="{{ asset('images/event-test/IMG_7560.JPG') }}" alt="" class="rounded card-img-top">
                     <div class="card-body">
                         <div class="row align-items-center mb-3">
                             <div class="col-5">
@@ -214,7 +218,7 @@
 
             <div class="col-4 mb-4">
                 <div class="card shadow border-0">
-                    <img src="images/event-test/IMG_7559.JPG" alt="" class="rounded card-img-top">
+                    <img src="{{ asset('images/event-test/IMG_7559.JPG') }}" alt="" class="rounded card-img-top">
                     <div class="card-body">
                         <div class="row align-items-center mb-3">
                             <div class="col-5">

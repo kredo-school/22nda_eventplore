@@ -1,0 +1,58 @@
+
+.cp_offcanvas {
+    position: absolute;
+    top: 160px; /* ナビゲーションバーの下に配置 */
+    left: 0;
+}
+
+.cp_offcanvas .cp_menu {
+	position: absolute;
+	top: 0;
+	left: -100vw; /* ビューポートの幅の100%分左（画面外）に配置 */
+	width: 50vw; /* 要素の幅50% */
+	height: 100vh;
+    overflow-y: auto;
+    transition: 0.5s transform; /* transformプロパティの変化に対して0.5秒のアニメーションを設定 */
+    transition-timing-function: cubic-bezier(.38,.52,.23,.99); /* アニメーションのタイミング関数を設定 */
+	background-color: #FFFFFF;
+}
+
+.cp_offcanvas #cp_toggle {
+	position: absolute;
+	display: none;
+	opacity: 0;
+}
+
+.cp_offcanvas #cp_toggle:checked ~ .cp_menu {
+	transform: translateX(100vw); /* チェック時にメニューをビューポートの幅100%分右に移動 */
+}
+
+/* menu toggle */
+.cp_offcanvas #cp_toggle ~ label {
+	display: block;
+	padding: 0.5em;
+	cursor: pointer; 
+	transition: 0.5s transform; /* transformプロパティの変化に対して0.5秒のアニメーションを設定 */
+	transition-timing-function: cubic-bezier(.61,-0.38,.37,1.27); /* アニメーションのタイミング関数を設定 */
+	position: absolute;
+	left: 0;
+}
+
+.cp_offcanvas #cp_toggle:checked ~ label {
+	transform: translateX(50vw); /* チェック時にラベルをビューポート幅の50%分右に移動 */
+}
+
+.cp_offcanvas #cp_toggle ~ label::before {
+	font-family: 'FontAwesome';
+	content: "\f101"; /* 右矢印アイコン（チェック前） */
+	font-size: 2em;
+	position: absolute;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.cp_offcanvas #cp_toggle:checked ~ label::before {
+	content: "\f100"; /* 左矢印アイコン（チェック後） */
+}
