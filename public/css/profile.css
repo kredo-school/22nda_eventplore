@@ -1,0 +1,117 @@
+
+.profile-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 30%;
+}
+
+.content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.card {
+    background-color: #ffff;
+}
+
+.custom-bg {
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+    background-color: rgba(132, 148, 124, 0.5);
+}
+
+.custom-bg::before {
+    background-color: #84947C;
+    opacity: 0.5;
+}
+
+
+.custom-dropdown-container {
+    position: relative;
+}
+
+.custom-dropdown {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.custom-dropdown:hover,
+.custom-dropdown:focus,
+.custom-dropdown:active {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.custom-dropdown span {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0.5rem;
+    min-width: 120px;
+}
+
+.custom-card {
+    width: 10rem;
+    height: 5rem;
+}
+
+.card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+/* for  event owner*/
+.contact-info {
+    text-align: left;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.contact-item i {
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
+.contact-item span {
+    flex: 1;
+    text-align: center;
+}
+/* end */

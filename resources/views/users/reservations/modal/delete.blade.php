@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="modal-body " style="font-family: EB Garamond">
-                    <p class="h5 text-center">Are you sure you want to cancel reservation of <b>EventName</b>?</p>
+                    <p class="h5 text-center text-dark">Are you sure you want to cancel reservation of <b>EventName</b>?</p>
                     <p class="text-center">All you selected  reservation will be deleted and you won't be able to see it.
                         <br>This action cannot be undone.
                     </p>

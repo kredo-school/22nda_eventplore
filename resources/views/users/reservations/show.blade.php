@@ -39,7 +39,9 @@
                 <td>2024/02/12</td>
                 <td>2024/05/12</td>
                 <td>
-                    <a href="" class="h6 border-0 me-3"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <button class="edit-btn border-0 me-2" data-bs-toggle="modal" data-bs-target="#user-edit-reservation">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
                     <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-reservation">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
@@ -55,7 +57,9 @@
                 <td class="table-yellow">2024/02/12</td>
                 <td class="table-yellow">2024/05/12</td>
                 <td class="table-yellow">
-                    <a href="" class="h6 border-0 me-3"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <button class="edit-btn border-0 me-2" data-bs-toggle="modal" data-bs-target="#user-edit-reservation">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
                     <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-reservation">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
@@ -71,7 +75,9 @@
                 <td>2024/02/12</td>
                 <td>2024/05/12</td>
                 <td>
-                    <a href="" class="h6 border-0 me-3"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <button class="edit-btn border-0 me-2" data-bs-toggle="modal" data-bs-target="#user-edit-reservation">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
                     <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-reservation">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
@@ -87,7 +93,9 @@
                 <td class="table-yellow">2024/02/12</td>
                 <td class="table-yellow">2024/05/12</td>
                 <td class="table-yellow">
-                    <a href="" class="h6 border-0 me-3"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <button class="edit-btn border-0 me-2" data-bs-toggle="modal" data-bs-target="#user-edit-reservation">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
                     <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-reservation">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
@@ -103,7 +111,9 @@
                 <td>2024/02/12</td>
                 <td>2024/05/12</td>
                 <td>
-                    <a href="" class="h6 border-0 me-3"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <button class="edit-btn border-0 me-2" data-bs-toggle="modal" data-bs-target="#user-edit-reservation">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
                     <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-reservation">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
@@ -119,7 +129,9 @@
                 <td class="table-yellow">2024/02/12</td>
                 <td class="table-yellow">2024/05/12</td>
                 <td class="table-yellow">
-                    <a href="" class="h6 border-0 me-3"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <button class="edit-btn border-0 me-2" data-bs-toggle="modal" data-bs-target="#user-edit-reservation">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
                     <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-reservation">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
@@ -131,6 +143,7 @@
 </div>
 
 @include('users.reservations.modal.delete')
+@include('users.reservations.modal.edit')
 
 @endsection
 
