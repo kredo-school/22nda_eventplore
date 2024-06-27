@@ -5,6 +5,16 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/auth/event-owners/sign-up', function () {
+    return view('auth.event-owners.sign-up');
+});
+
+
+// kanako
+Route::get('/users/profile/show', function () {
+    return view('users.profile.show');
+});
+
 Route::get('/auth/event-owners/sign-in', function () {
     return view('auth.event-owners.sign-in');
 });

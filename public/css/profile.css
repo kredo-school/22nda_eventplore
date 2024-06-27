@@ -1,0 +1,75 @@
+
+.profile-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 30%;
+}
+
+.content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.card {
+    background-color: #ffff;
+}
+
+.custom-bg {
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+    background-color: rgba(132, 148, 124, 0.5);
+}
+
+.custom-bg::before {
+    background-color: #84947C;
+    opacity: 0.5;
+}
+
+.custom-dropdown {
+    border: none;
+    box-shadow: none;
+}
+
+
+
+.custom-dropdown:hover,
+.custom-dropdown:focus,
+.custom-dropdown:active {
+    border: none;
+    box-shadow: none;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-menu {
+    min-width: 8rem;
+}
+
+.custom-card {
+    width: 10rem;
+    height: 5rem;
+}
+
+.card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}

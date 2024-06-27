@@ -34,3 +34,14 @@
     font-family: 'EB Garamond', serif;
 }
 
+.navbar-category {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.navbar-category a {
+    flex: 1 0 auto;
+    text-align: center;
+}
