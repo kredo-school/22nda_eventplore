@@ -4,6 +4,7 @@
 
 @section('content')
 
+{{-- CSS 読み込み --}}
 <link rel="stylesheet" href="{{ asset('css/register-event/register-event.css') }}">
 
 <div class="container-fluid d-flex justify-content-center p-0">
