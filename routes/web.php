@@ -34,6 +34,12 @@ Route::get('/user/reservation-list', function () {
     return view('users.reservations.show');
 });
 
+//Marika
+Route::get('/home/show-event', function () {
+    return view('home.show-event');
+});
+
+
 
 ?>
 

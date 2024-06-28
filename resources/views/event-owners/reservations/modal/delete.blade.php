@@ -24,8 +24,8 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center border-0">
-                    <button type="button" class="btn btn-outline-red me-5 p-2" data-bs-dismiss="modal">Back</button>
-                    <button type="submit" class="btn btn-red p-2">Cancel Reservation</button>
+                    <button type="button" class="btn btn-outline-red me-5 px-5 py-2" data-bs-dismiss="modal">Back</button>
+                    <button type="submit" class="btn btn-red px-5 py-2">Cancel Reservation</button>
                 </div>
             </div>
         </form>
