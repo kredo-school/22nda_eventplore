@@ -49,6 +49,9 @@ Route::get('/user/reservation-list', function () {
 Route::get('/home/event-menu', function () {
     return view('home.event-menu');
 });
+Route::get('/home', function () {
+    return view('home.home');
+});
 
 
 // kanako
