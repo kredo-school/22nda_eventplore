@@ -31,15 +31,23 @@ Route::get('event-owners/events/register', function () {
     return view('event-owners.events.register');
 });
 
+
 // Naoki
+// Show event page for event-owner
 Route::get('/owners/show-events', function () {
     return view('event-owners.events.show');
 });
+// Show reservation page for event-owner
 Route::get('/owners/reservation-list', function () {
     return view('event-owners.reservations.show');
 });
+// Show reservation page for user
 Route::get('/user/reservation-list', function () {
     return view('users.reservations.show');
+});
+// Show event menu page
+Route::get('/home/event-menu', function () {
+    return view('home.event-menu');
 });
 
 
