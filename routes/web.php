@@ -60,6 +60,9 @@ Route::get('/event-owners/profile/show', function () {
     return view('event-owners.profile.show');
 });
 
+Route::get('/home/guideline', function () {
+    return view('home.guideline');
+});
 
 
 ?>
