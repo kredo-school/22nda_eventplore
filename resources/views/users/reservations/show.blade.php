@@ -7,10 +7,12 @@
 <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
 
 <div class="container py-4">
+    {{-- title --}}
     <div class="mb-4 d-grid mx-auto">
         <h2 class="h1 text-center mb-1"><i class="fa-solid fa-clipboard-list me-2"></i>Reservation list</h2>
     </div>
 
+    {{-- reservation table --}}
     <table class="table text-center shadow rounded-2 overflow-hidden mb-5">
         <thead>
             <tr>

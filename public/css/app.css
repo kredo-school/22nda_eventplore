@@ -7,20 +7,6 @@
     border-bottom: 2px solid #84947C;
 }
 
-.navbar-category {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-}
-
-.navbar-category a {
-    flex: 1 1 auto;
-    text-align: center;
-    padding: 10px 5px;
-}
-
-
 .navbar-fixed-height {
     height: 80px;
     margin: 0 auto;
@@ -32,6 +18,9 @@
     border-top: 2px solid #84947C;
     border-bottom: 2px solid #84947C;
     font-family: 'EB Garamond', serif;
+    background-color: #FFFFFF;
+    position: absolute;
+    bottom: 0;
 }
 
 .navbar-category {
@@ -44,4 +33,11 @@
 .navbar-category a {
     flex: 1 0 auto;
     text-align: center;
+}
+
+#app {
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 80px;
+    box-sizing: border-box;
 }
