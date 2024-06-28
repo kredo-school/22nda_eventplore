@@ -1,10 +1,10 @@
 .card-img-top{
-    height: 16rem;
+    aspect-ratio: 8 / 5;
     object-fit: cover;
 }
 
 .card-img-sm{
-    height: 12rem;
+    aspect-ratio: 8 / 5;
     object-fit: cover;
 }
 

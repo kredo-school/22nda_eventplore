@@ -24,8 +24,8 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center border-0">
-                    <button type="button" class="btn-outline-red rounded me-5 p-2" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn-red rounded border-0 p-2">Delete</button>
+                    <button type="button" class="btn btn-outline-red me-5 p-2" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-red p-2">Delete</button>
                 </div>
             </div>
         </form>

@@ -9,8 +9,8 @@
 	position: absolute;
 	top: 0;
 	left: -100vw; /* ビューポートの幅の100%分左（画面外）に配置 */
-	width: 50vw; /* 要素の幅50% */
-	height: 100vh;
+	width: 50vw;
+	height: calc(100vh - 240px);
     overflow-y: auto;
     transition: 0.5s transform; /* transformプロパティの変化に対して0.5秒のアニメーションを設定 */
     transition-timing-function: cubic-bezier(.38,.52,.23,.99); /* アニメーションのタイミング関数を設定 */
@@ -55,4 +55,9 @@
 
 .cp_offcanvas #cp_toggle:checked ~ label::before {
 	content: "\f100"; /* 左矢印アイコン（チェック後） */
+}
+
+.map {
+	height: calc(100vh - 240px);
+	object-fit: cover;
 }

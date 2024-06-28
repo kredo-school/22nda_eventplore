@@ -127,9 +127,8 @@ color-black:#000000;
 }
 
 .btn-yellow:hover{
-    background-color:#F6E7D2;
-    border-color:#F6E7D2;
-    color: #F6E7D2;
+    color:#0C2C04;
+    border-color:#0C2C04;
 }
 
 .btn-outline-red:hover{
