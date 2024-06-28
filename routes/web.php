@@ -27,7 +27,7 @@ Route::get('/auth/users/sign-up', function () {
     return view('auth.users.sign-up');
 });
 // Show register event page
-Route::get('event-owners/events/register', function () {
+Route::get('/event-owners/events/register', function () {
     return view('event-owners.events.register');
 });
 
