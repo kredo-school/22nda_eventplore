@@ -26,8 +26,6 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    {{-- Camera icon's CDN--}}
-    <a  href="https://icons8.com/icon/a2Dj4VUwQuff/camera">Camera</a> icon by <a href="https://icons8.com">Icons8</a>
 </head>
 <body>
     <div id="app">
