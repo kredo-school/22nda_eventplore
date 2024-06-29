@@ -29,25 +29,25 @@
 </head>
 <body>
     <div id="app">
-        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white navbar-top-bottom-border navbar-fixed-height" style="font-family: 'EB Garamond', serif;">
-            <div class="container-fluid"> --}}
+        <nav class="navbar navbar-expand-md navbar-light bg-white navbar-top-bottom-border navbar-fixed-height" style="font-family: 'EB Garamond', serif;">
+            <div class="container-fluid">
                 {{-- Logo --}}
-                {{-- <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="Logo" style="width: 64px; height: auto;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent"> --}}
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    {{-- <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav me-auto">
 
-                    </ul> --}}
+                    </ul>
 
                     <!-- Center Of Navbar -->
                     {{-- only guests and users --}}
-                    {{-- <form class="d-flex mx-auto">
+                    <form class="d-flex mx-auto">
                         <select class="form-select me-2">
                             <option selected>Search by Area</option>
                             <option value="1">Option 1</option>
@@ -55,24 +55,24 @@
                             <option value="3">Option 3</option>
                         </select>
                         <input type="date" class="form-control" placeholder="Calendar">
-                    </form> --}}
+                    </form>
 
                     <!-- Right Side Of Navbar -->
-                    {{-- <ul class="navbar-nav ms-auto"> --}}
+                    <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         {{-- @guest --}}
                             {{-- Sign in --}}
-                            {{-- @if (Route::has('login'))
+                            @if (Route::has('login'))
                             <li class="nav-item">
                                 <a class="nav-link btn btn-green" href="#">{{ __('SIGN-IN') }}</a>
                             </li>
-                            @endif --}}
+                            @endif
 
-                            {{-- @if (Route::has('register'))
+                            @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif --}}
+                            @endif
 
                         {{-- @else --}}
                             {{-- for users --}}
@@ -133,13 +133,13 @@
                                 </div>
                             </li> --}}
                         {{-- @endguest --}}
-                    {{-- </ul>
+                    </ul>
                 </div>
             </div>
-        </nav> --}}
+        </nav>
 
         {{-- Show up only Home and Event menu page --}}
-        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height navbar-category">
+        <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height navbar-category">
             <a href="" class="mx-2 text-secondary text-decoration-none text-center">
                 <i class="fa-solid fa-user-tie fa-2xl"></i>
                 <span class="d-block mt-2">Business</span>
@@ -216,14 +216,14 @@
                 <i class="fa-solid fa-house-user fa-2xl"></i>
                 <span class="d-block mt-2">Inside</span>
             </a>
-        </nav> --}}
+        </nav>
 
 
         <main>
             @yield('content')
         </main>
 
-        {{-- <footer class="footer py-4">
+        <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-4">
@@ -248,7 +248,7 @@
                     </div>
                 </div>
             </div>
-        </footer> --}}
+        </footer>
     </div>
 
 </body>
