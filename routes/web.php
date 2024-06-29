@@ -64,6 +64,10 @@ Route::get('/home/guideline', function () {
     return view('home.guideline');
 });
 
+//Marika
+Route::get('/home/show-event', function () {
+    return view('home.show-event');
+});
 
 ?>
 
