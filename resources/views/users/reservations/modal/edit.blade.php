@@ -22,7 +22,7 @@
                                 <label for="persons" class="col-form-label"><i class="fa-solid fa-users fa-xl"></i></label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" id="persons" name="persons" class="form-control rounded-pill" placeholder="1 person">
+                                <input type="text" id="persons" name="persons" class="form-control rounded-pill input" placeholder="1 person">
                             </div>
                             @error('persons')
                                 <p class="text-danger small">{{ $message }}</p>
@@ -34,7 +34,7 @@
                                 <label for="date" class="col-form-label me-1"><i class="fa-solid fa-calendar-days fa-xl"></i></label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" id="date" name="date" class="form-control rounded-pill" placeholder="2024/6/15">
+                                <input type="text" id="date" name="date" class="form-control rounded-pill input" placeholder="2024/6/15">
                             </div>
                             @error('date')
                                 <p class="text-danger small">{{ $message }}</p>
@@ -46,7 +46,7 @@
                                 <label for="time" class="col-form-label me-1"><i class="fa-regular fa-clock fa-xl"></i></label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" id="time" name="time" class="form-control rounded-pill" placeholder="11:00">
+                                <input type="text" id="time" name="time" class="form-control rounded-pill input" placeholder="11:00">
                             </div>
                             @error('time')
                                 <p class="text-danger small">{{ $message }}</p>

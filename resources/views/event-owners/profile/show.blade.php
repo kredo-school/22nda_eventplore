@@ -20,6 +20,8 @@
                         </ul>
                     </div>
                 </div>
+                @include('event-owners.profile.modal.edit')
+                @include('event-owners.profile.modal.delete')
 
                 <div class="text-center mt-4">
                     <i class="fa-solid fa-circle-user fa-8x mb-2"></i>
