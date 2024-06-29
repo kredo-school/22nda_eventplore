@@ -19,8 +19,8 @@ Route::get('/auth/users/sign-in', function () {
     return view('auth.users.sign-in');
 });
 // Show sign-up page for event-owner
-Route::get('/auth/event-owners/sign-up', function () {
-    return view('auth.event-owners.sign-up');
+Route::get('/auth/users/sign-up', function () {
+    return view('auth.users.sign-up');
 });
 // Show sign-up page for user
 Route::get('/auth/users/sign-up', function () {
@@ -30,6 +30,11 @@ Route::get('/auth/users/sign-up', function () {
 Route::get('/event-owners/events/register', function () {
     return view('event-owners.events.register');
 });
+// Show edit event page
+Route::get('/event-owners/events/edit', function () {
+    return view('event-owners.events.edit');
+});
+
 
 
 // Naoki
