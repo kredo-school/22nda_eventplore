@@ -54,7 +54,10 @@ Route::get('/user/reservation-list', function () {
 Route::get('/home/event-menu', function () {
     return view('home.event-menu');
 });
-
+// Show event page for guest
+Route::get('/home/show-event', function () {
+    return view('home.show-event');
+});
 
 // kanako
 Route::get('/users/profile/show', function () {
