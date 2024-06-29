@@ -17,7 +17,7 @@
                     </p>
                     <label for="form-label"><b>Password</b></label>
                     <div class="input-group mb-3 position-relative">
-                        <input type="text" class="form-control rounded">
+                        <input type="text" class="form-control rounded input">
                         <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center">
                             <i class="fa-solid fa-eye-slash"></i>
                         </div>
