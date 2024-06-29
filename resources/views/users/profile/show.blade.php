@@ -20,6 +20,8 @@
                         </ul>
                     </div>
                 </div>
+                @include('users.profile.modal.delete')
+                @include('users.profile.modal.edit')
 
                 <div class="text-center">
                     <i class="fa-solid fa-circle-user fa-8x mb-2"></i>
