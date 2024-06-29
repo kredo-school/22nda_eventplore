@@ -6,6 +6,8 @@
 
 <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
 
+
+
 <div class="row mb-4">
     <div class="col-md-6">
         <div class="text-white p-4" style="height: 300px; background-color: #0C2C04;">
@@ -22,7 +24,59 @@
             </div>
         </div>
     </div>
+
+    {{-- Before Reservation --}}
     <div class="col-md-6">
+        <div class="card" style="height: 400px;">
+            <div class="card-body text-center">
+                <div class="mb-3 d-flex justify-content-center align-items-center">
+                    <div class="d-flex justify-content-center" style="width: 50px;">
+                        <i class="fa-solid fa-yen-sign icon-lg"></i>
+                    </div>
+                    <div class="ms-3 text-start" style="width: 20%">
+                        <h3 class="mb-0">Price per a person</h3>
+                    </div>
+                </div>
+                <div class="mb-3 d-flex justify-content-center align-items-center">
+                    <div class="d-flex justify-content-center" style="width: 50px;">
+                        <i class="fa-solid fa-users icon-lg"></i>
+                    </div>
+                    <div class="ms-3 text-start" style="width: 20%;">
+                        <select class="form-select">
+                            <option>1 person</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 d-flex justify-content-center align-items-center">
+                    <div class="d-flex justify-content-center" style="width: 50px;">
+                        <i class="fa-solid fa-calendar-days icon-lg"></i>
+                    </div>
+                    <div class="ms-3 text-start" style="width: 20%;">
+                        <select class="form-select">
+                            <option>Select Date</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 d-flex justify-content-center align-items-center">
+                    <div class="d-flex justify-content-center" style="width: 50px;">
+                        <i class="fa-regular fa-clock icon-lg"></i>
+                    </div>
+                    <div class="ms-3 text-start" style="width: 20%;">
+                        <select class="form-select">
+                            <option>Select Time</option>
+                        </select>
+                    </div>
+                </div>
+                    <button class="btn btn-green px-5 py-2 rounded-0 " data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
+                    <hr style="color: #0C2C04">
+                    <p class="text-center fs-3 mb-0"><strong>Total</strong> 5,000 yen</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Reserved --}}
+    {{-- <div class="col-md-6">
         <div class="card">
             <div class="card-body text-center">
                 <h2 class="card-title border-top border-bottom py-2 mx-5 mt-3 mb-5" style="color: #84947C"><i class="fa-solid fa-check"></i>Already Reseved!</h2>
@@ -76,7 +130,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 {{-- Related events --}}
