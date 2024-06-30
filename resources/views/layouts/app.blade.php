@@ -26,7 +26,6 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
 </head>
 <body>
     <div id="app">
@@ -63,21 +62,21 @@
                         <!-- Authentication Links -->
                         {{-- @guest --}}
                             {{-- Sign in --}}
-                            {{-- @if (Route::has('login'))
+                            @if (Route::has('login'))
                             <li class="nav-item">
                                 <a class="nav-link btn btn-green" href="#">{{ __('SIGN-IN') }}</a>
                             </li>
-                            @endif --}}
+                            @endif
 
-                            {{-- @if (Route::has('register'))
+                            @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif --}}
+                            @endif
 
                         {{-- @else --}}
                             {{-- for users --}}
-                            <li class="nav-item dropdown">
+                            {{-- <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="d-flex align-items-center justify-content-center">
                                         <i class="fa-solid fa-circle-user fa-2xl"></i>
@@ -103,7 +102,7 @@
                                         @csrf
                                     </form>
                                 </div>
-                            </li>
+                            </li> --}}
 
                             {{-- for event ownwers --}}
                             {{-- <li class="nav-item dropdown">

@@ -1,0 +1,33 @@
+.bar-chart-002 {
+    font-size: .9em;
+}
+
+.bar-chart-002 > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+.bar-chart-002 dt {
+    width: 20px;
+    min-width: 20px;
+}
+
+.bar-chart-002 dd {
+    width: 100%;
+    margin: 0;
+    border-radius: 3px;
+    background-color: #c0c0c0;
+}
+
+.bar-chart-002 span {
+    display: inline-block;
+    padding-right: 5px;
+    border-radius: inherit;
+    background-color: #696969;
+    color: #fff;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: right;
+    white-space: nowrap;
+}

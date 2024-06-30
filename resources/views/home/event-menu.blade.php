@@ -23,7 +23,7 @@
                         <a href="" class="text-decoration-none">
                             {{-- event card --}}
                             <div class="card shadow border-0">
-                                <img src="{{ asset('images/event-test/event1.jpeg') }}" alt="" class="rounded card-img-top card-img-sm">
+                                <img src="{{ asset('images/event-test/event1.jpeg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
                                 <div class="card-body">
                                     <div class="row align-items-center mb-3">
                                         {{-- event title --}}
@@ -65,7 +65,7 @@
                     <div class="col-lg-6 mb-4">
                         <a href="" class="text-decoration-none">
                             <div class="card shadow border-0">
-                                <img src="{{ asset('images/event-test/fireworktest.png') }}" alt="" class="rounded card-img-top card-img-sm">
+                                <img src="{{ asset('images/event-test/fireworktest.png') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
                                 <div class="card-body">
                                     <div class="row align-items-center mb-3">
                                         <div class="col-5">
@@ -105,7 +105,7 @@
                     <div class="col-lg-6 mb-4">
                         <a href="" class="text-decoration-none">
                             <div class="card shadow border-0">
-                                <img src="{{ asset('images/event-test/concert-event.jpg') }}" alt="" class="rounded card-img-top card-img-sm">
+                                <img src="{{ asset('images/event-test/concert-event.jpg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
                                 <div class="card-body">
                                     <div class="row align-items-center mb-3">
                                         <div class="col-5">
@@ -145,7 +145,7 @@
                     <div class="col-lg-6 mb-4">
                         <a href="" class="text-decoration-none">
                             <div class="card shadow border-0">
-                                <img src="{{ asset('images/event-test/festival_test.jpg') }}" alt="" class="rounded card-img-top card-img-sm">
+                                <img src="{{ asset('images/event-test/festival_test.jpg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
                                 <div class="card-body">
                                     <div class="row align-items-center mb-3">
                                         <div class="col-5">
@@ -185,7 +185,7 @@
                     <div class="col-lg-6 mb-4">
                         <a href="" class="text-decoration-none">
                             <div class="card shadow border-0">
-                                <img src="{{ asset('images/event-test/IMG_7560.JPG') }}" alt="" class="rounded card-img-top card-img-sm">
+                                <img src="{{ asset('images/event-test/IMG_7560.JPG') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
                                 <div class="card-body">
                                     <div class="row align-items-center mb-3">
                                         <div class="col-5">
@@ -225,7 +225,7 @@
                     <div class="col-lg-6 mb-4">
                         <a href="" class="text-decoration-none">
                             <div class="card shadow border-0">
-                                <img src="{{ asset('images/event-test/IMG_7559.JPG') }}" alt="" class="rounded card-img-top card-img-sm">
+                                <img src="{{ asset('images/event-test/IMG_7559.JPG') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
                                 <div class="card-body">
                                     <div class="row align-items-center mb-3">
                                         <div class="col-5">

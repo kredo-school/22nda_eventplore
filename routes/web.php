@@ -19,17 +19,22 @@ Route::get('/auth/users/sign-in', function () {
     return view('auth.users.sign-in');
 });
 // Show sign-up page for event-owner
-Route::get('/auth/event-owners/sign-up', function () {
-    return view('auth.event-owners.sign-up');
+Route::get('/auth/users/sign-up', function () {
+    return view('auth.users.sign-up');
 });
 // Show sign-up page for user
 Route::get('/auth/users/sign-up', function () {
     return view('auth.users.sign-up');
 });
 // Show register event page
-Route::get('event-owners/events/register', function () {
+Route::get('/event-owners/events/register', function () {
     return view('event-owners.events.register');
 });
+// Show edit event page
+Route::get('/event-owners/events/edit', function () {
+    return view('event-owners.events.edit');
+});
+
 
 
 // Naoki
@@ -49,6 +54,7 @@ Route::get('/user/reservation-list', function () {
 Route::get('/home/event-menu', function () {
     return view('home.event-menu');
 });
+// Show home page
 Route::get('/home', function () {
     return view('home.home');
 });
@@ -63,7 +69,14 @@ Route::get('/event-owners/profile/show', function () {
     return view('event-owners.profile.show');
 });
 
+Route::get('/home/guideline', function () {
+    return view('home.guideline');
+});
 
+//Marika
+Route::get('/home/show-event', function () {
+    return view('home.show-event');
+});
 
 ?>
 
