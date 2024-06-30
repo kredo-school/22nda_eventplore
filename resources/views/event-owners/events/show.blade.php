@@ -15,7 +15,7 @@
         </div>
         {{-- event list --}}
         <div class="row">
-            <div class="col-4 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4">
                 {{-- event card --}}
                 <div class="card shadow border-0">
                     <a href=""><img src="{{ asset('images/event-test/event1.jpeg') }}" alt="" class="rounded card-img-top"></a>
@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <div class="col-4 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card shadow border-0">
                     <a href=""><img src="{{ asset('images/event-test/fireworktest.png') }}" alt="" class="rounded card-img-top"></a>
                     <div class="card-body">
@@ -101,7 +101,7 @@
                 </div>
             </div>
 
-            <div class="col-4 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card shadow border-0">
                     <a href=""><img src="{{ asset('images/event-test/concert-event.jpg') }}" alt="" class="rounded card-img-top"></a>
                     <div class="card-body">
@@ -141,7 +141,7 @@
                 </div>
             </div>
 
-            <div class="col-4 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card shadow border-0">
                     <a href=""><img src="{{ asset('images/event-test/festival_test.jpg') }}" alt="" class="rounded card-img-top"></a>
                     <div class="card-body">
@@ -181,7 +181,7 @@
                 </div>
             </div>
 
-            <div class="col-4 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card shadow border-0">
                     <a href=""><img src="{{ asset('images/event-test/IMG_7560.JPG') }}" alt="" class="rounded card-img-top"></a>
                     <div class="card-body">
@@ -221,7 +221,7 @@
                 </div>
             </div>
 
-            <div class="col-4 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card shadow border-0">
                     <a href=""><img src="{{ asset('images/event-test/IMG_7559.JPG') }}" alt="" class="rounded card-img-top"></a>
                     <div class="card-body">
