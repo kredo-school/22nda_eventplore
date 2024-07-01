@@ -6,21 +6,6 @@
 
 <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
 
-
-
-{{-- <div class="row mb-4">
-    <div class="col-md-6">
-        <div class="text-white p-4" style="height: 300px; background-color: #0C2C04;">
-            <h2>Introduction</h2>
-            <p>The Sumida River Fireworks Festival, held annually in Tokyo, is one of Japan's most famous fireworks displays. It takes place on the last Saturday of July along the Sumida River, drawing over a million spectators.</p>
-            <p><a href="https://www.sumidagawa-hanabi.com/" class="text-white">https://www.sumidagawa-hanabi.com/</a></p>
-            <div class="mt-4 text-end">
-                <p class="text-white me-3">Follow this event's owner</p>
-                <div class="d-inline-flex align-items-center">
-                    <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-xl"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fa-brands fa-x-twitter fa-xl"></i></a>
-                    <a href="#" class="text-white"><i class="fab fa-instagram fa-xl"></i></a> --}}
-
 <div class="p-4 justify-content-center ">
     {{-- Event name & date & cate --}}
     <div class="row align-items-center mb-3">
@@ -144,9 +129,10 @@
                             </select>
                         </div>
                     </div>
-                        <button class="btn btn-green px-5 py-2 rounded-0 " data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
+                    <div>
+                        <button class="btn btn-green px-5 p-2 rounded-0 " data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
                         <hr style="color: #0C2C04">
-                        <p class="text-center fs-3 mb-0"><strong>Total</strong> 5,000 yen</p>
+                        <p class="align-middle text-center pt-2 fs-3 mb-0"><strong>Total</strong> 5,000 yen</p>
                     </div>
                 </div>
             </div>
