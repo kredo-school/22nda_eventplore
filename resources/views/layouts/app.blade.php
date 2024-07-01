@@ -55,6 +55,7 @@
                             <option value="3">Option 3</option>
                         </select>
                         <input type="date" class="form-control" placeholder="Calendar">
+                        <button class="btn border-0"><i class="fa-solid fa-magnifying-glass fa-xl"></i></button>
                     </form>
 
                     <!-- Right Side Of Navbar -->
@@ -140,25 +141,25 @@
 
         {{-- Show up only Home and Event menu page --}}
         <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height navbar-category">
-            <a href="" class="mx-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-user-tie fa-2xl"></i>
-                <span class="d-block mt-2">Business</span>
+            <a href="" class="me-1 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-torii-gate  fa-2xl"></i>
+                <small class="d-block mt-2">Culuture</small>
             </a>
             <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-icons fa-2xl"></i>
-                <span class="d-block mt-2">Hobbies</span>
+                <i class="fa-brands fa-first-order-alt fa-2xl"></i>
+                <small class="d-block mt-2">Fireworks</small>
             </a>
             <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-film fa-2xl"></i>
-                <span class="d-block mt-2">Movie</span>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-house-laptop fa-2xl"></i>
-                <span class="d-block mt-2">Online</span>
+                <i class="fas fa-theater-masks fa-2xl"></i>
+                <span class="d-block mt-2">Festival</span>
             </a>
             <a href="" class="me-2 text-secondary text-decoration-none text-center">
                 <i class="fa-solid fa-utensils fa-2xl"></i>
-                <small class="d-block mt-2">Food/Drinks</small>
+                <small class="d-block mt-2">Food/Drink</small>
+            </a>
+            <a href="" class="me-2 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-baseball-bat-ball fa-2xl"></i>
+                <span class="d-block mt-2">Sport</span>
             </a>
             <a href="" class="me-2 text-secondary text-decoration-none text-center">
                 <i class="fa-solid fa-paint-brush fa-2xl "></i>
@@ -173,24 +174,24 @@
                 <span class="d-block mt-2">Nature</span>
             </a>
             <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fas fa-theater-masks fa-2xl"></i>
-                <span class="d-block mt-2">Festival</span>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
                 <i class="fa-regular fa-lightbulb fa-2xl"></i>
                 <small class="d-block mt-2">Illumination</small>
             </a>
-            <a href="" class="me-1 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-torii-gate  fa-2xl"></i>
-                <small class="d-block mt-2">Culuture</small>
+            <a href="" class="me-2 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-film fa-2xl"></i>
+                <span class="d-block mt-2">Movie</span>
             </a>
             <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-baseball-bat-ball fa-2xl"></i>
-                <span class="d-block mt-2">Sport</span>
+                <i class="fa-solid fa-icons fa-2xl"></i>
+                <span class="d-block mt-2">Hobby</span>
+            </a>
+            <a href="" class="mx-2 text-secondary text-decoration-none text-center">
+                <i class="fa-solid fa-user-tie fa-2xl"></i>
+                <span class="d-block mt-2">Business</span>
             </a>
             <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-brands fa-first-order-alt fa-2xl"></i>
-                <small class="d-block mt-2">Fireworks</small>
+                <i class="fa-solid fa-house-laptop fa-2xl"></i>
+                <span class="d-block mt-2">Online</span>
             </a>
             <a href="" class="me-1 text-secondary text-decoration-none text-center">
                 <i class="fas fa-hand-holding-usd fa-xl"></i>
