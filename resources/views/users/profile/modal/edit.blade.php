@@ -40,6 +40,7 @@
                                 <input type="text" id="name" name="last-name" class="form-control input" placeholder="Smith">
                             </div>
                         </div>
+                    </div>
                 </div>
 
                 {{-- 確認ボタン --}}
