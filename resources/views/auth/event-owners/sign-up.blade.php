@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="p-0 overflow-scroll" style="width: 100vw; height: 100vh;">
+<div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
     <div class="d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
         <div class="w-50 p-0 d-flex flex-column justify-content-center">
             <form method="POST" action="">
