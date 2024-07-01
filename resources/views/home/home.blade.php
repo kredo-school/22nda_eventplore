@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/show-event/home.css') }}">
 
     <div class="row">
-        <div class="col-3 overflow-auto map">
+        <div class="col-lg-3 col-md-4 col-sm-5 overflow-auto map">
             <form action="" method="">
                 {{-- calendar --}}
                 <div class="mb-2">
@@ -40,43 +40,43 @@
                 <div class="ms-3">
                     <div class="h4 mt-3 mb-3">Category</div>
                     <div class="row ms-3">
-                        <div class="col-lg-6 form-check mb-3">
+                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
                             <input class="form-check-input green-check" type="checkbox" name="category" value="business" id="business">
                             <label class="form-check-label ms-1 text-capitalize" for="business">business</label>
                         </div>
-                        <div class="col-lg-6 form-check mb-3">
+                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
                             <input class="form-check-input green-check" type="checkbox" name="category" value="hobby" id="hobby">
                             <label class="form-check-label ms-1 text-capitalize" for="hobby">hobby</label>
                         </div>
-                        <div class="col-lg-6 form-check mb-3">
+                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
                             <input class="form-check-input green-check" type="checkbox" name="category" value="movie" id="movie">
                             <label class="form-check-label ms-1 text-capitalize" for="movie">movie</label>
                         </div>
-                        <div class="col-lg-6 form-check mb-3">
+                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
                             <input class="form-check-input green-check" type="checkbox" name="category" value="online" id="online">
                             <label class="form-check-label ms-1 text-capitalize" for="online">online</label>
                         </div>
-                        <div class="col-lg-6 form-check mb-3">
-                            <input class="form-check-input green-check" type="checkbox" name="category" value="food/drinks" id="food/drinks">
-                            <label class="form-check-label ms-1 text-capitalize" for="food/drinks">food/drinks</label>
+                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
+                            <input class="form-check-input green-check" type="checkbox" name="category" value="food/drink" id="food/drink">
+                            <label class="form-check-label ms-1 overflow-visible text-capitalize" for="food/drink">food/drink</label>
                         </div>
-                        <div class="col-lg-6 form-check mb-3">
+                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
                             <input class="form-check-input green-check" type="checkbox" name="category" value="art" id="art">
                             <label class="form-check-label ms-1 text-capitalize" for="art">art</label>
                         </div>
-                        <div class="col-lg-6 form-check mb-3">
+                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
                             <input class="form-check-input green-check" type="checkbox" name="category" value="music" id="music">
                             <label class="form-check-label ms-1 text-capitalize" for="music">music</label>
                         </div>
-                        <div class="col-lg-6 form-check mb-3">
+                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
                             <input class="form-check-input green-check" type="checkbox" name="category" value="nature" id="nature">
                             <label class="form-check-label ms-1 text-capitalize" for="nature">nature</label>
                         </div>
-                        <div class="col-lg-6 form-check mb-3">
+                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
                             <input class="form-check-input green-check" type="checkbox" name="category" value="festival" id="festival">
                             <label class="form-check-label ms-1 text-capitalize" for="festival">festival</label>
                         </div>
-                        <div class="col-lg-6 form-check mb-3">
+                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
                             <input class="form-check-input green-check" type="checkbox" name="category" value="illumination" id="illumination">
                             <label class="form-check-label ms-1 text-capitalize" for="illumination">illumination</label>
                         </div>
@@ -89,7 +89,7 @@
             </form>
         </div>
 
-        <div class="col-9 ps-0">
+        <div class="col-lg-9 col-md-8 col-sm-7 ps-0">
             {{-- map --}}
             <div class="p-0">
                 <img src="{{ asset('images/event-test/map.png') }}" alt="map" class="map w-100">

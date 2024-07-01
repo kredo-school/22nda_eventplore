@@ -12,8 +12,8 @@
 	width: 50vw;
 	height: calc(100vh - 240px);
     overflow-y: auto;
-    transition: 0.5s transform; /* transformプロパティの変化に対して0.5秒のアニメーション */
-    transition-timing-function: cubic-bezier(.38,.52,.23,.99); /* アニメーションのタイミング */
+    transition: 0.25s transform; /* 0.25秒のアニメーション */
+    transition-timing-function: ease; /* アニメーションのタイミング */
 	background-color: #FFFFFF;
 }
 
@@ -32,8 +32,8 @@
 	display: block;
 	padding: 0.5em;
 	cursor: pointer; 
-	transition: 0.5s transform; /* transformプロパティの変化に対して0.5秒のアニメーション */
-	transition-timing-function: cubic-bezier(.61,-0.38,.37,1.27); /* アニメーションのタイミング */
+	transition: 0.25s transform; /* 0.25秒のアニメーション */
+	transition-timing-function: ease; /* アニメーションのタイミング */
 	position: absolute;
 	left: 0;
 }
@@ -44,6 +44,7 @@
 
 .cp_offcanvas #cp_toggle ~ label::before {
 	font-family: 'FontAwesome';
+	color:#0C2C04;
 	content: "\f101"; /* 右矢印アイコン（チェック前） */
 	font-size: 2em;
 	position: absolute;
@@ -54,6 +55,7 @@
 }
 
 .cp_offcanvas #cp_toggle:checked ~ label::before {
+	color:#0C2C04;
 	content: "\f100"; /* 左矢印アイコン（チェック後） */
 }
 

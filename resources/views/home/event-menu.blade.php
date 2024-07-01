@@ -268,8 +268,8 @@
     </div>
 
     {{-- map --}}
-    <div class="w-100 p-0">
-        <img src="{{ asset('images/event-test/map.png') }}" alt="map" class="map">
+    <div class="p-0">
+        <img src="{{ asset('images/event-test/map.png') }}" alt="map" class="map w-100">
     </div>
 
 @endsection
