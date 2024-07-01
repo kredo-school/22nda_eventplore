@@ -11,6 +11,7 @@
 .btn-outline-dark{
     font-family: "Raleway";
     font-weight: bold;
+    min-width: 50px;
 }
 
 table.rounded-corners {

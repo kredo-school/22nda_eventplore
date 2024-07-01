@@ -19,7 +19,7 @@
                         <h2 class="h1 ms-1 mt-3"><i class="fa-solid fa-clipboard-list me-2"></i>Event menu list</h2>
                     </div>
                     {{-- event list --}}
-                    <div class="col-6 mb-4">
+                    <div class="col-lg-6 mb-4">
                         <a href="" class="text-decoration-none">
                             {{-- event card --}}
                             <div class="card shadow border-0">
@@ -62,7 +62,7 @@
                         </a>
                     </div>
 
-                    <div class="col-6 mb-4">
+                    <div class="col-lg-6 mb-4">
                         <a href="" class="text-decoration-none">
                             <div class="card shadow border-0">
                                 <img src="{{ asset('images/event-test/fireworktest.png') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -102,7 +102,7 @@
                         </a>
                     </div>
 
-                    <div class="col-6 mb-4">
+                    <div class="col-lg-6 mb-4">
                         <a href="" class="text-decoration-none">
                             <div class="card shadow border-0">
                                 <img src="{{ asset('images/event-test/concert-event.jpg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -142,7 +142,7 @@
                         </a>
                     </div>
 
-                    <div class="col-6 mb-4">
+                    <div class="col-lg-6 mb-4">
                         <a href="" class="text-decoration-none">
                             <div class="card shadow border-0">
                                 <img src="{{ asset('images/event-test/festival_test.jpg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -182,7 +182,7 @@
                         </a>
                     </div>
 
-                    <div class="col-6 mb-4">
+                    <div class="col-lg-6 mb-4">
                         <a href="" class="text-decoration-none">
                             <div class="card shadow border-0">
                                 <img src="{{ asset('images/event-test/IMG_7560.JPG') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -222,7 +222,7 @@
                         </a>
                     </div>
 
-                    <div class="col-6 mb-4">
+                    <div class="col-lg-6 mb-4">
                         <a href="" class="text-decoration-none">
                             <div class="card shadow border-0">
                                 <img src="{{ asset('images/event-test/IMG_7559.JPG') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -268,8 +268,8 @@
     </div>
 
     {{-- map --}}
-    <div class="w-100 p-0">
-        <img src="{{ asset('images/event-test/map.png') }}" alt="map" class="map">
+    <div class="p-0">
+        <img src="{{ asset('images/event-test/map.png') }}" alt="map" class="map w-100">
     </div>
 
 @endsection

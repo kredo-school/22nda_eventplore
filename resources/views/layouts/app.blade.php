@@ -226,8 +226,8 @@
 
         <footer class="footer py-4">
             <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-4">
+                <div class="row">
+                    <div class="col-4">
                         <div class="d-flex">
                             <a href="#" class="me-3 text-secondary text-decoration-none">
                                 <i class="fab fa-facebook fa-xl"></i>
@@ -240,10 +240,10 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4 text-center" style="color: #84947C">
+                    <div class="col-4 text-center" style="color: #84947C">
                         <small>Copylight 2024 Eventplore</small>
                     </div>
-                    <div class="col-md-4 text-end">
+                    <div class="col-4 d-flex justify-content-end">
                         <a href="#" class="me-3 text-decoration-none" style="color: #84947C">Terms of service</a>
                         <a href="#" class=" text-decoration-none" style="color: #84947C">Support</a>
                     </div>
