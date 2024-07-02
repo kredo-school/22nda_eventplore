@@ -7,8 +7,8 @@
 <div class="profile-container">
     <div class="background-image" style="background-image: url('{{ asset('images/profile/profileback.jpg') }}');"></div>
     <div class="content">
-        <div class="card mx-auto">
-            <div class="card-body text-center" style="width: 600px; height: 450px;">
+        <div class="card mx-auto w-50" style="min-width: 480px; min-height: 450px;">
+            <div class="card-body text-center">
                 <div class="position-absolute top-0 end-0 mt-2 me-5">
                     <div class="dropdown custom-dropdown-container">
                         <button class="btn btn-outline-light btn-sm custom-dropdown" type="button" id="dropdownPro" data-bs-toggle="dropdown" aria-expanded="false">
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="row mb-2">
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <div class="content">
                             <a href="#" class="text-decoration-none">
                                 <div class="card custom-bg border border-0 custom-card">
@@ -42,7 +42,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <div class="content">
                             <a href="#" class="text-decoration-none">
                                 <div class="card custom-bg border border-0 custom-card">
