@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
-    <div class="d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
-        <div class="w-50 p-0 d-flex flex-column justify-content-center">
+    <div class="row d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
+        <div class="col-md-6 p-0 d-flex flex-column justify-content-center">
             <form method="POST" action="">
                 @csrf
 
@@ -126,7 +126,7 @@
                 </div>
             </form>
         </div>
-        <div class="w-50 p-0">
+        <div class="col p-0">
             <img src="{{ asset('images/sign-up/redd-f-Bxzrd0p6yOM-unsplash.jpg') }}" alt="register event owner photo" class="w-100 h-100" style="object-fit: cover;">
         </div>
     </div>

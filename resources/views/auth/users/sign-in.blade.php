@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
-    <div class="d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
-        <div class="w-50 p-0 d-flex flex-column justify-content-center">
+    <div class="row d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
+        <div class="col-md-6 p-0 d-flex flex-column justify-content-center">
             <form method="POST" action="">
                 @csrf
 
@@ -15,7 +15,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center mb-3">
-                        <div class="w-75 text-start">
+                        <div class="text-start">
                             <label for="username" class="form-label fw-bold mb-2">Username*</label>
                             <div class="mb-3">
                                 <input id="username" type="username" class="form-control" name="username" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C">
@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center mb-2">
-                        <div class="w-75 text-start">
+                        <div class="text-start">
                             <label for="password" class="form-label fw-bold mb-2">Password*</label>
                             <div class="mb-3">
                                 <div class="input-group mb-3 position-relative">
@@ -79,7 +79,7 @@
                 </div>
             </form>
         </div>
-        <div class="w-50 p-0">
+        <div class="col p-0">
             <img src="{{ asset('images/sign-in/tengku-nadia-fz8_SONkBB8-unsplash.jpg') }}" alt="sign-in user photo" class="w-100 h-100" style="object-fit: cover;">
         </div>
     </div>
