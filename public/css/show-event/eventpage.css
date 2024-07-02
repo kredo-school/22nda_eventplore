@@ -1,0 +1,9 @@
+.icon-container {
+    flex: 0 0 10%; /* アイコンの幅を親要素の10%に設定 */
+    display: flex;
+    justify-content: center;
+}
+.text-container {
+    flex: 1; /* 残りの幅をテキストに使用 */
+}
+
