@@ -41,3 +41,19 @@
     padding-bottom: 80px;
     box-sizing: border-box;
 }
+
+.nav-list{
+    list-style: none;
+}
+
+
+@media (min-width: 768px) {
+    .btn-search-icon {
+        background: none;
+        border: none;
+        padding: 0;
+    }
+    .btn-search-icon:hover {
+        background: none;
+    }
+}
