@@ -90,14 +90,14 @@
 
         {{-- Before Reservation --}}
         <div class="col-md-6">
-            <div class="card" style="height: 400px;">
+            <div class="card px-5 pt-3 shadow" style="height: 400px;">
                 <div class="card-body text-center">
                     <div class="mb-3 d-flex justify-content-center align-items-center">
                         <div class="d-flex justify-content-center" style="width: 50px;">
                             <i class="fa-solid fa-yen-sign icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%">
-                            <h3 class="mb-0">Price per a person</h3>
+                        <div class="ms-3 text-center flex-grow-1">
+                            <h3 class="mb-0">5,000 yen / per a person</h3>
                         </div>
                     </div>
                     <div class="mb-3 d-flex justify-content-center align-items-center">
@@ -130,7 +130,7 @@
                             </select>
                         </div>
                     </div>
-                        <button class="btn btn-green px-5 py-2 rounded-0 " data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
+                        <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
                         <hr style="color: #0C2C04">
                         <p class="align-middle text-center pt-2 fs-3 mb-0"><strong>Total</strong> 5,000 yen</p>
                     </div>
@@ -139,8 +139,8 @@
         </div>
 
         {{-- Reserved --}}
-        {{-- <div class="col-md-6">
-            <div class="card mt-2" style="min-height: 400px; max-height: 400px;">
+        <div class="col-md-6">
+            <div class="card mb-4 shadow" style="min-height: 400px; max-height: 400px;">
                 <div class="card-body text-center mt-4">
                     <h2 class="card-title border-top border-bottom py-2 mx-5 mb-3" style="color: #84947C"><i class="fa-solid fa-check"></i>Already Reseved!</h2>
                     <div class="mb-3 d-flex justify-content-center align-items-center">
@@ -192,10 +192,8 @@
                         <button class="btn btn-green ms-2" data-bs-toggle="modal" data-bs-target="#user-edit-reservation"><i class="fa-solid fa-pen-to-square"></i> Edit Reservation</button>
                     </div>
                 </div>
-
-
             </div>
-        </div> --}}
+        </div>
 
 
     {{-- info & map --}}
@@ -253,7 +251,7 @@
 
         {{-- location --}}
         <div class="col-md-6">
-            <div class="card p-2" style="background-color: #0C2C04; height: 400px;">
+            <div class="card p-2 shadow" style="background-color: #0C2C04; height: 400px;">
                 <div class="card-body">
                     <div class="text-white">
                         <h2>Location</h2>
@@ -270,316 +268,6 @@
                             <a href=""><img src="{{ asset('images/event-test/go.png') }}" alt="" style="width: 5%; height: 5%;"></a>
                         </p>
                     </div>
-    
-                    {{-- レビューの評価(グラフ) --}}
-                    <dl class="bar-chart-002 ms-4 w-25 rounded">
-                        <div>
-                            <dt>5:</dt>
-                            <dd><span style="width: 80%">80%</span></dd>
-                        </div>
-                        <div>
-                            <dt>4:</dt>
-                            <dd><span style="width: 10%">10%</span></dd>
-                        </div>
-                        <div>
-                            <dt>3:</dt>
-                            <dd><span style="width: 5%">5%</span></dd>
-                        </div>
-                        <div>
-                            <dt>2:</dt>
-                            <dd><span style="width: 3%"> 3%</span></dd>
-                        </div>
-                        <div>
-                            <dt>1:</dt>
-                            <dd><span style="width: 2%">2%</span></dd>
-                        </div>
-                    </dl>
-                </div>
-            </div>
-            {{-- コメントが3件だけ見れる --}}
-            <div class="d-flex justify-content-center mt-4 ">
-                <div class="rounded p-2 me-3" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
-                    <div class="d-flex justify-content-start align-items-center">
-                        <img src="{{ asset('images/Jackie.jpeg') }}" alt="Jackie" class="rounded-circle m-2" style="width: 36px; height: 36px;">
-                        <span class="h5 ms-2 d-flex align-items-center">John Smith</span>
-                    </div>
-                    <i class="fa-solid fa-star"></i>
-                    <span class="me-2 h5">5.0</span>
-                    <div class="mt-2">
-                        <span>I was excited to watch fireworks!! I'm gonna go there next year. </span>
-                    </div>
-                </div>
-                <div class="rounded p-2 me-3" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
-                    <div class="d-flex justify-content-start align-items-center">
-                        <img src="{{ asset('images/Jackie.jpeg') }}" alt="Jackie" class="rounded-circle m-2" style="width: 36px; height: 36px;">
-                        <span class="h5 ms-2 d-flex align-items-center">John Smith</span>
-                    </div>
-                    <i class="fa-solid fa-star"></i>
-                    <span class="me-2 h5">5.0</span>
-                    <div class="mt-2">
-                        <span>I was excited to watch fireworks!! I'm gonna go there next year. </span>
-                    </div>
-                </div>
-                <div class="rounded p-2" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
-                    <div class="d-flex justify-content-start align-items-center">
-                        <img src="{{ asset('images/Jackie.jpeg') }}" alt="Jackie" class="rounded-circle m-2" style="width: 36px; height: 36px;">
-                        <span class="h5 ms-2 d-flex align-items-center">John Smith</span>
-                    </div>
-                    <i class="fa-solid fa-star"></i>
-                    <span class="me-2 h5">5.0</span>
-                    <div class="mt-2">
-                        <span>I was excited to watch fireworks!! I'm gonna go there next year. </span>
-                    </div>
-                </div>
-            </div>
-            <div class="ms-5 my-5">
-                <button class="btn btn-outline-dg" data-bs-toggle="modal" data-bs-target="#all-reviews-page">See all reviews(135)</button>
-            </div>
-            @include('home.modal.show-reviews')
-        </div>
-        <hr>
-        {{-- Related events --}}
-        <div class="container">
-            <h2 class="h1 my-3">Related Events</h2>
-            <div class="row mb-4 justify-content-center">
-                <div class="col-4">
-                    <a href="" class="text-decoration-none">
-                        {{-- event card --}}
-                        <div class="card shadow border-0">
-                            <img src="{{ asset('images/event-test/event1.jpeg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
-                            <div class="card-body">
-                                <div class="row align-items-center mb-3">
-                                    {{-- event title --}}
-                                    <div class="col-5">
-                                        <h4 class="text-dark">Event Title</h4>
-                                    </div>
-                                    <div class="col d-flex justify-content-end me-3">
-                                        <h4 class="h4 text-dark"><i class="fa-solid fa-star me-2"></i>4.5</h4>
-                                    </div>
-                                </div>
-                                {{-- information --}}
-                                <div class="row align-items-center gx-1 mb-2">
-                                    <div class="col-4">
-                                        <i class="fa-solid fa-location-dot me-1"></i>Location
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="tag rounded-pill py-1 w-100">Category1</div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="tag rounded-pill py-1 w-100">Category2</div>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center gx-1">
-                                    <div class="col-4">
-                                        <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                                    </div>
-                                    <div class="col-4 align-self-center">
-                                        <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                                    </div>
-                                    <div class="col-4 align-self-center">
-                                        <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-4">
-                    <a href="" class="text-decoration-none">
-                        <div class="card shadow border-0">
-                            <img src="{{ asset('images/event-test/fireworktest.png') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
-                            <div class="card-body">
-                                <div class="row align-items-center mb-3">
-                                    <div class="col-5">
-                                        <h4 class="text-dark">Event Title</h4>
-                                    </div>
-                                    <div class="col d-flex justify-content-end me-3">
-                                        <h4 class="h4 text-dark"><i class="fa-solid fa-star me-2"></i>4.5</h4>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center gx-1 mb-2">
-                                    <div class="col-4">
-                                        <i class="fa-solid fa-location-dot me-1"></i>Location
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="tag rounded-pill py-1 w-100">Category1</div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="tag rounded-pill py-1 w-100">Category2</div>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center gx-1">
-                                    <div class="col-4">
-                                        <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                                    </div>
-                                    <div class="col-4 align-self-center">
-                                        <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                                    </div>
-                                    <div class="col-4 align-self-center">
-                                        <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-4">
-                    <a href="" class="text-decoration-none">
-                        <div class="card shadow border-0">
-                            <img src="{{ asset('images/event-test/concert-event.jpg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
-                            <div class="card-body">
-                                <div class="row align-items-center mb-3">
-                                    <div class="col-5">
-                                        <h4 class="text-dark">Event Title</h4>
-                                    </div>
-                                    <div class="col d-flex justify-content-end me-3">
-                                        <h4 class="h4 text-dark"><i class="fa-solid fa-star me-2"></i>4.5</h4>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center gx-1 mb-2">
-                                    <div class="col-4">
-                                        <i class="fa-solid fa-location-dot me-1"></i>Location
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="tag rounded-pill py-1 w-100">Category1</div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="tag rounded-pill py-1 w-100">Category2</div>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center gx-1">
-                                    <div class="col-4">
-                                        <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                                    </div>
-                                    <div class="col-4 align-self-center">
-                                        <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                                    </div>
-                                    <div class="col-4 align-self-center">
-                                        <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="row mb-4 justify-content-center">
-                <div class="col-4">
-                    <a href="" class="text-decoration-none">
-                        <div class="card shadow border-0">
-                            <img src="{{ asset('images/event-test/festival_test.jpg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
-                            <div class="card-body">
-                                <div class="row align-items-center mb-3">
-                                    <div class="col-5">
-                                        <h4 class="text-dark">Event Title</h4>
-                                    </div>
-                                    <div class="col d-flex justify-content-end me-3">
-                                        <h4 class="h4 text-dark"><i class="fa-solid fa-star me-2"></i>4.5</h4>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center gx-1 mb-2">
-                                    <div class="col-4">
-                                        <i class="fa-solid fa-location-dot me-1"></i>Location
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="tag rounded-pill py-1 w-100">Category1</div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="tag rounded-pill py-1 w-100">Category2</div>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center gx-1">
-                                    <div class="col-4">
-                                        <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                                    </div>
-                                    <div class="col-4 align-self-center">
-                                        <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                                    </div>
-                                    <div class="col-4 align-self-center">
-                                        <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-4">
-                    <a href="" class="text-decoration-none">
-                        <div class="card shadow border-0">
-                            <img src="{{ asset('images/event-test/IMG_7560.JPG') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
-                            <div class="card-body">
-                                <div class="row align-items-center mb-3">
-                                    <div class="col-5">
-                                        <h4 class="text-dark">Event Title</h4>
-                                    </div>
-                                    <div class="col d-flex justify-content-end me-3">
-                                        <h4 class="h4 text-dark"><i class="fa-solid fa-star me-2"></i>4.5</h4>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center gx-1 mb-2">
-                                    <div class="col-4">
-                                        <i class="fa-solid fa-location-dot me-1"></i>Location
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="tag rounded-pill py-1 w-100">Category1</div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="tag rounded-pill py-1 w-100">Category2</div>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center gx-1">
-                                    <div class="col-4">
-                                        <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                                    </div>
-                                    <div class="col-4 align-self-center">
-                                        <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                                    </div>
-                                    <div class="col-4 align-self-center">
-                                        <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-4">
-                    <a href="" class="text-decoration-none">
-                        <div class="card shadow border-0">
-                            <img src="{{ asset('images/event-test/IMG_7559.JPG') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
-                            <div class="card-body">
-                                <div class="row align-items-center mb-3">
-                                    <div class="col-5">
-                                        <h4 class="text-dark">Event Title</h4>
-                                    </div>
-                                    <div class="col d-flex justify-content-end me-3">
-                                        <h4 class="h4 text-dark"><i class="fa-solid fa-star me-2"></i>4.5</h4>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center gx-1 mb-2">
-                                    <div class="col-4">
-                                        <i class="fa-solid fa-location-dot me-1"></i>Location
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="tag rounded-pill py-1 w-100">Category1</div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="tag rounded-pill py-1 w-100">Category2</div>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center gx-1">
-                                    <div class="col-4">
-                                        <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                                    </div>
-                                    <div class="col-4 align-self-center">
-                                        <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                                    </div>
-                                    <div class="col-4 align-self-center">
-                                        <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
                 </div>
             </div>
         </div>
@@ -670,7 +358,9 @@
         </div>
         @include('home.modal.show-reviews')
     </div>
+
     <hr>
+
     {{-- Related events --}}
     <div class="container-fluid">
         <h2 class="h1 my-3">Related Events</h2>
@@ -717,7 +407,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 mb-3">
                 <a href="" class="text-decoration-none">
                     <div class="card shadow border-0">
                         <img src="{{ asset('images/event-test/fireworktest.png') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -756,7 +446,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 mb-3">
                 <a href="" class="text-decoration-none">
                     <div class="card shadow border-0">
                         <img src="{{ asset('images/event-test/concert-event.jpg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -795,7 +485,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-md-6 ">
+            <div class="col-lg-4 col-md-6 mb-3">
                 <a href="" class="text-decoration-none">
                     <div class="card shadow border-0">
                         <img src="{{ asset('images/event-test/festival_test.jpg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -834,7 +524,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-md-6 ">
+            <div class="col-lg-4 col-md-6 mb-3">
                 <a href="" class="text-decoration-none">
                     <div class="card shadow border-0">
                         <img src="{{ asset('images/event-test/IMG_7560.JPG') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -873,7 +563,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-md-6 ">
+            <div class="col-lg-4 col-md-6">
                 <a href="" class="text-decoration-none">
                     <div class="card shadow border-0">
                         <img src="{{ asset('images/event-test/IMG_7559.JPG') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
