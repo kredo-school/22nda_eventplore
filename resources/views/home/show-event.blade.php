@@ -5,8 +5,9 @@
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
+<link rel="stylesheet" href="{{ asset('css/show-event/eventpage.css') }}">
 
-<div class="p-4 justify-content-center ">
+<div class="p-5 justify-content-center ">
     {{-- Event name & date & cate --}}
     <div class="row align-items-center mb-3">
         <div class="col-md-6">
@@ -14,7 +15,7 @@
             <hr style="color: #0C2C04">
         </div>
         <div class="col-md-3 text-center">
-            <p class="mb-0">2024 / 07 / 27 (Sat.)<br> 19:00 - 20:30</p>
+            <p class="mb-0 fw-bold fs-5">2024 / 07 / 27 (Sat.)<br> 19:00 - 20:30</p>
         </div>
         <div class="col-md-3 justify-content-end">
             <div class="row mb-2">
@@ -64,10 +65,10 @@
     </div>
 
     {{-- introduction & reserve --}}
-    <div class="row mb-4">
+    <div class="row mb-4 ">
         {{-- introduction --}}
         <div class="col-md-6">
-            <div class="card p-2" style="background-color: #0C2C04; max-height: 400px; overflow-y: auto;">
+            <div class="card p-2 mt-2" style="background-color: #0C2C04; min-height: 400px; max-height: 400px; overflow-y: auto;">
                 <div class="card-body">
                     <div class="text-white">
                         <h2>Introduction</h2>
@@ -89,21 +90,21 @@
 
         {{-- Before Reservation --}}
         <div class="col-md-6">
-            <div class="card" style="height: 400px;">
-                <div class="card-body text-center">
+            <div class="card p-3 mt-2 shadow" style="min-height: 400px; max-height: 400px;">
+                <div class="card-body text-center px-5">
                     <div class="mb-3 d-flex justify-content-center align-items-center">
                         <div class="d-flex justify-content-center" style="width: 50px;">
                             <i class="fa-solid fa-yen-sign icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%">
-                            <h3 class="mb-0">Price per a person</h3>
+                        <div class="ms-3 text-start flex-grow-1">
+                            <h3 class="mb-0">5,000 yen</h3>
                         </div>
                     </div>
                     <div class="mb-3 d-flex justify-content-center align-items-center">
                         <div class="d-flex justify-content-center" style="width: 50px;">
                             <i class="fa-solid fa-users icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%;">
+                        <div class="ms-3 text-start flex-grow-1">
                             <select class="form-select">
                                 <option>1 person</option>
                             </select>
@@ -113,7 +114,7 @@
                         <div class="d-flex justify-content-center" style="width: 50px;">
                             <i class="fa-solid fa-calendar-days icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%;">
+                        <div class="ms-3 text-start flex-grow-1">
                             <select class="form-select">
                                 <option>Select Date</option>
                             </select>
@@ -123,14 +124,14 @@
                         <div class="d-flex justify-content-center" style="width: 50px;">
                             <i class="fa-regular fa-clock icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%;">
+                        <div class="ms-3 text-start flex-grow-1">
                             <select class="form-select">
                                 <option>Select Time</option>
                             </select>
                         </div>
                     </div>
                     <div>
-                        <button class="btn btn-green px-5 p-2 rounded-0 " data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
+                        <button class="btn btn-green px-5 p-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
                         <hr style="color: #0C2C04">
                         <p class="align-middle text-center pt-2 fs-3 mb-0"><strong>Total</strong> 5,000 yen</p>
                     </div>
@@ -140,14 +141,14 @@
 
         {{-- Reserved --}}
         {{-- <div class="col-md-6">
-            <div class="card" style="height: 400px;">
-                <div class="card-body text-center">
-                    <h2 class="card-title border-top border-bottom py-2 mx-5 mt-3 mb-5" style="color: #84947C"><i class="fa-solid fa-check"></i>Already Reseved!</h2>
+            <div class="card mt-2" style="min-height: 400px; max-height: 400px;">
+                <div class="card-body text-center mt-4">
+                    <h2 class="card-title border-top border-bottom py-2 mx-5 mb-3" style="color: #84947C"><i class="fa-solid fa-check"></i>Already Reseved!</h2>
                     <div class="mb-3 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
+                        <div class="d-flex justify-content-center">
                             <i class="fa-solid fa-yen-sign icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%">
+                        <div class="ms-3 text-start">
                             <h3 class="mb-0">Total Price</h3>
                         </div>
                         <div class="ms-3 text-start" style="width: 20%;">
@@ -173,7 +174,7 @@
                             <h3 class="mb-0">Date</h3>
                         </div>
                         <div class="ms-3 text-start" style="width: 20%;">
-                            <h3 class="mb-0">2024/6/29</h3>
+                            <h4 class="mb-0">2024/6/29</h4>
                         </div>
                     </div>
                     <div class="mb-3 d-flex justify-content-center align-items-center">
@@ -187,11 +188,13 @@
                             <h3 class="mb-0">11:00</h3>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center mt-4">
-                        <button class="btn btn-red me-3 px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation"><i class="fa-regular fa-trash-can"></i> Cancel Reservation</button>
-                        <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation"><i class="fa-solid fa-pen-to-square"></i> Edit Reservation</button>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-red me-2" data-bs-toggle="modal" data-bs-target="#user-delete-reservation"><i class="fa-regular fa-trash-can"></i> Cancel Reservation</button>
+                        <button class="btn btn-green ms-2" data-bs-toggle="modal" data-bs-target="#user-edit-reservation"><i class="fa-solid fa-pen-to-square"></i> Edit Reservation</button>
                     </div>
                 </div>
+
+
             </div>
         </div> --}}
     </div>
@@ -200,42 +203,72 @@
     <div class="row mb-4">
         {{-- info --}}
         <div class="col-md-6">
-            <div class="card p-2" style="height: 400px;">
-                <div class="card-body">
+            <div class="card p-2 mt-2 shadow" style="min-height: 400px; max-height: 400px;">
+                <div class="card-body text-start fs-4">
                     <h2>Local Information</h2>
                     <ul class="list-unstyled">
                         <li class="fs-4 d-flex align-items-center mb-2">
-                            <i class="fas fa-parking me-2"></i>
-                            <span>No Parking</span>
+                            <div class="icon-container">
+                                <i class="fas fa-parking"></i>
+                            </div>
+                            <div class="text-container">
+                                <span>No Parking</span>
+                            </div>
                         </li>
                         <li class="fs-4 d-flex align-items-center mb-2">
-                            <i class="fas fa-train me-2"></i>
-                            <span>Near station: Asakusa station, Tokyo Skytree station, Kuramae station, Ryogoku station, Asakusabashi station</span>
+                            <div class="icon-container">
+                                <i class="fas fa-train"></i>
+                            </div>
+                            <div class="text-container">
+                                <span>Near station: Asakusa station, Tokyo Skytree station, Kuramae station, Ryogoku station, Asakusabashi station</span>
+                            </div>
                         </li>
                         <li class="fs-4 d-flex align-items-center mb-2">
-                            <i class="fas fa-restroom me-2"></i>
-                            <span>Toilet: 30 toilets around here</span>
+                            <div class="icon-container">
+                                <i class="fas fa-restroom"></i>
+                            </div>
+                            <div class="text-container">
+                                <span>Toilet: 30 toilets around here</span>
+                            </div>
                         </li>
                         <li class="fs-4 d-flex align-items-center mb-2">
-                            <i class="fas fa-cloud-rain me-2"></i>
-                            <span>Light rain, event will proceed (canceled in case of severe weather)</span>
+                            <div class="icon-container">
+                                <i class="fas fa-cloud-rain"></i>
+                            </div>
+                            <div class="text-container">
+                                <span>Light rain, event will proceed (canceled in case of severe weather)</span>
+                            </div>
+                        </li>
+                        <li class="fs-4 d-flex align-items-center mb-2">
+                            <div class="icon-container">
+                                <i class="fa-brands fa-first-order-alt"></i>
+                            </div>
+                            <div class="text-container">
+                                <span>Number of launches : about 20,000</span>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        {{-- location --}}
+        {{-- location map --}}
         <div class="col-md-6">
-            <div class="card p-2" style="background-color: #0C2C04; height: 400px;">
-                <div class="card-body">
+            <div class="card p-2 mt-2" style="background-color: #0C2C04; min-height: 400px; max-height: 400px;">
+                <div class="card-body px-4">
                     <div class="text-white">
                         <h2>Location</h2>
-                        <div id="map">
-                            <img src="{{ asset('images/event-test/map.png') }}" alt="map" class="map w-100 h-100 px-4">
+                        <div id="map-container" style="position: relative;">
+                            <img src="{{ asset('images/event-test/map.png') }}" alt="map" id="map-image" class="w-100">
+                            <div id="zoom-buttons" style="position: absolute; top: 10px; right: 10px;">
+                                <button class="btn btn-sm btn-light"><i class="fas fa-plus"></i></button><br>
+                                <button class="btn btn-sm btn-light"><i class="fas fa-minus"></i></button>
+                            </div>
                         </div>
                         <p class="mt-2">
                             Access by
+                            <a href=""><img src="{{ asset('images/event-test/luup.png') }}" alt="" style="width: 10%; height: 15%;"></a>
+                            <a href=""><img src="{{ asset('images/event-test/go.png') }}" alt="" style="width: 5%; height: 5%;"></a>
                         </p>
                     </div>
                 </div>
@@ -244,8 +277,8 @@
     </div>
 
     <hr>
-    {{-- Review --}}
 
+    {{-- Review --}}
     <div class="contaner-fluid">
         <h2 class="ms-5">Reviews</h2>
         <div style="font-family: EB Garamond">
@@ -577,6 +610,8 @@
 </div>
 
 @include('users.reservations.modal.confirm')
+@include('users.reservations.modal.delete')
+@include('users.reservations.modal.edit')
 
 @endsection
 
