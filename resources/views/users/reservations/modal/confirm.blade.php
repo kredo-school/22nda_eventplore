@@ -21,7 +21,9 @@
                         <div class="d-flex flex-row justify-content-between w-50 mb-2">
                              {{-- 合計金額 --}}
                             <div class="d-flex flex-row align-items-center">
-                                <i class="fa-solid fa-yen-sign fa-xl me-3"></i>
+                                <div class="d-flex justify-content-center align-items-center" style="height: 25px; width: 25px;">
+                                    <i class="fa-solid fa-yen-sign d-flex justify-content-center align-items-center h-100"></i>
+                                </div>
                                 <span>Total Price</span>
                             </div>
                             <div class="d-flex flex-row">
@@ -31,7 +33,9 @@
                         <div class="d-flex flex-row justify-content-between w-50 mb-2">
                              {{-- 人数 --}}
                             <div class="d-flex flex-row align-items-center">
-                                <i class="fa-solid fa-users fa-xl me-3"></i>
+                                <div class="d-flex justify-content-center align-items-center" style="height: 25px; width: 25px;">
+                                    <i class="fa-solid fa-users d-flex justify-content-center align-items-center h-100"></i>
+                                </div>
                                 <span>People</span>
                             </div>
                             <div class="d-flex flex-row">
@@ -40,18 +44,22 @@
                         </div>
                         <div class="d-flex flex-row justify-content-between w-50 mb-2">
                             {{-- 日付 --}}
-                           <div class="d-flex flex-row align-items-center">
-                                <i class="fa-solid fa-calendar-days fa-xl me-3"></i>
+                            <div class="d-flex flex-row align-items-center">
+                                <div class="d-flex justify-content-center align-items-center" style="height: 25px; width: 25px;">
+                                    <i class="fa-solid fa-calendar-days d-flex justify-content-center align-items-center h-100"></i>
+                                </div>
                                 <span>Date</span>
-                           </div>
-                           <div class="d-flex flex-row">
+                            </div>
+                            <div class="d-flex flex-row">
                                 <span>2024/6/15</span>
-                           </div>
+                            </div>
                        </div>
                        <div class="d-flex flex-row justify-content-between w-50 mb-2">
                             {{-- 時間 --}}
                             <div class="d-flex flex-row align-items-center">
-                                <i class="fa-regular fa-clock fa-xl me-3"></i>
+                                <div class="d-flex justify-content-center align-items-center" style="height: 25px; width: 25px;">
+                                    <i class="fa-solid fa-clock d-flex justify-content-center align-items-center h-100"></i>
+                                </div>
                                 <span>Time</span>
                             </div>
                             <div class="d-flex flex-row">
@@ -59,15 +67,12 @@
                             </div>
                        </div>
                    </div>
-
-
-
                 </div>
-
+                
                 {{-- 確認ボタン --}}
                 <div class="modal-footer justify-content-center border-0">
                     <button type="button" class="btn btn-yellow me-5 px-5 py-2" data-bs-dismiss="modal">Back</button>
-                    <button type="submit" class="btn btn-green px-5 py-2">Reserve</button>
+                    <button type="submit" class="btn btn-green px-5 py-2" >Reserve</button>
                 </div>
             </div>
         </form>
