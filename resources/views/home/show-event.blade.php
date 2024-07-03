@@ -19,18 +19,18 @@
         </div>
         <div class="col-md-3 justify-content-end">
             <div class="row mb-2">
-                <div class="col-md-6">
+                <div class="col-6">
                     <div class="tag border border-0 rounded-pill py-1 w-100">Free</div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-6">
                     <div class="tag border border-0 rounded-pill py-1 w-100">Culture</div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-6">
                     <div class="tag border border-0 rounded-pill py-1 w-100">Food & Drink</div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-6">
                     <div class="tag border border-0 rounded-pill py-1 w-100">Free</div>
                 </div>
             </div>
@@ -65,10 +65,10 @@
     </div>
 
     {{-- introduction & reserve --}}
-    <div class="row mb-4 ">
+    <div class="row mb-4">
         {{-- introduction --}}
         <div class="col-md-6">
-            <div class="card p-2 mt-2" style="background-color: #0C2C04; min-height: 400px; max-height: 400px; overflow-y: auto;">
+            <div class="card p-2 mb-4" style="background-color: #0C2C04; max-height: 400px; overflow-y: auto;">
                 <div class="card-body">
                     <div class="text-white">
                         <h2>Introduction</h2>
@@ -90,14 +90,14 @@
 
         {{-- Before Reservation --}}
         <div class="col-md-6">
-            <div class="card p-3 mt-2 shadow" style="min-height: 400px; max-height: 400px;">
-                <div class="card-body text-center px-5">
+            <div class="card" style="height: 400px;">
+                <div class="card-body text-center">
                     <div class="mb-3 d-flex justify-content-center align-items-center">
                         <div class="d-flex justify-content-center" style="width: 50px;">
                             <i class="fa-solid fa-yen-sign icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start flex-grow-1">
-                            <h3 class="mb-0">5,000 yen</h3>
+                        <div class="ms-3 text-start" style="width: 20%">
+                            <h3 class="mb-0">Price per a person</h3>
                         </div>
                     </div>
                     <div class="mb-3 d-flex justify-content-center align-items-center">
@@ -130,8 +130,7 @@
                             </select>
                         </div>
                     </div>
-                    <div>
-                        <button class="btn btn-green px-5 p-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
+                        <button class="btn btn-green px-5 py-2 rounded-0 " data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
                         <hr style="color: #0C2C04">
                         <p class="align-middle text-center pt-2 fs-3 mb-0"><strong>Total</strong> 5,000 yen</p>
                     </div>
@@ -197,14 +196,14 @@
 
             </div>
         </div> --}}
-    </div>
+
 
     {{-- info & map --}}
-    <div class="row mb-4">
+    <div class="row">
         {{-- info --}}
         <div class="col-md-6">
-            <div class="card p-2 mt-2 shadow" style="min-height: 400px; max-height: 400px;">
-                <div class="card-body text-start fs-4">
+            <div class="card p-2 mb-4" style="height: 400px;">
+                <div class="card-body">
                     <h2>Local Information</h2>
                     <ul class="list-unstyled">
                         <li class="fs-4 d-flex align-items-center mb-2">
@@ -252,10 +251,10 @@
             </div>
         </div>
 
-        {{-- location map --}}
+        {{-- location --}}
         <div class="col-md-6">
-            <div class="card p-2 mt-2" style="background-color: #0C2C04; min-height: 400px; max-height: 400px;">
-                <div class="card-body px-4">
+            <div class="card p-2" style="background-color: #0C2C04; height: 400px;">
+                <div class="card-body">
                     <div class="text-white">
                         <h2>Location</h2>
                         <div id="map-container" style="position: relative;">
@@ -280,12 +279,12 @@
 
     {{-- Review --}}
     <div class="contaner-fluid">
-        <h2 class="ms-5">Reviews</h2>
+        <h2 class="ms-3">Reviews</h2>
         <div style="font-family: EB Garamond">
 
             <div class="align-items-center justify-content-center flex-row d-flex">
                 {{--  レビューの星　--}}
-                <div style="width: 400px; height: 200px; border: 1px solid #0C2C04" class="rounded d-flex flex-column justify-content-center align-items-center ms-5">
+                <div style="height: 200px; border: 1px solid #0C2C04" class=" w-25 rounded d-flex flex-column justify-content-center align-items-center ms-5">
                     <div class="mb-2">
                         <i class="fa-solid fa-star fa-3x"></i>
                         <span class="h1 ms-2 ">4.5</span>
@@ -321,8 +320,8 @@
             </div>
         </div>
         {{-- コメントが3件だけ見れる --}}
-        <div class="d-flex justify-content-center mt-4 ">
-            <div class="rounded p-2 me-3" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
+        <div class="d-flex justify-content-center mt-4 w-100 flex-wrap">
+            <div class="rounded p-2 col-12 col-md-6 col-lg-3 mb-3 me-2" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
                 <div class="d-flex justify-content-start align-items-center">
                     <img src="{{ asset('images/Jackie.jpeg') }}" alt="Jackie" class="rounded-circle m-2" style="width: 36px; height: 36px;">
                     <span class="h5 ms-2 d-flex align-items-center">John Smith</span>
@@ -333,7 +332,7 @@
                     <span>I was excited to watch fireworks!! I'm gonna go there next year. </span>
                 </div>
             </div>
-            <div class="rounded p-2 me-3" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
+            <div class="rounded p-2 col-12 col-md-6 col-lg-3 mb-3 me-2" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
                 <div class="d-flex justify-content-start align-items-center">
                     <img src="{{ asset('images/Jackie.jpeg') }}" alt="Jackie" class="rounded-circle m-2" style="width: 36px; height: 36px;">
                     <span class="h5 ms-2 d-flex align-items-center">John Smith</span>
@@ -344,7 +343,7 @@
                     <span>I was excited to watch fireworks!! I'm gonna go there next year. </span>
                 </div>
             </div>
-            <div class="rounded p-2" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
+            <div class="rounded p-2 col-12 col-12 col-md-6 col-lg-3 me-2" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
                 <div class="d-flex justify-content-start align-items-center">
                     <img src="{{ asset('images/Jackie.jpeg') }}" alt="Jackie" class="rounded-circle m-2" style="width: 36px; height: 36px;">
                     <span class="h5 ms-2 d-flex align-items-center">John Smith</span>
@@ -363,10 +362,10 @@
     </div>
     <hr>
     {{-- Related events --}}
-    <div class="container">
+    <div class="container-fluid">
         <h2 class="h1 my-3">Related Events</h2>
         <div class="row mb-4 justify-content-center">
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 mb-3">
                 <a href="" class="text-decoration-none">
                     {{-- event card --}}
                     <div class="card shadow border-0">
@@ -408,7 +407,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6">
                 <a href="" class="text-decoration-none">
                     <div class="card shadow border-0">
                         <img src="{{ asset('images/event-test/fireworktest.png') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -447,7 +446,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6">
                 <a href="" class="text-decoration-none">
                     <div class="card shadow border-0">
                         <img src="{{ asset('images/event-test/concert-event.jpg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -486,9 +485,7 @@
                     </div>
                 </a>
             </div>
-        </div>
-        <div class="row mb-4 justify-content-center">
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 ">
                 <a href="" class="text-decoration-none">
                     <div class="card shadow border-0">
                         <img src="{{ asset('images/event-test/festival_test.jpg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -527,7 +524,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 ">
                 <a href="" class="text-decoration-none">
                     <div class="card shadow border-0">
                         <img src="{{ asset('images/event-test/IMG_7560.JPG') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -566,7 +563,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-6 ">
                 <a href="" class="text-decoration-none">
                     <div class="card shadow border-0">
                         <img src="{{ asset('images/event-test/IMG_7559.JPG') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
@@ -605,6 +602,7 @@
                     </div>
                 </a>
             </div>
+
         </div>
     </div>
 </div>
