@@ -65,7 +65,7 @@
     </div>
 
     {{-- introduction & reserve --}}
-    <div class="row mb-4">
+    <div class="row mb-md-4">
         {{-- introduction --}}
         <div class="col-md-6">
             <div class="card p-2 mb-4" style="background-color: #0C2C04; max-height: 400px; overflow-y: auto;">
@@ -89,15 +89,15 @@
         </div>
 
         {{-- Before Reservation --}}
-        <div class="col-md-6">
-            <div class="card px-5 pt-3 shadow" style="height: 400px;">
+        {{-- <div class="col-md-6">
+            <div class="card px-5 pt-3 mb-4 shadow" style="height: 400px;">
                 <div class="card-body text-center">
                     <div class="mb-3 d-flex justify-content-center align-items-center">
                         <div class="d-flex justify-content-center" style="width: 50px;">
                             <i class="fa-solid fa-yen-sign icon-lg"></i>
                         </div>
                         <div class="ms-3 text-center flex-grow-1">
-                            <h3 class="mb-0">5,000 yen / per a person</h3>
+                            <h3 class="mb-0">5,000 yen / per person</h3>
                         </div>
                     </div>
                     <div class="mb-3 d-flex justify-content-center align-items-center">
@@ -130,77 +130,77 @@
                             </select>
                         </div>
                     </div>
-                        <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
-                        <hr style="color: #0C2C04">
-                        <p class="align-middle text-center pt-2 fs-3 mb-0"><strong>Total</strong> 5,000 yen</p>
-                    </div>
+                    <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
+                    <hr style="color: #0C2C04">
+                    <p class="align-middle text-center pt-2 fs-3 mb-0"><strong>Total</strong> 5,000 yen</p>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         {{-- Reserved --}}
         <div class="col-md-6">
             <div class="card mb-4 shadow" style="min-height: 400px; max-height: 400px;">
-                <div class="card-body text-center mt-4">
-                    <h2 class="card-title border-top border-bottom py-2 mx-5 mb-3" style="color: #84947C"><i class="fa-solid fa-check"></i>Already Reseved!</h2>
-                    <div class="mb-3 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center">
+                <div class="card-body text-center">
+                    <h2 class="card-title border-top border-bottom py-2 mx-5 my-3" style="color: #84947C"><i class="fa-solid fa-check"></i>Already Reseved!</h2>
+                    <div class="mb-2 d-flex justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center" style="width: 50px;">
                             <i class="fa-solid fa-yen-sign icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start">
-                            <h3 class="mb-0">Total Price</h3>
+                        <div class="ms-3 text-start" style="width: 20%;">
+                            <h4 class="mb-0">Total Price</h3>
                         </div>
                         <div class="ms-3 text-start" style="width: 20%;">
-                            <h3 class="mb-0">5,000 yen</h3>
+                            <h4 class="mb-0">5,000 yen</h4>
                         </div>
                     </div>
-                    <div class="mb-3 d-flex justify-content-center align-items-center">
+                    <div class="mb-2 d-flex justify-content-center align-items-center">
                         <div class="d-flex justify-content-center" style="width: 50px;">
                             <i class="fa-solid fa-users icon-lg"></i>
                         </div>
                         <div class="ms-3 text-start" style="width: 20%;">
-                            <h3 class="mb-0">People</h3>
+                            <h4 class="mb-0">People</h4>
                         </div>
                         <div class="ms-3 text-start" style="width: 20%;">
-                            <h3 class="mb-0">2</h3>
+                            <h4 class="mb-0">2</h4>
                         </div>
                     </div>
-                    <div class="mb-3 d-flex justify-content-center align-items-center">
+                    <div class="mb-2 d-flex justify-content-center align-items-center">
                         <div class="d-flex justify-content-center" style="width: 50px;">
                             <i class="fa-solid fa-calendar-days icon-lg"></i>
                         </div>
                         <div class="ms-3 text-start" style="width: 20%;">
-                            <h3 class="mb-0">Date</h3>
+                            <h4 class="mb-0">Date</h4>
                         </div>
                         <div class="ms-3 text-start" style="width: 20%;">
                             <h4 class="mb-0">2024/6/29</h4>
                         </div>
                     </div>
-                    <div class="mb-3 d-flex justify-content-center align-items-center">
+                    <div class="mb-2 d-flex justify-content-center align-items-center">
                         <div class="d-flex justify-content-center" style="width: 50px;">
                             <i class="fa-regular fa-clock icon-lg"></i>
                         </div>
                         <div class="ms-3 text-start" style="width: 20%;">
-                            <h3 class="mb-0">Time</h3>
+                            <h4 class="mb-0">Time</h4>
                         </div>
                         <div class="ms-3 text-start" style="width: 20%;">
-                            <h3 class="mb-0">11:00</h3>
+                            <h4 class="mb-0">11:00</h4>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <button class="btn btn-red me-2" data-bs-toggle="modal" data-bs-target="#user-delete-reservation"><i class="fa-regular fa-trash-can"></i> Cancel Reservation</button>
-                        <button class="btn btn-green ms-2" data-bs-toggle="modal" data-bs-target="#user-edit-reservation"><i class="fa-solid fa-pen-to-square"></i> Edit Reservation</button>
+                    <div class="d-flex justify-content-center my-4">
+                        <button class="btn btn-red custom-btn me-2" data-bs-toggle="modal" data-bs-target="#user-delete-reservation"><i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation</button>
+                        <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-target="#user-edit-reservation"><i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
     {{-- info & map --}}
     <div class="row">
         {{-- info --}}
         <div class="col-md-6">
-            <div class="card p-2 mb-4" style="height: 400px;">
+            <div class="card p-2 mb-4 shadow" style="height: 400px; overflow-y: auto;">
                 <div class="card-body">
                     <h2>Local Information</h2>
                     <ul class="list-unstyled">
@@ -251,13 +251,13 @@
 
         {{-- location --}}
         <div class="col-md-6">
-            <div class="card p-2 shadow" style="background-color: #0C2C04; height: 400px;">
+            <div class="card p-2" style="background-color: #0C2C04; height: 400px;">
                 <div class="card-body">
-                    <div class="text-white">
+                    <div class="text-white flex-grow-1">
                         <h2>Location</h2>
-                        <div id="map-container" style="position: relative;">
-                            <img src="{{ asset('images/event-test/map.png') }}" alt="map" id="map-image" class="w-100">
-                            <div id="zoom-buttons" style="position: absolute; top: 10px; right: 10px;">
+                        <div id="map-container">
+                            <img src="{{ asset('images/event-test/map.png') }}" alt="map" id="map-image">
+                            <div id="zoom-buttons">
                                 <button class="btn btn-sm btn-light"><i class="fas fa-plus"></i></button><br>
                                 <button class="btn btn-sm btn-light"><i class="fas fa-minus"></i></button>
                             </div>
