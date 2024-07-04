@@ -7,3 +7,27 @@
     flex: 1; /* 残りの幅をテキストに使用 */
 }
 
+.custom-btn {
+    width: 180px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#map-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+#map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#zoom-buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
