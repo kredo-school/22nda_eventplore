@@ -16,8 +16,8 @@
                             <div class="d-flex flex-wrap justify-content-between mb-1">
                                 <div class="flex-fill me-2 mb-1" style="min-width: 45%;">
                                     <label for="username" class="form-label fw-bold mb-1">Username*</label>
-                                    <input id="username" type="username" class="form-control" name="username" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C">
-                
+                                    <input id="username" type="text" class="form-control" name="username" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C">
+
                                     @error('username')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -27,12 +27,12 @@
                                 <div class="flex-fill mb-1" style="min-width: 45%;">
                                     <label for="password" class="form-label fw-bold mb-1">Password*</label>
                                     <div class="input-group mb-1 position-relative">
-                                        <input type="text" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password">
+                                        <input type="password" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password">
                                         <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center">
                                             <i class="fa-solid fa-eye-slash"></i>
                                         </div>
                                     </div>
-                
+
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -43,8 +43,8 @@
                             <div class="d-flex flex-wrap justify-content-between mb-1">
                                 <div class="flex-fill me-2 mb-1" style="min-width: 45%;">
                                     <label for="first-name" class="form-label fw-bold mb-1">First Name*</label>
-                                    <input id="firstname" type="firstname" class="form-control" name="firstname" required autocomplete="firstname" autofocus placeholder="First name" style="border: 1px solid #84947C">
-                
+                                    <input id="firstname" type="text" class="form-control" name="firstname" required autocomplete="firstname" autofocus placeholder="First name" style="border: 1px solid #84947C">
+
                                     @error('firstname')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -53,8 +53,8 @@
                                 </div>
                                 <div class="flex-fill mb-1" style="min-width: 45%;">
                                     <label for="last-name" class="form-label fw-bold mb-1">Last Name*</label>
-                                    <input id="lastname" type="lastname" class="form-control" name="lastname" required autocomplete="lastname" autofocus placeholder="Last name" style="border: 1px solid #84947C">
-                
+                                    <input id="lastname" type="text" class="form-control" name="lastname" required autocomplete="lastname" autofocus placeholder="Last name" style="border: 1px solid #84947C">
+
                                     @error('lastname')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
