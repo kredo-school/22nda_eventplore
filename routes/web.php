@@ -2,8 +2,19 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
-Auth::routes();
+Route::get('/user/sign-in', [LoginController::class, 'showSignIn'])->name('sign-in');
+Route::post('/user/sign-in', [LoginController::class, 'signIn'])->name('login');
+Route::get('/user/sign-up', [RegisterController::class, 'showSignUp'])->name('sign-up');
+Route::post('/user/sign-up', [RegisterController::class, 'register'])->name('register');
+Route::group(['middleware' => 'auth'], function(){ // auth middleware only allows logged-in users access
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    });
+
+
+
 
 // Haruka
 // Show sign-up page for event-owner

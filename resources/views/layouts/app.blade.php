@@ -24,6 +24,10 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+    {{-- Mapbox --}}
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
@@ -39,7 +43,7 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-    
+
                     <div class="collapse navbar-collapse" id="navbarHamburger">
                         <!-- Hamburger Menu for smaller screens -->
                         <ul class="navbar-nav me-auto mb-2 mb-md-0 d-md-none" style="background-color: white;">
@@ -125,7 +129,7 @@
                                 </ul>
                             </li>
                         </ul>
-    
+
                         <!-- Desktop Menu -->
                         <div class="d-none d-md-flex w-100 justify-content-center">
                             <form class="d-flex">
@@ -141,7 +145,7 @@
                                 </button>
                             </form>
                         </div>
-    
+
                         <div class="d-none d-md-flex ms-auto">
                             @if (Route::has('login'))
                             <a class="btn btn-green" href="#" style="width: 100px">{{ __('SIGN-IN') }}</a>
