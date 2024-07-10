@@ -11,15 +11,15 @@
                     <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="logo" class="mt-5 mb-2 w-25">
                     <h2 class="h1 mb-2 text-align-center">Sign in</h2>
                     <div class="d-flex justify-content-center mb-3">
-                        <div class="w-100"><p>Don't you have account yet?&nbsp;<a href="#" class="fw-bold text-decoration-none" style="color: #84947C">Sign Up</a></p></div>
+                        <div class="w-100"><p>Don't you have account yet?&nbsp;<a href="{{ route('sign-up')}}" class="fw-bold text-decoration-none" style="color: #84947C">Sign Up</a></p></div>
                     </div>
 
                     <div class="d-flex justify-content-center mb-3">
                         <div class="text-start">
                             <label for="username" class="form-label fw-bold mb-2">Username*</label>
                             <div class="mb-3">
-                                <input id="username" type="username" class="form-control" name="username" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C">
-        
+                                <input id="username" type="text" class="form-control" name="username" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C">
+
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -34,12 +34,12 @@
                             <label for="password" class="form-label fw-bold mb-2">Password*</label>
                             <div class="mb-3">
                                 <div class="input-group mb-3 position-relative">
-                                    <input type="text" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password">
+                                    <input type="password" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password">
                                     <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center">
                                         <i class="fa-solid fa-eye-slash"></i>
                                     </div>
                                 </div>
-        
+
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

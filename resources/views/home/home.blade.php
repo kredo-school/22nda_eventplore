@@ -3,7 +3,7 @@
 @section('title', 'Event Menu')
 
 @section('content')
-
+@vite(['resources/js/mapbox.js'])
     <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
     <link rel="stylesheet" href="{{ asset('css/show-event/event-menu.css') }}">
     <link rel="stylesheet" href="{{ asset('css/show-event/home.css') }}">
@@ -92,7 +92,8 @@
         <div class="col-lg-9 col-md-8 col-sm-7 ps-0">
             {{-- map --}}
             <div class="p-0">
-                <img src="{{ asset('images/event-test/map.png') }}" alt="map" class="map w-100">
+                <div id="map" style="width: 100%; height: 600px;"/>
+                {{-- <img src="{{ asset('images/event-test/map.png') }}" alt="map" class="map w-100"> --}}
             </div>
         </div>
     </div>
