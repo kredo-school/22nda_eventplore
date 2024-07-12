@@ -1,23 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Event Menu')
-
 @section('content')
 @vite(['resources/js/mapbox.js'])
-    <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/show-event/event-menu.css') }}">
+@vite(['resources/js/fullcalendar.js'])
+
     <link rel="stylesheet" href="{{ asset('css/show-event/home.css') }}">
 
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.14/index.global.min.js'></script>
+
     <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-5 overflow-auto map">
-            <form action="" method="">
+        <div class="col-lg-3 col-md-4 col-sm-5 overflow-auto sidebar">
+            <form action="{{ route('event-menu') }}" method="get">
+                
                 {{-- calendar --}}
-                <div class="mb-2">
-                    <img src="{{ asset('images/event-test/calendar.png') }}" alt="calendar" class="calendar w-100 mt-3 ms-2">
-                </div>
-                <hr size="5" width="90%" class="mx-auto ms-4" noshade="">
-                {{-- keyword search --}}
-                <div class="ms-3">
+                <div class="ms-3 mt-4 mb-4 me-2" id="calendar"></div>
+                <input type="hidden" id="date" name="date"> {{-- hidden input to store selected date --}}
+                
+                {{-- keyword --}}
+                <div class="ms-3 me-2">
                     <label for="keyword" class="h4 form-label mb-2">Keyword</label>
                     <div class="input-group mb-2 position-relative">
                         <input id="keyword" type="text" class="form-control rounded" name="keyword">
@@ -26,62 +27,32 @@
                         </div>
                     </div>
                 </div>
-                {{-- area search --}}
-                <div class="mt-2 ms-3">
+
+                {{-- area --}}
+                <div class="mt-3 ms-3 me-2 mb-4">
                     <label for="area" class="h4 form-label mb-2">Area</label>
-                    <select class="form-select me-2" id="area">
-                        <option hidden selected>Select Area</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
+                    <select class="form-select me-2" id="area" name="area">
+                        <option value="" hidden selected>Select Area</option>
+                        @foreach ($areas as $area)
+                            <option value="{{ $area->id }}">{{ $area->name }}</option>
+                        @endforeach
                     </select>
                 </div>
-                {{-- categories --}}
-                <div class="ms-3">
-                    <div class="h4 mt-3 mb-3">Category</div>
+
+                {{-- category --}}
+                <div class="mt-3 ms-3">
+                    <div class="h4 mb-4">Category</div>
                     <div class="row ms-3">
-                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
-                            <input class="form-check-input green-check" type="checkbox" name="category" value="business" id="business">
-                            <label class="form-check-label ms-1 text-capitalize" for="business">business</label>
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
-                            <input class="form-check-input green-check" type="checkbox" name="category" value="hobby" id="hobby">
-                            <label class="form-check-label ms-1 text-capitalize" for="hobby">hobby</label>
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
-                            <input class="form-check-input green-check" type="checkbox" name="category" value="movie" id="movie">
-                            <label class="form-check-label ms-1 text-capitalize" for="movie">movie</label>
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
-                            <input class="form-check-input green-check" type="checkbox" name="category" value="online" id="online">
-                            <label class="form-check-label ms-1 text-capitalize" for="online">online</label>
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
-                            <input class="form-check-input green-check" type="checkbox" name="category" value="food/drink" id="food/drink">
-                            <label class="form-check-label ms-1 overflow-visible text-capitalize" for="food/drink">food/drink</label>
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
-                            <input class="form-check-input green-check" type="checkbox" name="category" value="art" id="art">
-                            <label class="form-check-label ms-1 text-capitalize" for="art">art</label>
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
-                            <input class="form-check-input green-check" type="checkbox" name="category" value="music" id="music">
-                            <label class="form-check-label ms-1 text-capitalize" for="music">music</label>
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
-                            <input class="form-check-input green-check" type="checkbox" name="category" value="nature" id="nature">
-                            <label class="form-check-label ms-1 text-capitalize" for="nature">nature</label>
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
-                            <input class="form-check-input green-check" type="checkbox" name="category" value="festival" id="festival">
-                            <label class="form-check-label ms-1 text-capitalize" for="festival">festival</label>
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
-                            <input class="form-check-input green-check" type="checkbox" name="category" value="illumination" id="illumination">
-                            <label class="form-check-label ms-1 text-capitalize" for="illumination">illumination</label>
-                        </div>
+                        @foreach ($categories as $category)
+                            <div class="col-lg-6 col-sm-12 col-6 form-check mb-3">
+                                <input class="form-check-input green-check" type="checkbox" name="categories[]" id="{{ $category->name }}" value="{{ $category->id }}">
+                                <label class="form-check-label ms-1 text-capitalize" for="{{ $category->name }}">{{ $category->name }}</label>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
+
+                {{-- search button --}}
                 <div class="text-center mt-2 mb-4">
                     <input type="reset" class="btn btn-yellow ms-2 me-2 py-2 mb-1" value="Clear">
                     <button type="submit" class="btn btn-green ms-2 me-2 py-2">Search</button>
@@ -91,9 +62,8 @@
 
         <div class="col-lg-9 col-md-8 col-sm-7 ps-0">
             {{-- map --}}
-            <div class="p-0">
-                <div id="map" style="width: 100%; height: 600px;"/>
-                {{-- <img src="{{ asset('images/event-test/map.png') }}" alt="map" class="map w-100"> --}}
+            <div>
+                <div id="map"></div>
             </div>
         </div>
     </div>

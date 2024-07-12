@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -10,7 +11,8 @@ Route::post('/user/sign-in', [LoginController::class, 'signIn'])->name('login');
 Route::get('/user/sign-up', [RegisterController::class, 'showSignUp'])->name('sign-up');
 Route::post('/user/sign-up', [RegisterController::class, 'register'])->name('register');
 Route::group(['middleware' => 'auth'], function(){ // auth middleware only allows logged-in users access
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
     });
 
 
@@ -60,10 +62,6 @@ Route::get('/user/reservation-list', function () {
 // Show event menu page
 Route::get('/home/event-menu', function () {
     return view('home.event-menu');
-});
-// Show home page
-Route::get('/home', function () {
-    return view('home.home');
 });
 
 

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id(); 
             $table->string('event_name', 50); 
             $table->string('address', 255); 
+            $table->unsignedBigInteger('area_id');
             $table->date('start_date'); 
             $table->date('finish_date'); 
             $table->time('start_time'); 
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->foreign('event_owner_id')->references('id')->on('event_owners');
+            $table->foreign('area_id')->references('id')->on('areas');
         });
     }
 
