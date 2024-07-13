@@ -9,7 +9,7 @@ class Event extends Model
 {
     use HasFactory;
 
-    public function categoryEvents(){
-        return $this->hasMany(CategoryEvent::class);
+    public function eventCategories(){
+        return $this->hasMany(EventCategory::class);
     }
 }
