@@ -1,6 +1,6 @@
 {{-- STEP3 --}}
 {{-- area --}}
-{{-- <div class="row justify-content-center mx-5 px-5 mb-3">
+<div class="row justify-content-center mx-5 px-5 mb-3">
     <label for="area" class="h4 form-label mb-2">Area</label>
     <select class="form-select me-2" id="area" name="area">
         <option value="" hidden selected>Select Area</option>
@@ -8,7 +8,7 @@
             <option value="{{ $area->id }}">{{ $area->name }}</option>
         @endforeach
     </select>
-</div> --}}
+</div>
 {{-- map --}}
 <div class="row justify-content-center mx-5 px-5 mb-3">
     <label for="form-label" class="fw-bold mb-2 text-start">Address*</label>
