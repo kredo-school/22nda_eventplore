@@ -22,3 +22,109 @@ input[type="checkbox"]:checked {
     width: 35%;
     min-width: 90px;
 }
+
+
+/* 画面サイズ575px未満 */
+.sidebar {
+	height: 100%;
+	object-fit: cover;
+}
+/* 画面サイズ575px未満 */
+#map {
+	height: calc(100vh - 160px);
+	width: 100%;
+	margin-top: 50px;
+}
+/* 画面サイズ576px~767px */
+@media (min-width: 576px) {
+    #map, .sidebar {
+		height: calc(100vh - 160px);
+		margin-top: 0;
+	}
+}
+/* 画面サイズ768px以上 */
+@media (min-width: 768px) {
+    #map, .sidebar {
+		height: calc(100vh - 240px);
+		margin-top: 0;
+	}
+}
+
+
+/* FullCalendar */
+.fc-daygrid-day-number,
+.fc-daygrid-day-top {
+    color:#0C2C04;
+    font-family: "EB Garamond";
+    text-decoration: none;
+}
+.fc-col-header-cell-cushion {
+    height: 30px;
+    color: #FFFFFF;
+    font-family: "EB Garamond";
+    text-decoration: none;
+}
+/* 月タイトルの書式 */
+.fc-toolbar-title {
+    color:#0C2C04;
+    font-family: "EB Garamond";
+}
+/* 月タイトルのサイズ */
+#fc-dom-1 {
+    font-size: 22px;
+}
+/* 平日の背景 */
+.fc-day-mon,
+.fc-day-tue,
+.fc-day-wed,
+.fc-day-thu,
+.fc-day-fri {
+    background-color: #FFFFFF;
+}
+/* 土曜の背景 */
+.fc-day-sat {
+    background-color: #ecf2f7;
+}
+/* 日曜の背景 */
+.fc-day-sun {
+    background-color: #f9eaed;
+}
+/* ヘッダーの背景 */
+.fc-col-header-cell {
+    background-color: #0C2C04;
+}
+/* 本日の背景 */
+.fc-day-today {
+    background-color: #d9e0d6 !important;
+}
+/* 選択日の背景 */
+.fc-highlight {
+    background-color: #f4dab5 !important;
+}
+/* ボタンの書式 */
+.fc-today-button,
+.fc-prev-button,
+.fc-next-button {
+    background-color: #84947C !important;
+    color: #FFFFFF !important;
+    font-weight: bold !important;
+    font-family: "Raleway",sans-serif !important;
+}
+/* 前後ボタンの幅 */
+.fc-prev-button,
+.fc-next-button {
+    padding-left: 2.5px !important;
+    padding-right: 2.5px !important;
+}
+/* 日付を中央表示 */
+.fc-daygrid-day-top {
+    justify-content: center;
+}
+/* 日付のフレームの高さ */
+.fc-daygrid-day-frame {
+    height: 40px;
+}
+/* 枠線の削除 */
+table, th, td {
+    border: 0px !important;
+}

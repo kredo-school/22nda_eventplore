@@ -15,7 +15,7 @@
         <div class="col-md-4 me-2 mb-4">
             {{-- event list --}}
             <div class="card shadow border-0">
-                <a href=""><img src="{{ asset('images/event-test/event1.jpeg') }}" alt="" class="rounded card-img-top"></a>
+                <a href=""><img src="{{ asset('images/event-test/event1.jpeg') }}" alt="" class="rounded-top-only card-img-top"></a>
                 <div class="card-body">
                     <div class="row align-items-center mb-2">
                         {{-- event title --}}

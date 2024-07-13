@@ -4,7 +4,7 @@
 <div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
     <div class="row d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
         <div class="col-md-6 p-0 d-flex flex-column justify-content-center">
-            <form method="post" action="{{ route('register') }}">
+            <form method="post" action="{{ route('user.register') }}">
                 @csrf
 
                 <div class="d-flex flex-column align-items-center my-4 text-center">
@@ -68,9 +68,9 @@
                                     </span>
                                 @enderror
                             </div>
-                            <label for="avatar" class="form-label fw-bold mb-1"><i class="fa-solid fa-circle-user"></i>Avatar*</label>
+                            <label for="avatar" class="form-label fw-bold mb-1"><i class="fa-solid fa-circle-user"></i>Avatar</label>
                             <div class="mb-2">
-                                <input type="file" name="avatar" id="avatar" class="form-control" required style="border: 1px solid #84947C">
+                                <input type="file" name="avatar" id="avatar" class="form-control" style="border: 1px solid #84947C">
                                 @error('avatar')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
