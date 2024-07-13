@@ -3,9 +3,10 @@
 @section('title', 'Event Menu')
 
 @section('content')
+@vite(['resources/js/mapbox.js'])
 
-    <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
     <link rel="stylesheet" href="{{ asset('css/show-event/event-menu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
 
     {{-- menu offcanvas --}}
     <div class="cp_cont">
@@ -19,248 +20,83 @@
                         <h2 class="h1 ms-1 mt-3"><i class="fa-solid fa-clipboard-list me-2"></i>Event menu list</h2>
                     </div>
                     {{-- event list --}}
-                    <div class="col-lg-6 mb-4">
-                        <a href="" class="text-decoration-none">
-                            {{-- event card --}}
-                            <div class="card shadow border-0">
-                                <img src="{{ asset('images/event-test/event1.jpeg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
-                                <div class="card-body">
-                                    <div class="row align-items-center mb-3">
-                                        {{-- event title --}}
-                                        <div class="col-5">
-                                            <h4 class="text-dark">Event Title</h4>
+                    @forelse ($search_events as $event)
+                        <div class="col-lg-6 mb-4">
+                            <a href="" class="text-decoration-none">
+                                {{-- event card --}}
+                                <div class="card shadow border-0">
+                                    @if (is_null($event->event_image))
+                                    <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
+                                    @else
+                                        <img src="{{ $event->event_image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                                    @endif
+                                    <div class="card-body px-2">
+                                        <div class="row align-items-center mb-3">
+                                            {{-- event title --}}
+                                            <div class="col-8 pe-0">
+                                                <h4 class="overflow_dot text-dark">{{ $event->event_name }}</h4>
+                                            </div>
+                                            {{-- review --}}
+                                            <div class="col d-flex justify-content-end overflow_cut ps-0 me-1">
+                                                @if (is_null($event->avg_star))
+                                                    <h6 class="text-muted overflow_cut">No Reviews</h6>
+                                                @else
+                                                    <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1"></i>{{ number_format($event->avg_star, 1) }}</h4>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="col d-flex justify-content-end me-3">
-                                            <h4 class="h4 text-dark"><i class="fa-solid fa-star me-2"></i>4.5</h4>
+                                        {{-- information --}}
+                                        <div class="row align-items-center gx-1 mb-2">
+                                            <div class="col-4">
+                                                <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area_name }} area
+                                            </div>
+                                            @php
+                                                $loop_count = 0;
+                                            @endphp
+                                            @forelse($event->EventCategories as $event_category)
+                                                @if ($loop_count < 2)
+                                                    <div class="col-4">
+                                                        <div class="tag rounded-pill overflow_dot py-1 w-100">{{ $event_category->category->name }}</div>
+                                                    </div>
+                                                    @php
+                                                        $loop_count++;
+                                                    @endphp
+                                                @endif
+                                            @empty
+                                                <div class="col-8">
+                                                    <div class="tag rounded-pill bg-secondary overflow_dot py-1 text-white w-50">No Category</div>
+                                                </div>
+                                            @endforelse
                                         </div>
-                                    </div>
-                                    {{-- information --}}
-                                    <div class="row align-items-center gx-1 mb-2">
-                                        <div class="col-4">
-                                            <i class="fa-solid fa-location-dot me-1"></i>Location
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="tag rounded-pill py-1 w-100">Category1</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="tag rounded-pill py-1 w-100">Category2</div>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center gx-1">
-                                        <div class="col-4">
-                                            <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                                        </div>
-                                        <div class="col-4 align-self-center">
-                                            <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                                        </div>
-                                        <div class="col-4 align-self-center">
-                                            <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-6 mb-4">
-                        <a href="" class="text-decoration-none">
-                            <div class="card shadow border-0">
-                                <img src="{{ asset('images/event-test/fireworktest.png') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
-                                <div class="card-body">
-                                    <div class="row align-items-center mb-3">
-                                        <div class="col-5">
-                                            <h4 class="text-dark">Event Title</h4>
-                                        </div>
-                                        <div class="col d-flex justify-content-end me-3">
-                                            <h4 class="h4 text-dark"><i class="fa-solid fa-star me-2"></i>4.5</h4>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center gx-1 mb-2">
-                                        <div class="col-4">
-                                            <i class="fa-solid fa-location-dot me-1"></i>Location
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="tag rounded-pill py-1 w-100">Category1</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="tag rounded-pill py-1 w-100">Category2</div>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center gx-1">
-                                        <div class="col-4">
-                                            <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                                        </div>
-                                        <div class="col-4 align-self-center">
-                                            <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                                        </div>
-                                        <div class="col-4 align-self-center">
-                                            <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
+                                        <div class="row align-items-center gx-1">
+                                            <div class="col-4">
+                                                <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
+                                            </div>
+                                            <div class="col-4 align-self-center">
+                                                <div class="tag rounded-pill overflow_dot py-1 w-100">
+                                                    @if ($event->start_date == $event->finish_date)
+                                                        {{ date('m/d', strtotime($event->start_date)) }}
+                                                    @else
+                                                        {{ date('m/d', strtotime($event->start_date)) }}~{{ date('m/d', strtotime($event->finish_date)) }}
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-4 align-self-center">
+                                                <div class="tag rounded-pill overflow_dot py-1 w-100">{{ date('H:i', strtotime($event->start_time)) }}~{{ date('H:i', strtotime($event->finish_time)) }}</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-6 mb-4">
-                        <a href="" class="text-decoration-none">
-                            <div class="card shadow border-0">
-                                <img src="{{ asset('images/event-test/concert-event.jpg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
-                                <div class="card-body">
-                                    <div class="row align-items-center mb-3">
-                                        <div class="col-5">
-                                            <h4 class="text-dark">Event Title</h4>
-                                        </div>
-                                        <div class="col d-flex justify-content-end me-3">
-                                            <h4 class="h4 text-dark"><i class="fa-solid fa-star me-2"></i>4.5</h4>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center gx-1 mb-2">
-                                        <div class="col-4">
-                                            <i class="fa-solid fa-location-dot me-1"></i>Location
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="tag rounded-pill py-1 w-100">Category1</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="tag rounded-pill py-1 w-100">Category2</div>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center gx-1">
-                                        <div class="col-4">
-                                            <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                                        </div>
-                                        <div class="col-4 align-self-center">
-                                            <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                                        </div>
-                                        <div class="col-4 align-self-center">
-                                            <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-6 mb-4">
-                        <a href="" class="text-decoration-none">
-                            <div class="card shadow border-0">
-                                <img src="{{ asset('images/event-test/festival_test.jpg') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
-                                <div class="card-body">
-                                    <div class="row align-items-center mb-3">
-                                        <div class="col-5">
-                                            <h4 class="text-dark">Event Title</h4>
-                                        </div>
-                                        <div class="col d-flex justify-content-end me-3">
-                                            <h4 class="h4 text-dark"><i class="fa-solid fa-star me-2"></i>4.5</h4>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center gx-1 mb-2">
-                                        <div class="col-4">
-                                            <i class="fa-solid fa-location-dot me-1"></i>Location
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="tag rounded-pill py-1 w-100">Category1</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="tag rounded-pill py-1 w-100">Category2</div>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center gx-1">
-                                        <div class="col-4">
-                                            <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                                        </div>
-                                        <div class="col-4 align-self-center">
-                                            <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                                        </div>
-                                        <div class="col-4 align-self-center">
-                                            <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-6 mb-4">
-                        <a href="" class="text-decoration-none">
-                            <div class="card shadow border-0">
-                                <img src="{{ asset('images/event-test/IMG_7560.JPG') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
-                                <div class="card-body">
-                                    <div class="row align-items-center mb-3">
-                                        <div class="col-5">
-                                            <h4 class="text-dark">Event Title</h4>
-                                        </div>
-                                        <div class="col d-flex justify-content-end me-3">
-                                            <h4 class="h4 text-dark"><i class="fa-solid fa-star me-2"></i>4.5</h4>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center gx-1 mb-2">
-                                        <div class="col-4">
-                                            <i class="fa-solid fa-location-dot me-1"></i>Location
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="tag rounded-pill py-1 w-100">Category1</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="tag rounded-pill py-1 w-100">Category2</div>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center gx-1">
-                                        <div class="col-4">
-                                            <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                                        </div>
-                                        <div class="col-4 align-self-center">
-                                            <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                                        </div>
-                                        <div class="col-4 align-self-center">
-                                            <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-6 mb-4">
-                        <a href="" class="text-decoration-none">
-                            <div class="card shadow border-0">
-                                <img src="{{ asset('images/event-test/IMG_7559.JPG') }}" alt="" class="rounded-top-only card-img-top card-img-sm">
-                                <div class="card-body">
-                                    <div class="row align-items-center mb-3">
-                                        <div class="col-5">
-                                            <h4 class="text-dark">Event Title</h4>
-                                        </div>
-                                        <div class="col d-flex justify-content-end me-3">
-                                            <h4 class="h4 text-dark"><i class="fa-solid fa-star me-2"></i>4.5</h4>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center gx-1 mb-2">
-                                        <div class="col-4">
-                                            <i class="fa-solid fa-location-dot me-1"></i>Location
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="tag rounded-pill py-1 w-100">Category1</div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="tag rounded-pill py-1 w-100">Category2</div>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center gx-1">
-                                        <div class="col-4">
-                                            <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                                        </div>
-                                        <div class="col-4 align-self-center">
-                                            <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                                        </div>
-                                        <div class="col-4 align-self-center">
-                                            <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div> 
+                    @empty
+                        {{-- No events --}}
+                        <div class="text-center mt-5">
+                            <h3 class="h3">Sorry! No Results Found<i class="fa-regular fa-face-tired ms-2"></i></h3>
+                            <p class="h5 text-muted mt-3">We can't find any event matching your search</p>
+                            <a href="/" class="btn btn-green py-2 mt-3">Search again</a>
+                        </div>
+                    @endforelse
         
                 </div>
             </div>
@@ -268,8 +104,8 @@
     </div>
 
     {{-- map --}}
-    <div class="p-0">
-        <img src="{{ asset('images/event-test/map.png') }}" alt="map" class="map w-100">
+    <div>
+        <div id="map"></div>
     </div>
 
 @endsection

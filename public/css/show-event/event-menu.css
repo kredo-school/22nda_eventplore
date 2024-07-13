@@ -1,8 +1,15 @@
 
 .cp_offcanvas {
     position: absolute;
-    top: 160px; /* ナビゲーションバーの下に配置 */
+    top: 80px; /* ナブバーの下に配置 */
     left: 0;
+	z-index: 3;
+}
+
+@media (min-width: 768px) {
+    .cp_offcanvas {
+		top: 160px;
+	}
 }
 
 .cp_offcanvas .cp_menu {
@@ -10,11 +17,17 @@
 	top: 0;
 	left: -100vw; /* ビューポートの幅の100%分左（画面外）に配置 */
 	width: 50vw;
-	height: calc(100vh - 240px);
+	height: calc(100vh - 160px);
     overflow-y: auto;
     transition: 0.25s transform; /* 0.25秒のアニメーション */
     transition-timing-function: ease; /* アニメーションのタイミング */
 	background-color: #FFFFFF;
+}
+
+@media (min-width: 768px) {
+    .cp_offcanvas .cp_menu {
+		height: calc(100vh - 240px);
+	}
 }
 
 .cp_offcanvas #cp_toggle {
@@ -59,7 +72,28 @@
 	content: "\f100"; /* 左矢印アイコン（チェック後） */
 }
 
-.map {
-	height: calc(100vh - 240px);
-	object-fit: cover;
+
+/* 画面サイズ767px未満 */
+#map {
+	height: calc(100vh - 160px);
+}
+
+/* 画面サイズ768px以上 */
+@media (min-width: 768px) {
+    #map {
+		height: calc(100vh - 240px);
+	}
+}
+
+/* オーバーフローしたテキストを"…"で表示 */
+.overflow_dot {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* オーバーフローしたテキストをカット */
+.overflow_cut {
+	overflow: hidden;
+	white-space: nowrap;
 }

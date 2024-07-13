@@ -91,10 +91,6 @@ Route::get('/owners/reservation-list', function () {
 Route::get('/user/reservation-list', function () {
     return view('users.reservations.show');
 });
-// Show event menu page
-Route::get('/home/event-menu', function () {
-    return view('home.event-menu');
-});
 
 
 // kanako

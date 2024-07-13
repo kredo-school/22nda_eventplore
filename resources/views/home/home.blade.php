@@ -54,7 +54,7 @@
 
                 {{-- search button --}}
                 <div class="text-center mt-2 mb-4">
-                    <input type="reset" class="btn btn-yellow ms-2 me-2 py-2 mb-1" value="Clear">
+                    <input type="reset" class="btn btn-yellow ms-2 me-2 py-2 mb-1" value="Clear" onclick="clearCalendar()">
                     <button type="submit" class="btn btn-green ms-2 me-2 py-2">Search</button>
                 </div>
             </form>
