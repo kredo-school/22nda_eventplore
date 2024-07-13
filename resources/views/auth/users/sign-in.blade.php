@@ -4,14 +4,14 @@
 <div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
     <div class="row d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
         <div class="col-md-6 p-0 d-flex flex-column justify-content-center">
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('user.login') }}">
                 @csrf
 
                 <div class="d-flex flex-column align-items-center my-4 text-center">
                     <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="logo" class="mt-5 mb-2 w-25">
                     <h2 class="h1 mb-2 text-align-center">Sign in</h2>
                     <div class="d-flex justify-content-center mb-3">
-                        <div class="w-100"><p>Don't you have account yet?&nbsp;<a href="{{ route('sign-up')}}" class="fw-bold text-decoration-none" style="color: #84947C">Sign Up</a></p></div>
+                        <div class="w-100"><p>Don't you have account yet?&nbsp;<a href="{{ route('user.sign-up')}}" class="fw-bold text-decoration-none" style="color: #84947C">Sign Up</a></p></div>
                     </div>
 
                     <div class="d-flex justify-content-center mb-3">
@@ -74,7 +74,7 @@
                     @endif
                     <hr class="w-50 mx-auto mt-3" style="border: 1px solid #0C2C04">
                     <div class="d-flex justify-content-center">
-                        <div class="w-100"><p>If you'd like to create event...&nbsp;<a href="#" style="color: #84947C">Event Owner sign-in</a></p></div>
+                        <div class="w-100"><p>If you'd like to create event...&nbsp;<a href="{{ route('event-owner.sign-in') }}" style="color: #84947C">Event Owner sign-in</a></p></div>
                     </div>
                 </div>
             </form>

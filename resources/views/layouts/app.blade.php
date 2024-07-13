@@ -151,12 +151,38 @@
                                 </button>
                             </form>
                         </div>
-
-                        <div class="d-none d-md-flex ms-auto">
-                            @if (Route::has('login'))
-                            <a class="btn btn-green" href="#" style="width: 100px">{{ __('SIGN-IN') }}</a>
+                        @guest
+                            @if (Route::has('user.register'))
+                                <div class="d-none d-md-flex ms-auto">
+                                    <a class="btn btn-green" href="#" style="width: 100px">{{ __('SIGN-IN') }}</a>
+                                </div>
                             @endif
-                        </div>
+                        @else
+                            <div class="d-none d-md-flex align-items-center pe-3">
+                                <a id="navbarDropdown" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="d-flex align-items-center justify-content-center">
+                                        <i class="fa-solid fa-circle-user fa-2xl"></i>
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fa-solid fa-circle-user fa-xl"></i>&nbsp; Profile
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; My Event
+                                    </a>
+                                    <hr>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+                        @endguest
+
+
                     </div>
                 </div>
             </nav>

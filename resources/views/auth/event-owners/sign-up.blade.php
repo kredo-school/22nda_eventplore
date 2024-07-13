@@ -4,7 +4,7 @@
 <div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
     <div class="row d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
         <div class="col-md-6 p-0 d-flex flex-column justify-content-center">
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('event-owner.register') }}">
                 @csrf
 
                 <div class="d-flex flex-column align-items-center mt-3 text-center">
@@ -27,7 +27,7 @@
                                 <div class="flex-fill mb-1" style="min-width: 45%;">
                                     <label for="password" class="form-label fw-bold mb-1">Password*</label>
                                     <div class="input-group mb-1 position-relative">
-                                        <input type="password" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password">
+                                        <input type="password" class="form-control rounded" name="password" style="border: 1px solid #84947C" placeholder="Password">
                                         <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center">
                                             <i class="fa-solid fa-eye-slash"></i>
                                         </div>

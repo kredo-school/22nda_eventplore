@@ -12,7 +12,7 @@
                     <h2 class="h1 mb-2 text-align-center">Event Owner</h2>
 
                     <div class="d-flex justify-content-center mb-3">
-                        <div class="w-100"><p>Don't you have account yet?&nbsp;<a href="#" class="fw-bold text-decoration-none" style="color: #84947C">Sign Up</a></p></div>
+                        <div class="w-100"><p>Don't you have account yet?&nbsp;<a href="{{ route('event-owner.sign-up') }}" class="fw-bold text-decoration-none" style="color: #84947C">Sign Up</a></p></div>
                     </div>
 
                     <div class="d-flex justify-content-center mb-3">
