@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -14,9 +15,9 @@ Route::group(['middleware' => 'auth'], function(){ // auth middleware only allow
         Route::get('/', [HomeController::class, 'index'])->name('home');
         Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
     });
-
-
-
+Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
+Route::post('/event-owners/events/store', [EventController::class, 'store'])->name('events.store');
+Route::get('/event-owners/session-id', [EventController::class, 'getSessionId']);
 
 // Haruka
 // Show sign-up page for event-owner
@@ -35,11 +36,6 @@ Route::get('/auth/users/sign-in', function () {
 Route::get('/auth/users/sign-up', function () {
     return view('auth.users.sign-up');
 });
-// Show register event page
-Route::get('/event-owners/events/register', function () {
-    return view('event-owners.events.register');
-});
-// Show edit event page
 Route::get('/event-owners/events/edit', function () {
     return view('event-owners.events.edit');
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
 use App\Models\Event;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -18,9 +19,9 @@ class EventController extends Controller
 
     public function create()
     {
-        // $areas = Area::all();
+        $areas = Area::all();
         $categories = Category::all();
-        return view('event-owners.events.register', compact('categories'));
+        return view('event-owners.events.register', compact('areas','categories'));
     }
 
     public function getSessionId(){
