@@ -12,11 +12,11 @@
     <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-5 overflow-auto sidebar">
             <form action="{{ route('event-menu') }}" method="get">
-                
+
                 {{-- calendar --}}
                 <div class="ms-3 mt-4 mb-4 me-2" id="calendar"></div>
                 <input type="hidden" id="date" name="date"> {{-- hidden input to store selected date --}}
-                
+
                 {{-- keyword --}}
                 <div class="ms-3 me-2">
                     <label for="keyword" class="h4 form-label mb-2">Keyword</label>

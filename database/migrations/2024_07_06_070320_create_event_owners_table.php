@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('email')->unique();
             $table->string('phone_number', 50);
+            $table->string('address');
             $table->timestamps();
             $table->softDeletes();
         });
