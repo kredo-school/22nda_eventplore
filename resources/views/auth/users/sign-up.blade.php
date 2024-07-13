@@ -68,9 +68,9 @@
                                     </span>
                                 @enderror
                             </div>
-                            <label for="avatar" class="form-label fw-bold mb-1"><i class="fa-solid fa-circle-user"></i>Avatar*</label>
+                            <label for="avatar" class="form-label fw-bold mb-1"><i class="fa-solid fa-circle-user"></i>Avatar</label>
                             <div class="mb-2">
-                                <input type="file" name="avatar" id="avatar" class="form-control" required style="border: 1px solid #84947C">
+                                <input type="file" name="avatar" id="avatar" class="form-control" style="border: 1px solid #84947C">
                                 @error('avatar')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
