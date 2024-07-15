@@ -21,32 +21,32 @@
                 <h2 class="h1">Register Event</h2>
                 {{-- ステータスバー --}}
                 <div class="timeline">
-                    <div class="timeline-item">
+                    <div class="timeline-item active">
                         <div class="timeline-icon">
                             <i class="fa-regular fa-calendar icon-md"></i>
                         </div>
                     </div>
-                    <div class="timeline-item">
+                    <div class="timeline-item inactive">
                         <div class="timeline-icon">
                             <i class="fa-solid fa-icons icon-md"></i>
                         </div>
                     </div>
-                    <div class="timeline-item">
+                    <div class="timeline-item inactive">
                         <div class="timeline-icon">
                             <i class="fa-solid fa-location-dot icon-md"></i>
                         </div>
                     </div>
-                    <div class="timeline-item">
+                    <div class="timeline-item inactive">
                         <div class="timeline-icon">
                             <i class="fa-solid fa-image icon-md"></i>
                         </div>
                     </div>
-                    <div class="timeline-item">
+                    <div class="timeline-item inactive">
                         <div class="timeline-icon">
                             <i class="fa-solid fa-circle-info icon-md"></i>
                         </div>
                     </div>
-                    <div class="timeline-item">
+                    <div class="timeline-item inactive">
                         <div class="timeline-icon">
                             <i class="fa-solid fa-up-right-from-square icon-md"></i>
                         </div>
@@ -82,13 +82,13 @@
                         <div class="row justify-content-center p-0">
                             {{-- back button --}}
                             <div id="back-button" class="col-4 d-none">
-                                <button type="button" class="btn btn-yellow w-100" onclick="back()">
+                                <button type="button" class="btn btn-yellow w-100" onclick="window.back()">
                                     Back
                                 </button>
                             </div>
                             {{-- next button --}}
                             <div id="next-button" class="col-4">
-                                <button type="button" class="btn btn-green w-100" onclick="next()">
+                                <button type="button" class="btn btn-green w-100" onclick="window.next()">
                                     Next
                                 </button>
                             </div>

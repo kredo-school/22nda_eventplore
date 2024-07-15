@@ -14,34 +14,50 @@ const nextButton = document.getElementById("next-button");
 const submitButton = document.getElementById("submit-button");
 const searchBox = document.getElementById("address");
 const searchContainer = document.getElementById("search-container");
+const timelineItems = document.querySelectorAll('.timeline-item');
 
-function next() {
-    // show next step
-    document.getElementById(`step${step + 1}`).classList.remove("d-none");
-    // hide previous step
-    document.getElementById(`step${step}`).classList.add("d-none");
+function updateTimeline(step){
+    timelineItems.forEach((item, index) =>{
+        item.classList.remove('active', 'inactive');
+        if(index === step - 1){
+            item.classList.add('active');
+        }else{
+            item.classList.add('inactive');
+        }
+    })
+}
 
-    step += 1;
-    if (step == 1) backButton.classList.add("d-none");
-    else backButton.classList.remove("d-none");
-    if (step == 6) {
-        nextButton.classList.add("d-none");
-        submitButton.classList.remove("d-none");
+window.next = function next() {
+    if(step < 6){
+        // show next step
+        document.getElementById(`step${step + 1}`).classList.remove("d-none");
+        // hide previous step
+        document.getElementById(`step${step}`).classList.add("d-none");
+    
+        step += 1;
+        if (step == 1) backButton.classList.add("d-none");
+        else backButton.classList.remove("d-none");
+        if (step == 6) {
+            nextButton.classList.add("d-none");
+            submitButton.classList.remove("d-none");
+        }
     }
 }
 
-function back() {
-    // show previous step
-    document.getElementById(`step${step - 1}`).classList.remove("d-none");
-    // hide next step
-    document.getElementById(`step${step}`).classList.add("d-none");
-
-    step -= 1;
-    if (step == 1) backButton.classList.add("d-none");
-    else backButton.classList.remove("d-none");
-    if (step < 6) {
-        submitButton.classList.add("d-none");
-        nextButton.classList.remove("d-none");
+window.back = function back() {
+    if(step > 1){
+        // show previous step
+        document.getElementById(`step${step - 1}`).classList.remove("d-none");
+        // hide next step
+        document.getElementById(`step${step}`).classList.add("d-none");
+    
+        step -= 1;
+        if (step == 1) backButton.classList.add("d-none");
+        else backButton.classList.remove("d-none");
+        if (step < 6) {
+            submitButton.classList.add("d-none");
+            nextButton.classList.remove("d-none");
+        }
     }
 }
 
@@ -82,6 +98,8 @@ async function searchHandler(){
         searchContainer.appendChild(list);
     }
 }
+
+updateTimeline(step);
 
 window.next = next;
 window.back = back;
