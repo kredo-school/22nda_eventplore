@@ -13,4 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
       },
     });
     calendar.render();
+
+    // カレンダーの選択解除
+    window.clearCalendar = function() {
+      calendar.unselect();
+      document.getElementById('date').value = '';
+    };
   });
