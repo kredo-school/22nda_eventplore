@@ -7,12 +7,12 @@ use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 
+Auth::routes();
 
 // Route::group(['middleware' => 'auth'], function(){ // auth middleware only allows logged-in users access
 //         Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -26,10 +26,8 @@ use App\Http\Controllers\Auth\RegisterController;
         Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
         Route::post('/logout', [UserLoginController::class, 'logout'])->name('logout');
 
-
         Route::middleware('guest:event_owner')->group(function () {
             Route::get('/event-owners/sign-in', [EventOwnerLoginController::class, 'showEventOwnerSignIn'])->name('event-owner.sign-in');
-
         });
     });
 Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
@@ -47,27 +45,23 @@ Route::get('/event-owners/session-id', [EventController::class, 'getSessionId'])
 
         Route::get('/event-owners/sign-up',[EventOwnerRegisterController::class, 'showEventOwnerSignUp'])->name('event-owner.sign-up');
         Route::post('/event-owners/sign-up',[EventOwnerRegisterController::class, 'register'])->name('event-owner.register');
-
-
     });
-
-
 
 
 
 // Haruka
 // Show sign-up page for event-owner
-Route::get('/auth/event-owners/sign-up', function () {
-    return view('auth.event-owners.sign-up');
-});
+// Route::get('/auth/event-owners/sign-up', function () {
+//     return view('auth.event-owners.sign-up');
+// });
 // Show sign-in page for event-owner
-Route::get('/auth/event-owners/sign-in', function () {
-    return view('auth.event-owners.sign-in');
-});
+// Route::get('/auth/event-owners/sign-in', function () {
+//     return view('auth.event-owners.sign-in');
+// });
 // Show sign-in page for user
-Route::get('/auth/users/sign-in', function () {
-    return view('auth.users.sign-in');
-});
+// Route::get('/auth/users/sign-in', function () {
+//     return view('auth.users.sign-in');
+// });
 // Show sign-up page for user
 Route::get('/auth/users/sign-up', function () {
     return view('auth.users.sign-up');
