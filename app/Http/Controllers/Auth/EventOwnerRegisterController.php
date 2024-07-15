@@ -18,7 +18,7 @@ class EventOwnerRegisterController extends Controller
 
     protected $guardName = 'event_owner';
 
-    protected $redirectTo = '/owners/show-events';
+    protected $redirectTo = '/event-menu';
 
     public function __construct()
     {
@@ -32,9 +32,10 @@ class EventOwnerRegisterController extends Controller
             'password' => ['required', 'string', 'min:8' ],
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners'],
             'phone_number'=>['required', 'string', 'max:255'],
             'address'=>['required', 'string', 'max:255'],
+            'role'=>'event-owner',
         ]);
     }
 
@@ -52,9 +53,10 @@ class EventOwnerRegisterController extends Controller
             'password' => ['required', 'string', 'min:8' ],
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners'],
             'phone_number'=>['required', 'string', 'max:255'],
             'address'=>['required', 'string', 'max:255'],
+            'role'=>'event-owner',
         ]);
 
         $avatar = base64_encode($request['avatar']);
@@ -66,16 +68,11 @@ class EventOwnerRegisterController extends Controller
             'email' => $validated['email'],
             'phone_number' =>$validated['phone_number'],
             'address'=>$validated['address'],
-            'avatar' => $avatar
+            'avatar' => $avatar,
+            'role'=>'event-owner',
 
         ]);
-        if (Auth::guard('event_owner')->attempt([
-            'email' =>$validated['email'],
-            'password' => $validated['password'],
-        ])) {
-            return view('event-owners.events.show');
-        }
-        return Redirect::back();
+        return redirect()->route('event-menu')->with('success', 'Event owner registered successfully.');
     }
 
     public function showEventOwnerSignUp()

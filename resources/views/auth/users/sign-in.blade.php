@@ -34,7 +34,7 @@
                             <label for="password" class="form-label fw-bold mb-2">Password*</label>
                             <div class="mb-3">
                                 <div class="input-group mb-3 position-relative">
-                                    <input type="password" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password">
+                                    <input type="password" name="password" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password">
                                     <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center">
                                         <i class="fa-solid fa-eye-slash"></i>
                                     </div>

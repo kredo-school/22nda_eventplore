@@ -4,7 +4,7 @@
 <div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
     <div class="row d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
         <div class="col-md-6 p-0 d-flex flex-column justify-content-center">
-            <form method="POST" action="">
+            <form action="{{ route('event-owner.login') }}" method="POST">
                 @csrf
 
                 <div class="d-flex flex-column align-items-center my-4 text-center">
@@ -20,7 +20,6 @@
                             <label for="username" class="form-label fw-bold mb-2">Username*</label>
                             <div class="mb-3">
                                 <input id="username" type="text" class="form-control" name="username" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C;">
-
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -35,7 +34,7 @@
                             <label for="password" class="form-label fw-bold mb-2">Password*</label>
                             <div class="mb-3">
                                 <div class="input-group mb-3 position-relative">
-                                    <input type="password" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password">
+                                    <input id="password" type="password" class="form-control rounded" name="password" required style="border: 1px solid #84947C" placeholder="Password">
                                     <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center">
                                         <i class="fa-solid fa-eye-slash"></i>
                                     </div>

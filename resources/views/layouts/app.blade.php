@@ -55,7 +55,7 @@
                         <ul class="navbar-nav me-auto mb-2 mb-md-0 d-md-none" style="background-color: white;">
                             <!-- Dropdown 1: Sign-in -->
                             <li class="nav-item">
-                                @if (Route::has('login'))
+                                @if (Route::has('user.sign-in'))
                                 <a class="nav-link btn btn-green mx-3" href="#">{{ __('SIGN-IN') }}</a>
                                 @endif
                             </li>
@@ -151,13 +151,19 @@
                                 </button>
                             </form>
                         </div>
-                        @guest
-                            @if (Route::has('user.register'))
+                        {{-- @guest
+                            @if (Route::has('user.sign-in'))
                                 <div class="d-none d-md-flex ms-auto">
-                                    <a class="btn btn-green" href="#" style="width: 100px">{{ __('SIGN-IN') }}</a>
+                                    <a class="btn btn-green" href="#" style="width: 100px">{{ __('User SIGN-IN') }}</a>
                                 </div>
                             @endif
-                        @else
+                            @if (Route::has('event-owner.sign-in'))
+                                <div class="d-none d-md-flex ms-auto">
+                                    <a class="btn btn-green" href="#" style="width: 100px">{{ __('Event Owner SIGN-IN') }}</a>
+                                </div>
+                            @endif
+
+                        @else --}}
                             <div class="d-none d-md-flex align-items-center pe-3">
                                 <a id="navbarDropdown" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="d-flex align-items-center justify-content-center">
@@ -172,15 +178,15 @@
                                         <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; My Event
                                     </a>
                                     <hr>
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; {{ __('Logout') }}
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('user.logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
                             </div>
-                        @endguest
+                        {{-- @endguest --}}
 
 
                     </div>
