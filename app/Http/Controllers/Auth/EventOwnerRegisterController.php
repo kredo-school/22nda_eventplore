@@ -22,7 +22,7 @@ class EventOwnerRegisterController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest:event_owner');
+        // $this->middleware('guest:event_owner');
     }
 
     protected function validator(array $data)
@@ -60,7 +60,7 @@ class EventOwnerRegisterController extends Controller
         ]);
 
         $avatar = base64_encode($request['avatar']);
-        EventOwner::create([
+        $user = EventOwner::create([
             'username' => $validated['username'],
             'password' => Hash::make($validated['password']),
             'first_name' =>$validated['firstname'],
@@ -72,7 +72,15 @@ class EventOwnerRegisterController extends Controller
             'role'=>'event-owner',
 
         ]);
-        return redirect()->route('event-menu')->with('success', 'Event owner registered successfully.');
+        if(Auth::guard('event_owner')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
+        {
+        // Authentication successful
+        return redirect('/event-menu');
+        } else {
+        // Authentication failed
+        return back()->withErrors(['email' => 'Invalid credentials']);
+        }
+
     }
 
     public function showEventOwnerSignUp()

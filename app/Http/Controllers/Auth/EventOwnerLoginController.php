@@ -16,7 +16,7 @@ class EventOwnerLoginController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest:event_owner')->except('logout');
+        // $this->middleware('guest:event_owner')->except('logout');
     }
 
 
@@ -32,9 +32,8 @@ class EventOwnerLoginController extends Controller
 
     public function signIn(Request $request)
     {
-        Log::error('Start sequence');
         $event_login = $this->validate($request, [
-            'username' => 'required|max:255',
+            'email' => 'required|max:255',
             'password' => 'required|min:6',
         ]);
 
@@ -42,13 +41,13 @@ class EventOwnerLoginController extends Controller
             if (Auth::guard('event_owner')->user()->role == 'event-owner') {
                 return redirect()->intended($this->redirectTo);
             } else {
-                return back()->withInput($request->only('username'))->withErrors([
-                    'username' => 'These credentials do not match our records',
+                return back()->withInput($request->only('email'))->withErrors([
+                    'email' => 'These credentials do not match our records',
                 ]);
             }
         } else {
-            return back()->withInput($request->only('username'))->withErrors([
-                'username' => 'These credentials do not match our records',
+            return back()->withInput($request->only('email'))->withErrors([
+                'email' => 'These credentials do not match our records',
             ]);
         }
 
@@ -62,7 +61,7 @@ class EventOwnerLoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('event-owner.sign-in');
     }
 
 }

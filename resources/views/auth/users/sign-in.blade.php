@@ -16,11 +16,11 @@
 
                     <div class="d-flex justify-content-center mb-3">
                         <div class="text-start">
-                            <label for="username" class="form-label fw-bold mb-2">Username*</label>
+                            <label for="email" class="form-label fw-bold mb-2">Username*</label>
                             <div class="mb-3">
-                                <input id="username" type="text" class="form-control" name="username" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C">
+                                <input id="email" type="text" class="form-control" name="email" required autocomplete="email" autofocus placeholder="Email" style="border: 1px solid #84947C">
 
-                                @error('username')
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

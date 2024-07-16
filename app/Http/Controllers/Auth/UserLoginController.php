@@ -48,16 +48,16 @@ class UserLoginController extends Controller
     public function signIn(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required|max:255',
+            'email' => 'required|max:255',
             'password' => 'required|min:8',
         ]);
 
-        if (Auth::guard('web')->attempt($request->only('username', 'password'))) {
+        if (Auth::guard('web')->attempt($request->only('email', 'password'))) {
             return view('home.home');
         }
 
-        return back()->withInput($request->only('username'))->withErrors([
-            'username' => 'These credentials do not match our records.',
+        return back()->withInput($request->only('email'))->withErrors([
+            'email' => 'These credentials do not match our records.',
         ]);
     }
 
