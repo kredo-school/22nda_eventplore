@@ -22,7 +22,8 @@ class User extends Authenticatable
         'password',
         'first_name',
         'last_name',
-        'avatar'
+        'avatar',
+        'role',
     ];
     // It should be filled in database name
 
