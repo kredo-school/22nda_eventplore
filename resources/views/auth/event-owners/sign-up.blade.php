@@ -64,7 +64,7 @@
                             </div>
                             <div class="d-flex flex-wrap justify-content-between mb-1">
                                 <div class="flex-fill me-2 mb-1" style="min-width: 45%;">
-                                    <label for="email" class="form-label fw-bold mb-1">e-mail*</label>
+                                    <label for="email" class="form-label fw-bold mb-1">Email*</label>
                                     <input type="email" name="email" id="email" class="form-control" required autocomplete="email" autofocus placeholder="email@eventplore.com" style="border: 1px solid #84947C">
 
                                     @error('email')
@@ -95,8 +95,8 @@
                                     @enderror
                                 </div>
                                 <div class="flex-fill w-100 my-1">
-                                    <label for="avatar" class="form-label fw-bold mb-1"><i class="fa-solid fa-circle-user"></i>Avatar*</label>
-                                    <input type="file" name="avatar" id="avatar" class="form-control" required style="border: 1px solid #84947C">
+                                    <label for="avatar" class="form-label fw-bold mb-1"><i class="fa-solid fa-circle-user"></i>Avatar</label>
+                                    <input type="file" name="avatar" id="avatar" class="form-control" style="border: 1px solid #84947C">
                                     @error('avatar')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

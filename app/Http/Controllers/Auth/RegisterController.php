@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -31,6 +32,13 @@ class RegisterController extends Controller
     protected $redirectTo = '/';
 
     /**
+     * Where to redirect event owners after login.
+     *
+     * @var string
+     */
+    protected $ownerRedirectTo = '/event-owners/show';
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -50,10 +58,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'username' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:8' ],
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+
         ]);
     }
 
@@ -68,12 +77,12 @@ class RegisterController extends Controller
         $avatar = base64_encode($data['avatar']);
         return User::create([
             'username' => $data['username'],
-            'password' => Hash::make($data['password']),
-            'first_name' =>$data['firstname'],
-            'last_name' =>$data['lastname'],
+            'first_name' => $data['firstname'],
+            'last_name' => $data['lastname'],
             'email' => $data['email'],
-            'avatar' => $avatar
-
+            'password' => Hash::make($data['password']),
+            'avatar' => $avatar,
+            'role' => 'user',  // default role
         ]);
     }
 
@@ -82,4 +91,8 @@ class RegisterController extends Controller
         return view('auth.users.sign-up');
     }
 
+    public function showOwnerSignUp()
+    {
+        return view('auth.event-owners.sign-up');
+    }
 }

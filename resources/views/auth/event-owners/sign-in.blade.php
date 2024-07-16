@@ -19,7 +19,7 @@
                         <div class="text-start">
                             <label for="email" class="form-label fw-bold mb-2">Email*</label>
                             <div class="mb-3">
-                                <input id="email" type="text" class="form-control" name="email" required autocomplete="email" autofocus placeholder="email" style="border: 1px solid #84947C;">
+                                <input id="email" type="email" class="form-control" name="email" required autocomplete="email" autofocus placeholder="Email" style="border: 1px solid #84947C">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -28,7 +28,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="d-flex justify-content-center mb-3">
                         <div class="text-start">
                             <label for="password" class="form-label fw-bold mb-2">Password*</label>

@@ -9,16 +9,8 @@ use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
 
-
-
-
-// Route::group(['middleware' => 'auth'], function(){ // auth middleware only allows logged-in users access
-//         Route::get('/', [HomeController::class, 'index'])->name('home');
-//         Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
-//         Route::get('/event-owners/sign-in',[EventOwnerLoginController::class, 'showEventOwnerSignIn'])->name('event-owner.sign-in')->middleware('guest:event_owner');
-//         Route::get('/user/sign-in', [UserLoginController::class, 'showUserSignIn'])->name('user.sign-in');
-//     });
 
 Auth::routes();
 
@@ -50,26 +42,21 @@ Route::post('/event-owner/logout', [EventOwnerLoginController::class, 'logout'])
 
 // Haruka
 // Show sign-up page for event-owner
-Route::get('/auth/event-owners/sign-up', function () {
-    return view('auth.event-owners.sign-up');
-});
+// Route::get('/auth/event-owners/sign-up', function () {
+//     return view('auth.event-owners.sign-up');
+// });
 // Show sign-in page for event-owner
-Route::get('/auth/event-owners/sign-in', function () {
-    return view('auth.event-owners.sign-in');
-});
+// Route::get('/auth/event-owners/sign-in', function () {
+//     return view('auth.event-owners.sign-in');
+// });
 // Show sign-in page for user
-Route::get('/auth/users/sign-in', function () {
-    return view('auth.users.sign-in');
-});
+// Route::get('/auth/users/sign-in', function () {
+//     return view('auth.users.sign-in');
+// });
 // Show sign-up page for user
 Route::get('/auth/users/sign-up', function () {
     return view('auth.users.sign-up');
 });
-// Show register event page
-Route::get('/event-owners/events/register', function () {
-    return view('event-owners.events.register');
-});
-// Show edit event page
 Route::get('/event-owners/events/edit', function () {
     return view('event-owners.events.edit');
 });
@@ -88,10 +75,6 @@ Route::get('/owners/reservation-list', function () {
 // Show reservation page for user
 Route::get('/user/reservation-list', function () {
     return view('users.reservations.show');
-});
-// Show event menu page
-Route::get('/home/event-menu', function () {
-    return view('home.event-menu');
 });
 
 

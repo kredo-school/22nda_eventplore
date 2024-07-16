@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Event;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -37,41 +38,50 @@ class HomeController extends Controller
 
     public function show(Request $request)
     {
-        $date     = $request->input('date');
-        $keyword  = $request->input('keyword');
-        $area     = $request->input('area');
+        $date       = $request->input('date');
+        $keyword    = $request->input('keyword');
+        $area       = $request->input('area');
         $categories = $request->input('categories');
 
         $query = Event::query();
 
         // テーブル結合
-        $query->join('event_categories', 'events.id', '=', 'event_categories.event_id');
+        $query->leftJoin('event_categories', 'events.id', '=', 'event_categories.event_id')
+            ->leftJoin('areas', 'events.area_id', '=', 'areas.id')
+            ->leftJoin(DB::raw('(SELECT event_id, AVG(star) as avg_star FROM reviews GROUP BY event_id) as avg_reviews'), 'events.id', '=', 'avg_reviews.event_id')
+            ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'events.id', '=', 'first_event_images.event_id')
+            ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id');
 
+        // 日付選択時
         if (!empty($date)) {
             $query->where(function($q) use ($date) {
                 $q->whereDate('start_date', '<=', $date)
                 ->whereDate('finish_date', '>=', $date);
             });
         }
-
+        // キーワード入力時
         if (!empty($keyword)) {
             $query->where(function($q) use ($keyword) {
                 $q->where('event_name', 'LIKE', "%{$keyword}%")
                 ->orWhere('details', 'LIKE', "%{$keyword}%");
             });
         }
-
+        // エリア指定時
         if (!empty($area)) {
             $query->where('area_id', $area);
         }
-
+        // カテゴリー指定時
         if (!empty($categories)) {
-            $query->whereIn('category_id', $categories);
+            $query->whereIn('event_categories.category_id', $categories);
         }
 
-        $search_events = $query->distinct()->get(['events.*']);
+        $search_events = $query->distinct()->get([
+            'events.*',
+            'areas.name as area_name',
+            'avg_reviews.avg_star as avg_star',
+            'event_images.image as event_image',
+        ]);
 
         return view('home.event-menu', compact('search_events'));
     }
-
 }

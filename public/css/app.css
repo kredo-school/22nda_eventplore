@@ -1,3 +1,9 @@
+#app {
+    display: flex;
+    flex-direction: column;
+    /* min-height: 100vh; */
+}
+
 .navbar-top-bottom-border {
     border-top: 2px solid #84947C;
     border-bottom: 2px solid #84947C;
@@ -19,8 +25,11 @@
     border-bottom: 2px solid #84947C;
     font-family: 'EB Garamond', serif;
     background-color: #FFFFFF;
-    position: absolute;
-    bottom: 0;
+    /* position: static;
+    bottom: 0; */
+    color: #84947C;
+    text-align: center;
+    padding-top: 20px;
 }
 
 .navbar-category {
@@ -33,13 +42,6 @@
 .navbar-category a {
     flex: 1 0 auto;
     text-align: center;
-}
-
-#app {
-    min-height: 100vh;
-    position: relative;
-    padding-bottom: 80px;
-    box-sizing: border-box;
 }
 
 .nav-list{

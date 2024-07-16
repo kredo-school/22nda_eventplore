@@ -36,9 +36,9 @@
                             <label for="password" class="form-label fw-bold mb-2">Password*</label>
                             <div class="mb-3">
                                 <div class="input-group mb-2 position-relative">
-                                    <input type="password" class="form-control rounded" name="password" id="password" style="border: 1px solid #84947C" placeholder="Password">
+                                    <input id="password" type="password" name="password" required autocomplete="new-password" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password">
                                     <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center">
-                                        {{-- <i class="fa-solid fa-eye-slash"></i> --}}
+                                        <i class="fa-solid fa-eye-slash"></i>
                                     </div>
                                 </div>
 
@@ -104,4 +104,7 @@
     </div>
 </div>
 @endsection
+
+
+
 

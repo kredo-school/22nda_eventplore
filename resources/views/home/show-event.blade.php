@@ -262,10 +262,10 @@
                                 <button class="btn btn-sm btn-light"><i class="fas fa-minus"></i></button>
                             </div>
                         </div>
-                        <p class="mt-2">
+                        <p class="mt-2" style="display: flex; align-items: center;">
                             Access by
-                            <a href=""><img src="{{ asset('images/event-test/luup.png') }}" alt="" style="width: 10%; height: 15%;"></a>
-                            <a href=""><img src="{{ asset('images/event-test/go.png') }}" alt="" style="width: 5%; height: 5%;"></a>
+                            <a href="#" class="mx-2"><img src="{{ asset('images/event-test/luup.png') }}" alt="LUUP" style="width: 50px; height: auto;"></a>
+                            <a href="#"><img src="{{ asset('images/event-test/go.png') }}" alt="GO" style="width: 25px; height: auto;"></a>
                         </p>
                     </div>
                 </div>

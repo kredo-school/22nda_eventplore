@@ -36,6 +36,8 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sign-inup/sign-inup.css') }}">
+
 </head>
 <body>
     <div id="app">
@@ -55,7 +57,7 @@
                         <ul class="navbar-nav me-auto mb-2 mb-md-0 d-md-none" style="background-color: white;">
                             <!-- Dropdown 1: Sign-in -->
                             <li class="nav-item">
-                                @if (Route::has('user.sign-in'))
+                                @if (Route::has('login'))
                                 <a class="nav-link btn btn-green mx-3" href="#">{{ __('SIGN-IN') }}</a>
                                 @endif
                             </li>
@@ -151,19 +153,13 @@
                                 </button>
                             </form>
                         </div>
-                        {{-- @guest
-                            @if (Route::has('user.sign-in'))
+                        @guest
+                            @if (Route::has('user.register'))
                                 <div class="d-none d-md-flex ms-auto">
-                                    <a class="btn btn-green" href="#" style="width: 100px">{{ __('User SIGN-IN') }}</a>
+                                    <a class="btn btn-green" href="#" style="width: 100px">{{ __('SIGN-IN') }}</a>
                                 </div>
                             @endif
-                            @if (Route::has('event-owner.sign-in'))
-                                <div class="d-none d-md-flex ms-auto">
-                                    <a class="btn btn-green" href="#" style="width: 100px">{{ __('Event Owner SIGN-IN') }}</a>
-                                </div>
-                            @endif
-
-                        @else --}}
+                        @else
                             <div class="d-none d-md-flex align-items-center pe-3">
                                 <a id="navbarDropdown" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="d-flex align-items-center justify-content-center">
@@ -178,15 +174,15 @@
                                         <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; My Event
                                     </a>
                                     <hr>
-                                    <a class="dropdown-item" href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; {{ __('Logout') }}
                                     </a>
-                                    <form id="logout-form" action="{{ route('user.logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
                             </div>
-                        {{-- @endguest --}}
+                        @endguest
 
 
                     </div>
@@ -284,32 +280,11 @@
             @yield('content')
         </main>
 
-        <footer class="footer py-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-4">
-                        <div class="d-flex">
-                            <a href="#" class="me-3 text-secondary text-decoration-none">
-                                <i class="fab fa-facebook fa-xl"></i>
-                            </a>
-                            <a href="#" class="me-3 text-secondary text-decoration-none fa-xl">
-                                <i class="fa-brands fa-x-twitter"></i>
-                            </a>
-                            <a href="#" class="me-3 text-secondary text-decoration-none fa-xl">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-4 text-center" style="color: #84947C">
-                        <small>Copylight 2024 Eventplore</small>
-                    </div>
-                    <div class="col-4 d-flex justify-content-end">
-                        <a href="#" class="me-3 text-decoration-none" style="color: #84947C">Terms of service</a>
-                        <a href="#" class=" text-decoration-none" style="color: #84947C">Support</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        {{-- footer --}}
+        @if (!in_array(Route::currentRouteName(), ['home', 'event-menu', 'user.sign-in', 'user.sign-up', 'event-owners.sign-in', 'event-owners.sign-up']))
+            @include('partials.footer')
+        @endif
+
     </div>
 
 </body>
