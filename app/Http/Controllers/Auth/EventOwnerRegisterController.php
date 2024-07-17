@@ -18,11 +18,11 @@ class EventOwnerRegisterController extends Controller
 
     protected $guardName = 'event_owner';
 
-    protected $redirectTo = '/owners/show-events';
+    protected $redirectTo = '/event-menu';
 
     public function __construct()
     {
-        $this->middleware('guest:event_owner');
+        // $this->middleware('guest:event_owner');
     }
 
     protected function validator(array $data)
@@ -32,9 +32,10 @@ class EventOwnerRegisterController extends Controller
             'password' => ['required', 'string', 'min:8' ],
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners'],
             'phone_number'=>['required', 'string', 'max:255'],
             'address'=>['required', 'string', 'max:255'],
+            'role'=>'event-owner',
         ]);
     }
 
@@ -52,13 +53,14 @@ class EventOwnerRegisterController extends Controller
             'password' => ['required', 'string', 'min:8' ],
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners'],
             'phone_number'=>['required', 'string', 'max:255'],
             'address'=>['required', 'string', 'max:255'],
+            'role'=>'event-owner',
         ]);
 
         $avatar = base64_encode($request['avatar']);
-        EventOwner::create([
+        $user = EventOwner::create([
             'username' => $validated['username'],
             'password' => Hash::make($validated['password']),
             'first_name' =>$validated['firstname'],
@@ -66,16 +68,19 @@ class EventOwnerRegisterController extends Controller
             'email' => $validated['email'],
             'phone_number' =>$validated['phone_number'],
             'address'=>$validated['address'],
-            'avatar' => $avatar
+            'avatar' => $avatar,
+            'role'=>'event-owner',
 
         ]);
-        if (Auth::guard('event_owner')->attempt([
-            'email' =>$validated['email'],
-            'password' => $validated['password'],
-        ])) {
-            return view('event-owners.events.show');
+        if(Auth::guard('event_owner')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
+        {
+        // Authentication successful
+        return redirect('/event-menu');
+        } else {
+        // Authentication failed
+        return back()->withErrors(['email' => 'Invalid credentials']);
         }
-        return Redirect::back();
+
     }
 
     public function showEventOwnerSignUp()

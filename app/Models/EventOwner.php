@@ -26,7 +26,8 @@ class EventOwner extends Authenticatable
         'password',
         'email',
         'phone_number',
-        'address'
+        'address',
+        'role',
     ];
     // It should be filled in database name
 

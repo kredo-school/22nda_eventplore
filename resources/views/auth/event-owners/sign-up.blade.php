@@ -77,7 +77,7 @@
                                     <label for="phone_number" class="form-label fw-bold mb-1">Phone Number*</label>
                                     <input type="tel" name="phone_number" id="phone_number" class="form-control" required autocomplete="tel" autofocus placeholder="0xx-xxxx-xxxx" style="border: 1px solid #84947C">
 
-                                    @error('tel')
+                                    @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
