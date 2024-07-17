@@ -4,7 +4,7 @@
 <div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
     <div class="row d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
         <div class="col-md-6 p-0 d-flex flex-column justify-content-center">
-            <form method="post" action="{{ route('user.register') }}">
+            <form method="post" action="{{ route('user.register') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="d-flex flex-column align-items-center my-4 text-center">
