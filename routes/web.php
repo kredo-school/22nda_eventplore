@@ -31,8 +31,9 @@ Route::post('/event-owner/logout', [EventOwnerLoginController::class, 'eventowne
     Route::middleware(['auth:event_owner'])->group(function () {
         Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
     });
-    
+    Route::middleware(['auth:event_owner'])->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home');
+    });
 
 
 
