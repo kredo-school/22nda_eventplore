@@ -13,21 +13,20 @@ use App\Http\Controllers\Auth\EventOwnerLoginController;
 use App\Http\Controllers\Auth\EventOwnerRegisterController;
 
 
-Auth::routes();
 
-Route::get('/user/show-sign-up', [UserRegisterController::class, 'showSignUp'])->name('user.sign-up');
-Route::post('/user/sign-up', [UserRegisterController::class, 'register'])->name('user.register');
+Route::get('/user/show-sign-up', [UserRegisterController::class, 'showUserSignUp'])->name('user.sign-up');
+Route::post('/user/sign-up', [UserRegisterController::class, 'userRegister'])->name('user.register');
 
 Route::get('/user/show-sign-in', [UserLoginController::class, 'showUserSignIn'])->name('user.sign-in');
-Route::post('/user/login', [UserLoginController::class, 'signIn'])->name('user.login');
-Route::post('/user/logout', [UserLoginController::class, 'logout'])->name('user.logout');
+Route::post('/user/login', [UserLoginController::class, 'userSignIn'])->name('user.login');
+Route::post('/user/logout', [UserLoginController::class, 'userLogout'])->name('user.logout');
 
 Route::get('/event-owner/show-sign-up',[EventOwnerRegisterController::class, 'showEventOwnerSignUp'])->name('event-owner.sign-up');
-Route::post('/event-owner/sign-up',[EventOwnerRegisterController::class, 'register'])->name('event-owner.register');
+Route::post('/event-owner/sign-up',[EventOwnerRegisterController::class, 'eventownerRegister'])->name('event-owner.register');
 
 Route::get('/event-owner/show-sign-in', [EventOwnerLoginController::class, 'showEventOwnerSignIn'])->name('event-owner.sign-in');
-Route::post('/event-owner/sign-in', [EventOwnerLoginController::class, 'signIn'])->name('event-owner.login');
-Route::post('/event-owner/logout', [EventOwnerLoginController::class, 'logout'])->name('event-owner.logout');
+Route::post('/event-owner/sign-in', [EventOwnerLoginController::class, 'eventownerSignIn'])->name('event-owner.login');
+Route::post('/event-owner/logout', [EventOwnerLoginController::class, 'eventownerLogout'])->name('event-owner.logout');
 
 
     Route::middleware(['auth:user'])->group(function () {
