@@ -30,7 +30,7 @@ class EventOwnerLoginController extends Controller
         return Auth::guard('event_owner'); // event_owner guard を使用
     }
 
-    public function signIn(Request $request)
+    public function eventownerSignIn(Request $request)
     {
         $event_login = $this->validate($request, [
             'email' => 'required|max:255',
@@ -53,7 +53,7 @@ class EventOwnerLoginController extends Controller
 
     }
 
-    public function logout(Request $request)
+    public function eventownerLogout(Request $request)
     {
         Auth::guard('event_owner')->logout();
 

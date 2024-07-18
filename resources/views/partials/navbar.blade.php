@@ -12,7 +12,7 @@
                 <!-- Desktop Menu -->
                 <div class="col-md-8">
                     @auth
-                        @if (!(Auth::check() && Auth::user()->role == 'owner') && !request()->is('/'))
+                        @if ((Auth::check() && Auth::user()->role !== 'event-owner') && request()->is('/') )
                         <div class="d-none d-md-flex justify-content-center flex-grow-1">
                             <form class="d-flex w-75">
                                 <select class="form-select me-2">
@@ -40,7 +40,7 @@
                                     <i class="fa-solid fa-circle-user fa-2xl me-2"></i>
                                 </span>
                             </a>
-                        @elseif (Auth::user()->role == 'owner')
+                        @elseif (Auth::user()->role == 'event-owner')
                             <a id="navbarDropdownOwner" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-circle-user fa-2xl me-2" style="color: #0C2C04"></i>
@@ -58,10 +58,10 @@
                                 <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; My Events
                             </a>
                             <hr>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; {{ __('Logout') }}
+                            <a class="dropdown-item" href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; Logout
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            <form id="logout-form" action="{{ route('user.logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         </div>
@@ -74,10 +74,10 @@
                                 <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; Event Lists
                             </a>
                             <hr>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; {{ __('Logout') }}
+                            <a class="dropdown-item" href="{{ route('event-owner.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; Logout
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            <form id="logout-form" action="{{ route('event-owner.logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         </div>
@@ -94,7 +94,7 @@
                     @endauth
                 </div>
             {{-- </div> --}}
-            
+
             <!-- Hamburger Menu for smaller screens -->
             <div class="collapse navbar-collapse" id="navbarHamburger">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0 d-md-none pt-2" style="background-color: white;">

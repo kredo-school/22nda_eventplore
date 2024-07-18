@@ -46,7 +46,7 @@ class EventOwnerRegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\EventOwner
      */
-    public function register(Request $request)
+    public function eventownerRegister(Request $request)
     {
         $validated = $request->validate([
             'username' => ['required', 'string', 'max:255'],

@@ -4,7 +4,7 @@
 <div class="p-0 overflow-auto full-height">
     <div class="row d-flex justify-content-center align-items-stretch full-height">
         <div class="col-md-6 p-0 d-flex flex-column justify-content-center form-container">
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('user.login') }}">
                 @csrf
 
                 <div class="d-flex flex-column align-items-center my-4 text-center">
