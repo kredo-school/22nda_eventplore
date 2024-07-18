@@ -20,6 +20,7 @@
                 @csrf
                 <h2 class="h1">Register Event</h2>
                 {{-- ステータスバー --}}
+                {{-- active = green, inactive = white --}}
                 <div class="timeline">
                     <div class="timeline-item active">
                         <div class="timeline-icon">
@@ -54,27 +55,27 @@
                 </div>
                 {{-- STEP1 --}}
                 <div id="step1" class="">
-                    @include('event-owners.events.partials.step1')
+                    @include('event-owners.events.partials-register.step1')
                 </div>
                 {{-- STEP2 --}}
                 <div id="step2" class="d-none">
-                    @include('event-owners.events.partials.step2')
+                    @include('event-owners.events.partials-register.step2')
                 </div>
                 {{-- STEP3 --}}
                 <div id="step3" class="d-none">
-                    @include('event-owners.events.partials.step3')
+                    @include('event-owners.events.partials-register.step3')
                 </div>
                 {{-- STEP4 --}}
                 <div id="step4" class="d-none">
-                    @include('event-owners.events.partials.step4')
+                    @include('event-owners.events.partials-register.step4')
                 </div>
                 {{-- STEP5 --}}
                 <div id="step5" class="d-none">
-                    @include('event-owners.events.partials.step5')
+                    @include('event-owners.events.partials-register.step5')
                 </div>
                 {{-- STEP6 --}}
                 <div id="step6" class="d-none">
-                    @include('event-owners.events.partials.step6')
+                    @include('event-owners.events.partials-register.step6')
                 </div>
                 {{-- buttons --}}
                 <div class="row my-3 justify-content-center text-center">
