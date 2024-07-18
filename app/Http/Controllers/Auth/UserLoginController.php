@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Area;
+use App\Models\Category;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +41,7 @@ class UserLoginController extends Controller
 
     protected function guard()
     {
-        return Auth::guard('web'); 
+        return Auth::guard('web');
     }
 
     public function userSignIn(Request $request)

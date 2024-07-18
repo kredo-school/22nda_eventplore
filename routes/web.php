@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\NavController;
 
 
 
@@ -28,11 +29,12 @@ Route::post('/event-owner/sign-in', [EventOwnerLoginController::class, 'eventown
 Route::post('/event-owner/logout', [EventOwnerLoginController::class, 'eventownerLogout'])->name('event-owner.logout');
 
 
-    Route::middleware(['auth:event_owner'])->group(function () {
-        Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
-    });
-    Route::middleware(['auth:event_owner'])->group(function () {
+    Route::middleware(['auth:user'])->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
+
+        Route::get('/events/search', [NavController::class, 'index'])->name('events.search');
+
     });
 
 

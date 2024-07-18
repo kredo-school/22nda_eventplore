@@ -35,10 +35,14 @@
                 <div class="col-md-2 d-flex justify-content-end">
                     @auth
                         @if (Auth::user()->role == 'user')
-                            <a id="navbarDropdownUser" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a id="navbarDropdownUser" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if (Auth::user()->avatar)
+                            <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle avatar-sm">
+                            @else
                                 <span class="d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-circle-user fa-2xl me-2"></i>
                                 </span>
+                            @endif
                             </a>
                         @elseif (Auth::user()->role == 'event-owner')
                             <a id="navbarDropdownOwner" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
