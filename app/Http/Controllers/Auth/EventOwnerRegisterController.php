@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\EventOwner;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class EventOwnerRegisterController extends Controller
 {
@@ -72,13 +72,12 @@ class EventOwnerRegisterController extends Controller
             'role'=>'event-owner',
 
         ]);
-        if(Auth::guard('event_owner')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
-        {
-        // Authentication successful
-        return redirect('/event-menu');
+        if(Auth::guard('event_owner')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+            // Authentication successful
+            return redirect()->route('events.show');
         } else {
-        // Authentication failed
-        return back()->withErrors(['email' => 'Invalid credentials']);
+            // Authentication failed
+            return back()->withErrors(['email' => 'Invalid credentials']);
         }
 
     }

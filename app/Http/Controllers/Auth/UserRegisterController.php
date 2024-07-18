@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Models\EventOwner;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Models\EventOwner;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class UserRegisterController extends Controller
 {
@@ -94,27 +94,21 @@ class UserRegisterController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-
+        
         $data = $request->all();
         if ($request->hasFile('avatar')) {
             $data['avatar'] = $request->file('avatar');
         }
-
+        
         $user = $this->create($data);
         // return redirect($this->redirectPath());
-
-        if(Auth::guard('user')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
-        {
-        // Authentication successful
-        $areas = Area::all();
-        $categories = Category::all();
-
-        return view('home.home', compact('areas', 'categories'));
+        
+        if(Auth::guard('user')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+            // Authentication successful
+            return redirect()->route('home');
         } else {
-        // Authentication failed
-        return back()->withErrors(['email' => 'Invalid credentials']);
+            // Authentication failed
+            return back()->withErrors(['email' => 'Invalid credentials']);
         }
-
     }
-
 }

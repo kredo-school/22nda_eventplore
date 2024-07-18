@@ -31,15 +31,15 @@
                                         <img src="{{ $event->event_image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
                                     @endif
                                     <div class="card-body px-2">
-                                        <div class="row align-items-center mb-3">
+                                        <div class="row align-items-center">
                                             {{-- event title --}}
-                                            <div class="col-8 pe-0">
+                                            <div class="col-11 pe-0">
                                                 <h4 class="overflow_dot text-dark">{{ $event->event_name }}</h4>
                                             </div>
                                             {{-- review --}}
-                                            <div class="col d-flex justify-content-end overflow_cut ps-0 me-1">
+                                            <div class="col d-flex justify-content-end mb-1 me-1">
                                                 @if (is_null($event->avg_star))
-                                                    <h6 class="text-muted overflow_cut">No Reviews</h6>
+                                                    <h6 class="text-muted overflow_cut">No Reviews</h6><h4 style="visibility: hidden">.</h4>
                                                 @else
                                                     <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1"></i>{{ number_format($event->avg_star, 1) }}</h4>
                                                 @endif
@@ -47,7 +47,7 @@
                                         </div>
                                         {{-- information --}}
                                         <div class="row align-items-center gx-1 mb-2">
-                                            <div class="col-4">
+                                            <div class="col-4 overflow_dot">
                                                 <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area_name }} area
                                             </div>
                                             @php

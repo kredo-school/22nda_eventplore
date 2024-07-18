@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class EventOwnerLoginController extends Controller
 {
@@ -39,7 +39,7 @@ class EventOwnerLoginController extends Controller
 
         if (Auth::guard('event_owner')->attempt($event_login)) {
             if (Auth::guard('event_owner')->user()->role == 'event-owner') {
-                return redirect()->intended($this->redirectTo);
+                return redirect()->route('events.show');
             } else {
                 return back()->withInput($request->only('email'))->withErrors([
                     'email' => 'These credentials do not match our records',

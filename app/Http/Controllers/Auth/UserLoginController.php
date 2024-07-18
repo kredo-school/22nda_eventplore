@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Area;
-use App\Models\Category;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class UserLoginController extends Controller
 {
@@ -30,7 +27,7 @@ class UserLoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -56,15 +53,12 @@ class UserLoginController extends Controller
         ]);
 
         if (Auth::guard('web')->attempt($request->only('email', 'password'))) {
-            $areas = Area::all();
-            $categories = Category::all();
-
-            return view('home.home', compact('areas', 'categories'));
+            return redirect()->route('home');
+        } else {
+            return back()->withInput($request->only('email'))->withErrors([
+                'email' => 'These credentials do not match our records.',
+            ]);
         }
-
-        return back()->withInput($request->only('email'))->withErrors([
-            'email' => 'These credentials do not match our records.',
-        ]);
     }
 
     public function logout(Request $request)

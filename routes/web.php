@@ -1,17 +1,16 @@
 <?php
 
-use App\Http\Controllers\Auth\EventOwnerLoginController;
-use App\Http\Controllers\Auth\EventOwnerRegisterController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NavController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Auth\UserRegisterController;
-use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\NavController;
-
+use App\Http\Controllers\Auth\EventOwnerLoginController;
+use App\Http\Controllers\Auth\EventOwnerRegisterController;
 
 Auth::routes();
 
@@ -19,6 +18,7 @@ Route::get('/user/show-sign-up', [UserRegisterController::class, 'showSignUp'])-
 Route::post('/user/sign-up', [UserRegisterController::class, 'register'])->name('user.register');
 
 Route::get('/user/show-sign-in', [UserLoginController::class, 'showUserSignIn'])->name('user.sign-in');
+
 Route::post('/user/login', [UserLoginController::class, 'signIn'])->name('user.login');
 Route::post('/user/logout', [UserLoginController::class, 'logout'])->name('user.logout');
 
@@ -35,9 +35,19 @@ Route::post('/event-owner/logout', [EventOwnerLoginController::class, 'logout'])
         Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
 
         Route::get('/events/search', [NavController::class, 'index'])->name('events.search');
-
     });
 
+    Route::middleware(['auth:event-owner'])->group(function () {
+        Route::get('/event-owners/top', [EventController::class, 'show'])->name('events.show');
+    });
+
+
+Route::get('/event-owners/top', [EventController::class, 'show'])->name('events.show');
+Route::delete('/event/{id}/destroy', [EventController::class, 'destroy'])->name('events.destroy');
+
+Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
+Route::post('/event-owners/events/store', [EventController::class, 'store'])->name('events.store');
+Route::get('/event-owners/session-id', [EventController::class, 'getSessionId']);
 
 
 
@@ -57,9 +67,9 @@ Route::post('/event-owner/logout', [EventOwnerLoginController::class, 'logout'])
 //     return view('auth.users.sign-in');
 // });
 // Show sign-up page for user
-Route::get('/auth/users/sign-up', function () {
-    return view('auth.users.sign-up');
-});
+// Route::get('/auth/users/sign-up', function () {
+//     return view('auth.users.sign-up');
+// });
 Route::get('/event-owners/events/edit', function () {
     return view('event-owners.events.edit');
 });
@@ -67,10 +77,6 @@ Route::get('/event-owners/events/edit', function () {
 
 
 // Naoki
-// Show event page for event-owner
-Route::get('/owners/show-events', function () {
-    return view('event-owners.events.show');
-});
 // Show reservation page for event-owner
 Route::get('/owners/reservation-list', function () {
     return view('event-owners.reservations.show');
