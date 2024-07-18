@@ -35,10 +35,14 @@
                 <div class="col-md-2 d-flex justify-content-end">
                     @auth
                         @if (Auth::user()->role == 'user')
-                            <a id="navbarDropdownUser" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a id="navbarDropdownUser" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if (Auth::user()->avatar)
+                            <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle avatar-sm">
+                            @else
                                 <span class="d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-circle-user fa-2xl me-2"></i>
                                 </span>
+                            @endif
                             </a>
                         @elseif (Auth::user()->role == 'owner')
                             <a id="navbarDropdownOwner" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -94,7 +98,7 @@
                     @endauth
                 </div>
             {{-- </div> --}}
-            
+
             <!-- Hamburger Menu for smaller screens -->
             <div class="collapse navbar-collapse" id="navbarHamburger">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0 d-md-none pt-2" style="background-color: white;">

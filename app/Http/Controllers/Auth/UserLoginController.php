@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Area;
+use App\Models\Category;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +56,10 @@ class UserLoginController extends Controller
         ]);
 
         if (Auth::guard('web')->attempt($request->only('email', 'password'))) {
-            return view('home.home');
+            $areas = Area::all();
+            $categories = Category::all();
+
+            return view('home.home', compact('areas', 'categories'));
         }
 
         return back()->withInput($request->only('email'))->withErrors([
