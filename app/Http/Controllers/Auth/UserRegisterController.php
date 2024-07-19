@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class UserRegisterController extends Controller
 {
@@ -24,42 +25,18 @@ class UserRegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/user/sign-in';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    protected $guardName = 'web';
+
+    protected $redirectTo = '/';
+
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'username' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:8' ],
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'avatar' => ['nullable', 'image', 'max:2048'],
-        ]);
-    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -67,48 +44,42 @@ class UserRegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function userRegister(Request $request)
     {
-        // $avatar = base64_encode($data['avatar']);
-        $user = User::create([
-            'username' => $data['username'],
-            'password' => Hash::make($data['password']),
-            'first_name' =>$data['firstname'],
-            'last_name' =>$data['lastname'],
-            'email' => $data['email'],
-
+        $validated = $request->validate([
+            'username' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8' ],
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'role'=>'user',
         ]);
 
-        if (isset($data['avatar'])) {
-            $user->avatar = 'data:image/' . $data['avatar']->extension() . ';base64,' . base64_encode(file_get_contents($data['avatar']));
-            $user->save();
-        }
-        return $user;
-    }
-
-    public function showSignUp()
-    {
-        return view('auth.users.sign-up');
-    }
-
-    public function register(Request $request)
-    {
-        $this->validator($request->all())->validate();
-        
-        $data = $request->all();
-        if ($request->hasFile('avatar')) {
-            $data['avatar'] = $request->file('avatar');
-        }
-        
-        $user = $this->create($data);
-        // return redirect($this->redirectPath());
-        
-        if(Auth::guard('user')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+        $avatar = base64_encode($request['avatar']);
+        $user = User::create([
+            'username' => $validated['username'],
+            'password' => Hash::make($validated['password']),
+            'first_name' =>$validated['firstname'],
+            'last_name' =>$validated['lastname'],
+            'email' => $validated['email'],
+            'avatar' => $avatar,
+            'role'=>'user',
+        ]);
+        if(Auth::guard('web')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
             // Authentication successful
-            return redirect()->route('home');
+            return redirect()->intended($this->redirectTo);
         } else {
             // Authentication failed
             return back()->withErrors(['email' => 'Invalid credentials']);
         }
+
+
     }
+
+    public function showUserSignUp()
+    {
+        return view('auth.users.sign-up');
+    }
+
+
 }

@@ -22,22 +22,13 @@ class UserLoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
     protected $redirectTo = '/';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('auth')->only('logout');
+        // $this->middleware('guest')->except('logout');
+        // $this->middleware('auth')->only('logout');
     }
 
     public function showUserSignIn()
@@ -45,23 +36,34 @@ class UserLoginController extends Controller
         return view('auth.users.sign-in');
     }
 
-    public function signIn(Request $request)
+    protected function guard()
     {
-        $this->validate($request, [
+        return Auth::guard('web');
+    }
+
+    public function userSignIn(Request $request)
+    {
+        $event_login = $this->validate($request, [
             'email' => 'required|max:255',
-            'password' => 'required|min:8',
+            'password' => 'required|min:6',
         ]);
 
-        if (Auth::guard('web')->attempt($request->only('email', 'password'))) {
-            return redirect()->route('home');
+        if (Auth::guard('web')->attempt($event_login)) {
+            if (Auth::guard('web')->user()->role == 'user') {
+                return redirect()->intended($this->redirectTo);
+            } else {
+                return back()->withInput($request->only('email'))->withErrors([
+                    'email' => 'These credentials do not match our records',
+                ]);
+            }
         } else {
             return back()->withInput($request->only('email'))->withErrors([
-                'email' => 'These credentials do not match our records.',
+                'email' => 'These credentials do not match our records',
             ]);
         }
     }
 
-    public function logout(Request $request)
+    public function userLogout(Request $request)
     {
         Auth::guard('web')->logout();
 

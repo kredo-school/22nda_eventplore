@@ -12,7 +12,7 @@ class EventOwnerLoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/event-menu';
+    protected $redirectTo = '/event-owner/top';
 
     public function __construct()
     {
@@ -30,7 +30,7 @@ class EventOwnerLoginController extends Controller
         return Auth::guard('event_owner'); // event_owner guard を使用
     }
 
-    public function signIn(Request $request)
+    public function eventownerSignIn(Request $request)
     {
         $event_login = $this->validate($request, [
             'email' => 'required|max:255',
@@ -39,7 +39,7 @@ class EventOwnerLoginController extends Controller
 
         if (Auth::guard('event_owner')->attempt($event_login)) {
             if (Auth::guard('event_owner')->user()->role == 'event-owner') {
-                return redirect()->route('events.show');
+                return redirect()->intended($this->redirectTo);
             } else {
                 return back()->withInput($request->only('email'))->withErrors([
                     'email' => 'These credentials do not match our records',
@@ -53,7 +53,7 @@ class EventOwnerLoginController extends Controller
 
     }
 
-    public function logout(Request $request)
+    public function eventownerLogout(Request $request)
     {
         Auth::guard('event_owner')->logout();
 

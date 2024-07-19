@@ -18,7 +18,7 @@ class EventOwnerRegisterController extends Controller
 
     protected $guardName = 'event_owner';
 
-    protected $redirectTo = '/event-menu';
+    protected $redirectTo = '/event-owner/top';
 
     public function __construct()
     {
@@ -46,7 +46,7 @@ class EventOwnerRegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\EventOwner
      */
-    public function register(Request $request)
+    public function eventownerRegister(Request $request)
     {
         $validated = $request->validate([
             'username' => ['required', 'string', 'max:255'],
@@ -74,7 +74,7 @@ class EventOwnerRegisterController extends Controller
         ]);
         if(Auth::guard('event_owner')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
             // Authentication successful
-            return redirect()->route('events.show');
+            return redirect()->intended($this->redirectTo);
         } else {
             // Authentication failed
             return back()->withErrors(['email' => 'Invalid credentials']);

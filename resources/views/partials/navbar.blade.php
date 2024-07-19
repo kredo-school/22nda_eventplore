@@ -1,18 +1,24 @@
 <div class="sticky-top">
-    <nav class="navbar navbar-expand-md navbar-light bg-white navbar-top-bottom-border navbar-fixed-height" style="font-family: 'EB Garamond', serif;">
+    <nav class="navbar navbar-expand-md navbar-light bg-white navbar-top-bottom-border navbar-fixed-height p-0" style="font-family: 'EB Garamond', serif;">
         <div class="container-fluid">
             {{-- Logo --}}
             {{-- <div class="row"> --}}
                 <div class="col-md-2 d-flex align-items-center">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="Logo" style="width: 64px; height: auto;">
-                    </a>
+                    @auth('event_owner')
+                        <a class="navbar-brand" href="{{ route('event-list.show') }}">
+                            <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="Logo" style="width: 64px; height: auto;">
+                        </a>
+                    @else
+                        <a class="navbar-brand" href="{{ route('home') }}">
+                            <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="Logo" style="width: 64px; height: auto;">
+                        </a>
+                    @endauth
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="col-md-8">
                     @auth
-                        @if (!(Auth::check() && Auth::user()->role == 'owner') && !request()->is('/'))
+                        @if ((Auth::check() && Auth::user()->role !== 'event-owner') && request()->is('/') )
                         <div class="d-none d-md-flex justify-content-center flex-grow-1">
                             <form class="d-flex w-75">
                                 <select class="form-select me-2">
@@ -33,27 +39,18 @@
 
                     <!-- User & Owner Icon  -->
                 <div class="col-md-2 d-flex justify-content-end">
-                    @auth
-                        @if (Auth::user()->role == 'user')
+                    
+                    @auth('web')
                         <a id="navbarDropdownUser" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @if (Auth::user()->avatar)
-                            <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle avatar-sm">
+                                <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle avatar-sm">
                             @else
                                 <span class="d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-circle-user fa-2xl me-2"></i>
                                 </span>
                             @endif
-                            </a>
-                        @elseif (Auth::user()->role == 'event-owner')
-                            <a id="navbarDropdownOwner" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-flex align-items-center justify-content-center">
-                                    <i class="fa-solid fa-circle-user fa-2xl me-2" style="color: #0C2C04"></i>
-                                </span>
-                            </a>
-                        @endif
-
-                        {{-- droplist --}}
-                        {{-- user --}}
+                        </a>
+                        {{-- droplist for user --}}
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
                             <a class="dropdown-item" href="#">
                                 <i class="fa-solid fa-circle-user fa-xl"></i>&nbsp; Profile
@@ -63,32 +60,39 @@
                             </a>
                             <hr>
                             <a class="dropdown-item" href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; Sign-out
+                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; Logout
                             </a>
                             <form id="logout-form" action="{{ route('user.logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         </div>
-                        {{-- owner --}}
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        
+                    @elseauth('event_owner')
+                        <a id="navbarDropdownOwner" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-circle-user fa-2xl me-2" style="color: #0C2C04"></i>
+                            </span>
+                        </a>
+                        {{-- droplist for event owner --}}
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownOwner">
                             <a class="dropdown-item" href="#">
                                 <i class="fa-solid fa-circle-user fa-xl"></i>&nbsp; Profile
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('event-list.show') }}">
                                 <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; Event Lists
                             </a>
                             <hr>
-                            <a class="dropdown-item" href="{{ route('event-owner.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; Sign-out
+                            <a class="dropdown-item" href="{{ route('event-owner.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-owner').submit();">
+                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; Logout
                             </a>
-                            <form id="logout-form" action="{{ route('event-owner.logout') }}" method="POST" class="d-none">
+                            <form id="logout-form-owner" action="{{ route('event-owner.logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         </div>
 
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
                     @else
                         <div class="d-flex align-items-center ms-auto">
                             @if (Route::has('user.register'))
