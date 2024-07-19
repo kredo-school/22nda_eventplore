@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NavController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UserLoginController;
@@ -33,17 +33,28 @@ Route::post('/event-owner/sign-up',[EventOwnerRegisterController::class, 'evento
 Route::get('/event-owner/show-sign-in', [EventOwnerLoginController::class, 'showEventOwnerSignIn'])->name('event-owner.sign-in');
 Route::post('/event-owner/sign-in', [EventOwnerLoginController::class, 'eventownerSignIn'])->name('event-owner.login');
 Route::post('/event-owner/logout', [EventOwnerLoginController::class, 'eventownerLogout'])->name('event-owner.logout');
+
 // ユーザーとゲストのメインビュー
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
+
 // ユーザー認証後に見れる画面
-    Route::middleware(['auth:user'])->group(function () {
-        Route::get('/events/search', [NavController::class, 'index'])->name('events.search');
+    Route::middleware(['auth:web'])->group(function () {
+        Route::get('/events/search', [NavbarController::class, 'index'])->name('events.search');
     });
+    
 // イベントオーナー認証後に見れる画面
     Route::middleware(['auth:event_owner'])->group(function () {
         // イベントオーナーのメインビュー
-        Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
+        Route::get('/event-owner/top', [EventController::class, 'show'])->name('event-list.show');
+        Route::delete('/event/{id}/destroy', [EventController::class, 'destroy'])->name('events.destroy');
+        
+        Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
+        Route::post('/event-owners/events/store', [EventController::class, 'store'])->name('events.store');
+        Route::get('/event-owners/session-id', [EventController::class, 'getSessionId']);
     });
+
+
 
 
 

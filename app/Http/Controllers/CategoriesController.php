@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
     private $category;
+    private $event;
     public function __construct(Category $category, Event $event)
     {
         $this->category = $category;

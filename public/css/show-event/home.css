@@ -1,28 +1,8 @@
-/* チェックボックスのサイズ */
-input[type="checkbox"] {
-    transform: scale(1.5);
-}
-/* チェックボックスのチェック時のカラー */
-input[type="checkbox"]:checked {
-    background-color: #84947C;
-    border-color: #84947C;
-}
-/* チェックボックスの選択時のカラー */
-.form-check-input:focus {
-    border-color: #84947C;
-    box-shadow: 0 0 0 0.15rem rgba(132, 148, 124, 0.5);
-}
-/* 入力・選択欄の選択時のカラー */
-.form-control:focus, .form-select:focus {
-    border-color: #84947C;
-    box-shadow: inset 0 1px 1px #0C2C04, 0 0 8px #84947C;
-}
 /* ボタン幅 */
 .btn {
     width: 35%;
     min-width: 90px;
 }
-
 
 /* 画面サイズ575px未満 */
 .sidebar {
@@ -31,21 +11,14 @@ input[type="checkbox"]:checked {
 }
 /* 画面サイズ575px未満 */
 #map {
-	height: calc(100vh - 160px);
+	height: calc(100vh - 80px);
 	width: 100%;
 	margin-top: 50px;
 }
 /* 画面サイズ576px~767px */
 @media (min-width: 576px) {
     #map, .sidebar {
-		height: calc(100vh - 160px);
-		margin-top: 0;
-	}
-}
-/* 画面サイズ768px以上 */
-@media (min-width: 768px) {
-    #map, .sidebar {
-		height: calc(100vh - 240px);
+		height: calc(100vh - 80px);
 		margin-top: 0;
 	}
 }

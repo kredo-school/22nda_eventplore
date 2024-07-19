@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Models\Area;
-use App\Models\Category;
 use App\Models\User;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Models\EventOwner;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class UserRegisterController extends Controller
 {
@@ -67,13 +65,12 @@ class UserRegisterController extends Controller
             'avatar' => $avatar,
             'role'=>'user',
         ]);
-        if(Auth::guard('web')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
-        {
-        // Authentication successful
-        return redirect('/');
+        if(Auth::guard('web')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+            // Authentication successful
+            return redirect()->intended($this->redirectTo);
         } else {
-        // Authentication failed
-        return back()->withErrors(['email' => 'Invalid credentials']);
+            // Authentication failed
+            return back()->withErrors(['email' => 'Invalid credentials']);
         }
 
 
@@ -84,30 +81,5 @@ class UserRegisterController extends Controller
         return view('auth.users.sign-up');
     }
 
-    public function register(Request $request)
-    {
-        $this->validator($request->all())->validate();
-
-        $data = $request->all();
-        if ($request->hasFile('avatar')) {
-            $data['avatar'] = $request->file('avatar');
-        }
-
-        $user = $this->create($data);
-        // return redirect($this->redirectPath());
-
-        if(Auth::guard('user')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
-        {
-        // Authentication successful
-        $areas = Area::all();
-        $categories = Category::all();
-
-        return view('home.home', compact('areas', 'categories'));
-        } else {
-        // Authentication failed
-        return back()->withErrors(['email' => 'Invalid credentials']);
-        }
-
-    }
 
 }
