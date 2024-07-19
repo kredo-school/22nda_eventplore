@@ -43,3 +43,16 @@ td.table-yellow {
     font-size: 2rem;
     color: #0C2C04;
 }
+
+/* オーバーフローしたテキストを"…"で表示 */
+.overflow_dot {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* オーバーフローしたテキストをカット */
+.overflow_cut {
+	overflow: hidden;
+	white-space: nowrap;
+}

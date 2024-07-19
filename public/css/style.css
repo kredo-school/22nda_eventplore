@@ -140,3 +140,18 @@ color-black:#000000;
     background-color: #0C2C04;
     color:#FFFFFF;
 }
+
+/* チェックボックスのサイズ */
+input[type="checkbox"] {
+    transform: scale(1.5);
+}
+/* チェックボックスのチェック時のカラー */
+input[type="checkbox"]:checked {
+    background-color: #84947C;
+    border-color: #84947C;
+}
+/* チェックボックス・フォーム入力・選択欄の選択時のカラー */
+.form-check-input:focus, .form-control:focus, .form-select:focus {
+    border-color: #84947C;
+    box-shadow: 0 0 0 0.15rem rgba(130, 155, 120, 0.5);
+}

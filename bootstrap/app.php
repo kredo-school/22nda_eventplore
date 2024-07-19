@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->redirectGuestsTo(function ($request) {
+            return $request->is('event-owner*') ? route('event-owner.sign-in') : route('user.sign-in');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
