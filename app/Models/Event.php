@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\EventImage;
+use App\Models\EventCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +16,7 @@ class Event extends Model
         return $this->hasMany(EventCategory::class);
     }
 
-    public function reservations(){
-        return $this->hasMany(Reservation::class);
+    public function eventImages(){
+        return $this->hasMany(EventImage::class);
     }
 }

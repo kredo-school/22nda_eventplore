@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\Event;
 use App\Models\Category;
+use App\Models\EventImage;
 use App\Models\Reservation;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -37,77 +39,60 @@ class EventController extends Controller
     }
 
     public function store(Request $request){
-        // validate the request
-        $request->validate([
-            // step1
-            'event_name' => 'required',
-            'start_date' => 'required',
-            'finish_date' => 'required',
-            'start_time' => 'required',
-            'finish_time' => 'required',
-            'details' => 'required|max:1000',
-            'history' => 'required|max:1000',
-            'max_participants' => 'required|integer|min:1',
-            'app_deadline' => 'required',
-            // step2
-            'categories' => 'required|array|between:1,4',
-            // step3
-            'area_id' => 'required',
-            'address' => 'required',
-            // step4
-            'photo' => 'required|mimes:jpeg,jpg,png,jig',
-            // step5
-            'parking' => 'required|max:100',
-            'train' => 'required|max:100',
-            'toilet' => 'required|max:100',
-            'weather' => 'required|max:100',
-            'add_info' => 'max:100',
-            // step6
-            'facebook' => 'url',
-            'instagram' => 'url',
-            'x' => 'url',
-            'official' => 'url' 
-        ]);
+        $event = new Event();
+        
+        
 
         // Save the form data to the db
-        $this->event->event_name = $request->event_name;
-        $this->event->start_date = $request->start_date;
-        $this->event->end_date = $request->end_date;
-        $this->event->start_time = $request->start_time;
-        $this->event->end_time = $request->end_time;
-        $this->event->details = $request->details;
-        $this->event->history = $request->history;
-        $this->event->max_participants = $request->max_participants;
-        $this->event->app_deadline = $request->app_deadline;
-        $this->event->area_id = $request->area_id;
-        $this->event->address = $request->address;
-        $this->event->photo = "data:image/".$request->image->extension().
-                            ";base64,".base64_encode(file_get_contents($request->image));
-        $this->event->parking = $request->parking;
-        $this->event->train = $request->train;
-        $this->event->toilet = $request->toilet;
-        $this->event->weather = $request->weather;
-        $this->event->category_id = $request->category_id;
-        $this->event->add_info = $request->add_info;
-        $this->event->facebook = $request->facebook;
-        $this->event->instagram = $request->instagram;
-        $this->event->x = $request->x;
-        $this->event->official = $request->official;
-        $this->event->save();
-
+        $event->event_name = $request->event_name;
+        $event->start_date = $request->start_date;
+        $event->finish_date = $request->finish_date;
+        $event->start_time = $request->start_time;
+        $event->finish_time = $request->finish_time;
+        $event->details = $request->details;
+        $event->history = $request->history;
+        $event->max_participants = $request->max_participants;
+        $event->app_deadline = $request->app_deadline;
+        $event->area_id = $request->area_id;
+        $event->address = $request->address;
+        // $event->parking = $request->parking;
+        // $event->train = $request->train;
+        // $event->toilet = $request->toilet;
+        // $event->weather = $request->weather;
+        // $event->category_id = $request->category_id;
+        // $event->add_info = $request->add_info;
+        $event->facebook_link = $request->facebook_link;
+        $event->insta_link = $request->insta_link;
+        $event->x_link = $request->x_link;
+        // $event->official = $request->official;
+        $event->event_owner_id = Auth::id();
+        $event->save();
+        // $image->event()->associate($event);
+        // $image->save();
+        // $event->save();
+        
+        $event_images = [];
+        foreach($request->file("image") as $img){
+            $image = new EventImage();
+            $image->image="data:image/".explode(".",$img->getClientOriginalName())[1].
+            ";base64,".base64_encode(file_get_contents($img));
+            $image->event_id = $event->id;
+            $event_images [] = ['image' => $image->image,'event_id' => $event->id];
+        }
+        $event->eventImages()->createMany($event_images);
+        
         $event_categories = [];
         foreach($request->categories as $category_id){
-            $event_categories [] = ['category_id' => $category_id];
+            $event_categories [] = ['category_id' => $category_id,'event_id' => $event->id];
         }
-        $this->event->eventCategories()->createMany($event_categories);
+        $event->eventCategories()->createMany($event_categories);
 
-        return redirect()->route('show');
+        return redirect()->route('event-list.show');
     }
 
-    public function show()
+    public function index()
     {
         $id = Auth::guard('event_owner')->id();
-
         $query = Event::query();
 
         // テーブル結合

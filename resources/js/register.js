@@ -1,3 +1,4 @@
+// 地図を表示
 const accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 mapboxgl.accessToken = accessToken;
 const map = new mapboxgl.Map({
@@ -8,6 +9,7 @@ const map = new mapboxgl.Map({
     zoom: 8, // Zoom level
 });
 
+// マルチステップフォーム
 let step = 1;
 const backButton = document.getElementById("back-button");
 const nextButton = document.getElementById("next-button");
@@ -27,6 +29,7 @@ function updateTimeline(step){
     })
 }
 
+// next button
 window.next = function next() {
     if(step < 6){
         // show next step
@@ -44,6 +47,7 @@ window.next = function next() {
     }
 }
 
+// back button
 window.back = function back() {
     if(step > 1){
         // show previous step
@@ -85,8 +89,8 @@ async function searchHandler(){
     console.log(data);
     while (searchContainer.firstChild) {
         searchContainer.removeChild(searchContainer.lastChild);
-        }
-    for(const suggestion of data.suggestions){
+    }
+    for (const suggestion of data.suggestions) {
         const list = document.createElement("li");
         const icon = document.createElement("i");
         const place = document.createElement("p");
@@ -97,6 +101,7 @@ async function searchHandler(){
         list.appendChild(place);
         searchContainer.appendChild(list);
     }
+    
 }
 
 updateTimeline(step);

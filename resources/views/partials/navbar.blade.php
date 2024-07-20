@@ -5,7 +5,8 @@
             {{-- <div class="row"> --}}
                 <div class="col-md-2 d-flex align-items-center">
                     @auth('event_owner')
-                        <a class="navbar-brand" href="{{ route('event-list.show') }}">
+                        <a class="navbar-brand" href="{{ route('event-list.show') }}"> 
+
                             <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="Logo" style="width: 64px; height: auto;">
                         </a>
                     @else
