@@ -30,6 +30,8 @@ return new class extends Migration
             $table->text('train');
             $table->text('toilet');
             $table->text('weather');
+            $table->unsignedBigInteger('category_id');
+            $table->text('add_info');
             $table->text('insta_link')->nullable(); 
             $table->text('facebook_link')->nullable(); 
             $table->text('x_link')->nullable(); 
@@ -39,6 +41,7 @@ return new class extends Migration
 
             $table->foreign('event_owner_id')->references('id')->on('event_owners');
             $table->foreign('area_id')->references('id')->on('areas');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

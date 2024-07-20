@@ -1,7 +1,7 @@
 {{-- STEP4 --}}
 {{-- area --}}
 <div class="row justify-content-center mx-5 px-5 mb-3">
-    <label for="area" class="form-label fw-bold mb-2 text-start">Area</label>
+    <label for="area" class="form-label fw-bold mb-2 text-start">Area*</label>
     <div class="col-12">
         <select class="form-select me-2 form-control" id="area_id" name="area_id" style="border: 1px solid #84947C">
             <option value="" hidden selected>Select Area</option>
@@ -15,9 +15,9 @@
 <div class="row justify-content-center mx-5 px-5 mb-3">
     <label for="address" class="form-label fw-bold mb-2 text-start">Address*</label>
     {{-- search box --}}
-    <div class="col-12 mb-3 position-relative" id="search">
-        <input type="text" id="address" class="form-control" style="border: 1px solid #84947C" placeholder="Enter address" />
-        <button class="border-0" onclick="searchLocation()"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <div class="col-12 mb-3 position-relative" id="search-container">
+        <input type="text" id="address" class="form-control" style="border: 1px solid #84947C" placeholder="Enter address" oninput="searchHandler()" />
+        <ul id="suggestions" class="list-group position-absolute w-100" style="z-index: 1000;"></ul>
     </div>
 </div>
 {{-- show map --}}

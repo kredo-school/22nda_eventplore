@@ -1,4 +1,3 @@
-// 地図を表示
 const accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 mapboxgl.accessToken = accessToken;
 const map = new mapboxgl.Map({
@@ -9,47 +8,11 @@ const map = new mapboxgl.Map({
     zoom: 8, // Zoom level
 });
 
-// マーカーを保持する変数
-let marker;
+// マーカーの作成と追加
+const marker = new mapboxgl.Marker({ color: "#F7142B" }) // マーカーの色を赤に設定
+    .setLngLat([139.6917, 35.6895]) // マーカーの座標
+    .addTo(map); // 地図に追加
 
-// 住所検索と座標取得の関数
-function searchLocation() {
-    const address = document.getElementById('address').value;
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${mapboxgl.accessToken}`;
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            if (data.features && data.features.length > 0) {
-                const coordinates = data.features[0].geometry.coordinates;
-                const placeName = data.features[0].place_name;
-
-                // 地図の中心を新しい座標に移動
-                map.flyTo({ center: coordinates, zoom: 14 });
-
-                // 既存のマーカーがあれば削除
-                if (marker) {
-                    marker.remove();
-                }
-
-                // 新しいマーカーを作成して地図に追加
-                marker = new mapboxgl.Marker({ color: "#F7142B" })
-                    .setLngLat(coordinates)
-                    .setPopup(
-                        new mapboxgl.Popup({ offset: 25 }).setText(placeName)
-                    )
-                    .addTo(map);
-            } else {
-                alert('Not found');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('error');
-        });
-}
-
-// マルチステップフォーム
 let step = 1;
 const backButton = document.getElementById("back-button");
 const nextButton = document.getElementById("next-button");
@@ -69,7 +32,6 @@ function updateTimeline(step){
     })
 }
 
-// next button
 window.next = function next() {
     if(step < 7){
         // show next step
@@ -87,7 +49,6 @@ window.next = function next() {
     }
 }
 
-// back button
 window.back = function back() {
     if(step > 1){
         // show previous step
@@ -120,28 +81,36 @@ $.ajax({
     },
 });
 
-// search map in step4
 async function searchHandler(){
     const input = searchBox.value;
-    const query = `https://api.mapbox.com/search/searchbox/v1/suggest?q=${input}+&language=en&session_token=${sessionToken}&access_token=${accessToken}`;
+    const query = `https://api.mapbox.com/search/searchbox/v1/suggest?q=${input}&language=en&session_token=${sessionToken}&access_token=${accessToken}`;
     const response = await fetch(query);
     const data = await response.json();
-    console.log(data);
-    while (searchContainer.firstChild) {
-        searchContainer.removeChild(searchContainer.lastChild);
+
+    while (suggestionsContainer.firstChild) {
+        suggestionsContainer.removeChild(suggestionsContainer.lastChild);
     }
-    for (const suggestion of data.suggestions) {
-        const list = document.createElement("li");
-        const icon = document.createElement("i");
-        const place = document.createElement("p");
-        list.classList.add("d-flex", "align-items-center");
-        icon.classList.add("fa-solid", "fa-location-dot", "me-2");
-        place.innerHTML = suggestion.name;
-        list.appendChild(icon);
-        list.appendChild(place);
-        searchContainer.appendChild(list);
+
+    for(const suggestion of data.suggestions){
+        const listItem = document.createElement("li");
+        listItem.classList.add("list-group-item", "d-flex", "align-items-center");
+        listItem.innerHTML = `<i class="fa-solid fa-location-dot me-2"></i>${suggestion.name}`;
+        listItem.onclick = () => selectSuggestion(suggestion);
+        suggestionsContainer.appendChild(listItem);
     }
-    
+}
+
+function selectSuggestion(suggestion){
+    const query = `https://api.mapbox.com/search/searchbox/v1/retrieve/${suggestion.id}?access_token=${accessToken}&session_token=${sessionToken}`;
+    fetch(query)
+        .then(response => response.json())
+        .then(data => {
+            const coordinates = data.result.center;
+            marker.setLngLat(coordinates).addTo(map);
+            map.flyTo({ center: coordinates, zoom: 14 });
+            searchBox.value = data.result.name;
+            suggestionsContainer.innerHTML = '';
+        });
 }
 
 updateTimeline(step);
