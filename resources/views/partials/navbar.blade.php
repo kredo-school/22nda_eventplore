@@ -5,9 +5,10 @@
             {{-- <div class="row"> --}}
                 <div class="col-md-2 d-flex align-items-center">
                     @auth('event_owner')
-                        <a class="navbar-brand" href="{{ route('event-list.show') }}">
+                        {{-- <a class="navbar-brand" href="{{ route('event-list.show') }}"> 
+
                             <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="Logo" style="width: 64px; height: auto;">
-                        </a>
+                        </a> --}}
                     @else
                         <a class="navbar-brand" href="{{ route('home') }}">
                             <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="Logo" style="width: 64px; height: auto;">
@@ -81,9 +82,9 @@
                             <a class="dropdown-item" href="#">
                                 <i class="fa-solid fa-circle-user fa-xl"></i>&nbsp; Profile
                             </a>
-                            <a class="dropdown-item" href="{{ route('event-list.show') }}">
+                            {{-- <a class="dropdown-item" href="{{ route('event-list.show') }}">
                                 <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; Event Lists
-                            </a>
+                            </a> --}}
                             <hr>
                             <a class="dropdown-item" href="{{ route('event-owner.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-owner').submit();">
                                 <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; Logout
