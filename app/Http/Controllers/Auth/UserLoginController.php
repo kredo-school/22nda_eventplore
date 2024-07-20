@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Area;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -67,6 +68,19 @@ class UserLoginController extends Controller
                 'email' => 'These credentials do not match our records.',
             ]);
         }
+    }
+
+        public function showProfile()
+    {
+        $areas = Area::all();
+        return view('users.profile.show', compact('areas'));
+    }
+
+
+    public function showReservations()
+    {
+        $areas = Area::all();
+        return view('users.reservations.show', compact('areas'));
     }
 
     public function userLogout(Request $request)
