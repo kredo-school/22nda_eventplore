@@ -13,19 +13,19 @@
 </div>
 {{-- Event Date --}}
 <div class="row justify-content-center mx-5 px-5">
-    <div class="col-lg-3 mb-3 text-start">
+    <div class="col-lg-6 mb-3 text-start">
         <label for="start_date" class="fw-bold mb-2 text-start">Start Date*</label>
         <input type="date" name="start_date" id="start_date" class="form-control" required autocomplete="start_date" autofocus style="border: 1px solid #84947C">
     </div>
-    <div class="col-lg-3 mb-3 text-start">
+    <div class="col-lg-6 mb-3 text-start">
         <label for="finish_date" class="fw-bold mb-2 text-start">Finish Date*</label>
         <input type="date" name="finish_date" id="finish_date" class="form-control" required autocomplete="finish_date" autofocus style="border: 1px solid #84947C">
     </div>
-    <div class="col-lg-3 mb-3 text-start">
+    <div class="col-lg-6 mb-3 text-start">
         <label for="start_time" class="fw-bold mb-2 text-start">Start Time*</label>
         <input type="time" name="start_time" id="start_time" class="form-control" required autocomplete="start_time" autofocus style="border: 1px solid #84947C">
     </div>
-    <div class="col-lg-3 mb-3 text-start">
+    <div class="col-lg-6 mb-3 text-start">
         <label for="finish_time" class="fw-bold mb-2 text-start">Finish Time*</label>
         <input type="time" name="finish_time" id="finish_time" class="form-control" required autocomplete="finish_time" autofocus style="border: 1px solid #84947C">
     </div>
@@ -52,18 +52,5 @@
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
-    </div>
-</div>
-{{-- add information --}}
-<div class="row justify-content-center mx-5 px-5">
-    {{-- participants --}}
-    <div class="col-lg-6 mb-3 text-start">
-        <label for="max_participants" class="fw-bold mb-2 text-start">Max Participants*</label>
-        <input type="number" name="max_participants" id="max_participants" class="form-control" required autocomplete="max_participants" autofocus style="border: 1px solid #84947C">
-    </div>
-    {{-- reservation deadline --}}
-    <div class="col-lg-6 mb-3 text-start">
-        <label for="app_deadline" class="fw-bold mb-2 text-start">Resrevation Deadline*</label>
-        <input type="date" name="app_deadline" id="app_deadline" class="form-control" required autocomplete="app_deadline" autofocus style="border: 1px solid #84947C">
     </div>
 </div>

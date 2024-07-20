@@ -9,6 +9,46 @@ const map = new mapboxgl.Map({
     zoom: 8, // Zoom level
 });
 
+// マーカーを保持する変数
+let marker;
+
+// 住所検索と座標取得の関数
+function searchLocation() {
+    const address = document.getElementById('address').value;
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${mapboxgl.accessToken}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.features && data.features.length > 0) {
+                const coordinates = data.features[0].geometry.coordinates;
+                const placeName = data.features[0].place_name;
+
+                // 地図の中心を新しい座標に移動
+                map.flyTo({ center: coordinates, zoom: 14 });
+
+                // 既存のマーカーがあれば削除
+                if (marker) {
+                    marker.remove();
+                }
+
+                // 新しいマーカーを作成して地図に追加
+                marker = new mapboxgl.Marker({ color: "#F7142B" })
+                    .setLngLat(coordinates)
+                    .setPopup(
+                        new mapboxgl.Popup({ offset: 25 }).setText(placeName)
+                    )
+                    .addTo(map);
+            } else {
+                alert('Not found');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('error');
+        });
+}
+
 // マルチステップフォーム
 let step = 1;
 const backButton = document.getElementById("back-button");
@@ -31,7 +71,7 @@ function updateTimeline(step){
 
 // next button
 window.next = function next() {
-    if(step < 6){
+    if(step < 7){
         // show next step
         document.getElementById(`step${step + 1}`).classList.remove("d-none");
         // hide previous step
@@ -40,7 +80,7 @@ window.next = function next() {
         step += 1;
         if (step == 1) backButton.classList.add("d-none");
         else backButton.classList.remove("d-none");
-        if (step == 6) {
+        if (step == 7) {
             nextButton.classList.add("d-none");
             submitButton.classList.remove("d-none");
         }
@@ -58,7 +98,7 @@ window.back = function back() {
         step -= 1;
         if (step == 1) backButton.classList.add("d-none");
         else backButton.classList.remove("d-none");
-        if (step < 6) {
+        if (step < 7) {
             submitButton.classList.add("d-none");
             nextButton.classList.remove("d-none");
         }
@@ -80,7 +120,7 @@ $.ajax({
     },
 });
 
-// search map in step3
+// search map in step4
 async function searchHandler(){
     const input = searchBox.value;
     const query = `https://api.mapbox.com/search/searchbox/v1/suggest?q=${input}+&language=en&session_token=${sessionToken}&access_token=${accessToken}`;

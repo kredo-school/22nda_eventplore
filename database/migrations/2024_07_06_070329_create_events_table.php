@@ -25,9 +25,15 @@ return new class extends Migration
             $table->text('history'); 
             $table->integer('max_participants'); 
             $table->dateTime('app_deadline'); 
+            $table->integer('price');
+            $table->text('parking');
+            $table->text('train');
+            $table->text('toilet');
+            $table->text('weather');
             $table->text('insta_link')->nullable(); 
             $table->text('facebook_link')->nullable(); 
             $table->text('x_link')->nullable(); 
+            $table->text('official')->nullable();
             $table->timestamps(); 
             $table->softDeletes();
 
