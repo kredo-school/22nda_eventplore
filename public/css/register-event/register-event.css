@@ -74,3 +74,48 @@ html, body {
     color: #ffffff; /* 未完了のステップの色 */
 }
 
+/* チェックボックスのサイズ */
+input[type="checkbox"] {
+    transform: scale(1.5);
+}
+/* チェックボックスのチェック時のカラー */
+input[type="checkbox"]:checked {
+    background-color: #84947C;
+    border-color: #84947C;
+}
+/* チェックボックスの選択時のカラー */
+.form-check-input:focus {
+    border-color: #84947C;
+    box-shadow: 0 0 0 0.15rem rgba(132, 148, 124, 0.5);
+}
+/* 入力・選択欄の選択時のカラー */
+.form-control:focus, .form-select:focus {
+    border-color: #84947C;
+    box-shadow: inset 0 1px 1px #0C2C04, 0 0 8px #84947C;
+}
+
+.map-container {
+    /* display: none; */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    z-index: 1000;
+}
+
+.map-container ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.map-container li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.map-container li:hover {
+    background-color: #f0f0f0;
+}
