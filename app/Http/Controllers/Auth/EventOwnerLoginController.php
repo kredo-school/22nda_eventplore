@@ -32,20 +32,26 @@ class EventOwnerLoginController extends Controller
 
     public function eventownerSignIn(Request $request)
     {
-        $event_login = $this->validate($request, [
-            'email' => 'required|max:255',
+        $request->validate([
+            'email' => 'required|max:255|exists:users,email',
             'password' => 'required|min:6',
+        ], [
+            'email.exists' => 'The email does not exist in our records.',
         ]);
 
-        if (Auth::guard('event_owner')->attempt($event_login)) {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('event_owner')->attempt($credentials)) {
             if (Auth::guard('event_owner')->user()->role == 'event-owner') {
                 return redirect()->intended($this->redirectTo);
             } else {
+                // roleがevent_ownerではない時
                 return back()->withInput($request->only('email'))->withErrors([
                     'email' => 'These credentials do not match our records',
                 ]);
             }
         } else {
+            // 認証が失敗したとき
             return back()->withInput($request->only('email'))->withErrors([
                 'email' => 'These credentials do not match our records',
             ]);

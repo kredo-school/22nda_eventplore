@@ -47,19 +47,19 @@ img {
 
 .form-container .input-group {
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
 }
 
-.form-container .input-group .form-control {
+/* .form-container .input-group .form-control {
     border-radius: 0;
-}
+} */
 
-.form-container .input-group .fa-eye-slash {
+/* .form-container .input-group .fa-eye-slash {
     position: absolute;
     right: 0.5rem;
     top: 50%;
     transform: translateY(-50%);
-}
+} */
 
 .form-container .btn {
     padding-left: 2rem;
@@ -85,4 +85,19 @@ img {
     .col-md-6 {
         max-width: 100%;
     }
+}
+
+
+/* エラー状態のフォームコントロール */
+.form-control.is-invalid {
+    /* サイズ変更を防ぐためのスタイル */
+    box-sizing: border-box;
+}
+
+/* エラーメッセージのスタイル */
+.invalid-feedback {
+    display: block;
+    color: #F7142B;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
 }

@@ -30,7 +30,7 @@ Route::post('/user/logout', [UserLoginController::class, 'userLogout'])->name('u
 Route::get('/event-owner/show-sign-up',[EventOwnerRegisterController::class, 'showEventOwnerSignUp'])->name('event-owner.sign-up');
 Route::post('/event-owner/sign-up',[EventOwnerRegisterController::class, 'eventownerRegister'])->name('event-owner.register');
 // イベントオーナーのサインイン
-Route::get('$image->originalName', [EventOwnerLoginController::class, 'showEventOwnerSignIn'])->name('event-owner.sign-in');
+Route::get('/event-owner/show-sign-in', [EventOwnerLoginController::class, 'showEventOwnerSignIn'])->name('event-owner.sign-in');
 Route::post('/event-owner/sign-in', [EventOwnerLoginController::class, 'eventownerSignIn'])->name('event-owner.login');
 Route::post('/event-owner/logout', [EventOwnerLoginController::class, 'eventownerLogout'])->name('event-owner.logout');
 
@@ -40,14 +40,13 @@ Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
 
 // ユーザー認証後に見れる画面
     Route::middleware(['auth:web'])->group(function () {
-        // Route::get('/events/search', [NavbarController::class, 'index'])->name('events.search');
     });
-    
+
 // イベントオーナー認証後に見れる画面
     Route::middleware(['auth:event_owner'])->group(function () {
         // イベントオーナーのメインビュー
         Route::delete('/event/{id}/destroy', [EventController::class, 'destroy'])->name('events.destroy');
-        
+
         Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
         Route::post('/event-owners/events/store', [EventController::class, 'store'])->name('events.store');
         Route::get('/event-owners/session-id', [EventController::class, 'getSessionId']);
