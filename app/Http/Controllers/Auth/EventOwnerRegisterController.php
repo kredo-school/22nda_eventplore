@@ -61,6 +61,7 @@ class EventOwnerRegisterController extends Controller
             'role'=>'event-owner',
         ]);
 
+        $base64Data = null;
 
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');

@@ -34,7 +34,7 @@ class EventOwnerLoginController extends Controller
     public function eventownerSignIn(Request $request)
     {
         $request->validate([
-            'email' => 'required|max:255|exists:users,email',
+            'email' => 'required|max:255|exists:event_owners,email',
             'password' => 'required|min:6',
         ], [
             'email.exists' => 'The email does not exist in our records.',
