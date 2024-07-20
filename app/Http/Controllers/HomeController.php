@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
 
     private $areas;
-    
+
     public function index()
     {
         $areas = Area::all();

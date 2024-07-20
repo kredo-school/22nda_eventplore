@@ -1,50 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
-    <div class="row d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
-        <div class="col-md-6 p-0 d-flex flex-column justify-content-center">
+<div class="p-0 overflow-auto full-height">
+    <div class="row d-flex justify-content-center align-items-stretch full-height">
+        <div class="col-md-6 p-0 d-flex flex-column justify-content-center form-container">
             <form action="{{ route('event-owner.login') }}" method="POST">
                 @csrf
 
                 <div class="d-flex flex-column align-items-center my-4 text-center">
                     <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="logo" class="mt-5 mb-2 w-25">
                     <h2 class="h1 mb-2 text-align-center">Event Owner</h2>
-
                     <div class="d-flex justify-content-center mb-3">
                         <div class="w-100"><p>Don't you have account yet?&nbsp;<a href="{{ route('event-owner.sign-up') }}" class="fw-bold text-decoration-none" style="color: #84947C">Sign Up</a></p></div>
                     </div>
 
-                    <div class="d-flex justify-content-center mb-3">
-                        <div class="text-start">
+                    <div class="d-flex justify-content-center flex-column w-50">
+                        <div class="text-start mb-3">
                             <label for="email" class="form-label fw-bold mb-2">Email*</label>
-                            <div class="mb-3">
-                                <input id="email" type="email" class="form-control" name="email" required autocomplete="email" autofocus placeholder="Email" style="border: 1px solid #84947C">
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                            <input id="email" type="email" class="form-control w-100 @error('email') is-invalid @enderror" name="email" required autocomplete="email" placeholder="Email">
+                            @error('email')
+                                <span class="invalid-feedback text-start" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center mb-3">
-                        <div class="text-start">
-                            <label for="password" class="form-label fw-bold mb-2">Password*</label>
-                            <div class="mb-3">
-                                <div class="input-group mb-3 position-relative">
-                                    <input id="password" type="password" class="form-control rounded" name="password" required style="border: 1px solid #84947C" placeholder="Password">
-                                    <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center">
-                                        <i class="fa-solid fa-eye-slash"></i>
-                                    </div>
-                                </div>
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                    <div class="d-flex justify-content-center flex-column w-50">
+                        <div class="text-start mb-3">
+                            <label for="password" class="form-label fw-bold mb-2">Password*</label>
+                            <div class="input-group">
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                                <div class="input-group-text d-flex justify-content-center align-items-center mb-0" style="width: 40px; height: 38px;">
+                                    <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer; "></i>
+                                </div>
                             </div>
+                            @error('password')
+                                <span class="invalid-feedback text-start" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -66,11 +61,17 @@
                         </button>
                     </div>
 
-                    @if (Route::has('password.request'))
-                        <a class="btn btn-link mt-2" href="{{ route('password.request') }}">
+                    {{-- @if (Route::has('password.request')) --}}
+                        <a class="btn btn-link mt-2" href="#">
                             {{ __('Forgot Your Password?') }}
                         </a>
-                    @endif
+                    {{-- @endif --}}
+
+
+                    <hr class="w-100 mx-auto mt-3" style="border: 1px solid #0C2C04">
+                    <div class="d-flex justify-content-center">
+                        <div class="w-100"><p>If you'd like to sign-in as an user...&nbsp;<a href="{{ route('user.sign-in') }}" style="color: #84947C">User sign-in</a></p></div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -82,3 +83,18 @@
 @endsection
 
 
+{{-- 通常の切り替え --}}
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.querySelector('.toggle-password');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+        }
+    }
+</script>

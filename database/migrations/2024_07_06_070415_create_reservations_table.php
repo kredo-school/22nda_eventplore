@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('event_id');
-            $table->date('reservation_date'); 
+            $table->date('reservation_date');
             $table->integer('num_tickets');
+            $table->time('time');
             $table->timestamps();
             $table->softDeletes();
 
