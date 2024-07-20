@@ -29,7 +29,7 @@ Route::post('/user/logout', [UserLoginController::class, 'userLogout'])->name('u
 Route::get('/event-owner/show-sign-up',[EventOwnerRegisterController::class, 'showEventOwnerSignUp'])->name('event-owner.sign-up');
 Route::post('/event-owner/sign-up',[EventOwnerRegisterController::class, 'eventownerRegister'])->name('event-owner.register');
 // イベントオーナーのサインイン
-Route::get('$image->originalName', [EventOwnerLoginController::class, 'showEventOwnerSignIn'])->name('event-owner.sign-in');
+Route::get('/event-owner/show-sign-in', [EventOwnerLoginController::class, 'showEventOwnerSignIn'])->name('event-owner.sign-in');
 Route::post('/event-owner/sign-in', [EventOwnerLoginController::class, 'eventownerSignIn'])->name('event-owner.login');
 Route::post('/event-owner/logout', [EventOwnerLoginController::class, 'eventownerLogout'])->name('event-owner.logout');
 // ユーザーとゲストのメインビュー
