@@ -38,14 +38,14 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sign-inup/sign-inup.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 </head>
 <body>
     <div id="app" class="d-flex flex-column min-vh-100">
 
-        @if (!in_array(Route::currentRouteName(), ['user.sign-in', 'user.sign-up', 'owner.sign-in', 'owner.sign-up']))
+        @if (!in_array(Route::currentRouteName(), ['user.sign-in', 'user.sign-up', 'event-owner.sign-in', 'event-owner.sign-up']))
             @include('partials.navbar')
         @endif
 
@@ -54,7 +54,7 @@
         </main>
 
         {{-- footer --}}
-        @if (!in_array(Route::currentRouteName(), ['home', 'event-menu', 'user.sign-in', 'user.sign-up', 'event-owners.sign-in', 'event-owners.sign-up']))
+        @if (!in_array(Route::currentRouteName(), ['home', 'event-menu', 'events.search', 'ham.search', 'user.sign-in', 'user.sign-up', 'event-owner.sign-in', 'event-owner.sign-up']))
             @include('partials.footer')
         @endif
 

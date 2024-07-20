@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Area;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -43,24 +44,43 @@ class UserLoginController extends Controller
 
     public function userSignIn(Request $request)
     {
-        $event_login = $this->validate($request, [
-            'email' => 'required|max:255',
+        $request->validate([
+            'email' => 'required|max:255|exists:users,email',
             'password' => 'required|min:6',
+        ], [
+            'email.exists' => 'The email does not exist in our records.',
         ]);
 
-        if (Auth::guard('web')->attempt($event_login)) {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('web')->attempt($credentials)) {
             if (Auth::guard('web')->user()->role == 'user') {
                 return redirect()->intended($this->redirectTo);
             } else {
+                // roleがuserではないとき
                 return back()->withInput($request->only('email'))->withErrors([
-                    'email' => 'These credentials do not match our records',
+                    'email' => 'These credentials do not match our records.',
                 ]);
             }
         } else {
+            // 認証が失敗したとき
             return back()->withInput($request->only('email'))->withErrors([
-                'email' => 'These credentials do not match our records',
+                'email' => 'These credentials do not match our records.',
             ]);
         }
+    }
+
+        public function showProfile()
+    {
+        $areas = Area::all();
+        return view('users.profile.show', compact('areas'));
+    }
+
+
+    public function showReservations()
+    {
+        $areas = Area::all();
+        return view('users.reservations.show', compact('areas'));
     }
 
     public function userLogout(Request $request)

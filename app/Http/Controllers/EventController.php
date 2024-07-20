@@ -66,7 +66,11 @@ class EventController extends Controller
         $event->official = $request->official;
         $event->event_owner_id = Auth::id();
         $event->save();
-        
+
+        // $image->event()->associate($event);
+        // $image->save();
+        // $event->save();
+
         $event_images = [];
         foreach($request->file("image") as $img){
             $image = new EventImage();
@@ -76,7 +80,7 @@ class EventController extends Controller
             $event_images [] = ['image' => $image->image,'event_id' => $event->id];
         }
         $event->eventImages()->createMany($event_images);
-        
+
         $event_categories = [];
         foreach($request->categories as $category_id){
             $event_categories [] = ['category_id' => $category_id,'event_id' => $event->id];
@@ -89,6 +93,7 @@ class EventController extends Controller
     public function index()
     {
         $id = Auth::guard('event_owner')->id();
+        $areas = Area::all();
         $query = Event::query();
 
         // テーブル結合
@@ -108,8 +113,9 @@ class EventController extends Controller
             'event_images.image as event_image',
             'sum_reservations.sum_tickets as sum_tickets',
         ]);
+        // ])->groupBy('events.id');
 
-        return view('event-owners.events.show', compact('events'));
+        return view('event-owners.events.show', compact('events', 'areas'));
     }
 
     public function destroy(Request $request, $id)
@@ -122,7 +128,7 @@ class EventController extends Controller
 
         if (Hash::check($request->input('password'), $user->password)) {
             $this->event->destroy($id);
-    
+
             return redirect()->back()->with('success', 'Event deleted successfully.');
         } else {
             return redirect()->back()->withErrors(['password' => 'The password is incorrect.']);

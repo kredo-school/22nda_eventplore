@@ -48,21 +48,35 @@ class UserRegisterController extends Controller
     {
         $validated = $request->validate([
             'username' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:8' ],
+            'password' => ['required', 'string', 'min:6' ],
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'avatar' => ['file', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'role'=>'user',
         ]);
 
-        $avatar = base64_encode($request['avatar']);
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+
+            if ($file->isValid()) {
+                $extension = $file->extension();
+                $base64Data = 'data:image/' . $extension . ';base64,' . base64_encode(file_get_contents($file));
+            } else {
+                return back()->withErrors(['avatar' => 'Invalid file upload.']);
+            }
+        } else {
+            return back()->withErrors(['avatar' => 'No file uploaded.']);
+        }
+
+
         $user = User::create([
             'username' => $validated['username'],
             'password' => Hash::make($validated['password']),
             'first_name' =>$validated['firstname'],
             'last_name' =>$validated['lastname'],
             'email' => $validated['email'],
-            'avatar' => 'data:image/'.$request->avatar->extension().';base64,'.base64_encode(file_get_contents($request->avatar)),
+            'avatar' => $base64Data,
             'role'=>'user',
         ]);
         if(Auth::guard('web')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
@@ -75,6 +89,7 @@ class UserRegisterController extends Controller
 
 
     }
+
 
     public function showUserSignUp()
     {
