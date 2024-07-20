@@ -119,3 +119,13 @@ input[type="checkbox"]:checked {
 .map-container li:hover {
     background-color: #f0f0f0;
 }
+
+.custom-marker {
+    background-color: #F7142B; /* ピンの色を赤に設定 */
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+
