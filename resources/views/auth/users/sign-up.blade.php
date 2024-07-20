@@ -11,7 +11,7 @@
                     <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="logo" class="mb-2 w-25">
                     <h2 class="h1 mb-2 text-align-center">Sign Up</h2>
 
-                    <div class="d-flex flex-column align-items-center mt-3">
+                    <div class="d-flex flex-column align-items-center my-3">
                         <div class="w-75 text-start">
                             <label for="username" class="form-label fw-bold mb-2">Username*</label>
                             <div class="mb-3">
@@ -35,10 +35,10 @@
                             </div>
                             <label for="password" class="form-label fw-bold mb-2">Password*</label>
                             <div class="mb-3">
-                                <div class="input-group mb-2 position-relative">
-                                    <input id="password" type="password" name="password" required autocomplete="new-password" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password">
-                                    <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center">
-                                        <i class="fa-solid fa-eye-slash"></i>
+                                <div class="input-group mb-2">
+                                    <input id="password" type="password" name="password" required autocomplete="new-password" class="form-control" style="border: 1px solid #84947C" placeholder="Password">
+                                    <div class="input-group-text d-flex justify-content-center align-items-center mb-0" style="width: 40px; height: 38px;">
+                                        <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer; "></i>
                                     </div>
                                 </div>
 
@@ -91,7 +91,9 @@
                     </div>
                 </div> --}}
 
-                <div class="d-flex mb-3 justify-content-center text-center">
+                <div class="mb-3 justify-content-center text-center">
+                    <a href="{{ route('user.sign-in') }}" class="btn btn-yellow me-5 px-4">Back</a>
+
                     <button type="submit" class="btn btn-green px-5">
                         Sign Up
                     </button>
@@ -105,6 +107,20 @@
 </div>
 @endsection
 
+{{-- 通常の切り替え --}}
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.querySelector('.toggle-password');
 
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+        }
+    }
+</script>
 
 
