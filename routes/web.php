@@ -34,7 +34,7 @@ Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
 
 // ユーザー認証後に見れる画面
     Route::middleware(['auth:web'])->group(function () {
-        Route::get('/events/search', [NavbarController::class, 'index'])->name('events.search');
+        // Route::get('/events/search', [NavbarController::class, 'index'])->name('events.search');
     });
     
 // イベントオーナー認証後に見れる画面
@@ -42,6 +42,8 @@ Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
         // イベントオーナーのメインビュー
         Route::get('/event-owner/top', [EventController::class, 'show'])->name('event-list.show');
         Route::delete('/event/{id}/destroy', [EventController::class, 'destroy'])->name('events.destroy');
+        Route::get('/event-owner/reservation/{id}', [EventController::class, 'showReservation'])->name('reservation.show');
+        Route::delete('/event-owner/reservation/{id}/destroy', [EventController::class, 'destroyReservation'])->name('reservation.destroy');
         
         Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
         Route::post('/event-owners/events/store', [EventController::class, 'store'])->name('events.store');

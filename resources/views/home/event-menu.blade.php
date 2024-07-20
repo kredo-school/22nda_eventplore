@@ -26,7 +26,7 @@
                                 {{-- event card --}}
                                 <div class="card shadow border-0">
                                     @if (is_null($event->event_image))
-                                    <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
+                                        <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
                                     @else
                                         <img src="{{ $event->event_image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
                                     @endif

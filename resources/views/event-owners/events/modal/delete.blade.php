@@ -38,7 +38,7 @@
     </div>
 </div>
 
-{{-- モーダルの場合の切り替え --}}
+{{-- パスワード表示切替 --}}
 <script>
     function togglePasswordVisibility(eventId) {
         const passwordInput = document.getElementById('password' + eventId);
@@ -53,19 +53,3 @@
         }
     }
 </script>
-
-{{-- 通常の切り替え --}}
-{{-- <script>
-    function togglePasswordVisibility() {
-        const passwordInput = document.getElementById('password');
-        const toggleIcon = document.querySelector('.toggle-password');
-
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
-        } else {
-            passwordInput.type = 'password';
-            toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
-        }
-    }
-</script> --}}

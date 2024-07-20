@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Show reservations')
+@section('title', 'Reservation')
 
 @section('content')
 
@@ -11,65 +11,121 @@
         {{-- page title --}}
         <h2 class="h1 text-center mb-1"><i class="fa-solid fa-clipboard-list me-2"></i>Reservation list</h2>
     </div>
+
+    <!-- delete success -->
+    @if (session('success'))
+        <h5 class="alert alert-success">{{ session('success') }}</h5>
+    @endif
+    <!-- delete error -->
+    @if ($errors->has('password'))
+        <h5 class="alert alert-danger">{{ $errors->first('password') }}</h5>
+    @endif
+
     <div class="row">
         <div class="col-md-4 me-2 mb-4">
-            {{-- event list --}}
-            <div class="card shadow border-0">
-                <a href=""><img src="{{ asset('images/event-test/event1.jpeg') }}" alt="" class="rounded-top-only card-img-top"></a>
-                <div class="card-body">
-                    <div class="row align-items-center mb-2">
-                        {{-- event title --}}
-                        <div class="col-5">
-                            <h4><a href="#" class="text-dark text-decoration-none">Event Title</a></h4>
+            <a href="" class="text-decoration-none">
+                {{-- event list --}}
+                <div class="card shadow border-0">
+                    @if (is_null($event->event_image))
+                        <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top">
+                    @else
+                        <img src="{{ $event->event_image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top">
+                    @endif
+                    <div class="card-body px-2">
+                        <div class="row align-items-center">
+                            {{-- event title --}}
+                            <div class="col-11 pe-0">
+                                <h4 class="overflow_dot text-dark">{{ $event->event_name }}</h4>
+                            </div>
+                            {{-- review --}}
+                            <div class="col d-flex justify-content-end mb-1 me-1">
+                                @if (is_null($event->avg_star))
+                                    <h6 class="text-muted overflow_cut">No Reviews</h6><h4 style="visibility: hidden">.</h4>
+                                @else
+                                    <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1"></i>{{ number_format($event->avg_star, 1) }}</h4>
+                                @endif
+                            </div>
                         </div>
-                        {{-- review --}}
-                        <div class="col d-flex justify-content-end me-3">
-                            <a href="" class="h4 text-dark text-decoration-none"><i class="fa-solid fa-star me-2"></i>4.5</a>
+                        {{-- information --}}
+                        <div class="row align-items-center gx-1 mb-2">
+                            <div class="col-4 overflow_dot">
+                                <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area_name }} area
+                            </div>
+                            @php
+                                $loop_count = 0;
+                            @endphp
+                            @forelse($event->EventCategories as $event_category)
+                                @if ($loop_count < 2)
+                                    <div class="col-4">
+                                        <div class="tag rounded-pill overflow_dot py-1 w-100">{{ $event_category->category->name }}</div>
+                                    </div>
+                                    @php
+                                        $loop_count++;
+                                    @endphp
+                                @endif
+                            @empty
+                                <div class="col-8">
+                                    <div class="tag rounded-pill bg-secondary overflow_dot py-1 text-white w-50">No Category</div>
+                                </div>
+                            @endforelse
                         </div>
-                    </div>
-                    {{-- information --}}
-                    <div class="row align-items-center gx-1 mb-2">
-                        <div class="col-4">
-                            <i class="fa-solid fa-location-dot me-1"></i>Location
-                        </div>
-                        <div class="col-4">
-                            <div class="tag rounded-pill py-1 w-100">Category1</div>
-                        </div>
-                        <div class="col-4">
-                            <div class="tag rounded-pill py-1 w-100">Category2</div>
-                        </div>
-                    </div>
-                    <div class="row align-items-center gx-1">
-                        <div class="col-4">
-                            <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
-                        </div>
-                        <div class="col-4 align-self-center">
-                            <div class="tag rounded-pill py-1 w-100">10/10~11/11</div>
-                        </div>
-                        <div class="col-4 align-self-center">
-                            <div class="tag rounded-pill py-1 w-100">10:00~17:00</div>
+                        <div class="row align-items-center gx-1">
+                            <div class="col-4">
+                                <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
+                            </div>
+                            <div class="col-4 align-self-center">
+                                <div class="tag rounded-pill overflow_dot py-1 w-100">
+                                    @if ($event->start_date == $event->finish_date)
+                                        {{ date('m/d', strtotime($event->start_date)) }}
+                                    @else
+                                        {{ date('m/d', strtotime($event->start_date)) }}~{{ date('m/d', strtotime($event->finish_date)) }}
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-4 align-self-center">
+                                <div class="tag rounded-pill overflow_dot py-1 w-100">{{ date('H:i', strtotime($event->start_time)) }}~{{ date('H:i', strtotime($event->finish_time)) }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
 
             {{-- total people & sales --}}
-            <div class="w-75 mt-4 d-grid mx-auto">
+            <div class="mt-4 d-grid mx-auto" style="width: 90%;">
                 <div class="text-green">
-                    <div class="row align-items-center gx-1 mb-2">
-                        <div class="col h5">
-                            <i class="fa-solid fa-users fa-lg me-2"></i>Total People
+                    <div class="mb-2 d-flex justify-content-center align-items-center gx-1 mb-2">
+                        <div class="d-flex justify-content-center h5" style="width: 10%;">
+                            <i class="fa-solid fa-users fa-lg me-2"></i>
                         </div>
-                        <div class="col h2 text-end ms-3">
-                            20,000
+                        <div class="ms-1 text-start d-flex align-items-center" style="width: 55%;">
+                            <h5 class="h5 mb-0">Total People</h5>
+                        </div>
+                        <div class="text-end" style="width: 35%;">
+                            <h3 class="h3 mb-0">
+                                @if (is_null($event->sum_tickets))
+                                    0
+                                @else
+                                    {{ number_format($event->sum_tickets) }}
+                                @endif
+                            </h3>
                         </div>
                     </div>
-                    <div class="row align-items-center gx-1">
-                        <div class="col h5">
-                            <i class="fa-solid fa-sack-dollar fa-lg ms-1 me-2"></i>Total Sales
+                    <div class="mb-2 d-flex justify-content-center align-items-center gx-1 mb-2">
+                        <div class="d-flex justify-content-center h5" style="width: 10%;">
+                            <i class="fa-solid fa-sack-dollar fa-lg me-2"></i>
                         </div>
-                        <div class="col h2 text-end ms-3">
-                            ¥1,000,000
+                        <div class="ms-1 text-start" style="width: 55%;">
+                            <h5 class="h5 mb-0">Total Sales</h5>
+                        </div>
+                        <div class="text-end" style="width: 35%;">
+                            <h3 class="h3 mb-0">
+                                @if (is_null($event->sum_tickets))
+                                    ¥0
+                                @else
+                                    ¥200,000
+                                    {{-- ¥{{ $event->sum_tickets * $event->price }} --}}
+                                @endif
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -93,97 +149,42 @@
                 </thead>
 
                 <tbody>
-                    <tr class="table-yellow">
-                        <td>1</td>
-                        <td>User Name</td>
-                        <td>5</td>
-                        <td>5,000 yen</td>
-                        <td>2024/06/15</td>
-                        <td>11:00</td>
-                        <td>2024/06/11</td>
-                        <td>
-                            <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="table-yellow">2</td>
-                        <td class="table-yellow">User Name</td>
-                        <td class="table-yellow">5</td>
-                        <td class="table-yellow">5,000 yen</td>
-                        <td class="table-yellow">2024/06/15</td>
-                        <td class="table-yellow">11:00</td>
-                        <td class="table-yellow">2024/06/11</td>
-                        <td class="table-yellow">
-                            <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="table-yellow">
-                        <td>3</td>
-                        <td>User Name</td>
-                        <td>5</td>
-                        <td>5,000 yen</td>
-                        <td>2024/06/15</td>
-                        <td>11:00</td>
-                        <td>2024/06/11</td>
-                        <td>
-                            <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="table-yellow">4</td>
-                        <td class="table-yellow">User Name</td>
-                        <td class="table-yellow">5</td>
-                        <td class="table-yellow">5,000 yen</td>
-                        <td class="table-yellow">2024/06/15</td>
-                        <td class="table-yellow">11:00</td>
-                        <td class="table-yellow">2024/06/11</td>
-                        <td class="table-yellow">
-                            <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="table-yellow">
-                        <td>5</td>
-                        <td>User Name</td>
-                        <td>5</td>
-                        <td>5,000 yen</td>
-                        <td>2024/06/15</td>
-                        <td>11:00</td>
-                        <td>2024/06/11</td>
-                        <td>
-                            <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="table-yellow">6</td>
-                        <td class="table-yellow">User Name</td>
-                        <td class="table-yellow">5</td>
-                        <td class="table-yellow">5,000 yen</td>
-                        <td class="table-yellow">2024/06/15</td>
-                        <td class="table-yellow">11:00</td>
-                        <td class="table-yellow">2024/06/11</td>
-                        <td class="table-yellow">
-                            <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    @forelse ($reservations as $reservation)
+                        <tr>
+                            <td>{{ $loop->iteration + ($reservations->currentPage() - 1) * $reservations->perPage() }}</td>
+                            <td>{{ $reservation->user->first_name }} {{ $reservation->user->last_name }}</td>
+                            <td>{{ $reservation->num_tickets }}</td>
+                            <td>
+                                @if (is_null($event->price))
+                                ¥0
+                            @else
+                                ¥{{ $event->price * $reservation->num_tickets }}
+                            @endif
+                            </td>
+                            <td>{{ date('Y/m/d', strtotime($reservation->reservation_date)) }}</td>
+                            <td>??:00</td>
+                            <td>{{ date('Y/m/d', strtotime($reservation->created_at)) }}</td>
+                            <td>
+                                <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation{{ $reservation->id }}">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                                @include('event-owners.reservations.modal.delete')
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="8">
+                                <h4 class="h4 my-3">No reservations yet.</h4>
+                            </td>
+                        </tr>
+                    @endforelse
+
                 </tbody>
             </table>
-        </div>
 
+            {{ $reservations->links('vendor.pagination.event-pagination') }}
+        </div>
     </div>
 </div>
-
-@include('event-owners.reservations.modal.delete')
 
 @endsection

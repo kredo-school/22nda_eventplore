@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\Event;
 use App\Models\Category;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +16,12 @@ class EventController extends Controller
 {
     private $event;
     private $category;
-    public function __construct(Event $event, Category $category){
+    private $reservation;
+
+    public function __construct(Event $event, Category $category, Reservation $reservation){
         $this->event = $event;
         $this->category = $category;
+        $this->reservation = $reservation;
     }
 
     public function create()
@@ -139,6 +143,55 @@ class EventController extends Controller
             $this->event->destroy($id);
     
             return redirect()->back()->with('success', 'Event deleted successfully.');
+        } else {
+            return redirect()->back()->withErrors(['password' => 'The password is incorrect.']);
+        }
+    }
+
+    public function showReservation($id)
+    {
+        $currentOwnerId = Auth::guard('event_owner')->user()->id;
+        
+        $event = Event::select([
+                'events.*',
+                'areas.name as area_name',
+                'avg_reviews.avg_star as avg_star',
+                'event_images.image as event_image',
+                'sum_reservations.sum_tickets as sum_tickets',
+            ])
+            ->leftJoin('event_categories', 'events.id', '=', 'event_categories.event_id')
+            ->leftJoin('areas', 'events.area_id', '=', 'areas.id')
+            ->leftJoin(DB::raw('(SELECT event_id, AVG(star) as avg_star FROM reviews GROUP BY event_id) as avg_reviews'), 'events.id', '=', 'avg_reviews.event_id')
+            ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'events.id', '=', 'first_event_images.event_id')
+            ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id')
+            ->leftJoin(DB::raw('(SELECT event_id, SUM(num_tickets) as sum_tickets FROM reservations GROUP BY event_id) as sum_reservations'), 'events.id', '=', 'sum_reservations.event_id')
+            ->where('events.id', $id)
+            ->groupBy('events.id')
+            ->distinct()
+            ->first();
+
+        $reservations = Reservation::where('event_id', $id)->paginate(10);
+        $eventOwnerId = $event->event_owner_id ?? null;
+
+        if ($currentOwnerId == $eventOwnerId) {
+            return view('event-owners.reservations.show', compact('event', 'reservations'));
+        } else {
+            return back();
+        }
+    }
+
+    public function destroyReservation(Request $request, $id)
+    {
+        $request->validate([
+            'password' => 'required',
+        ]);
+
+        $user = Auth::guard('event_owner')->user();
+
+        if (Hash::check($request->input('password'), $user->password)) {
+            $this->reservation->destroy($id);
+    
+            return redirect()->back()->with('success', 'Reservation deleted successfully.');
         } else {
             return redirect()->back()->withErrors(['password' => 'The password is incorrect.']);
         }

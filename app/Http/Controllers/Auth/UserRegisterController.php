@@ -62,7 +62,7 @@ class UserRegisterController extends Controller
             'first_name' =>$validated['firstname'],
             'last_name' =>$validated['lastname'],
             'email' => $validated['email'],
-            'avatar' => $avatar,
+            'avatar' => 'data:image/'.$request->avatar->extension().';base64,'.base64_encode(file_get_contents($request->avatar)),
             'role'=>'user',
         ]);
         if(Auth::guard('web')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){

@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col d-flex justify-content-end">
                                     {{-- participants --}}
-                                    <a href="#" class="btn btn-outline-dark me-2">
+                                    <a href="{{ route('reservation.show', $event->id) }}" class="btn btn-outline-dark me-2">
                                         @if (is_null($event->sum_tickets))
                                             <i class="fas fa-user me-1"></i>0
                                         @elseif ($event->sum_tickets == 1)

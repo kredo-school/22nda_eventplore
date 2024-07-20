@@ -6,15 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Event extends Model
+class Reservation extends Model
 {
     use HasFactory,SoftDeletes;
 
-    public function eventCategories(){
-        return $this->hasMany(EventCategory::class);
-    }
-
-    public function reservations(){
-        return $this->hasMany(Reservation::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }
