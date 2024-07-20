@@ -5,10 +5,9 @@
             {{-- <div class="row"> --}}
                 <div class="col-md-2 d-flex align-items-center">
                     @auth('event_owner')
-                        {{-- <a class="navbar-brand" href="{{ route('event-list.show') }}"> 
-
+                        <a class="navbar-brand" href="{{ route('event-list.show') }}">
                             <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="Logo" style="width: 64px; height: auto;">
-                        </a> --}}
+                        </a>
                     @else
                         <a class="navbar-brand" href="{{ route('home') }}">
                             <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="Logo" style="width: 64px; height: auto;">
@@ -18,33 +17,32 @@
 
                 <!-- Desktop Menu -->
                 <div class="col-md-8">
-                    @auth
-                        @if ((Auth::check() && Auth::user()->role !== 'event-owner') && request()->is('/') )
+                    {{-- @auth --}}
+                        @if ((Auth::check() && Auth::user()->role == 'user') && !request()->is('/') )
                         <div class="d-none d-md-flex justify-content-center flex-grow-1">
-                            <form class="d-flex w-75">
-                                <select class="form-select me-2">
+                            <form action="{{ route('events.search') }}" method="GET" class="d-flex w-75">
+                                <select class="form-select me-2" id="area" name="area">
                                     <option selected>Search by Area</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
+                                    @foreach ($areas as $area)
+                                        <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                    @endforeach
                                 </select>
                                 <input type="date" class="form-control me-2" placeholder="Calendar">
-                                <button class="btn btn-search-icon d-flex align-items-center justify-content-center">
+                                <button type="submit" class="btn btn-search-icon d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-magnifying-glass fa-xl"></i>
                                 </button>
                             </form>
                         </div>
                         @endif
-                    @endauth
+                    {{-- @endauth --}}
                 </div>
 
                     <!-- User & Owner Icon  -->
                 <div class="col-md-2 d-flex justify-content-end">
-                    
                     @auth('web')
                         <a id="navbarDropdownUser" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @if (Auth::user()->avatar)
-                                <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle avatar-sm">
+                                <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle avatar-md">
                             @else
                                 <span class="d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-circle-user fa-2xl me-2"></i>
@@ -53,10 +51,10 @@
                         </a>
                         {{-- droplist for user --}}
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('users.profile.show') }}">
                                 <i class="fa-solid fa-circle-user fa-xl"></i>&nbsp; Profile
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('user.reservation.list') }}">
                                 <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; My Events
                             </a>
                             <hr>
@@ -70,21 +68,25 @@
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        
+
                     @elseauth('event_owner')
                         <a id="navbarDropdownOwner" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="d-flex align-items-center justify-content-center">
-                                <i class="fa-solid fa-circle-user fa-2xl me-2" style="color: #0C2C04"></i>
-                            </span>
+                            @if (Auth::guard('event_owner')->user()->avatar)
+                                <img src="{{ Auth::guard('event_owner')->user()->avatar }}" alt="" class="rounded-circle avatar-md">
+                            @else
+                                <span class="d-flex align-items-center justify-content-center">
+                                    <i class="fa-solid fa-circle-user fa-2xl me-2" style="color: #0C2C04"></i>
+                                </span>
+                            @endif
                         </a>
                         {{-- droplist for event owner --}}
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownOwner">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('event-owners.profile.show') }}">
                                 <i class="fa-solid fa-circle-user fa-xl"></i>&nbsp; Profile
                             </a>
-                            {{-- <a class="dropdown-item" href="{{ route('event-list.show') }}">
+                            <a class="dropdown-item" href="{{ route('event-list.show') }}">
                                 <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; Event Lists
-                            </a> --}}
+                            </a>
                             <hr>
                             <a class="dropdown-item" href="{{ route('event-owner.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-owner').submit();">
                                 <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; Logout
@@ -104,104 +106,103 @@
                 </div>
             {{-- </div> --}}
 
-            <!-- Hamburger Menu for smaller screens -->
-            <div class="collapse navbar-collapse" id="navbarHamburger">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0 d-md-none pt-2" style="background-color: white;">
-                    @guest
-                        @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-green mx-3" href="{{ route('user.sign-in') }}">{{ __('SIGN-IN') }}</a>
+                <!-- Hamburger Menu for smaller screens -->
+                <div class="collapse navbar-collapse" id="navbarHamburger">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0 d-md-none pt-2" style="background-color: white;">
+                        @guest
+                            @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-green mx-3" href="{{ route('user.sign-in') }}">{{ __('SIGN-IN') }}</a>
+                            </li>
+                            @endif
+                        @else
+                        @endguest
+                        <!-- Dropdown 2: Area and Calendar Search -->
+                        <li class="nav-item px-3">
+                            <form action="{{ route('ham.search') }}" class="d-flex flex-column">
+                                <select class="form-select my-2">
+                                    <option selected>Search by Area</option>
+                                    @foreach ($areas as $area)
+                                        <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                    @endforeach
+                                </select>
+                                <input type="date" class="form-control mb-2" placeholder="Calendar">
+                                <button type="submit" class="btn btn-yellow align-self-end"><span>SEARCH</span> <i class="fa-solid fa-magnifying-glass fa-xl"></i></button>
+                            </form>
                         </li>
-                        @endif
-                    @else
-                    @endguest
-                    <!-- Dropdown 2: Area and Calendar Search -->
-                    <li class="nav-item px-3">
-                        <form class="d-flex flex-column">
-                            <select class="form-select my-2">
-                                <option selected>Search by Area</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                            </select>
-                            <input type="date" class="form-control mb-2" placeholder="Calendar">
-                            <button class="btn btn-yellow align-self-end"><span>SEARCH</span> <i class="fa-solid fa-magnifying-glass fa-xl"></i></button>
-                        </form>
-                    </li>
-                    <!-- Dropdown 3: Category Search with scroll -->
-                    <li class="nav-item">
-                        <ul class="nav-list" style="max-height: 200px; overflow-y: auto;">
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-torii-gate"></i> Culture</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-brands fa-first-order-alt"></i> Fireworks</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fas fa-theater-masks"></i> Festival</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-utensils"></i> Food/Drink</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-baseball-bat-ball"></i> Sport</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-paint-brush"></i> Art</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-music"></i> Music</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-leaf"></i> Nature</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-regular fa-lightbulb"></i> Illumination</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-film"></i> Movie</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-icons"></i> Hobby</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-user-tie"></i> Business</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-house-laptop"></i> Online</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fas fa-hand-holding-usd"></i> Free</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-brands fa-product-hunt"></i> Parking</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-restroom"></i> Toilet</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-train-subway"></i> Train/Bus</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-cloud-sun"></i> Outside</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href=""><i class="fa-solid fa-house-user"></i> Inside</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+
+                        <!-- Dropdown 3: Category Search with scroll -->
+                        <li class="nav-item">
+                            <ul class="nav-list" style="max-height: 200px; overflow-y: auto;">
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-torii-gate"></i> Culture</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-brands fa-first-order-alt"></i> Fireworks</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fas fa-theater-masks"></i> Festival</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-utensils"></i> Food/Drink</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-baseball-bat-ball"></i> Sport</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-paint-brush"></i> Art</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-music"></i> Music</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-leaf"></i> Nature</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-regular fa-lightbulb"></i> Illumination</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-film"></i> Movie</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-icons"></i> Hobby</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-user-tie"></i> Business</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-house-laptop"></i> Online</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fas fa-hand-holding-usd"></i> Free</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-brands fa-product-hunt"></i> Parking</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-restroom"></i> Toilet</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-train-subway"></i> Train/Bus</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-cloud-sun"></i> Outside</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href=""><i class="fa-solid fa-house-user"></i> Inside</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
-
-
-        </div>
-    </nav>
-</div>
+        </nav>
+    </div>
+</form>
 
 
 {{-- Show up only Event menu page --}}
-@if(Route::currentRouteName() == 'event-menu')
+@if (Route::currentRouteName() == 'event-menu' || Route::currentRouteName() == 'events.search'|| Route::currentRouteName() == 'ham.search')
 <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height navbar-category d-none d-md-flex" style = "width: 100%;">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarCategory">

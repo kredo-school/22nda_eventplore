@@ -52,17 +52,23 @@ class UserRegisterController extends Controller
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'avatar' => ['nullable', 'mimes:jpeg,jpg,png'],
             'role'=>'user',
         ]);
 
-        $avatar = base64_encode($request['avatar']);
+        $avatarPath = null;
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarPath = 'data:image/' . $avatar->extension() . ';base64,' . base64_encode(file_get_contents($avatar));
+        }
+
         $user = User::create([
             'username' => $validated['username'],
             'password' => Hash::make($validated['password']),
             'first_name' =>$validated['firstname'],
             'last_name' =>$validated['lastname'],
             'email' => $validated['email'],
-            'avatar' => $avatar,
+            'avatar' => $avatarPath,
             'role'=>'user',
         ]);
         if(Auth::guard('web')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
@@ -75,6 +81,7 @@ class UserRegisterController extends Controller
 
 
     }
+
 
     public function showUserSignUp()
     {

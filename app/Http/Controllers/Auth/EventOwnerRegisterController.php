@@ -35,6 +35,7 @@ class EventOwnerRegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners'],
             'phone_number'=>['required', 'string', 'max:255'],
             'address'=>['required', 'string', 'max:255'],
+            'avatar' => ['nullable', 'mimes:jpeg,jpg,png'],
             'role'=>'event-owner',
         ]);
     }
@@ -56,10 +57,16 @@ class EventOwnerRegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners'],
             'phone_number'=>['required', 'string', 'max:255'],
             'address'=>['required', 'string', 'max:255'],
+            'avatar' => ['nullable', 'mimes:jpeg,jpg,png'],
             'role'=>'event-owner',
         ]);
 
-        $avatar = base64_encode($request['avatar']);
+        $avatarPath = null;
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarPath = 'data:image/' . $avatar->extension() . ';base64,' . base64_encode(file_get_contents($avatar));
+        }
+
         $user = EventOwner::create([
             'username' => $validated['username'],
             'password' => Hash::make($validated['password']),
@@ -68,10 +75,9 @@ class EventOwnerRegisterController extends Controller
             'email' => $validated['email'],
             'phone_number' =>$validated['phone_number'],
             'address'=>$validated['address'],
-            'avatar' => $avatar,
-            'role'=>'event-owner',
-
+            'avatar' =>$avatarPath,
         ]);
+
         if(Auth::guard('event_owner')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
             // Authentication successful
             return redirect()->intended($this->redirectTo);
