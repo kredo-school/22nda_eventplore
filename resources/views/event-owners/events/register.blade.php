@@ -20,11 +20,15 @@
                 @csrf
                 <h2 class="h1">Register Event</h2>
                 {{-- ステータスバー --}}
-                {{-- active = green, inactive = white --}}
                 <div class="timeline">
                     <div class="timeline-item active">
                         <div class="timeline-icon">
                             <i class="fa-regular fa-calendar icon-md"></i>
+                        </div>
+                    </div>
+                    <div class="timeline-item inactive">
+                        <div class="timeline-icon">
+                            <i class="fa-solid fa-users icon-md"></i>
                         </div>
                     </div>
                     <div class="timeline-item inactive">
@@ -76,6 +80,10 @@
                 {{-- STEP6 --}}
                 <div id="step6" class="d-none">
                     @include('event-owners.events.partials-register.step6')
+                </div>
+                {{-- STEP7 --}}
+                <div id="step7" class="d-none">
+                    @include('event-owners.events.partials-register.step7')
                 </div>
                 {{-- buttons --}}
                 <div class="row my-3 justify-content-center text-center">

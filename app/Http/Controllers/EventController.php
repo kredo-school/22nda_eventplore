@@ -40,8 +40,6 @@ class EventController extends Controller
 
     public function store(Request $request){
         $event = new Event();
-        
-        
 
         // Save the form data to the db
         $event->event_name = $request->event_name;
@@ -53,23 +51,21 @@ class EventController extends Controller
         $event->history = $request->history;
         $event->max_participants = $request->max_participants;
         $event->app_deadline = $request->app_deadline;
+        $event->price = $request->price;
         $event->area_id = $request->area_id;
         $event->address = $request->address;
-        // $event->parking = $request->parking;
-        // $event->train = $request->train;
-        // $event->toilet = $request->toilet;
-        // $event->weather = $request->weather;
-        // $event->category_id = $request->category_id;
-        // $event->add_info = $request->add_info;
+        $event->parking = $request->parking;
+        $event->train = $request->train;
+        $event->toilet = $request->toilet;
+        $event->weather = $request->weather;
+        $event->category_id = $request->category_id;
+        $event->add_info = $request->add_info;
         $event->facebook_link = $request->facebook_link;
         $event->insta_link = $request->insta_link;
         $event->x_link = $request->x_link;
-        // $event->official = $request->official;
+        $event->official = $request->official;
         $event->event_owner_id = Auth::id();
         $event->save();
-        // $image->event()->associate($event);
-        // $image->save();
-        // $event->save();
         
         $event_images = [];
         foreach($request->file("image") as $img){
