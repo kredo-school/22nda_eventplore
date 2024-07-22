@@ -44,11 +44,11 @@
                                     {{-- participants --}}
                                     <a href="{{ route('reservation.show', $event->id) }}" class="btn btn-outline-dark me-2">
                                         @if (is_null($event->sum_tickets))
-                                            <i class="fas fa-user me-1"></i>0
-                                        @elseif ($event->sum_tickets == 1)
-                                            <i class="fas fa-user me-1"></i>{{ $event->sum_tickets }}
+                                            <i class="fa-regular fa-user me-1"></i>0
+                                        @elseif ($event->sum_tickets >= 10)
+                                            <i class="fa-solid fa-users me-1"></i>{{ $event->sum_tickets }}
                                         @else
-                                            <i class="fas fa-users me-1"></i>{{ $event->sum_tickets }}
+                                            <i class="fa-solid fa-user me-1"></i>{{ $event->sum_tickets }}
                                         @endif
                                     </a>
                                     {{-- edit --}}
@@ -61,7 +61,7 @@
 
                             {{-- information --}}
                             <div class="row align-items-center gx-1 mb-2">
-                                <div class="col-4">
+                                <div class="col-4 overflow_dot">
                                     <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area_name }} area
                                 </div>
                                 @php

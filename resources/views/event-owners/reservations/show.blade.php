@@ -22,10 +22,10 @@
     @endif
 
     <div class="row">
-        <div class="col-md-4 me-2 mb-4">
+        <div class="col-md-4 mb-4">
             <a href="" class="text-decoration-none">
                 {{-- event list --}}
-                <div class="card shadow border-0">
+                <div class="card shadow border-0 w-100 me-2">
                     @if (is_null($event->event_image))
                         <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top">
                     @else
@@ -122,8 +122,7 @@
                                 @if (is_null($event->sum_tickets))
                                     ¥0
                                 @else
-                                    ¥200,000
-                                    {{-- ¥{{ $event->sum_tickets * $event->price }} --}}
+                                    ¥{{ number_format($event->sum_tickets * $event->price) }}
                                 @endif
                             </h3>
                         </div>
@@ -133,8 +132,8 @@
         </div>
 
         {{-- reservation table --}}
-        <div class="col">
-            <table class="table text-center align-middle shadow rounded-2 overflow-hidden mb-5">
+        <div class="col-md-8">
+            <table class="table text-center align-middle shadow rounded-2 overflow-hidden me-2 mb-5">
                 <thead>
                     <tr>
                         <th class="table-dg">#</th>
@@ -158,11 +157,11 @@
                                 @if (is_null($event->price))
                                 ¥0
                             @else
-                                ¥{{ $event->price * $reservation->num_tickets }}
+                                ¥{{ number_format($event->price * $reservation->num_tickets) }}
                             @endif
                             </td>
                             <td>{{ date('Y/m/d', strtotime($reservation->reservation_date)) }}</td>
-                            <td>??:00</td>
+                            <td>{{ date('H:i', strtotime($reservation->time)) }}</td>
                             <td>{{ date('Y/m/d', strtotime($reservation->created_at)) }}</td>
                             <td>
                                 <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation{{ $reservation->id }}">

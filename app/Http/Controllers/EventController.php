@@ -102,7 +102,7 @@ class EventController extends Controller
             ->leftJoin(DB::raw('(SELECT event_id, AVG(star) as avg_star FROM reviews GROUP BY event_id) as avg_reviews'), 'events.id', '=', 'avg_reviews.event_id')
             ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'events.id', '=', 'first_event_images.event_id')
             ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id')
-            ->leftJoin(DB::raw('(SELECT event_id, SUM(num_tickets) as sum_tickets FROM reservations GROUP BY event_id) as sum_reservations'), 'events.id', '=', 'sum_reservations.event_id')
+            ->leftJoin(DB::raw('(SELECT event_id, SUM(num_tickets) as sum_tickets FROM reservations WHERE deleted_at IS NULL GROUP BY event_id) as sum_reservations'), 'events.id', '=', 'sum_reservations.event_id')
             ->groupBy('events.id')
             ->where('events.event_owner_id', $id);
 
@@ -137,6 +137,7 @@ class EventController extends Controller
 
     public function showReservation($id)
     {
+        $areas = Area::all();
         $currentOwnerId = Auth::guard('event_owner')->user()->id;
         
         $event = Event::select([
@@ -151,7 +152,7 @@ class EventController extends Controller
             ->leftJoin(DB::raw('(SELECT event_id, AVG(star) as avg_star FROM reviews GROUP BY event_id) as avg_reviews'), 'events.id', '=', 'avg_reviews.event_id')
             ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'events.id', '=', 'first_event_images.event_id')
             ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id')
-            ->leftJoin(DB::raw('(SELECT event_id, SUM(num_tickets) as sum_tickets FROM reservations GROUP BY event_id) as sum_reservations'), 'events.id', '=', 'sum_reservations.event_id')
+            ->leftJoin(DB::raw('(SELECT event_id, SUM(num_tickets) as sum_tickets FROM reservations WHERE deleted_at IS NULL GROUP BY event_id) as sum_reservations'), 'events.id', '=', 'sum_reservations.event_id')
             ->where('events.id', $id)
             ->groupBy('events.id')
             ->distinct()
@@ -161,7 +162,7 @@ class EventController extends Controller
         $eventOwnerId = $event->event_owner_id ?? null;
 
         if ($currentOwnerId == $eventOwnerId) {
-            return view('event-owners.reservations.show', compact('event', 'reservations'));
+            return view('event-owners.reservations.show', compact('event', 'reservations', 'areas'));
         } else {
             return back();
         }

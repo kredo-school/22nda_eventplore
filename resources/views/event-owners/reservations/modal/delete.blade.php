@@ -8,7 +8,7 @@
                 <div class="modal-header border-0">
                     <div class="img-container modal-title mx-auto mt-3">
                         @if ($reservation->user->avatar)
-                            <img src="{{ $reservation->user->avatar }}" alt="{{ $reservation->user->username }}" class="avatar-lg" style="height: 8rem;">
+                            <img src="{{ $reservation->user->avatar }}" alt="{{ $reservation->user->username }}" class="avatar-lg" style="height: 8rem; width: 8rem;">
                         @else
                             <i class="fa-solid fa-circle-user fa-8x"></i>
                         @endif
