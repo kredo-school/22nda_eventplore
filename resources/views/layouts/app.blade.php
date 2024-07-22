@@ -45,7 +45,7 @@
 <body>
     <div id="app" class="d-flex flex-column min-vh-100">
 
-        @if (!in_array(Route::currentRouteName(), ['user.sign-in', 'user.sign-up', 'owner.sign-in', 'owner.sign-up']))
+        @if (!in_array(Route::currentRouteName(), ['user.sign-in', 'user.sign-up', 'owner.sign-in', 'owner.sign-up','password.request','password.reset']))
             @include('partials.navbar')
         @endif
 
@@ -54,7 +54,7 @@
         </main>
 
         {{-- footer --}}
-        @if (!in_array(Route::currentRouteName(), ['home', 'event-menu', 'user.sign-in', 'user.sign-up', 'event-owners.sign-in', 'event-owners.sign-up']))
+        @if (!in_array(Route::currentRouteName(), ['home', 'event-menu', 'user.sign-in', 'user.sign-up', 'event-owners.sign-in', 'event-owners.sign-up','password.request','password.reset']))
             @include('partials.footer')
         @endif
 
