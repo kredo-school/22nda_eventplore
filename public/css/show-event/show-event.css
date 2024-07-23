@@ -44,6 +44,10 @@ td.table-yellow {
     color: #0C2C04;
 }
 
+tbody tr:nth-child(even) td {
+    background-color: #F6E7D2;
+}
+
 /* オーバーフローしたテキストを"…"で表示 */
 .overflow_dot {
 	overflow: hidden;
