@@ -1,65 +1,99 @@
 @extends('layouts.app')
 
+@section('title', 'Reset password')
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<div class="p-0 overflow-auto full-height">
+    <div class="row d-flex justify-content-center align-items-stretch full-height">
+        <div class="col-md-6 p-0 d-flex flex-column justify-content-center form-container">
+            <form method="POST" action="{{ route('password.update') }}">
+                @csrf
+                <div class="d-flex flex-column align-items-center my-4 text-center">
+                    <input type="hidden" name="token" value="{{ $token }}">
+                    <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="logo" class="mt-5 mb-2 w-25">
+                    <h2 class="h1 mb-2 text-align-center mb-3">Reset password</h2>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                    <div class="d-flex justify-content-center flex-column w-50">
+                        <div class="text-start mb-3">
+                            <label for="email" class="form-label fw-bold mb-2">Email*</label>
+                            <input id="email" type="email" class="form-control w-100 @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                            @error('email')
+                                <span class="invalid-feedback text-start" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                    <div class="d-flex justify-content-center flex-column w-50">
+                        <div class="text-start mb-3">
+                            <label for="password" class="form-label fw-bold mb-2">Password*</label>
+                            <div class="input-group">
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                                <div class="input-group-text d-flex justify-content-center align-items-center mb-0" style="width: 40px; height: 38px;">
+                                    <i class="fa-solid fa-eye-slash toggle-password" style="cursor: pointer;"></i>
+                                </div>
                             </div>
+                            @error('password')
+                                <span class="invalid-feedback text-start" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                    <div class="d-flex justify-content-center flex-column w-50">
+                        <div class="text-start mb-3">
+                            <label for="password-confirm" class="form-label fw-bold mb-2">Confirm Password*</label>
+                            <div class="input-group">
+                                <input type="password" id="password-confirm" name="password_confirmation" class="form-control" placeholder="Password" required>
+                                <div class="input-group-text d-flex justify-content-center align-items-center mb-0" style="width: 40px; height: 38px;">
+                                    <i class="fa-solid fa-eye-slash toggle-password" style="cursor: pointer;"></i>
+                                </div>
                             </div>
+                            @error('password_confirmation')
+                                <span class="invalid-feedback text-start" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
+                    </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
+                    <div class="d-flex flex-column mb-3 justify-content-center text-center mt-4">
+                        <div class="d-flex justify-content-center mb-2">
+                            <button type="submit" class="btn btn-green px-5" style="width: auto;">
+                                Reset Password
+                            </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </form>
+        </div>
+        <div class="col p-0">
+            <img src="{{ asset('images/sign-in/tengku-nadia-fz8_SONkBB8-unsplash.jpg') }}" alt="reset mail"  class="w-100 h-100" style="object-fit: cover;">
         </div>
     </div>
 </div>
 @endsection
+
+<script>
+    function togglePasswordVisibility(event) {
+        const inputGroup = event.target.closest('.input-group');
+        const passwordInput = inputGroup.querySelector('input');
+        const toggleIcon = event.target;
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.toggle-password').forEach(icon => {
+            icon.addEventListener('click', togglePasswordVisibility);
+        });
+    });
+</script>

@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Auth\EventOwnerLoginController;
 use App\Http\Controllers\Auth\EventOwnerRegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 
 Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
@@ -46,7 +48,9 @@ Route::get('/ham/search', [HomeController::class, 'searchFromHam'])->name('ham.s
 // ユーザー認証後に見れる画面
     Route::middleware(['auth:web'])->group(function () {
         Route::get('/users/profile/show', [UserLoginController::class, 'showProfile'])->name('users.profile.show');
-        Route::get('/user/reservation-list', [UserLoginController::class, 'showReservations'])->name('user.reservation.list');
+        Route::get('/user/reservation', [EventController::class, 'showUserReservation'])->name('user.reservation.show');
+        Route::delete('/user/reservation/{id}/destroy', [EventController::class, 'destroyUserReservation'])->name('user.reservation.destroy');
+        Route::patch('/user/reservation/{id}/update', [EventController::class, 'updateUserReservation'])->name('user.reservation.update');
     });
 
 // イベントオーナー認証後に見れる画面
@@ -64,6 +68,18 @@ Route::get('/ham/search', [HomeController::class, 'searchFromHam'])->name('ham.s
         Route::get('/event-owners/session-id', [EventController::class, 'getSessionId']);
 
     });
+
+
+    
+// パスワードのリセット関係
+// パスワードリセットリンクのリクエストフォームを表示
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+// パスワードリセットリンクをメールで送信する
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+// パスワードのリセットリンクを表示
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+// パスワードリセットを処理
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 
 
