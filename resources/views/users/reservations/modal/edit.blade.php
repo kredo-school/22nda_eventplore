@@ -1,52 +1,79 @@
-<div class="modal fade" id="user-edit-reservation">
+<div class="modal fade" id="user-edit-reservation{{ $reservation->id }}" data-price="{{ $reservation->price }}">
     <div class="modal-dialog">
-        <form action="#" method="post">
+        <form action="{{ route('user.reservation.update', $reservation->id) }}" method="post">
             @csrf
             @method('PATCH')
             <div class="modal-content">
                 <div class="modal-header border-0 m-0">
                     <div class="img-container w-100">
-                        <img src="{{ asset('images/fireworks.jpg') }}" alt="fireworks" class="w-100 rounded" style="object-fit: cover; height: 300px;">
+                        @if (is_null($reservation->event_image))
+                            <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="w-100 rounded" style="object-fit: cover; height: 300px;">
+                        @else
+                            <img src="{{ $reservation->event_image }}" alt="{{ $reservation->event_name }}" class="w-100 rounded" style="object-fit: cover; height: 300px;">
+                        @endif
                     </div>
                 </div>
 
-                <div class="modal-body " style="font-family: EB Garamond">
+                <div class="modal-body" style="font-family: EB Garamond">
                     <div class="h3 modal-title text-center text-dark mb-3">
-                        Event Name
-                        <hr class="w-75 fw-bold" style="margin: 0 auto; border: 1px solid black;">
+                        {{ $reservation->event_name }}
+                        <hr class="w-75 mt-1 fw-bold" style="margin: 0 auto; border: 1px solid black;">
                     </div>
-                    <div style="display: flex; flex-direction: column; align-items: center; ">
+                    <div class="w-50 mx-auto">
+                        {{-- 価格 --}}
+                        <div class="row ms-3 mb-3">
+                            <div class="col-2 px-0">
+                                <label for="price" class="col-form-label me-1"><i class="fa-solid fa-sack-dollar fa-xl"></i></label>
+                            </div>
+                            <div class="col-5 h6 text-dark my-auto">
+                                Ticket Price
+                            </div>
+                            <div class="col-auto h6 text-dark my-auto">
+                                ¥{{ number_format($reservation->price) }}
+                            </div>
+                        </div>
                         {{-- 人数 --}}
-                        <div class="row ms-3 mb-3" style="display: flex; align-items: center;">
-                            <div class="col-auto">
-                                <label for="persons" class="col-form-label"><i class="fa-solid fa-users fa-xl"></i></label>
+                        <div class="row ms-3 mb-3">
+                            <div class="col-2 px-0">
+                                <label for="num_tickets{{ $reservation->id }}" class="col-form-label me-1"><i class="fa-solid fa-users fa-xl"></i></label>
                             </div>
-                            <div class="col-auto">
-                                <input type="text" id="persons" name="persons" class="form-control rounded-pill input" placeholder="1 person">
+                            <div class="col-9">
+                                <input type="number" id="num_tickets{{ $reservation->id }}" name="num_tickets" value="{{ $reservation->num_tickets }}" class="form-control rounded-pill text-center input" min="1"  max="{{ $reservation->maxAvailableTickets + $reservation->num_tickets }}" required>
                             </div>
-                            @error('persons')
+                            @error('num_tickets')
                                 <p class="text-danger small">{{ $message }}</p>
                             @enderror
                         </div>
                         {{-- 日付 --}}
                         <div class="row ms-3 mb-3">
-                            <div class="col-auto">
-                                <label for="date" class="col-form-label me-1"><i class="fa-solid fa-calendar-days fa-xl"></i></label>
+                            <div class="col-2 px-0">
+                                <label for="reservation_date" class="col-form-label me-1"><i class="fa-solid fa-calendar-days fa-xl"></i></label>
                             </div>
-                            <div class="col-auto">
-                                <input type="text" id="date" name="date" class="form-control rounded-pill input" placeholder="2024/6/15">
+                            <div class="col-9">
+                                <input type="date" id="reservation_date" name="reservation_date" value="{{ $reservation->reservation_date }}" class="form-control rounded-pill text-center input" min="{{ $reservation->start_date }}" max="{{ $reservation->finish_date }}" required>
                             </div>
-                            @error('date')
+                            @error('reservation_date')
                                 <p class="text-danger small">{{ $message }}</p>
                             @enderror
                         </div>
                         {{-- 時間 --}}
                         <div class="row ms-3 mb-3">
-                            <div class="col-auto">
-                                <label for="time" class="col-form-label me-1"><i class="fa-regular fa-clock fa-xl"></i></label>
+                            <div class="col-2 px-0">
+                                <label for="time{{ $reservation->id }}" class="col-form-label me-1"><i class="fa-regular fa-clock fa-xl"></i></label>
                             </div>
-                            <div class="col-auto">
-                                <input type="text" id="time" name="time" class="form-control rounded-pill input" placeholder="11:00">
+                            <div class="col-9">
+                                <select id="time{{ $reservation->id }}" name="time" class="form-control rounded-pill text-center input">
+                                    @php
+                                        $startTime = strtotime($reservation->start_time);
+                                        $finishTime = strtotime($reservation->finish_time);
+                                        $adjustedFinishTime = strtotime('-1 hour', $finishTime);
+
+                                        for ($time = $startTime; $time <= $adjustedFinishTime; $time = strtotime('+1 hour', $time)) {
+                                            $formattedTime = date('H:i', $time);
+                                            echo "<option value=\"{$formattedTime}\"" . ($reservation->time == $formattedTime ? ' selected' : '') . ">{$formattedTime}</option>";
+                                        }
+                                    @endphp
+                                </select>
                             </div>
                             @error('time')
                                 <p class="text-danger small">{{ $message }}</p>
@@ -58,11 +85,11 @@
 
                     {{-- 合計金額 --}}
                     <div class="text-center mt-3">
-                        <i class="fa-solid fa-yen-sign fa-xl"></i>
-                        <span class="mx-4">total price</span>
-                        <span>5,000yen</span>
+                        <span class="h5 me-3">Total Price</span>
+                        <span class="h5" id="total-price{{ $reservation->id }}">
+                            ¥{{ number_format($reservation->price * $reservation->num_tickets) }}
+                        </span>
                     </div>
-
 
                 </div>
                 <div class="modal-footer justify-content-center border-0">
@@ -73,3 +100,27 @@
         </form>
     </div>
 </div>
+
+{{-- 合計金額の表示切り替え --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            modal.addEventListener('shown.bs.modal', function(event) {
+                const reservationId = modal.getAttribute('id').replace('user-edit-reservation', '');
+                const ticketInput = document.getElementById(`num_tickets${reservationId}`);
+                const totalPriceElement = document.getElementById(`total-price${reservationId}`);
+                const pricePerTicket = parseFloat(modal.getAttribute('data-price'));
+
+                ticketInput.addEventListener('input', function() {
+                    let numTickets = parseInt(ticketInput.value);
+                    if (isNaN(numTickets) || numTickets < 1) {
+                        numTickets = 1;  // デフォルトのチケット数
+                    }
+                    const totalPrice = numTickets * pricePerTicket;
+                    totalPriceElement.textContent = `¥${totalPrice.toLocaleString()}`;
+                });
+            });
+        });
+    });
+</script>
