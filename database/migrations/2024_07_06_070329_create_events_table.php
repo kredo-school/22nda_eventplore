@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id(); 
             $table->string('event_name', 50); 
             $table->string('address', 255); 
+            $table->float('latitude');
+            $table->float('longitude');
             $table->unsignedBigInteger('area_id');
             $table->date('start_date'); 
             $table->date('finish_date'); 

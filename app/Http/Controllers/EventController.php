@@ -40,7 +40,6 @@ class EventController extends Controller
 
     public function store(Request $request){
         $event = new Event();
-
         // Save the form data to the db
         $event->event_name = $request->event_name;
         $event->start_date = $request->start_date;
@@ -58,18 +57,16 @@ class EventController extends Controller
         $event->train = $request->train;
         $event->toilet = $request->toilet;
         $event->weather = $request->weather;
-        $event->category_id = $request->category_id;
+        $event->category_id = $request->category;
         $event->add_info = $request->add_info;
         $event->facebook_link = $request->facebook_link;
         $event->insta_link = $request->insta_link;
         $event->x_link = $request->x_link;
         $event->official = $request->official;
         $event->event_owner_id = Auth::id();
+        $event->latitude = $request->latitude;
+        $event->longitude = $request->longitude;
         $event->save();
-
-        // $image->event()->associate($event);
-        // $image->save();
-        // $event->save();
 
         $event_images = [];
         foreach($request->file("image") as $img){

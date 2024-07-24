@@ -19,6 +19,9 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Fabicon -->
+    <link rel="icon" href="{{ asset('images/eventplore-logo_final-nobg_480.png') }}">
+
     {{-- garamond400 and raleway --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
