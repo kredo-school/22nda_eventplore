@@ -51,10 +51,12 @@ class UserRegisterController extends Controller
             'password' => ['required', 'string', 'min:6' ],
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners,users'],
             'avatar' => ['file', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'role'=>'user',
         ]);
+
+        $base64Data = null;
 
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
@@ -65,8 +67,6 @@ class UserRegisterController extends Controller
             } else {
                 return back()->withErrors(['avatar' => 'Invalid file upload.']);
             }
-        } else {
-            return back()->withErrors(['avatar' => 'No file uploaded.']);
         }
 
 

@@ -54,13 +54,16 @@ class EventOwnerRegisterController extends Controller
             'password' => ['required', 'string', 'min:6' ],
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners,users'],
             'phone_number'=>['required', 'string', 'max:255'],
             'address'=>['required', 'string', 'max:255'],
-            'avatar' => ['file', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'avatar' => ['nullable','file', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'role'=>'event-owner',
         ]);
 
+        $base64Data = null;
+
+        $base64Data = null;
 
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
@@ -71,9 +74,7 @@ class EventOwnerRegisterController extends Controller
             } else {
                 return back()->withErrors(['avatar' => 'Invalid file upload.']);
             }
-        } else {
-            return back()->withErrors(['avatar' => 'No file uploaded.']);
-        }
+        };
 
         $user = EventOwner::create([
             'username' => $validated['username'],

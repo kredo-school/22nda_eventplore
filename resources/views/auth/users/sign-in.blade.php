@@ -51,11 +51,11 @@
                         </button>
                     </div>
 
-                    {{-- @if (Route::has('password.request')) --}}
-                        <a class="btn btn-link mt-2" href="#">
+                    @if (Route::has('password.request'))
+                        <a class="btn btn-link mt-2" href="{{ route('password.request') }}">
                             {{ __('Forgot Your Password?') }}
                         </a>
-                    {{-- @endif --}}
+                    @endif
                     <hr class="w-100 mx-auto mt-3" style="border: 1px solid #0C2C04">
                     <div class="d-flex justify-content-center">
                         <div class="w-100"><p>If you'd like to create event...&nbsp;<a href="{{ route('event-owner.sign-in') }}" style="color: #84947C">Event Owner sign-in</a></p></div>

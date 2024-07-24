@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Reservation extends Model
+class Review extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     public function user()
     {
@@ -19,5 +18,4 @@ class Reservation extends Model
     {
         return $this->belongsTo(Event::class);
     }
-
 }

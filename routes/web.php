@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Auth\EventOwnerLoginController;
 use App\Http\Controllers\Auth\EventOwnerRegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 
 Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
@@ -52,15 +54,30 @@ Route::get('/ham/search', [HomeController::class, 'searchFromHam'])->name('ham.s
 // イベントオーナー認証後に見れる画面
     Route::middleware(['auth:event_owner'])->group(function () {
         // イベントオーナーのメインビュー
+        Route::get('/event-owner/top', [EventController::class, 'index'])->name('event-list.show');
         Route::delete('/event/{id}/destroy', [EventController::class, 'destroy'])->name('events.destroy');
-
+        Route::get('/event-owner/reservation/{id}', [EventController::class, 'showReservation'])->name('reservation.show');
+        Route::delete('/event-owner/reservation/{id}/destroy', [EventController::class, 'destroyReservation'])->name('reservation.destroy');
+        
         Route::get('/event-owners/profile/show', [EventOwnerLoginController::class, 'showProfile'])->name('event-owners.profile.show');
 
         Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
         Route::post('/event-owners/events/store', [EventController::class, 'store'])->name('events.store');
         Route::get('/event-owners/session-id', [EventController::class, 'getSessionId']);
-        Route::get('/event-owner/top', [EventController::class, 'index'])->name('event-list.show');
+
     });
+
+
+    
+// パスワードのリセット関係
+// パスワードリセットリンクのリクエストフォームを表示
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+// パスワードリセットリンクをメールで送信する
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+// パスワードのリセットリンクを表示
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+// パスワードリセットを処理
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 
 
