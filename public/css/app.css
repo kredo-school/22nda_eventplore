@@ -1,7 +1,11 @@
 #app {
     display: flex;
     flex-direction: column;
-    /* min-height: 100vh; */
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* コンテンツ領域がフッターまでスペースを占めるようにする */
 }
 
 .navbar-top-bottom-border {

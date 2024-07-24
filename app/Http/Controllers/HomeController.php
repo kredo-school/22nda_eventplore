@@ -54,7 +54,7 @@ class HomeController extends Controller
             ->leftJoin(DB::raw('(SELECT event_id, AVG(star) as avg_star FROM reviews GROUP BY event_id) as avg_reviews'), 'events.id', '=', 'avg_reviews.event_id')
             ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'events.id', '=', 'first_event_images.event_id')
             ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id')
-            // ->groupBy('events.id');
+            // ->groupBy('events.id')
             ;
 
         // 日付選択時
@@ -85,8 +85,8 @@ class HomeController extends Controller
             'areas.name as area_name',
             'avg_reviews.avg_star as avg_star',
             'event_images.image as event_image',
-        ]);
-        // ])->groupBy('events.id');
+        // ]);
+        ])->groupBy('events.id');
 
 
         return view('home.event-menu', compact('search_events', 'areas'));

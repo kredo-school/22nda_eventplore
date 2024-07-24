@@ -17,16 +17,27 @@
                         This action cannot be undone.
                     </p>
 
-                    <img src="{{ asset('images/Jackie.jpeg') }}" alt="Jackie" class="rounded-circle" style="width: 128px; height: 128px;">
-                    <p class="h3 mt-2">Owner Name</p>
+                    <div class="d-flex justify-content-center">
+                    @if (Auth::user()->avatar)
+                        <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle avatar-lg">
+                    @else
+                        <span class="d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-circle-user fa-8x"></i>
+                        </span>
+                    @endif
+                    </div>
+                    <p class="h3 mt-2">{{ $user->username }}</p>
 
                     <div class="text-start">
                         <label for="form-label" class="form-label"><b>Password</b></label>
                         <div class="input-group mb-3 position-relative">
-                            <input type="text" class="form-control rounded input">
-                            <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center" >
-                                <i class="fa-solid fa-eye-slash"></i>
+                            <input id="password" type="password" name="password" required autocomplete="new-password" class="form-control" placeholder="Password">
+                            <div class="input-group-text d-flex justify-content-center align-items-center mb-0" style="width: 40px; height: 38px;">
+                                <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer; "></i>
                             </div>
+                            {{-- <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center" >
+                                <i class="fa-solid fa-eye-slash"></i>
+                            </div> --}}
                         </div>
                     </div>
 
@@ -39,3 +50,19 @@
         </form>
     </div>
 </div>
+
+{{-- 通常の切り替え --}}
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.querySelector('.toggle-password');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+        }
+    }
+</script>

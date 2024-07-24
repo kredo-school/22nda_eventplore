@@ -63,8 +63,44 @@ class EventOwnerLoginController extends Controller
     public function showProfile()
     {
         $areas = Area::all();
+        $user = Auth::guard('event_owner')->user();
+        $eventCount = $user->events()->count();
+        return view('event-owners.profile.show', compact('areas', 'user', 'eventCount'));
+    }
 
-        return view('event-owners.profile.show', compact('areas'));
+    public function update(Request $request)
+    {
+        // $request->validate([
+        //     'username' => ['required', 'string', 'max:255'],
+        //     'first_name' => ['required', 'string', 'max:255'],
+        //     'last_name' => ['required', 'string', 'max:255'],
+        //     'address' => ['nullable', 'string', 'max:255'],
+        //     'phone_number' => ['nullable', 'numeric'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners,email,' . Auth::id()],
+        //     'avatar' => ['nullable', 'file', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+        // ]);
+
+        $eventOwner = Auth::user();
+
+        $eventOwner->username = $request->input('username');
+        $eventOwner->first_name = $request->input('first_name');
+        $eventOwner->last_name = $request->input('last_name');
+        $eventOwner->address = $request->input('address');
+        $eventOwner->phone_number = $request->input('phone_number');
+        $eventOwner->email = $request->input('email');
+
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            if ($file->isValid()) {
+                $extension = $file->extension();
+                $base64Data = 'data:image/' . $extension . ';base64,' . base64_encode(file_get_contents($file));
+                $eventOwner->avatar = $base64Data;
+            }
+        }
+
+        $eventOwner->save();
+
+        return redirect()->route('event-owners.profile.show');
     }
 
     public function eventownerLogout(Request $request)

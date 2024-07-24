@@ -43,7 +43,7 @@
 
 </head>
 <body>
-    <div id="app" class="d-flex flex-column min-vh-100">
+    <div id="app" class="d-flex flex-column">
 
         @if (!in_array(Route::currentRouteName(), ['user.sign-in', 'user.sign-up', 'event-owner.sign-in', 'event-owner.sign-up','password.request','password.reset']))
             @include('partials.navbar')
