@@ -1,3 +1,4 @@
+@vite(['resources/js/showPassword.js'])
 
 <div class="modal fade" id="user-delete-reservation{{ $reservation->id }}">
     <div class="modal-dialog">
@@ -20,11 +21,11 @@
                         <br>This action cannot be undone.
                     </p>
                     <div class="w-75 mb-3 mx-auto">
-                        <label for="password" class="d-flex justify-content-start"><b>Password</b></label>
+                        <label for="password{{$reservation->id}}" class="d-flex justify-content-start"><b>Password</b></label>
                         <div class="input-group">
                             <input type="password" id="password{{$reservation->id}}" name="password" class="form-control" required>
                             <div class="input-group-text">
-                                <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility({{$reservation->id}})" style="cursor: pointer;"></i>
+                                <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility({{ $reservation->id }})" style="cursor: pointer;"></i>
                             </div>
                         </div>
                     </div>
@@ -37,19 +38,3 @@
         </form>
     </div>
 </div>
-
-{{-- パスワード表示切替 --}}
-<script>
-    function togglePasswordVisibility(reservationId) {
-        const passwordInput = document.getElementById('password' + reservationId);
-        const toggleIcon = passwordInput.nextElementSibling.querySelector('.toggle-password');
-
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
-        } else {
-            passwordInput.type = 'password';
-            toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
-        }
-    }
-</script>
