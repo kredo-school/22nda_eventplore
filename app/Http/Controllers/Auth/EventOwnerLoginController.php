@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Area;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -57,6 +58,13 @@ class EventOwnerLoginController extends Controller
             ]);
         }
 
+    }
+
+    public function showProfile()
+    {
+        $areas = Area::all();
+
+        return view('event-owners.profile.show', compact('areas'));
     }
 
     public function eventownerLogout(Request $request)

@@ -90,6 +90,7 @@ class UserRegisterController extends Controller
 
     }
 
+
     public function showUserSignUp()
     {
         return view('auth.users.sign-up');

@@ -35,6 +35,7 @@ class EventOwnerRegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners'],
             'phone_number'=>['required', 'string', 'max:255'],
             'address'=>['required', 'string', 'max:255'],
+            'avatar' => ['nullable', 'mimes:jpeg,jpg,png'],
             'role'=>'event-owner',
         ]);
     }
