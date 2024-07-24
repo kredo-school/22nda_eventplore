@@ -1,3 +1,4 @@
+@vite(['resources/js/showPassword.js'])
 
 <div class="modal fade" id="eventowner-delete-event{{$event->id}}">
     <div class="modal-dialog">
@@ -37,19 +38,3 @@
         </form>
     </div>
 </div>
-
-{{-- パスワード表示切替 --}}
-<script>
-    function togglePasswordVisibility(eventId) {
-        const passwordInput = document.getElementById('password' + eventId);
-        const toggleIcon = passwordInput.nextElementSibling.querySelector('.toggle-password');
-
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
-        } else {
-            passwordInput.type = 'password';
-            toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
-        }
-    }
-</script>

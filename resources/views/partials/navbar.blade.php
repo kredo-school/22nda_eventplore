@@ -54,7 +54,7 @@
                             <a class="dropdown-item" href="{{ route('users.profile.show') }}">
                                 <i class="fa-solid fa-circle-user fa-xl"></i>&nbsp; Profile
                             </a>
-                            <a class="dropdown-item" href="{{ route('user.reservation.list') }}">
+                            <a class="dropdown-item" href="{{ route('user.reservation.show') }}">
                                 <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; My Events
                             </a>
                             <hr>
