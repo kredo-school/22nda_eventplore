@@ -1,3 +1,4 @@
+// パスワードの表示切り替え
 function togglePasswordVisibility(id) {
     const passwordInput = document.getElementById('password' + id);
     const toggleIcon = document.getElementById('toggle-password' + id);
