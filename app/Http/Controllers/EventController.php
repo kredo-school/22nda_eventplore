@@ -41,6 +41,7 @@ class EventController extends Controller
     public function store(Request $request){
         $event = new Event();
 
+        $event = new Event();
         // Save the form data to the db
         $event->event_name = $request->event_name;
         $event->start_date = $request->start_date;
@@ -58,13 +59,15 @@ class EventController extends Controller
         $event->train = $request->train;
         $event->toilet = $request->toilet;
         $event->weather = $request->weather;
-        $event->category_id = $request->category_id;
+        $event->category_id = $request->category;
         $event->add_info = $request->add_info;
         $event->facebook_link = $request->facebook_link;
         $event->insta_link = $request->insta_link;
         $event->x_link = $request->x_link;
         $event->official = $request->official;
         $event->event_owner_id = Auth::id();
+        $event->latitude = $request->latitude;
+        $event->longitude = $request->longitude;
         $event->save();
 
         // $image->event()->associate($event);
@@ -103,17 +106,17 @@ class EventController extends Controller
             ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'events.id', '=', 'first_event_images.event_id')
             ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id')
             ->leftJoin(DB::raw('(SELECT event_id, SUM(num_tickets) as sum_tickets FROM reservations WHERE deleted_at IS NULL GROUP BY event_id) as sum_reservations'), 'events.id', '=', 'sum_reservations.event_id')
-            // ->groupBy('events.id')
+            ->groupBy('events.id')
             ->where('events.event_owner_id', $id);
 
         $events = $query->distinct()->paginate(6, [
-            'events.*',
+            'events.event_name',
             'areas.name as area_name',
             'avg_reviews.avg_star as avg_star',
             'event_images.image as event_image',
             'sum_reservations.sum_tickets as sum_tickets',
-        // ]);
-        ])->groupBy('events.id');
+
+        ]);
 
         return view('event-owners.events.show', compact('events', 'areas'));
     }
@@ -154,7 +157,7 @@ class EventController extends Controller
             ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id')
             ->leftJoin(DB::raw('(SELECT event_id, SUM(num_tickets) as sum_tickets FROM reservations WHERE deleted_at IS NULL GROUP BY event_id) as sum_reservations'), 'events.id', '=', 'sum_reservations.event_id')
             ->where('events.id', $id)
-            // ->groupBy('events.id')
+            ->groupBy('events.id')
             ->distinct()
             ->first();
 

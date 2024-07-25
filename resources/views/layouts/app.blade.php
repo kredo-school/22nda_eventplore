@@ -19,6 +19,9 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Fabicon -->
+    <link rel="icon" href="{{ asset('images/eventplore-logo_final-nobg_480.png') }}">
+
     {{-- garamond400 and raleway --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,12 +52,12 @@
             @include('partials.navbar')
         @endif
 
-        <main class="">
+        <main>
             @yield('content')
         </main>
 
         {{-- footer --}}
-        @if (!in_array(Route::currentRouteName(), ['home', 'event-menu', 'user.sign-in', 'user.sign-up', 'event-owners.sign-in', 'event-owners.sign-up','password.request','password.reset']))
+        @if (!in_array(Route::currentRouteName(), ['home', 'event-menu', 'user.sign-in', 'user.sign-up', 'event-owner.sign-in', 'event-owner.sign-up','password.request','password.reset']))
             @include('partials.footer')
         @endif
 

@@ -70,16 +70,6 @@ class EventOwnerLoginController extends Controller
 
     public function update(Request $request)
     {
-        // $request->validate([
-        //     'username' => ['required', 'string', 'max:255'],
-        //     'first_name' => ['required', 'string', 'max:255'],
-        //     'last_name' => ['required', 'string', 'max:255'],
-        //     'address' => ['nullable', 'string', 'max:255'],
-        //     'phone_number' => ['nullable', 'numeric'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners,email,' . Auth::id()],
-        //     'avatar' => ['nullable', 'file', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-        // ]);
-
         $eventOwner = Auth::user();
 
         $eventOwner->username = $request->input('username');
@@ -114,4 +104,19 @@ class EventOwnerLoginController extends Controller
         return redirect()->route('event-owner.sign-in');
     }
 
+    public function destroy(Request $request)
+    {
+        $user = Auth::user();
+
+        $user->delete();
+
+        // ログアウト処理
+        Auth::guard('event_owner')->logout();
+
+        // セッションの無効化とトークンの再生成
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('event-owner.sign-in');
+    }
 }

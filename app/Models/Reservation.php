@@ -8,16 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reservation extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory,SoftDeletes;
 
-    public function user()
-    {
+    public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function event()
-    {
+    public function event(){
         return $this->belongsTo(Event::class);
     }
-
 }

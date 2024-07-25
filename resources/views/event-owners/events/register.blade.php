@@ -21,39 +21,39 @@
                 <h2 class="h1">Register Event</h2>
                 {{-- ステータスバー --}}
                 <div class="timeline">
-                    <div class="timeline-item active">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-regular fa-calendar icon-md"></i>
+                            <i class="fa-regular fa-calendar icon-md-active" id="icon1"></i>
                         </div>
                     </div>
-                    <div class="timeline-item inactive">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-solid fa-users icon-md"></i>
+                            <i class="fa-solid fa-users icon-md" id="icon2"></i>
                         </div>
                     </div>
-                    <div class="timeline-item inactive">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-solid fa-icons icon-md"></i>
+                            <i class="fa-solid fa-icons icon-md" id="icon3"></i>
                         </div>
                     </div>
-                    <div class="timeline-item inactive">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-solid fa-location-dot icon-md"></i>
+                            <i class="fa-solid fa-location-dot icon-md" id="icon4"></i>
                         </div>
                     </div>
-                    <div class="timeline-item inactive">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-solid fa-image icon-md"></i>
+                            <i class="fa-solid fa-image icon-md" id="icon5"></i>
                         </div>
                     </div>
-                    <div class="timeline-item inactive">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-solid fa-circle-info icon-md"></i>
+                            <i class="fa-solid fa-circle-info icon-md" id="icon6"></i>
                         </div>
                     </div>
-                    <div class="timeline-item inactive">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-solid fa-up-right-from-square icon-md"></i>
+                            <i class="fa-solid fa-up-right-from-square icon-md" id="icon7"></i>
                         </div>
                     </div>
                 </div>

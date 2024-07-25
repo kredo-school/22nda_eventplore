@@ -137,7 +137,4 @@ class UserLoginController extends Controller
 
         return redirect()->route('user.sign-in');
     }
-
-
-
 }

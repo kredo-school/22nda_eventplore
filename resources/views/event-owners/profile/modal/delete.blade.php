@@ -1,14 +1,14 @@
 
 <div class="modal fade" id="eventowner-profile-delete">
     <div class="modal-dialog">
-        <form action="#" method="post">
+        <form action="{{ route('event-owner.delete') }}" method="post">
             @csrf
             @method('DELETE')
             <div class="modal-content">
                 <div class="modal-header border-0 d-flex justify-content-center align-items-center mt-3">
-                   <div class="modal-title h2" style="color: #F7142B;">
-                        <i class="fa-solid fa-trash-can fa-xl"></i> Delete Your Account
-                   </div>
+                    <div class="modal-title h2" style="color: #F7142B;">
+                            <i class="fa-solid fa-trash-can fa-xl"></i> Delete Your Account
+                    </div>
                 </div>
                 <div class="modal-body" style="font-family: EB Garamond">
                     <p class="text-center">
@@ -66,3 +66,4 @@
         }
     }
 </script>
+

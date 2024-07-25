@@ -38,7 +38,7 @@
                 <div class="row mb-2">
                     <div class="col-6">
                         <div class="content">
-                            <a href="{{ route('user.reservation.list') }}" class="text-decoration-none">
+                            <a href="{{ route('user.reservation.show') }}" class="text-decoration-none">
                                 <div class="card custom-bg border border-0 custom-card">
                                     <div class="card-body">
                                         <p class="card-text">Events</p>

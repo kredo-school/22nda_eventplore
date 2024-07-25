@@ -51,7 +51,7 @@ class UserRegisterController extends Controller
             'password' => ['required', 'string', 'min:6' ],
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:event_owners,users'],
+            'email' => ['required', 'string', 'email', 'max:255','unique:event_owners,email', 'unique:users,email'],
             'avatar' => ['file', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'role'=>'user',
         ]);
@@ -69,7 +69,6 @@ class UserRegisterController extends Controller
             }
         }
 
-
         $user = User::create([
             'username' => $validated['username'],
             'password' => Hash::make($validated['password']),
@@ -86,10 +85,7 @@ class UserRegisterController extends Controller
             // Authentication failed
             return back()->withErrors(['email' => 'Invalid credentials']);
         }
-
-
     }
-
 
     public function showUserSignUp()
     {
