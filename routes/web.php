@@ -102,6 +102,18 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('
 
 
 
+// パスワードのリセット関係
+// パスワードリセットリンクのリクエストフォームを表示
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+// パスワードリセットリンクをメールで送信する
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+// パスワードのリセットリンクを表示
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+// パスワードリセットを処理
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
+
 // Haruka
 // Show sign-up page for event-owner
 // Route::get('/auth/event-owners/sign-up', function () {

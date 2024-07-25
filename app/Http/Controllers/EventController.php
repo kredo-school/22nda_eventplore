@@ -40,8 +40,6 @@ class EventController extends Controller
 
     public function store(Request $request){
         $event = new Event();
-
-        $event = new Event();
         // Save the form data to the db
         $event->event_name = $request->event_name;
         $event->start_date = $request->start_date;
@@ -69,10 +67,6 @@ class EventController extends Controller
         $event->latitude = $request->latitude;
         $event->longitude = $request->longitude;
         $event->save();
-
-        // $image->event()->associate($event);
-        // $image->save();
-        // $event->save();
 
         $event_images = [];
         foreach($request->file("image") as $img){
@@ -181,10 +175,94 @@ class EventController extends Controller
 
         if (Hash::check($request->input('password'), $user->password)) {
             $this->reservation->destroy($id);
+            return redirect()->back()->with('success', 'Reservation deleted successfully.');
+        } else {
+            return redirect()->back()->withErrors(['password' => 'The password is incorrect.']);
+        }
+    }
+
+    public function showUserReservation()
+    {
+        $areas = Area::all();
+        $id = Auth::guard('web')->id();
+        $query = Reservation::query();
+
+        $subQuery = Reservation::select('event_id', DB::raw('SUM(num_tickets) as current_participants'))
+                                ->groupBy('event_id');
+
+        $query->leftJoin('events', 'reservations.event_id', '=', 'events.id')
+            ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'reservations.event_id', '=', 'first_event_images.event_id')
+            ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id')
+            ->leftJoinSub($subQuery, 'event_participants', function($join) {
+                $join->on('reservations.event_id', '=', 'event_participants.event_id');
+            })
+            ->groupBy('reservations.id')
+            ->where('user_id', $id);
+
+        $reservations = $query->distinct()->paginate(10, [
+            'reservations.*',
+            'events.price as price',
+            'events.event_name as event_name',
+            'events.max_participants as max_participants',
+            'events.start_date as start_date',
+            'events.finish_date as finish_date',
+            'events.start_time as start_time',
+            'events.finish_time as finish_time',
+            'events.app_deadline as app_deadline',
+            'event_participants.current_participants as current_participants',
+            'event_images.image as event_image',
+        ]);
+
+        foreach ($reservations as $reservation) {
+            $reservation->maxAvailableTickets = $reservation->max_participants - $reservation->current_participants;
+        }
+
+        return view('users.reservations.show', compact('reservations', 'areas'));
+    }
+
+    public function destroyUserReservation(Request $request, $id)
+    {
+        $request->validate([
+            'password' => 'required',
+        ]);
+
+        $user = Auth::guard('web')->user();
+
+        if (Hash::check($request->input('password'), $user->password)) {
+            $this->reservation->destroy($id);
 
             return redirect()->back()->with('success', 'Reservation deleted successfully.');
         } else {
             return redirect()->back()->withErrors(['password' => 'The password is incorrect.']);
         }
+    }
+
+    public function updateUserReservation(Request $request, $id)
+    {
+        $request->validate([
+            'num_tickets'      => 'required|integer|min:1',
+            'reservation_date' => 'required|date',
+            'time'             => 'required|date_format:H:i'
+        ]);
+
+        $reservation = Reservation::findOrFail($id);
+        $event = Event::findOrFail($reservation->event_id);
+
+        $currentParticipants = Reservation::where('event_id', $event->id)
+                                        ->whereNull('deleted_at')
+                                        ->sum('num_tickets');
+
+        $totalParticipants = $currentParticipants - $reservation->num_tickets + $request->num_tickets;
+
+        if ($totalParticipants > $event->max_participants) {
+            return redirect()->back()->withErrors(['num_tickets' => 'The number of tickets exceeds the limit.']);
+        }
+
+        $reservation->num_tickets = $request->num_tickets;
+        $reservation->reservation_date = $request->reservation_date;
+        $reservation->time = $request->time;
+        $reservation->save();
+
+        return redirect()->back()->with('success', 'Reservation updated successfully!');
     }
 }
