@@ -119,8 +119,8 @@
                         @endguest
                         <!-- Dropdown 2: Area and Calendar Search -->
                         <li class="nav-item px-3">
-                            <form action="{{ route('ham.search') }}" class="d-flex flex-column">
-                                <select class="form-select my-2">
+                            <form action="{{ route('ham.search') }}" method="GET" class="d-flex flex-column">
+                                <select class="form-select my-2" id="area" name="area">
                                     <option selected>Search by Area</option>
                                     @foreach ($areas as $area)
                                         <option value="{{ $area->id }}">{{ $area->name }}</option>

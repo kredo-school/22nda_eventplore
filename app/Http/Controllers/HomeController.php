@@ -32,8 +32,24 @@ class HomeController extends Controller
     {
         $areas = Area::all();
         $categories = Category::all();
+        
+        $query = Event::query();
 
-        return view('home.home', compact('areas', 'categories'));
+        // テーブル結合
+        $query->leftJoin('areas', 'events.area_id', '=', 'areas.id')
+            ->leftJoin(DB::raw('(SELECT event_id, AVG(star) as avg_star FROM reviews GROUP BY event_id) as avg_reviews'), 'events.id', '=', 'avg_reviews.event_id')
+            ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'events.id', '=', 'first_event_images.event_id')
+            ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id')
+            ->groupBy('events.id');
+
+        $events = $query->distinct()->get([
+            'events.*',
+            'areas.name as area_name',
+            'avg_reviews.avg_star as avg_star',
+            'event_images.image as image',
+        ]);
+
+        return view('home.home', compact('areas', 'categories', 'events'));
     }
 
     public function show(Request $request)
@@ -49,12 +65,11 @@ class HomeController extends Controller
         $query = Event::query();
 
         // テーブル結合
-        $query->leftJoin('event_categories', 'events.id', '=', 'event_categories.event_id')
-            ->leftJoin('areas', 'events.area_id', '=', 'areas.id')
+        $query->leftJoin('areas', 'events.area_id', '=', 'areas.id')
             ->leftJoin(DB::raw('(SELECT event_id, AVG(star) as avg_star FROM reviews GROUP BY event_id) as avg_reviews'), 'events.id', '=', 'avg_reviews.event_id')
             ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'events.id', '=', 'first_event_images.event_id')
             ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id')
-            ->groupBy('events.id');
+            ->groupBy('events.id', 'events.event_name', 'events.details', 'events.start_date', 'events.finish_date', 'events.area_id', 'areas.name', 'avg_reviews.avg_star', 'event_images.image');
 
         // 日付選択時
         if (!empty($date)) {
@@ -79,16 +94,16 @@ class HomeController extends Controller
             $query->whereIn('event_categories.category_id', $categories);
         }
 
-        $search_events = $query->distinct()->get([
+        $events = $query->distinct()->get([
             'events.*',
             'areas.name as area_name',
             'avg_reviews.avg_star as avg_star',
-            'event_images.image as event_image',
+            'event_images.image as image',
         ]);
         // ])->groupBy('events.id');
 
 
-        return view('home.event-menu', compact('search_events', 'areas'));
+        return view('home.event-menu', compact('events', 'areas'));
     }
 
     public function searchFromNav(Request $request)
@@ -102,8 +117,7 @@ class HomeController extends Controller
         $query = Event::query();
 
         // Join necessary tables
-        $query->leftJoin('event_categories', 'events.id', '=', 'event_categories.event_id')
-                ->leftJoin('areas', 'events.area_id', '=', 'areas.id')
+        $query->leftJoin('areas', 'events.area_id', '=', 'areas.id')
                 ->leftJoin(DB::raw('(SELECT event_id, AVG(star) as avg_star FROM reviews GROUP BY event_id) as avg_reviews'), 'events.id', '=', 'avg_reviews.event_id')
                 ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'events.id', '=', 'first_event_images.event_id')
                 ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id');
@@ -122,14 +136,14 @@ class HomeController extends Controller
         }
 
         // Retrieve distinct events
-        $search_events = $query->distinct()->get([
+        $events = $query->distinct()->get([
             'events.*',
             'areas.name as area_name',
             'avg_reviews.avg_star as avg_star',
-            'event_images.image as event_image',
+            'event_images.image as image',
         ]);
 
-        return view('home.event-menu', compact('search_events', 'areas'));
+        return view('home.event-menu', compact('events', 'areas'));
     }
 
     public function searchFromHam(Request $request)
@@ -143,8 +157,7 @@ class HomeController extends Controller
         $query = Event::query();
 
         // Join necessary tables
-        $query->leftJoin('event_categories', 'events.id', '=', 'event_categories.event_id')
-                ->leftJoin('areas', 'events.area_id', '=', 'areas.id')
+        $query->leftJoin('areas', 'events.area_id', '=', 'areas.id')
                 ->leftJoin(DB::raw('(SELECT event_id, AVG(star) as avg_star FROM reviews GROUP BY event_id) as avg_reviews'), 'events.id', '=', 'avg_reviews.event_id')
                 ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'events.id', '=', 'first_event_images.event_id')
                 ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id');
@@ -163,13 +176,13 @@ class HomeController extends Controller
         }
 
         // Retrieve distinct events
-        $search_events = $query->distinct()->get([
+        $events = $query->distinct()->get([
             'events.*',
             'areas.name as area_name',
             'avg_reviews.avg_star as avg_star',
-            'event_images.image as event_image',
+            'event_images.image as image',
         ]);
 
-        return view('home.event-menu', compact('search_events', 'areas'));
+        return view('home.event-menu', compact('events', 'areas'));
     }
 }

@@ -3,10 +3,12 @@
 @section('title', 'Event Menu')
 
 @section('content')
-@vite(['resources/js/mapbox.js'])
+@vite(['resources/js/mapbox-search.js'])
 
     <link rel="stylesheet" href="{{ asset('css/show-event/event-menu.css') }}">
     <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/mapbox-gl-animated-popup@latest"></script>
 
     {{-- menu offcanvas --}}
     <div class="cp_cont">
@@ -20,15 +22,15 @@
                         <h2 class="h1 ms-1 mt-3"><i class="fa-solid fa-clipboard-list me-2"></i>Event menu list</h2>
                     </div>
                     {{-- event list --}}
-                    @forelse ($search_events as $event)
+                    @forelse ($events as $event)
                         <div class="col-lg-6 mb-4">
                             <a href="" class="text-decoration-none">
                                 {{-- event card --}}
                                 <div class="card shadow border-0">
-                                    @if (is_null($event->event_image))
+                                    @if (is_null($event->image))
                                         <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
                                     @else
-                                        <img src="{{ $event->event_image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                                        <img src="{{ $event->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
                                     @endif
                                     <div class="card-body px-2">
                                         <div class="row align-items-center">
@@ -106,6 +108,7 @@
     {{-- map --}}
     <div>
         <div id="map"></div>
+        <script id="event-data" type="application/json">{!! $events->toJson() !!}</script>
     </div>
 
 @endsection

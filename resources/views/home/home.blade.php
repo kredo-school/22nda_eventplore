@@ -8,6 +8,7 @@
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.14/index.global.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/mapbox-gl-animated-popup@latest"></script>
 
     <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-5 overflow-auto sidebar">
@@ -60,10 +61,22 @@
             </form>
         </div>
 
+        {{-- Pass category data to map popup --}}
+        <div class="visually-hidden">
+            @forelse ($events as $event)
+                @forelse($event->EventCategories as $event_category)
+                    {{ $event_category->category->name }}
+                @empty
+                @endforelse
+            @empty
+            @endforelse
+        </div>
+        
         <div class="col-lg-9 col-md-8 col-sm-7 ps-0">
             {{-- map --}}
             <div>
                 <div id="map"></div>
+                <script id="event-data" type="application/json">{!! $events->toJson() !!}</script>
             </div>
         </div>
     </div>
