@@ -26,10 +26,10 @@
             <a href="" class="text-decoration-none">
                 {{-- event list --}}
                 <div class="card shadow border-0 w-100 me-2">
-                    @if (is_null($event->event_image))
+                    @if ($event->eventImages->isEmpty())
                         <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top">
                     @else
-                        <img src="{{ $event->event_image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top">
+                        <img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top">
                     @endif
                     <div class="card-body px-2">
                         <div class="row align-items-center">
@@ -39,17 +39,17 @@
                             </div>
                             {{-- review --}}
                             <div class="col d-flex justify-content-end mb-1 me-1">
-                                @if (is_null($event->avg_star))
+                                @if ($event->reviews->isEmpty())
                                     <h6 class="text-muted overflow_cut">No Reviews</h6><h4 style="visibility: hidden">.</h4>
                                 @else
-                                    <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1"></i>{{ number_format($event->avg_star, 1) }}</h4>
+                                    <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1"></i>{{ number_format($event->reviews->avg('star'), 1) }}</h4>
                                 @endif
                             </div>
                         </div>
                         {{-- information --}}
                         <div class="row align-items-center gx-1 mb-2">
                             <div class="col-4 overflow_dot">
-                                <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area_name }} area
+                                <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area->name }} area
                             </div>
                             @php
                                 $loop_count = 0;
@@ -102,10 +102,13 @@
                         </div>
                         <div class="text-end" style="width: 35%;">
                             <h3 class="h3 mb-0">
-                                @if (is_null($event->sum_tickets))
+                                @php
+                                    $totalTickets = $reservations->sum('num_tickets');
+                                @endphp
+                                @if ($totalTickets == 0)
                                     0
                                 @else
-                                    {{ number_format($event->sum_tickets) }}
+                                    {{ number_format($totalTickets) }}
                                 @endif
                             </h3>
                         </div>
@@ -119,10 +122,15 @@
                         </div>
                         <div class="text-end" style="width: 35%;">
                             <h3 class="h3 mb-0">
-                                @if (is_null($event->sum_tickets))
+                                @php
+                                    $totalTickets = $reservations->sum('num_tickets');
+                                @endphp
+                                @if ($event->price == 0)
+                                    Free
+                                @elseif ($totalTickets == 0)
                                     ¥0
                                 @else
-                                    ¥{{ number_format($event->sum_tickets * $event->price) }}
+                                    ¥{{ number_format($totalTickets * $event->price) }}
                                 @endif
                             </h3>
                         </div>
@@ -154,11 +162,11 @@
                             <td>{{ $reservation->user->first_name }} {{ $reservation->user->last_name }}</td>
                             <td>{{ $reservation->num_tickets }}</td>
                             <td>
-                                @if (is_null($event->price))
-                                ¥0
-                            @else
-                                ¥{{ number_format($event->price * $reservation->num_tickets) }}
-                            @endif
+                                @if ($reservation->event->price == 0)
+                                    Free
+                                @else
+                                    ¥{{ number_format($reservation->event->price * $reservation->num_tickets) }}
+                                @endif
                             </td>
                             <td>{{ date('Y/m/d', strtotime($reservation->reservation_date)) }}</td>
                             <td>{{ date('H:i', strtotime($reservation->time)) }}</td>

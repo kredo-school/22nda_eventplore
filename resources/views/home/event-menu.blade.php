@@ -20,15 +20,15 @@
                         <h2 class="h1 ms-1 mt-3"><i class="fa-solid fa-clipboard-list me-2"></i>Event menu list</h2>
                     </div>
                     {{-- event list --}}
-                    @forelse ($search_events as $event)
+                    @forelse ($events as $event)
                         <div class="col-lg-6 mb-4">
                             <a href="" class="text-decoration-none">
                                 {{-- event card --}}
                                 <div class="card shadow border-0">
-                                    @if (is_null($event->event_image))
+                                    @if ($event->eventImages->isEmpty())
                                         <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
                                     @else
-                                        <img src="{{ $event->event_image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                                        <img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
                                     @endif
                                     <div class="card-body px-2">
                                         <div class="row align-items-center">
@@ -38,17 +38,17 @@
                                             </div>
                                             {{-- review --}}
                                             <div class="col d-flex justify-content-end mb-1 me-1">
-                                                @if (is_null($event->avg_star))
+                                                @if ($event->reviews->isEmpty())
                                                     <h6 class="text-muted overflow_cut">No Reviews</h6><h4 style="visibility: hidden">.</h4>
                                                 @else
-                                                    <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1"></i>{{ number_format($event->avg_star, 1) }}</h4>
+                                                    <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1"></i>{{ number_format($event->reviews->avg('star'), 1) }}</h4>
                                                 @endif
                                             </div>
                                         </div>
                                         {{-- information --}}
                                         <div class="row align-items-center gx-1 mb-2">
                                             <div class="col-4 overflow_dot">
-                                                <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area_name }} area
+                                                <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area->name }} area
                                             </div>
                                             @php
                                                 $loop_count = 0;
