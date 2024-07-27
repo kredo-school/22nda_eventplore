@@ -41,7 +41,7 @@ class HomeController extends Controller
     {
         $areas = Area::all();
         $categories = Category::all();
-
+        
         $date       = $request->input('date');
         $keyword    = $request->input('keyword');
         $area       = $request->input('area');
