@@ -11,13 +11,13 @@
                     <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="logo" class="mt-5 mb-1 w-25">
                     <h2 class="h1 mb-2 text-align-center">Sign Up</h2>
 
-                    <div class="d-flex flex-column align-items-center ">
-                        <div class="w-75 text-start">
-                            <div class="d-flex flex-wrap justify-content-between mb-2">
-                                <div class="flex-fill me-2 mb-1" style="min-width: 45%;">
+                    <div class="row justify-content-center my-3 w-75">
+                        <div class="col-10 text-start">
+                            <div class="row mb-2">
+                                <div class="col mb-1 px-1">
                                     <label for="username" class="form-label fw-bold mb-1">Username*</label>
                                     <input id="username" type="text" class="form-control" name="username" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C">
-
+                    
                                     @error('username')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -25,35 +25,38 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="flex-fill mb-3">
-                                <label for="password" class="form-label fw-bold">Password*</label>
-                                <div class="input-group">
-                                    <input type="password" id="password" name="password" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password" required >
-                                    <div class="input-group-text d-flex justify-content-center align-items-center mb-0" style="width: 40px; height: 38px;">
-                                        <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer; "></i>
+                            <div class="row mb-2">
+                                <div class="col mb-1 px-1">
+                                    <label for="password" class="form-label fw-bold mb-1">Password*</label>
+                                    <div class="input-group">
+                                        <input type="password" id="password" name="password" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password" required>
+                                        <div class="input-group-text">
+                                            <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer;"></i>
+                                        </div>
                                     </div>
+                                    
+                                    @error('password')
+                                        <span class="invalid-feedback text-start" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                @error('password')
-                                    <span class="invalid-feedback text-start" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
-                            <div class="d-flex flex-wrap justify-content-between mb-2">
-                                <div class="flex-fill me-2 mb-1" style="min-width: 45%;">
+                            <div class="row mb-2">
+                                <div class="col-6 mb-1 px-1">
                                     <label for="first-name" class="form-label fw-bold mb-1">First Name*</label>
                                     <input id="firstname" type="text" class="form-control" name="firstname" required autocomplete="firstname" autofocus placeholder="First name" style="border: 1px solid #84947C">
-
+                    
                                     @error('firstname')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="flex-fill mb-1" style="min-width: 45%;">
+                                <div class="col-6 mb-1 px-1">
                                     <label for="last-name" class="form-label fw-bold mb-1">Last Name*</label>
                                     <input id="lastname" type="text" class="form-control" name="lastname" required autocomplete="lastname" autofocus placeholder="Last name" style="border: 1px solid #84947C">
-
+                    
                                     @error('lastname')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -61,21 +64,21 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="d-flex flex-wrap justify-content-between mb-2">
-                                <div class="flex-fill me-2 mb-1" style="min-width: 45%;">
+                            <div class="row mb-2">
+                                <div class="col-6 mb-1 px-1">
                                     <label for="email" class="form-label fw-bold mb-1">Email*</label>
                                     <input type="email" name="email" id="email" class="form-control" required autocomplete="email" autofocus placeholder="email@eventplore.com" style="border: 1px solid #84947C">
-
+                    
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="flex-fill mb-1" style="min-width: 45%;">
+                                <div class="col-6 mb-1 px-1">
                                     <label for="phone_number" class="form-label fw-bold mb-1">Phone Number*</label>
                                     <input type="tel" name="phone_number" id="phone_number" class="form-control" required autocomplete="tel" autofocus placeholder="0xx-xxxx-xxxx" style="border: 1px solid #84947C">
-
+                    
                                     @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -83,8 +86,8 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="d-flex flex-wrap justify-content-between mb-2">
-                                <div class="flex-fill w-100 mb-1">
+                            <div class="row mb-2">
+                                <div class="col mb-1 px-1">
                                     <label for="address" class="form-label fw-bold mb-1">Address*</label>
                                     <input type="text" name="address" id="address" class="form-control" required autocomplete="address" autofocus placeholder="1-1-1 Minato-ku, Tokyo, Japan" style="border: 1px solid #84947C">
                                     @error('address')
@@ -93,7 +96,9 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="flex-fill w-100 my-1">
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col mb-1 px-1">
                                     <label for="avatar" class="form-label fw-bold mb-1"><i class="fa-solid fa-circle-user"></i>Avatar</label>
                                     <input type="file" name="avatar" id="avatar" class="form-control" style="border: 1px solid #84947C">
                                     @error('avatar')
