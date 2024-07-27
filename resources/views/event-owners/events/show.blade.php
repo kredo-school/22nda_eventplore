@@ -29,10 +29,10 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     {{-- event card --}}
                     <div class="card shadow border-0">
-                        @if (is_null($event->event_image))
+                        @if ($event->eventImages->isEmpty())
                             <a href=""><img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top"></a>
                         @else
-                            <a href=""><img src="{{ $event->event_image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top"></a>
+                            <a href=""><img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top"></a>
                         @endif
                         <div class="card-body">
                             <div class="row align-items-center mb-3">
@@ -43,12 +43,17 @@
                                 <div class="col d-flex justify-content-end">
                                     {{-- participants --}}
                                     <a href="{{ route('reservation.show', $event->id) }}" class="btn btn-outline-dark me-2">
-                                        @if (is_null($event->sum_tickets))
+                                        @if ($event->reservations->isEmpty())
                                             <i class="fa-regular fa-user me-1"></i>0
-                                        @elseif ($event->sum_tickets >= 10)
-                                            <i class="fa-solid fa-users me-1"></i>{{ $event->sum_tickets }}
                                         @else
-                                            <i class="fa-solid fa-user me-1"></i>{{ $event->sum_tickets }}
+                                            @php
+                                                $totalReservations = $event->reservations->sum('num_tickets');
+                                            @endphp
+                                            @if ($totalReservations >= 10)
+                                                <i class="fa-solid fa-users me-1"></i>{{ $totalReservations }}
+                                            @else
+                                                <i class="fa-solid fa-user me-1"></i>{{ $totalReservations }}
+                                            @endif
                                         @endif
                                     </a>
                                     {{-- edit --}}
@@ -62,7 +67,7 @@
                             {{-- information --}}
                             <div class="row align-items-center gx-1 mb-2">
                                 <div class="col-4 overflow_dot">
-                                    <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area_name }} area
+                                    <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area->name }} area
                                 </div>
                                 @php
                                     $loop_count = 0;
