@@ -25,7 +25,7 @@
                             <i class="fa-solid fa-circle-user fa-8x"></i>
                         </span>
                     @endif
-                    
+
                     </div>
                         <p class="h3 mt-2">{{ $user->username }}</p>
 
@@ -41,6 +41,9 @@
                                 <i class="fa-solid fa-eye-slash"></i>
                             </div> --}}
                         </div>
+                        @error('password')
+                            <strong class="text-danger">{{ $message }}</strong>
+                        @enderror
                     </div>
 
                 </div>
@@ -49,6 +52,7 @@
                     <button type="button" class="btn btn-outline-red me-5 px-5 py-2" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-red px-5 py-2">Delete</button>
                 </div>
+
             </div>
         </form>
     </div>
@@ -68,4 +72,11 @@
             toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
         }
     }
+
+    //delete modalを保持したままエラー表示
+    @if ($errors->any())
+        $(document).ready(function() {
+            $('#user-profile-delete').modal('show');
+        });
+    @endif
 </script>

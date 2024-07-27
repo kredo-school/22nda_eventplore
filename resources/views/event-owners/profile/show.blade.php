@@ -48,21 +48,31 @@
                     </div>
                 </div>
 
-                <div class="contact-info text-center">
-                    <div class="contact-item">
-                        <span class="text-wrap">
-                            <i class="fa-solid fa-location-dot"></i>&nbsp;
-                            {{ $user->address }}</span>
+                <div class="d-flex flex-column justify-content-center align-items-center w-50 mt-1 ms-5">
+                    <!-- Address -->
+                    <div class="row d-flex justify-content-between align-items-center w-100">
+                        <div class="col-2 text-center">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="col-10 d-flex text-start px-0">
+                            {{ $user->address }}
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <span>
-                            <i class="fa-solid fa-mobile-screen"></i>&nbsp;
-                            {{ $user->phone_number }}</span>
+                    <div class="row d-flex justify-content-between align-items-center w-100">
+                        <div class="col-2 text-center">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                        </div>
+                        <div class="col-10 d-flex px-0">
+                            {{ $user->phone_number }}
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <span>
-                            <i class="fa-regular fa-envelope"></i>&nbsp;
-                            {{ $user->email }}</span>
+                    <div class="row d-flex justify-content-between align-items-center w-100">
+                        <div class="col-2 text-center">
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <div class="col-10 d-flex px-0">
+                            {{ $user->email }}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
-    <div class="row d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
-        <div class="col-md-6 p-0 d-flex flex-column justify-content-center">
+<div class="p-0 overflow-auto full-height">
+    <div class="row d-flex justify-content-center align-items-stretch full-height">
+        <div class="col-md-6 p-0 d-flex flex-column justify-content-center form-container">
             <form method="POST" action="{{ route('event-owner.register') }}" enctype="multipart/form-data">
                 @csrf
 
@@ -11,7 +11,7 @@
                     <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="logo" class="mt-5 mb-1 w-25">
                     <h2 class="h1 mb-2 text-align-center">Sign Up</h2>
 
-                    <div class="d-flex flex-column align-items-center ">
+                    <div class="d-flex flex-column align-items-center">
                         <div class="w-75 text-start">
                             <div class="d-flex flex-wrap justify-content-between mb-2">
                                 <div class="flex-fill me-2 mb-1" style="min-width: 45%;">
@@ -128,7 +128,7 @@
 
             </form>
         </div>
-        <div class="col p-0">
+        <div class="col-md-6 p-0">
             <img src="{{ asset('images/sign-up/redd-f-Bxzrd0p6yOM-unsplash.jpg') }}" alt="register event owner photo" class="w-100 h-100" style="object-fit: cover;">
         </div>
     </div>

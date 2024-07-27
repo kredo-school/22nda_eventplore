@@ -33,12 +33,15 @@
                         <div class="input-group mb-3 position-relative">
                             <input id="password" type="password" name="password" required autocomplete="new-password" class="form-control" placeholder="Password">
                             <div class="input-group-text d-flex justify-content-center align-items-center mb-0" style="width: 40px; height: 38px;">
-                                <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer; "></i>
+                                <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer;"></i>
                             </div>
                             {{-- <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center" >
                                 <i class="fa-solid fa-eye-slash"></i>
                             </div> --}}
                         </div>
+                        @error('password')
+                            <strong class="text-danger">{{ $message }}</strong>
+                        @enderror
                     </div>
 
                 </div>
@@ -65,5 +68,12 @@
             toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
         }
     }
+
+    //delete modalを保持したままエラー表示
+    @if ($errors->any())
+        $(document).ready(function() {
+            $('#eventowner-profile-delete').modal('show');
+        });
+    @endif
 </script>
 

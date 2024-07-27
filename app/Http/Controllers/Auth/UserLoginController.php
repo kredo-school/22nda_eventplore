@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\Area;
+use App\Http\Controllers\Auth\User;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User as ModelsUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\User as AuthUser;
+use Illuminate\Support\Facades\Hash;
 
 class UserLoginController extends Controller
 {
@@ -74,20 +78,19 @@ class UserLoginController extends Controller
         public function showProfile()
     {
         $areas = Area::all();
-        $user = Auth::user();
+        $user = ModelsUser::find(auth()->id());
 
         $reservations = $user->reservations; // ユーザーの予約全てを取得
 
         $reservationCount = $user->reservations()->count(); // ユーザーの予約数をカウント
         $commentCount = Review::where('user_id', $user->id)->count(); // コメント数のカウント
 
-
         return view('users.profile.show', compact('areas', 'user', 'reservationCount', 'commentCount', 'reservations'));
     }
 
     public function update(Request $request)
     {
-        $user = Auth::user();
+        $user = ModelsUser::find(auth()->id());
 
         $user->username = $request->input('username', $user->username);
         $user->first_name = $request->input('first_name', $user->first_name);
@@ -124,17 +127,25 @@ class UserLoginController extends Controller
 
     public function destroy(Request $request)
     {
-        $user = Auth::user();
+        $user = AuthUser::find(auth()->id());
 
-        $user->delete();
+        if (Hash::check($request->password, $user->password)) {
 
-        // ログアウト処理
-        Auth::guard('web')->logout();
+            $user->delete();
 
-        // セッションの無効化とトークンの再生成
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            // ログアウト処理
+            Auth::guard('web')->logout();
 
-        return redirect()->route('user.sign-in');
+            // セッションの無効化とトークンの再生成
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('user.sign-in');
+        } else {
+            // パスワードが一致しない場合
+            return back()->withErrors([
+                'password' => 'The entered password is incorrect.',
+            ])->withInput();
+        }
     }
 }

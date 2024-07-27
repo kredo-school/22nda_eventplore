@@ -6,8 +6,11 @@ use App\Models\Area;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\EventOwner;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
+
 
 class EventOwnerLoginController extends Controller
 {
@@ -63,14 +66,15 @@ class EventOwnerLoginController extends Controller
     public function showProfile()
     {
         $areas = Area::all();
-        $user = Auth::guard('event_owner')->user();
+        $user = EventOwner::find(auth()->id());
+
         $eventCount = $user->events()->count();
         return view('event-owners.profile.show', compact('areas', 'user', 'eventCount'));
     }
 
     public function update(Request $request)
     {
-        $eventOwner = Auth::user();
+        $eventOwner = EventOwner::find(auth()->id());
 
         $eventOwner->username = $request->input('username');
         $eventOwner->first_name = $request->input('first_name');
@@ -106,17 +110,25 @@ class EventOwnerLoginController extends Controller
 
     public function destroy(Request $request)
     {
-        $user = Auth::user();
+        $user = EventOwner::find(auth()->id());
 
-        $user->delete();
+        if (Hash::check($request->password, $user->password)) {
 
-        // ログアウト処理
-        Auth::guard('event_owner')->logout();
+            $user->delete();
 
-        // セッションの無効化とトークンの再生成
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            // ログアウト処理
+            Auth::guard('event_owner')->logout();
 
-        return redirect()->route('event-owner.sign-in');
+            // セッションの無効化とトークンの再生成
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('event-owner.sign-in');
+        } else {
+            // パスワードが一致しない場合
+            return back()->withErrors([
+                'password' => 'The entered password is incorrect.',
+            ])->withInput();
+        }
     }
 }
