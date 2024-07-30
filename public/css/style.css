@@ -111,8 +111,8 @@ color-black:#000000;
     border-radius: 50%;
 }
 .avatar-lg{
-    width: 7rem;
-    height: 7rem;
+    width: 9rem;
+    height: 9rem;
     object-fit: cover;
     border-radius: 50%;
 }

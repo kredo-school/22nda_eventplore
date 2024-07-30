@@ -135,14 +135,14 @@ class EventController extends Controller
 
         if (Hash::check($request->input('password'), $user->password)) {
             $reservation = Reservation::find($id);
-            
+
             if (!$reservation) {
                 return redirect()->back()->withErrors(['error' => 'Reservation not found.']);
             }
-    
+
             $eventId = $reservation->event->id;
             $reservation->delete();
-            
+
             return redirect()->route('reservation.show', $eventId)->with('success', 'Reservation deleted successfully.');
         } else {
             return redirect()->back()->withErrors(['password' => 'The password is incorrect.']);
@@ -173,7 +173,7 @@ class EventController extends Controller
 
         if (Hash::check($request->input('password'), $user->password)) {
             $this->reservation->destroy($id);
-    
+
             return redirect()->route('user.reservation.show')->with('success', 'Reservation deleted successfully.');
         } else {
             return redirect()->back()->withErrors(['password' => 'The password is incorrect.']);

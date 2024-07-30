@@ -1,7 +1,19 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 #app {
     display: flex;
     flex-direction: column;
-    /* min-height: 100vh; */
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* コンテンツ領域がフッターまでスペースを占めるようにする */
 }
 
 .navbar-top-bottom-border {
@@ -25,8 +37,6 @@
     border-bottom: 2px solid #84947C;
     font-family: 'EB Garamond', serif;
     background-color: #FFFFFF;
-    /* position: static;
-    bottom: 0; */
     color: #84947C;
     text-align: center;
     padding-top: 20px;

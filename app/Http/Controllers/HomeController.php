@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\Event;
+use App\Models\Reservation;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -144,4 +145,21 @@ class HomeController extends Controller
 
         return view('home.event-menu', compact('events', 'areas'));
     }
+
+
+    public function showEvent($id){
+        $areas = Area::all();
+        $reservation = Reservation::find($id);
+        $event = Event::with('reviews')->findOrFail($id);
+        $averageRating = $event->reviews->avg('star');
+        $ratingDistribution = $event->reviews->groupBy('star')->map->count();
+
+        if (!$reservation) {
+            return redirect()->back();
+        }
+        return view('home.show-event', compact('areas', 'reservation', 'event', 'averageRating', 'ratingDistribution'));
+    }
+
+
+
 }
