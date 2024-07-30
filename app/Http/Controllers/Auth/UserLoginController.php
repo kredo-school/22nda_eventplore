@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\Area;
-use App\Http\Controllers\Auth\User;
+use App\Models\User;
 use App\Models\Review;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User as ModelsUser;
@@ -127,13 +128,18 @@ class UserLoginController extends Controller
 
     public function destroy(Request $request)
     {
-        $user = AuthUser::find(auth()->id());
+        $request->validate([
+            'password' => 'required',
+        ]);
 
-        if (Hash::check($request->password, $user->password)) {
+        $user = User::find(auth()->id());
 
+        if (Hash::check($request->input('password'), $user->password)) {
+
+            $user->reservations()->delete();
+            $user->reviews()->delete();
             $user->delete();
 
-            // ログアウト処理
             Auth::guard('web')->logout();
 
             // セッションの無効化とトークンの再生成

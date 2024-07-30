@@ -1,3 +1,4 @@
+@vite(['resources/js/delete_modal.js'])
 
 <div class="modal fade" id="eventowner-profile-delete">
     <div class="modal-dialog">
@@ -54,26 +55,4 @@
     </div>
 </div>
 
-{{-- 通常の切り替え --}}
-<script>
-    function togglePasswordVisibility() {
-        const passwordInput = document.getElementById('password');
-        const toggleIcon = document.querySelector('.toggle-password');
-
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
-        } else {
-            passwordInput.type = 'password';
-            toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
-        }
-    }
-
-    //delete modalを保持したままエラー表示
-    @if ($errors->any())
-        $(document).ready(function() {
-            $('#eventowner-profile-delete').modal('show');
-        });
-    @endif
-</script>
 

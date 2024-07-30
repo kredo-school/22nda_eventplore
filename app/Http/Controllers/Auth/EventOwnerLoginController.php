@@ -110,11 +110,18 @@ class EventOwnerLoginController extends Controller
 
     public function destroy(Request $request)
     {
-        $user = EventOwner::find(auth()->id());
+        $request->validate([
+            'password' => 'required',
+        ]);
 
-        if (Hash::check($request->password, $user->password)) {
+        $eventOwner = EventOwner::find(auth()->id());
 
-            $user->delete();
+        if (Hash::check($request->input('password'), $eventOwner->password)) {
+
+            // 関連するイベントを削除
+            $eventOwner->events()->delete();
+
+            $eventOwner->delete();
 
             // ログアウト処理
             Auth::guard('event_owner')->logout();
@@ -131,4 +138,5 @@ class EventOwnerLoginController extends Controller
             ])->withInput();
         }
     }
+
 }
