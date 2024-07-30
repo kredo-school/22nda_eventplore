@@ -100,7 +100,7 @@
                 </div>
             </form>
         </div>
-        <div class="col p-0">
+        <div class="col-md-6 p-0">
             <img src="{{ asset('images/sign-up/juan-manuel-nunez-mendez-EIo0V6oZJtQ-unsplash.jpg') }}" alt="register event owner photo" class="w-100 h-100" style="object-fit: cover;">
         </div>
     </div>

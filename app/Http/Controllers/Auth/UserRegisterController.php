@@ -69,7 +69,6 @@ class UserRegisterController extends Controller
             }
         }
 
-
         $user = User::create([
             'username' => $validated['username'],
             'password' => Hash::make($validated['password']),
@@ -86,10 +85,7 @@ class UserRegisterController extends Controller
             // Authentication failed
             return back()->withErrors(['email' => 'Invalid credentials']);
         }
-
-
     }
-
 
     public function showUserSignUp()
     {

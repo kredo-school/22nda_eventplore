@@ -73,7 +73,7 @@
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%);
+    /* transform: translateX(-50%); */
     margin-top: 0.5rem;
     min-width: 120px;
 }
@@ -101,7 +101,7 @@
 
 .contact-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 10px;
 }
 
@@ -112,6 +112,10 @@
 
 .contact-item span {
     flex: 1;
-    text-align: center;
+    word-break: break-word; /* 長い単語を折り返す */
+    overflow-wrap: break-word; /* 長い単語やURLを折り返す */
+    white-space: normal; /* テキストの折り返しを許可 */
+    display: inline-block;
+    max-width: calc(100% - 40px); /* アイコンのスペースを引いた幅にする */
 }
-/* end */
+
