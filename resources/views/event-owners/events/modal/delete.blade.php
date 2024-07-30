@@ -8,10 +8,10 @@
             <div class="modal-content">
                 <div class="modal-header border-0">
                     <div class="img-container modal-title w-100">
-                        @if (is_null($event->event_image))
+                        @if ($event->eventImages->isEmpty())
                             <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="w-100 rounded" style="object-fit: cover; height: 300px;">
                         @else
-                            <img src="{{ $event->event_image }}" alt="{{ $event->event_name }}" class="w-100 rounded" style="object-fit: cover; height: 300px;">
+                            <img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="w-100 rounded" style="object-fit: cover; height: 300px;">
                         @endif
                     </div>
                 </div>

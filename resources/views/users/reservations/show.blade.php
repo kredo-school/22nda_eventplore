@@ -46,13 +46,13 @@
                 @forelse ($reservations as $reservation)
                     <tr>
                         <td>{{ $loop->iteration + ($reservations->currentPage() - 1) * $reservations->perPage() }}</td>
-                        <td>{{ $reservation->event_name }}</td>
+                        <td>{{ $reservation->event->event_name }}</td>
                         <td>{{ $reservation->num_tickets }}</td>
                         <td>
-                            @if (is_null($reservation->price))
-                            ¥0
+                            @if ($reservation->event->price == 0)
+                            Free
                         @else
-                            ¥{{ number_format($reservation->price * $reservation->num_tickets) }}
+                            ¥{{ number_format($reservation->event->price * $reservation->num_tickets) }}
                         @endif
                         </td>
                         <td>{{ date('Y/m/d', strtotime($reservation->reservation_date)) }}</td>
@@ -66,7 +66,7 @@
                             @endif
                         </td>
                         <td>
-                            @if (now()->lessThanOrEqualTo($reservation->app_deadline))
+                            @if (now()->lessThanOrEqualTo($reservation->event->app_deadline))
                                 <button class="edit-btn border-0 ms-1 me-1" data-bs-toggle="modal" data-bs-target="#user-edit-reservation{{ $reservation->id }}">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
