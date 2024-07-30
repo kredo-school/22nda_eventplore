@@ -63,8 +63,6 @@ class EventOwnerRegisterController extends Controller
 
         $base64Data = null;
 
-        $base64Data = null;
-
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
 

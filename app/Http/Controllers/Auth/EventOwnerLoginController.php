@@ -6,8 +6,11 @@ use App\Models\Area;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\EventOwner;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
+
 
 class EventOwnerLoginController extends Controller
 {
@@ -63,8 +66,35 @@ class EventOwnerLoginController extends Controller
     public function showProfile()
     {
         $areas = Area::all();
+        $user = EventOwner::find(auth()->id());
 
-        return view('event-owners.profile.show', compact('areas'));
+        $eventCount = $user->events()->count();
+        return view('event-owners.profile.show', compact('areas', 'user', 'eventCount'));
+    }
+
+    public function update(Request $request)
+    {
+        $eventOwner = EventOwner::find(auth()->id());
+
+        $eventOwner->username = $request->input('username');
+        $eventOwner->first_name = $request->input('first_name');
+        $eventOwner->last_name = $request->input('last_name');
+        $eventOwner->address = $request->input('address');
+        $eventOwner->phone_number = $request->input('phone_number');
+        $eventOwner->email = $request->input('email');
+
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            if ($file->isValid()) {
+                $extension = $file->extension();
+                $base64Data = 'data:image/' . $extension . ';base64,' . base64_encode(file_get_contents($file));
+                $eventOwner->avatar = $base64Data;
+            }
+        }
+
+        $eventOwner->save();
+
+        return redirect()->route('event-owners.profile.show');
     }
 
     public function eventownerLogout(Request $request)
@@ -76,6 +106,37 @@ class EventOwnerLoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('event-owner.sign-in');
+    }
+
+    public function destroy(Request $request)
+    {
+        $request->validate([
+            'password' => 'required',
+        ]);
+
+        $eventOwner = EventOwner::find(auth()->id());
+
+        if (Hash::check($request->input('password'), $eventOwner->password)) {
+
+            // 関連するイベントを削除
+            $eventOwner->events()->delete();
+
+            $eventOwner->delete();
+
+            // ログアウト処理
+            Auth::guard('event_owner')->logout();
+
+            // セッションの無効化とトークンの再生成
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('event-owner.sign-in');
+        } else {
+            // パスワードが一致しない場合
+            return back()->withErrors([
+                'password' => 'The entered password is incorrect.',
+            ])->withInput();
+        }
     }
 
 }

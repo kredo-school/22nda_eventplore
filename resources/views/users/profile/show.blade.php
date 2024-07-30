@@ -23,10 +23,16 @@
                 @include('users.profile.modal.delete')
                 @include('users.profile.modal.edit')
 
-                <div class="text-center">
-                    <i class="fa-solid fa-circle-user fa-8x mb-2"></i>
-                    <h1 class="card-title">John</h1>
-                    <p class="text-muted">John Smith</p>
+                <div class="d-flex flex-column align-items-center justify-content-center">
+                @if (Auth::user()->avatar)
+                    <img src="{{ Auth::user()->avatar }}" alt="" class="mb-2 rounded-circle avatar-lg">
+                @else
+                    <span class="d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-circle-user fa-8x mb-2"></i>
+                    </span>
+                @endif
+                    <h1 class="card-title">{{ $user->username }}</h1>
+                    <p class="text-muted">{{ $user->first_name }} {{ $user->last_name }}</p>
                 </div>
 
                 <div class="row mb-2">
@@ -36,7 +42,7 @@
                                 <div class="card custom-bg border border-0 custom-card">
                                     <div class="card-body">
                                         <p class="card-text">Events</p>
-                                        <h5 class="card-title"><i class="fa-solid fa-list"></i>&nbsp; 24</h5>
+                                        <h5 class="card-title"><i class="fa-solid fa-list"></i>&nbsp; {{ $reservationCount }}</h5>
                                     </div>
                                 </div>
                             </a>
@@ -48,7 +54,7 @@
                                 <div class="card custom-bg border border-0 custom-card">
                                     <div class="card-body">
                                         <p class="card-text">Comments</p>
-                                        <h5 class="card-title"><i class="fa-regular fa-comment"></i>&nbsp; 5</h5>
+                                        <h5 class="card-title"><i class="fa-regular fa-comment"></i>&nbsp; {{ $commentCount }}</h5>
                                     </div>
                                 </div>
                             </a>

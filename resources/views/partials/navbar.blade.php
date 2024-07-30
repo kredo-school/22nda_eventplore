@@ -65,9 +65,6 @@
                                 @csrf
                             </form>
                         </div>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
 
                     @elseauth('event_owner')
                         <a id="navbarDropdownOwner" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -102,7 +99,11 @@
                                 <a class="btn btn-green" href="{{ route('user.sign-in') }}" style="width: 100px">{{ __('SIGN-IN') }}</a>
                             @endif
                         </div>
+
                     @endauth
+                    <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
             {{-- </div> --}}
 

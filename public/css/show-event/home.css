@@ -15,7 +15,7 @@
 	width: 100%;
 	margin-top: 50px;
 }
-/* 画面サイズ576px~767px */
+/* 画面サイズ576px以上 */
 @media (min-width: 576px) {
     #map, .sidebar {
 		height: calc(100vh - 80px);
@@ -141,4 +141,8 @@ table, th, td {
 }
 a:link { 
     text-decoration: none; 
-  } 
+}
+.card-img-sm {
+    aspect-ratio: 8 / 5;
+    object-fit: cover;
+}

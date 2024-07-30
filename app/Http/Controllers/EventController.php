@@ -7,9 +7,7 @@ use App\Models\Event;
 use App\Models\Category;
 use App\Models\EventImage;
 use App\Models\Reservation;
-use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -21,14 +19,14 @@ class EventController extends Controller
     private $reservation;
 
     public function __construct(Event $event, Category $category, Reservation $reservation){
-        $this->event = $event;
-        $this->category = $category;
+        $this->event       = $event;
+        $this->category    = $category;
         $this->reservation = $reservation;
     }
 
     public function create()
     {
-        $areas = Area::all();
+        $areas      = Area::all();
         $categories = Category::all();
         return view('event-owners.events.register', compact('areas','categories'));
     }
@@ -89,28 +87,9 @@ class EventController extends Controller
 
     public function index()
     {
-        $id = Auth::guard('event_owner')->id();
-        $areas = Area::all();
-        $query = Event::query();
-
-        // テーブル結合
-        $query->leftJoin('event_categories', 'events.id', '=', 'event_categories.event_id')
-            ->leftJoin('areas', 'events.area_id', '=', 'areas.id')
-            ->leftJoin(DB::raw('(SELECT event_id, AVG(star) as avg_star FROM reviews GROUP BY event_id) as avg_reviews'), 'events.id', '=', 'avg_reviews.event_id')
-            ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'events.id', '=', 'first_event_images.event_id')
-            ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id')
-            ->leftJoin(DB::raw('(SELECT event_id, SUM(num_tickets) as sum_tickets FROM reservations WHERE deleted_at IS NULL GROUP BY event_id) as sum_reservations'), 'events.id', '=', 'sum_reservations.event_id')
-            ->groupBy('events.id')
-            ->where('events.event_owner_id', $id);
-
-        $events = $query->distinct()->paginate(6, [
-            'events.*',
-            'areas.name as area_name',
-            'avg_reviews.avg_star as avg_star',
-            'event_images.image as event_image',
-            'sum_reservations.sum_tickets as sum_tickets',
-        ]);
-        // ])->groupBy('events.id');
+        $areas  = Area::all();
+        $id     = Auth::guard('event_owner')->id();
+        $events = Event::where('event_owner_id', $id)->paginate(6);
 
         return view('event-owners.events.show', compact('events', 'areas'));
     }
@@ -126,7 +105,7 @@ class EventController extends Controller
         if (Hash::check($request->input('password'), $user->password)) {
             $this->event->destroy($id);
 
-            return redirect()->back()->with('success', 'Event deleted successfully.');
+            return redirect()->route('event-list.show')->with('success', 'Event deleted successfully.');
         } else {
             return redirect()->back()->withErrors(['password' => 'The password is incorrect.']);
         }
@@ -134,34 +113,15 @@ class EventController extends Controller
 
     public function showReservation($id)
     {
-        $areas = Area::all();
-        $currentOwnerId = Auth::guard('event_owner')->user()->id;
-        
-        $event = Event::select([
-                'events.*',
-                'areas.name as area_name',
-                'avg_reviews.avg_star as avg_star',
-                'event_images.image as event_image',
-                'sum_reservations.sum_tickets as sum_tickets',
-            ])
-            ->leftJoin('event_categories', 'events.id', '=', 'event_categories.event_id')
-            ->leftJoin('areas', 'events.area_id', '=', 'areas.id')
-            ->leftJoin(DB::raw('(SELECT event_id, AVG(star) as avg_star FROM reviews GROUP BY event_id) as avg_reviews'), 'events.id', '=', 'avg_reviews.event_id')
-            ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'events.id', '=', 'first_event_images.event_id')
-            ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id')
-            ->leftJoin(DB::raw('(SELECT event_id, SUM(num_tickets) as sum_tickets FROM reservations WHERE deleted_at IS NULL GROUP BY event_id) as sum_reservations'), 'events.id', '=', 'sum_reservations.event_id')
-            ->where('events.id', $id)
-            ->groupBy('events.id')
-            ->distinct()
-            ->first();
-
+        $areas        = Area::all();
+        $event        = Event::where('id', $id)->first();
         $reservations = Reservation::where('event_id', $id)->paginate(10);
-        $eventOwnerId = $event->event_owner_id ?? null;
+        $eventOwner   = auth()->guard('event_owner')->user();
 
-        if ($currentOwnerId == $eventOwnerId) {
-            return view('event-owners.reservations.show', compact('event', 'reservations', 'areas'));
-        } else {
+        if ($eventOwner->id !== $event->event_owner_id) {
             return back();
+        } else {
+            return view('event-owners.reservations.show', compact('event', 'reservations', 'areas'));
         }
     }
 
@@ -174,9 +134,16 @@ class EventController extends Controller
         $user = Auth::guard('event_owner')->user();
 
         if (Hash::check($request->input('password'), $user->password)) {
-            $this->reservation->destroy($id);
-    
-            return redirect()->back()->with('success', 'Reservation deleted successfully.');
+            $reservation = Reservation::find($id);
+
+            if (!$reservation) {
+                return redirect()->back()->withErrors(['error' => 'Reservation not found.']);
+            }
+
+            $eventId = $reservation->event->id;
+            $reservation->delete();
+
+            return redirect()->route('reservation.show', $eventId)->with('success', 'Reservation deleted successfully.');
         } else {
             return redirect()->back()->withErrors(['password' => 'The password is incorrect.']);
         }
@@ -184,38 +151,13 @@ class EventController extends Controller
 
     public function showUserReservation()
     {
-        $areas = Area::all();
-        $id = Auth::guard('web')->id();
-        $query = Reservation::query();
-
-        $subQuery = Reservation::select('event_id', DB::raw('SUM(num_tickets) as current_participants'))
-                                ->groupBy('event_id');
-
-        $query->leftJoin('events', 'reservations.event_id', '=', 'events.id')
-            ->leftJoin(DB::raw('(SELECT event_id, MIN(id) as min_image_id FROM event_images GROUP BY event_id) as first_event_images'), 'reservations.event_id', '=', 'first_event_images.event_id')
-            ->leftJoin('event_images', 'first_event_images.min_image_id', '=', 'event_images.id')
-            ->leftJoinSub($subQuery, 'event_participants', function($join) {
-                $join->on('reservations.event_id', '=', 'event_participants.event_id');
-            })
-            ->groupBy('reservations.id')
-            ->where('user_id', $id);
-
-        $reservations = $query->distinct()->paginate(10, [
-            'reservations.*',
-            'events.price as price',
-            'events.event_name as event_name',
-            'events.max_participants as max_participants',
-            'events.start_date as start_date',
-            'events.finish_date as finish_date',
-            'events.start_time as start_time',
-            'events.finish_time as finish_time',
-            'events.app_deadline as app_deadline',
-            'event_participants.current_participants as current_participants',
-            'event_images.image as event_image',
-        ]);
+        $areas        = Area::all();
+        $id           = Auth::guard('web')->id();
+        $reservations = Reservation::where('user_id', $id)->with('event')->paginate(10);
 
         foreach ($reservations as $reservation) {
-            $reservation->maxAvailableTickets = $reservation->max_participants - $reservation->current_participants;
+            $currentParticipants = Reservation::where('event_id', $reservation->event_id)->sum('num_tickets');
+            $reservation->maxAvailableTickets = $reservation->event->max_participants - $currentParticipants;
         }
 
         return view('users.reservations.show', compact('reservations', 'areas'));
@@ -232,7 +174,7 @@ class EventController extends Controller
         if (Hash::check($request->input('password'), $user->password)) {
             $this->reservation->destroy($id);
     
-            return redirect()->back()->with('success', 'Reservation deleted successfully.');
+            return redirect()->route('user.reservation.show')->with('success', 'Reservation deleted successfully.');
         } else {
             return redirect()->back()->withErrors(['password' => 'The password is incorrect.']);
         }

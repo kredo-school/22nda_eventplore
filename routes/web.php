@@ -47,7 +47,12 @@ Route::get('/ham/search', [HomeController::class, 'searchFromHam'])->name('ham.s
 
 // ユーザー認証後に見れる画面
     Route::middleware(['auth:web'])->group(function () {
+        //プロフィール
         Route::get('/users/profile/show', [UserLoginController::class, 'showProfile'])->name('users.profile.show');
+        Route::patch('/users/profile/update', [UserLoginController::class, 'update'])->name('users.profile.update');
+        Route::delete('/users/delete', [UserLoginController::class, 'destroy'])->name('users.delete');
+
+        Route::get('/user/reservation-list', [UserLoginController::class, 'showReservations'])->name('user.reservation.list');
         Route::get('/user/reservation', [EventController::class, 'showUserReservation'])->name('user.reservation.show');
         Route::delete('/user/reservation/{id}/destroy', [EventController::class, 'destroyUserReservation'])->name('user.reservation.destroy');
         Route::patch('/user/reservation/{id}/update', [EventController::class, 'updateUserReservation'])->name('user.reservation.update');
@@ -60,8 +65,10 @@ Route::get('/ham/search', [HomeController::class, 'searchFromHam'])->name('ham.s
         Route::delete('/event/{id}/destroy', [EventController::class, 'destroy'])->name('events.destroy');
         Route::get('/event-owner/reservation/{id}', [EventController::class, 'showReservation'])->name('reservation.show');
         Route::delete('/event-owner/reservation/{id}/destroy', [EventController::class, 'destroyReservation'])->name('reservation.destroy');
-        
+        //プロフィール
         Route::get('/event-owners/profile/show', [EventOwnerLoginController::class, 'showProfile'])->name('event-owners.profile.show');
+        Route::patch('/event-owner/profile/update', [EventOwnerLoginController::class, 'update'])->name('event-owners.profile.update');
+        Route::delete('/event-owner/delete', [EventOwnerLoginController::class, 'destroy'])->name('event-owner.delete');
 
         Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
         Route::post('/event-owners/events/store', [EventController::class, 'store'])->name('events.store');
@@ -70,7 +77,31 @@ Route::get('/ham/search', [HomeController::class, 'searchFromHam'])->name('ham.s
     });
 
 
-    
+
+// パスワードのリセット関係
+// パスワードリセットリンクのリクエストフォームを表示
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+// パスワードリセットリンクをメールで送信する
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+// パスワードのリセットリンクを表示
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+// パスワードリセットを処理
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
+
+// パスワードのリセット関係
+// パスワードリセットリンクのリクエストフォームを表示
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+// パスワードリセットリンクをメールで送信する
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+// パスワードのリセットリンクを表示
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+// パスワードリセットを処理
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
+
 // パスワードのリセット関係
 // パスワードリセットリンクのリクエストフォームを表示
 Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');

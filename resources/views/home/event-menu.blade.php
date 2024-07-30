@@ -13,7 +13,7 @@
     {{-- menu offcanvas --}}
     <div class="cp_cont">
         <div class="cp_offcanvas">
-            <input type="checkbox" id="cp_toggle" checked>
+            <input type="checkbox" id="cp_toggle" checked onclick="toggleMap()">
             <label for="cp_toggle"></label>
             <div class="cp_menu">
                 <div class="row ms-2 me-2">
@@ -26,12 +26,40 @@
                         <div class="col-lg-6 mb-4">
                             <a href="" class="text-decoration-none">
                                 {{-- event card --}}
-                                <div class="card shadow border-0">
-                                    @if (is_null($event->image))
+                                <div class="card shadow border-0" id="event-card-{{$event->id}}">
+                                    @php
+                                        $carouselId = 'carousel' . $event->id;
+                                    @endphp
+
+                                    @if ($event->eventImages->isEmpty())
                                         <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
+                                    @elseif ($event->eventImages->count() == 1)
+                                        <img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
                                     @else
-                                        <img src="{{ $event->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                                        <div id="{{ $carouselId }}" class="carousel slide">
+                                            <div class="carousel-indicators">
+                                                @foreach ($event->eventImages as $index => $image)
+                                                    <button type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" aria-current="true" aria-label="Slide {{ $index + 1 }}"></button>
+                                                @endforeach
+                                            </div>
+                                            <div class="carousel-inner">
+                                                @foreach ($event->eventImages as $index => $image)
+                                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                        <img src="{{ $image->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        </div>
                                     @endif
+
                                     <div class="card-body px-2">
                                         <div class="row align-items-center">
                                             {{-- event title --}}
@@ -40,17 +68,17 @@
                                             </div>
                                             {{-- review --}}
                                             <div class="col d-flex justify-content-end mb-1 me-1">
-                                                @if (is_null($event->avg_star))
+                                                @if ($event->reviews->isEmpty())
                                                     <h6 class="text-muted overflow_cut">No Reviews</h6><h4 style="visibility: hidden">.</h4>
                                                 @else
-                                                    <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1"></i>{{ number_format($event->avg_star, 1) }}</h4>
+                                                    <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1"></i>{{ number_format($event->reviews->avg('star'), 1) }}</h4>
                                                 @endif
                                             </div>
                                         </div>
                                         {{-- information --}}
                                         <div class="row align-items-center gx-1 mb-2">
                                             <div class="col-4 overflow_dot">
-                                                <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area_name }} area
+                                                <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area->name }} area
                                             </div>
                                             @php
                                                 $loop_count = 0;
@@ -106,7 +134,7 @@
     </div>
 
     {{-- map --}}
-    <div>
+    <div id="map-container">
         <div id="map"></div>
         <script id="event-data" type="application/json">{!! $events->toJson() !!}</script>
     </div>
