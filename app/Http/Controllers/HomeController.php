@@ -89,7 +89,7 @@ class HomeController extends Controller
         return view('home.event-menu', compact('events', 'areas'));
     }
 
-    public function searchFromNav(Request $request)
+    public function search(Request $request)
     {
         $areas = Area::all();
 
@@ -121,40 +121,6 @@ class HomeController extends Controller
 
         return view('home.event-menu', compact('events', 'areas'));
     }
-
-    public function searchFromHam(Request $request)
-    {
-        $areas = Area::all();
-
-        $date = $request->input('date');
-        $area = $request->input('area');
-
-        // Query to fetch events
-        $query = Event::query();
-
-        // Filter by date if provided
-        if (!empty($date)) {
-            $query->where(function ($q) use ($date) {
-                $q->whereDate('start_date', '<=', $date)
-                    ->whereDate('finish_date', '>=', $date);
-            });
-        }
-
-        // Filter by area if provided
-        if (!empty($area)) {
-            $query->whereHas('area', function($q) use ($area) {
-                $q->where('id', $area);
-            });
-        }
-
-        $query->where('app_deadline', '>', now());
-        
-        // Retrieve distinct events
-        $events = $query->distinct()->get();
-
-        return view('home.event-menu', compact('events', 'areas'));
-    }
-
 
     public function showEvent($id){
         $areas = Area::all();
@@ -168,7 +134,4 @@ class HomeController extends Controller
         }
         return view('home.show-event', compact('areas', 'reservation', 'event', 'averageRating', 'ratingDistribution'));
     }
-
-
-
 }

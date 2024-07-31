@@ -22,12 +22,12 @@
                         <div class="d-none d-md-flex justify-content-center flex-grow-1">
                             <form action="{{ route('events.search') }}" method="GET" class="d-flex w-75">
                                 <select class="form-select me-2" id="area" name="area">
-                                    <option selected>Search by Area</option>
+                                    <option value="" hidden selected>Search by Area</option>
                                     @foreach ($areas as $area)
                                         <option value="{{ $area->id }}">{{ $area->name }}</option>
                                     @endforeach
                                 </select>
-                                <input type="date" class="form-control me-2" placeholder="Calendar">
+                                <input type="date" id="date" name="date" class="form-control me-2" placeholder="Calendar">
                                 <button type="submit" class="btn btn-search-icon d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-magnifying-glass fa-xl"></i>
                                 </button>
@@ -120,14 +120,14 @@
                         @endguest
                         <!-- Dropdown 2: Area and Calendar Search -->
                         <li class="nav-item px-3">
-                            <form action="{{ route('ham.search') }}" method="GET" class="d-flex flex-column">
+                            <form action="{{ route('events.search') }}" method="GET" class="d-flex flex-column">
                                 <select class="form-select my-2" id="area" name="area">
-                                    <option selected>Search by Area</option>
+                                    <option value="" hidden selected>Search by Area</option>
                                     @foreach ($areas as $area)
                                         <option value="{{ $area->id }}">{{ $area->name }}</option>
                                     @endforeach
                                 </select>
-                                <input type="date" class="form-control mb-2" placeholder="Calendar">
+                                <input type="date" id="date" name="date" class="form-control mb-2" placeholder="Calendar">
                                 <button type="submit" class="btn btn-yellow align-self-end"><span>SEARCH</span> <i class="fa-solid fa-magnifying-glass fa-xl"></i></button>
                             </form>
                         </li>
@@ -203,7 +203,7 @@
 
 
 {{-- Show up only Event menu page --}}
-@if (Route::currentRouteName() == 'event-menu' || Route::currentRouteName() == 'events.search'|| Route::currentRouteName() == 'ham.search')
+@if (Route::currentRouteName() == 'event-menu' || Route::currentRouteName() == 'events.search')
 <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height navbar-category d-none d-md-flex" style = "width: 100%;">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarCategory">

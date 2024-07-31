@@ -10,7 +10,7 @@
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.14/index.global.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/mapbox-gl-animated-popup@latest"></script>
 
-    <div class="row">
+    <div class="row m-0">
         <div class="col-lg-3 col-md-4 col-sm-5 overflow-auto sidebar">
             <form action="{{ route('event-menu') }}" method="get">
 
@@ -72,7 +72,7 @@
             @endforelse
         </div>
         
-        <div class="col-lg-9 col-md-8 col-sm-7 ps-0">
+        <div class="col-lg-9 col-md-8 col-sm-7 px-0">
             {{-- map --}}
             <div>
                 <div id="map"></div>
