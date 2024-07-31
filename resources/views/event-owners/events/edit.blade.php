@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Register Event')
+@section('title', 'Edit Event')
 
 @section('content')
 
 {{-- CSS 読み込み --}}
-<link rel="stylesheet" href="{{ asset('css/register-event/register-event.css') }}">
+<link rel="stylesheet" href="{{ asset('css/edit-event/edit-event.css') }}">
 
 <!-- Scripts -->
 @vite(['resources/js/register.js'])
@@ -16,41 +16,45 @@
     {{-- 入力フォーム --}}
     <div class="card my-5 w-50 text-align-center bg-light bg-opacity-75 border-0 shadow" style="min-width: 480px">
         <div class="card-body border-0 text-center py-4">
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('events.update', $event->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <h2 class="h1">Edit Event</h2>
                 {{-- ステータスバー --}}
-                {{-- active = green, inactive = white --}}
                 <div class="timeline">
-                    <div class="timeline-item active">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-regular fa-calendar icon-md"></i>
+                            <i class="fa-regular fa-calendar icon-md-active" id="icon1"></i>
                         </div>
                     </div>
-                    <div class="timeline-item inactive">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-solid fa-icons icon-md"></i>
+                            <i class="fa-solid fa-users icon-md" id="icon2"></i>
                         </div>
                     </div>
-                    <div class="timeline-item inactive">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-solid fa-location-dot icon-md"></i>
+                            <i class="fa-solid fa-icons icon-md" id="icon3"></i>
                         </div>
                     </div>
-                    <div class="timeline-item inactive">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-solid fa-image icon-md"></i>
+                            <i class="fa-solid fa-location-dot icon-md" id="icon4"></i>
                         </div>
                     </div>
-                    <div class="timeline-item inactive">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-solid fa-circle-info icon-md"></i>
+                            <i class="fa-solid fa-image icon-md" id="icon5"></i>
                         </div>
                     </div>
-                    <div class="timeline-item inactive">
+                    <div class="timeline-item">
                         <div class="timeline-icon">
-                            <i class="fa-solid fa-up-right-from-square icon-md"></i>
+                            <i class="fa-solid fa-circle-info icon-md" id="icon6"></i>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fa-solid fa-up-right-from-square icon-md" id="icon7"></i>
                         </div>
                     </div>
                 </div>
@@ -77,6 +81,10 @@
                 {{-- STEP6 --}}
                 <div id="step6" class="d-none">
                     @include('event-owners.events.partials-edit.step6')
+                </div>
+                {{-- STEP7 --}}
+                <div id="step7" class="d-none">
+                    @include('event-owners.events.partials-edit.step7')
                 </div>
                 {{-- buttons --}}
                 <div class="row my-3 justify-content-center text-center">

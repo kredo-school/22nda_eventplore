@@ -57,7 +57,8 @@
                                         @endif
                                     </a>
                                     {{-- edit --}}
-                                    <a href="#" class="btn btn-green me-2"><i class="fas fa-pen-to-square"></i></a>
+                                    {{-- {{ route('events.edit', $event->id) }} --}}
+                                    <a href="{{ route('events.edit', $event->id) }}" class="btn btn-green me-2"><i class="fas fa-pen-to-square"></i></a>
                                     {{-- delete --}}
                                     <button class="btn btn-red" data-bs-toggle="modal" data-bs-target="#eventowner-delete-event{{ $event->id }}"><i class="fa-solid fa-trash-can"></i></button>
                                     @include('event-owners.events.modal.delete')
