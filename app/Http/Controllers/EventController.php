@@ -321,7 +321,7 @@ class EventController extends Controller
 
         if (Hash::check($request->input('password'), $user->password)) {
             $this->reservation->destroy($id);
-
+    
             return redirect()->route('user.reservation.show')->with('success', 'Reservation deleted successfully.');
         } else {
             return redirect()->back()->withErrors(['password' => 'The password is incorrect.']);

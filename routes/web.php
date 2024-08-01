@@ -38,10 +38,8 @@ Route::post('/event-owner/logout', [EventOwnerLoginController::class, 'eventowne
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
 
-//navからのsearch
-Route::get('/events/search', [HomeController::class, 'searchFromNav'])->name('events.search');
-//Hamburgerからのsearch
-Route::get('/ham/search', [HomeController::class, 'searchFromHam'])->name('ham.search');
+//navとHamburgerからのsearch
+Route::get('/events/search', [HomeController::class, 'search'])->name('events.search');
 
 
 
