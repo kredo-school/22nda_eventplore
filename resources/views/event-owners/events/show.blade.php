@@ -147,6 +147,6 @@
         </div>
     </div>
 
-    {{-- {{ $events->links('vendor.pagination.event-pagination') }} --}}
+    {{ $events->links('vendor.pagination.event-pagination') }}
 
 @endsection

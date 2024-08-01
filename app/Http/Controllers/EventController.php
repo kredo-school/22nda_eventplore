@@ -62,7 +62,6 @@ class EventController extends Controller
         'insta_link' => 'nullable|url',
         'x_link' => 'nullable|url',
         'official' => 'nullable|url',
-        'image.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Example image validation
     ]);
 
         $event = new Event();
@@ -109,7 +108,6 @@ class EventController extends Controller
             $event_categories [] = ['category_id' => $category_id,'event_id' => $event->id];
         }
         $event->eventCategories()->createMany($event_categories);
-
         return redirect()->route('event-list.show');
     }
 
@@ -177,16 +175,15 @@ class EventController extends Controller
         
         // Step 1
         $event_images = $event_a->eventImages;
-
          // Step 2
-         foreach ($request->file('image') as $key => $img)
-         {
-            dd($key);
+        foreach ($request->file() as $key => $img)
+        {
             // New uploaded image
             if ($key == "new-image")
             {
                 $image = new EventImage();
                 $image->image = "data:image/" . explode(".", $img->getClientOriginalName())[1] . ";base64," . base64_encode(file_get_contents($img));
+                $image->event_id = $event_a->id;
                 $image->save();
             }
             // Update existing image
@@ -196,22 +193,7 @@ class EventController extends Controller
                 $image->image = "data:image/" . explode(".", $img->getClientOriginalName())[1] . ";base64," . base64_encode(file_get_contents($img));
                 $image->save();
             }
-         }
-
-        // if ($request->hasFile('image')) {
-        //     foreach ($request->file('image') as $key => $img) {
-        //         if ($img && $img->isValid()) {
-        //             // 新しい画像を保存
-        //             $image = $event_images->where('id', $key)->first();
-        //             if ($image) {
-        //                 // 既存の画像を更新
-        //                 $image->image = "data:image/" . explode(".", $img->getClientOriginalName())[1] . ";base64," . base64_encode(file_get_contents($img));
-        //                 $image->save();
-        //             }
-        //         }
-        //     }
-        // }
-
+        }
 
         $event_a->eventCategories()->delete();
 
