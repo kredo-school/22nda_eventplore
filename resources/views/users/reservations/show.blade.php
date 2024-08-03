@@ -24,7 +24,7 @@
     @if ($errors->has('password'))
         <h5 class="alert alert-danger">{{ $errors->first('password') }}</h5>
     @endif
-    
+
     {{-- reservation table --}}
     <div class="table-responsive">
         <table class="table text-center align-middle shadow rounded-2 overflow-hidden mb-5 w-100">
@@ -74,7 +74,7 @@
                                 <button class="trash-btn border-0 ms-1 me-1" data-bs-toggle="modal" data-bs-target="#user-delete-reservation{{ $reservation->id }}">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
-                                @include('users.reservations.modal.delete')
+                                @include('users.reservations.modal.delete', ['reservation' => $reservation])
                             @endif
                         </td>
                     </tr>

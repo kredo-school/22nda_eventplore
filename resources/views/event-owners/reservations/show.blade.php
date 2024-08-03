@@ -23,7 +23,7 @@
 
     <div class="row">
         <div class="col-md-4 mb-4">
-            <a href="" class="text-decoration-none">
+            <a href="#" class="text-decoration-none">
                 {{-- event list --}}
                 <div class="card shadow border-0 w-100 me-2">
                     @php
@@ -202,7 +202,7 @@
                                 <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation{{ $reservation->id }}">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
-                                @include('event-owners.reservations.modal.delete')
+                                @include('event-owners.reservations.modal.delete', ['reservation' => $reservation])
                             </td>
                         </tr>
                     @empty

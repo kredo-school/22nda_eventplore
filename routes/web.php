@@ -1,17 +1,19 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\UserLoginController;
-use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Auth\EventOwnerLoginController;
 use App\Http\Controllers\Auth\EventOwnerRegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\UserLoginController;
+use App\Http\Controllers\Auth\UserRegisterController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventShowController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 
 
 Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
@@ -41,19 +43,21 @@ Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
 //navとHamburgerからのsearch
 Route::get('/events/search', [HomeController::class, 'search'])->name('events.search');
 
-
+// 各イベント詳細ページ
+Route::get('/event/{id}/details-page', [EventShowController::class, 'show'])->name('event.details.show');
 
 // ユーザー認証後に見れる画面
-    Route::middleware(['auth:web'])->group(function () {
-        //プロフィール
-        Route::get('/users/profile/show', [UserLoginController::class, 'showProfile'])->name('users.profile.show');
-        Route::patch('/users/profile/update', [UserLoginController::class, 'update'])->name('users.profile.update');
-        Route::delete('/users/delete', [UserLoginController::class, 'destroy'])->name('users.delete');
+Route::middleware(['auth:web'])->group(function () {
+    //プロフィール
+    Route::get('/users/profile/show', [UserLoginController::class, 'showProfile'])->name('users.profile.show');
+    Route::patch('/users/profile/update', [UserLoginController::class, 'update'])->name('users.profile.update');
+    Route::delete('/users/delete', [UserLoginController::class, 'destroy'])->name('users.delete');
 
-        Route::get('/user/reservation-list', [UserLoginController::class, 'showReservations'])->name('user.reservation.list');
-        Route::get('/user/reservation', [EventController::class, 'showUserReservation'])->name('user.reservation.show');
-        Route::delete('/user/reservation/{id}/destroy', [EventController::class, 'destroyUserReservation'])->name('user.reservation.destroy');
-        Route::patch('/user/reservation/{id}/update', [EventController::class, 'updateUserReservation'])->name('user.reservation.update');
+    Route::get('/user/reservation-list', [UserLoginController::class, 'showReservations'])->name('user.reservation.list');
+    Route::get('/user/reservation', [EventController::class, 'showUserReservation'])->name('user.reservation.show');
+    Route::delete('/user/reservation/{id}/destroy', [EventController::class, 'destroyUserReservation'])->name('user.reservation.destroy');
+    Route::patch('/user/reservation/{id}/update', [EventController::class, 'updateUserReservation'])->name('user.reservation.update');
+    Route::post('/user/reservation/store', [EventShowController::class, 'storeUserReservation'])->name('user.reservation.store');
     });
 
 // イベントオーナー認証後に見れる画面
@@ -75,30 +79,6 @@ Route::get('/events/search', [HomeController::class, 'search'])->name('events.se
         Route::patch('/event-owners/events/{id}/update', [EventController::class, 'update'])->name('events.update');
         Route::delete('/event-owners/images/{id}', [EventController::class, 'destroyImage'])->name('event-image.destroy');
     });
-
-
-
-// パスワードのリセット関係
-// パスワードリセットリンクのリクエストフォームを表示
-Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-// パスワードリセットリンクをメールで送信する
-Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-// パスワードのリセットリンクを表示
-Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-// パスワードリセットを処理
-Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
-
-
-
-// パスワードのリセット関係
-// パスワードリセットリンクのリクエストフォームを表示
-Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-// パスワードリセットリンクをメールで送信する
-Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-// パスワードのリセットリンクを表示
-Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-// パスワードリセットを処理
-Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 
 

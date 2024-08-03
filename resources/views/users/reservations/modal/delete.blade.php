@@ -1,6 +1,5 @@
 @vite(['resources/js/showPassword.js'])
-
-<div class="modal fade" id="user-delete-reservation{{ $reservation->id }}">
+<div class="modal fade" id="user-delete-reservation">
     <div class="modal-dialog">
         <form action="{{ route('user.reservation.destroy', $reservation->id) }}" method="post">
             @csrf
