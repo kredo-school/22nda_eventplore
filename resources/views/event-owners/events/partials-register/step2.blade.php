@@ -9,7 +9,7 @@
     {{-- reservation deadline --}}
     <div class="col-lg-6 mb-3 text-start">
         <label for="app_deadline" class="fw-bold mb-2 text-start">Resrevation Deadline*</label>
-        <input type="date" name="app_deadline" id="app_deadline" class="form-control" required autocomplete="app_deadline" autofocus style="border: 1px solid #84947C">
+        <input type="dateTime" name="app_deadline" id="app_deadline" class="form-control" required autocomplete="app_deadline" autofocus style="border: 1px solid #84947C">
     </div>
     {{-- price / person --}}
     <div class="col-lg-12 mb-3 text-start">
