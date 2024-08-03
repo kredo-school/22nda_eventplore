@@ -60,3 +60,21 @@ tbody tr:nth-child(even) td {
 	overflow: hidden;
 	white-space: nowrap;
 }
+
+/* 画像サイズ　768px未満のとき */
+@media (max-width: 768px) {
+    .image-part{
+        overflow-x: auto;
+    }
+    .main-image {
+        width: 100% !important;
+    }
+    .other-images {
+        display: flex;
+        width: 100% !important;
+    }
+    .other-images .w-50 {
+        width: 50% !important;
+    }
+}
+

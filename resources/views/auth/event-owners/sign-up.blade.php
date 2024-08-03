@@ -29,7 +29,7 @@
                                 <div class="col mb-1 px-1">
                                     <label for="password" class="form-label fw-bold mb-1">Password*</label>
                                     <div class="input-group">
-                                        <input type="password" id="password" name="password" class="form-control rounded" style="border: 1px solid #84947C" placeholder="Password" required>
+                                        <input type="password" id="password" name="password" class="form-control" style="border: 1px solid #84947C" placeholder="Password" required>
                                         <div class="input-group-text">
                                             <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer;"></i>
                                         </div>

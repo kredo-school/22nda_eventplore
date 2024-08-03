@@ -22,7 +22,7 @@
                     {{-- event list --}}
                     @forelse ($events as $event)
                         <div class="col-lg-6 mb-4">
-                            <a href="" class="text-decoration-none">
+                            <a href="{{ route('event.details.show', $event->id) }}" class="text-decoration-none">
                                 {{-- event card --}}
                                 <div class="card shadow border-0">
                                     @if ($event->eventImages->isEmpty())
@@ -88,7 +88,7 @@
                                     </div>
                                 </div>
                             </a>
-                        </div> 
+                        </div>
                     @empty
                         {{-- No events --}}
                         <div class="text-center mt-5">
@@ -97,7 +97,7 @@
                             <a href="/" class="btn btn-green py-2 mt-3">Search again</a>
                         </div>
                     @endforelse
-        
+
                 </div>
             </div>
         </div>
