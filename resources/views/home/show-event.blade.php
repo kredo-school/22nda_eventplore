@@ -76,8 +76,6 @@
             </div>
         </div>
     </div>
-{{-- </div> これは不要では？ --}}
-
 
     {{-- introduction & reserve --}}
     <div class="row mb-md-4">
