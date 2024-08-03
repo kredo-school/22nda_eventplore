@@ -1,3 +1,9 @@
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
+
 const accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 mapboxgl.accessToken = accessToken;
 var map = new mapboxgl.Map({
@@ -97,29 +103,73 @@ function updateTimeline(step) {
     });
 }
 
+function validateStep(step) {
+    const currentStep = document.getElementById(`step${step}`);
+    const inputs = currentStep.querySelectorAll(
+        "input[required], select[required], textarea[required]"
+    );
+    let valid = true;
+
+    inputs.forEach((input) => {
+        if (!input.value.trim()) {
+            valid = false;
+            input.classList.add("is-invalid");
+            const error = document.createElement("div");
+            error.className = "invalid-feedback";
+            error.innerText = "This field is required.";
+            if (
+                !input.nextElementSibling ||
+                !input.nextElementSibling.classList.contains("invalid-feedback")
+            ) {
+                input.parentNode.appendChild(error);
+            }
+        } else {
+            input.classList.remove("is-invalid");
+            if (
+                input.nextElementSibling &&
+                input.nextElementSibling.classList.contains("invalid-feedback")
+            ) {
+                input.nextElementSibling.remove();
+            }
+        }
+    });
+
+    return valid;
+}
+
 window.next = function next() {
-    if (step < 7) {
-        // show next step
-        document.getElementById(`step${step + 1}`).classList.remove("d-none");
-        // hide previous step
-        document.getElementById(`step${step}`).classList.add("d-none");
-        // show icon
-        document.getElementById(`icon${step + 1}`).classList.add("icon-md-active");
-        // hide icon
-        document.getElementById(`icon${step + 1}`).classList.remove("icon-md");
-        // show icon
-        document.getElementById(`icon${step}`).classList.add("icon-md");
-        // hide icon
-        document.getElementById(`icon${step}`).classList.remove("icon-md-active");
+    if (validateStep(step)) {
+        if (step < 7) {
+            // show next step
+            document
+                .getElementById(`step${step + 1}`)
+                .classList.remove("d-none");
+            // hide previous step
+            document.getElementById(`step${step}`).classList.add("d-none");
+            // show icon
+            document
+                .getElementById(`icon${step + 1}`)
+                .classList.add("icon-md-active");
+            // hide icon
+            document
+                .getElementById(`icon${step + 1}`)
+                .classList.remove("icon-md");
+            // show icon
+            document.getElementById(`icon${step}`).classList.add("icon-md");
+            // hide icon
+            document
+                .getElementById(`icon${step}`)
+                .classList.remove("icon-md-active");
 
-        step += 1;
-        updateTimeline(step);
+            step += 1;
+            updateTimeline(step);
 
-        if (step === 1) backButton.classList.add("d-none");
-        else backButton.classList.remove("d-none");
-        if (step === 7) {
-            nextButton.classList.add("d-none");
-            submitButton.classList.remove("d-none");
+            if (step === 1) backButton.classList.add("d-none");
+            else backButton.classList.remove("d-none");
+            if (step === 7) {
+                nextButton.classList.add("d-none");
+                submitButton.classList.remove("d-none");
+            }
         }
     }
 };
@@ -132,17 +182,17 @@ window.back = function back() {
         document.getElementById(`step${step}`).classList.add("d-none");
         // show icon
         document
-            .getElementById(`icon${step - 1}`).classList.add("icon-md-active");
+            .getElementById(`icon${step - 1}`)
+            .classList.add("icon-md-active");
         // hide icon
-        document
-            .getElementById(`icon${step - 1}`).classList.remove("icon-md");
+        document.getElementById(`icon${step - 1}`).classList.remove("icon-md");
         // show icon
-        document
-            .getElementById(`icon${step}`).classList.add("icon-md");
+        document.getElementById(`icon${step}`).classList.add("icon-md");
         // hide icon
         document
-            .getElementById(`icon${step}`).classList.remove("icon-md-active");
-        
+            .getElementById(`icon${step}`)
+            .classList.remove("icon-md-active");
+
         step -= 1;
         updateTimeline(step);
 
@@ -172,7 +222,45 @@ $.ajax({
 
 updateTimeline(step);
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    // すべての削除ボタンにイベントリスナーを追加
+    document.querySelectorAll('.delete-image').forEach((button, index) => {
+        button.addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete this image?')) {
+            let imageId = this.getAttribute("data-image-id");
+                const imageElement =
+                    document.getElementById(imageId);
+                $.ajax({
+                    url: `/event-owners/images/${imageId}`,
+                    type: "DELETE",
+                    success: function (response) {
+                        // Handle the response data here
+                            // UIから画像要素を削除
+                            imageElement.remove();
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle errors
+                        console.error(error);
+                        alert("Failed to delete the image.");
+                    },
+                });
+            }
+        });
+    });
+});
+
+function previewImage(input, imageClass) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.querySelector("." + imageClass).src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+window.previewImage = previewImage;
 window.next = next;
 window.back = back;
-
 
