@@ -101,16 +101,21 @@
                         </div>
 
                     @endauth
-                    @unless(Auth::guard('event_owner')->check())
+                    {{-- @unless(Auth::guard('event_owner')->check())
                         <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                    @endunless
+                    @endunless --}}
+                    @if (!Auth::guard('event_owner')->check())
+                        <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    @endif
                 </div>
             {{-- </div> --}}
 
                 <!-- Hamburger Menu for smaller screens -->
-            @unless(Auth::guard('event_owner')->check())
+            @if(!Auth::guard('event_owner')->check())
                 <div class="col navbar-collapse" id="navbarHamburger">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0 d-md-none pt-2" style="background-color: white;">
                         @guest
@@ -199,7 +204,7 @@
                         </li>
                     </ul>
                 </div>
-            @endunless
+            @endif
         </div>
     </nav>
         {{-- Show up only Event menu page --}}

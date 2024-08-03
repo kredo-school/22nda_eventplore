@@ -133,46 +133,6 @@ class HomeController extends Controller
         return view('home.event-menu', compact('events', 'areas'));
     }
 
-    public function showEvent($id){
-        $areas = Area::all();
-        $event = Event::findOrFail($id);
-        $reservation = null;
-
-        // // 評価の集計
-        $ratingCounts = $event->reviews->groupBy('star')
-        ->mapWithKeys(function ($reviews, $star) {
-            // 各評価スターのカウントを取得
-            return [$star => $reviews->count()];
-        })->filter(function ($count, $star) {
-            // スター評価が1から5の範囲内にあるか確認
-            return in_array($star, [1, 2, 3, 4, 5]);
-        })->sortKeysDesc();
-
-        // デフォルトの評価星（5段階評価）
-        $defaultStars = [5, 4, 3, 2, 1];
-
-        $totalReviews = $event->reviews->count();
-        $averageRating = $event->reviews->avg('star');
-
-        // 関連イベントを取得（例：同じカテゴリーのイベント）
-        // $relatedEvents = Event::whereHas('categories', function($query) use ($event) {
-        //     $query->whereIn('categories.id', $event->categories->pluck('id'));
-        // })
-        // ->where('id', '!=', $event->id)
-        // ->take(6)
-        // ->get();
-
-        $latestReviews = $event->reviews()->latest()->take(3)->get();
-
-        if (auth()->check()) {
-            $reservation = Reservation::where('user_id', auth()->id())
-                ->where('event_id', $id)
-                ->first();
-        }
-
-        return view('home.show-event', compact('areas', 'event', 'reservation', 'averageRating', 'totalReviews', 'ratingCounts', 'latestReviews'));
-    }
-
     public function guideline(){
         $areas = Area::all();
 
@@ -181,3 +141,44 @@ class HomeController extends Controller
 
 
 }
+
+
+    // public function showEvent($id){
+    //     $areas = Area::all();
+    //     $event = Event::findOrFail($id);
+    //     $reservation = null;
+
+    //     // // 評価の集計
+    //     $ratingCounts = $event->reviews->groupBy('star')
+    //     ->mapWithKeys(function ($reviews, $star) {
+    //         // 各評価スターのカウントを取得
+    //         return [$star => $reviews->count()];
+    //     })->filter(function ($count, $star) {
+    //         // スター評価が1から5の範囲内にあるか確認
+    //         return in_array($star, [1, 2, 3, 4, 5]);
+    //     })->sortKeysDesc();
+
+    //     // デフォルトの評価星（5段階評価）
+    //     $defaultStars = [5, 4, 3, 2, 1];
+
+    //     $totalReviews = $event->reviews->count();
+    //     $averageRating = $event->reviews->avg('star');
+
+    //     // 関連イベントを取得（例：同じカテゴリーのイベント）
+    //     // $relatedEvents = Event::whereHas('categories', function($query) use ($event) {
+    //     //     $query->whereIn('categories.id', $event->categories->pluck('id'));
+    //     // })
+    //     // ->where('id', '!=', $event->id)
+    //     // ->take(6)
+    //     // ->get();
+
+    //     $latestReviews = $event->reviews()->latest()->take(3)->get();
+
+    //     if (auth()->check()) {
+    //         $reservation = Reservation::where('user_id', auth()->id())
+    //             ->where('event_id', $id)
+    //             ->first();
+    //     }
+
+    //     return view('home.show-event', compact('areas', 'event', 'reservation', 'averageRating', 'totalReviews', 'ratingCounts', 'latestReviews'));
+    // }

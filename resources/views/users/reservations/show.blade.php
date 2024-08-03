@@ -74,7 +74,7 @@
                                 <button class="trash-btn border-0 ms-1 me-1" data-bs-toggle="modal" data-bs-target="#user-delete-reservation{{ $reservation->id }}">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
-                                @include('users.reservations.modal.delete')
+                                @include('users.reservations.modal.delete', ['reservation' => $reservation])
                             @endif
                         </td>
                     </tr>

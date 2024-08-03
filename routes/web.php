@@ -1,18 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\UserLoginController;
-use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Auth\EventOwnerLoginController;
 use App\Http\Controllers\Auth\EventOwnerRegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\Auth\UserLoginController;
+use App\Http\Controllers\Auth\UserRegisterController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventShowController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 
 
 Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
@@ -20,11 +22,6 @@ Route::post('/event-owners/events/store', [EventController::class, 'store'])->na
 Route::get('/event-owners/session-id', [EventController::class, 'getSessionId']);
 
 Route::get('/guideline', [HomeController::class, 'guideline'])->name('gudeline');
-Route::get('/show-event/{id}', [HomeController::class, 'showEvent'])->name('show-event');
-Route::post('/events/{event}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
-
-Route::get('/show-event/{id}', [HomeController::class, 'showEvent'])->name('show-event');
-
 
 // ユーザーのサインアップ
 Route::get('/user/show-sign-up', [UserRegisterController::class, 'showUserSignUp'])->name('user.sign-up');
@@ -49,19 +46,25 @@ Route::get('/events/search', [HomeController::class, 'search'])->name('events.se
 //nav categoryからのsearch
 Route::get('/category/search', [HomeController::class, 'searchFromCategory'])->name('category.search');
 
+// 各イベント詳細ページ
+Route::get('/event/{id}/details-page', [EventShowController::class, 'show'])->name('event.details.show');
+
+// comment
+Route::post('/events/{event}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 
 // ユーザー認証後に見れる画面
-    Route::middleware(['auth:web'])->group(function () {
-        //プロフィール
-        Route::get('/users/profile/show', [UserLoginController::class, 'showProfile'])->name('users.profile.show');
-        Route::patch('/users/profile/update', [UserLoginController::class, 'update'])->name('users.profile.update');
-        Route::delete('/users/delete', [UserLoginController::class, 'destroy'])->name('users.delete');
+Route::middleware(['auth:web'])->group(function () {
+    //プロフィール
+    Route::get('/users/profile/show', [UserLoginController::class, 'showProfile'])->name('users.profile.show');
+    Route::patch('/users/profile/update', [UserLoginController::class, 'update'])->name('users.profile.update');
+    Route::delete('/users/delete', [UserLoginController::class, 'destroy'])->name('users.delete');
 
-        Route::get('/user/reservation-list', [UserLoginController::class, 'showReservations'])->name('user.reservation.list');
-        Route::get('/user/reservation', [EventController::class, 'showUserReservation'])->name('user.reservation.show');
-        Route::delete('/user/reservation/{id}/destroy', [EventController::class, 'destroyUserReservation'])->name('user.reservation.destroy');
-        Route::patch('/user/reservation/{id}/update', [EventController::class, 'updateUserReservation'])->name('user.reservation.update');
+    Route::get('/user/reservation-list', [UserLoginController::class, 'showReservations'])->name('user.reservation.list');
+    Route::get('/user/reservation', [EventController::class, 'showUserReservation'])->name('user.reservation.show');
+    Route::delete('/user/reservation/{id}/destroy', [EventController::class, 'destroyUserReservation'])->name('user.reservation.destroy');
+    Route::patch('/user/reservation/{id}/update', [EventController::class, 'updateUserReservation'])->name('user.reservation.update');
+    Route::post('/user/reservation/store', [EventShowController::class, 'storeUserReservation'])->name('user.reservation.store');
     });
 
 // イベントオーナー認証後に見れる画面
@@ -96,83 +99,6 @@ Route::get('password/reset/{token}', [ResetPasswordController::class, 'showReset
 // パスワードリセットを処理
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
-
-
-// パスワードのリセット関係
-// パスワードリセットリンクのリクエストフォームを表示
-Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-// パスワードリセットリンクをメールで送信する
-Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-// パスワードのリセットリンクを表示
-Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-// パスワードリセットを処理
-Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
-
-
-
-// パスワードのリセット関係
-// パスワードリセットリンクのリクエストフォームを表示
-Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-// パスワードリセットリンクをメールで送信する
-Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-// パスワードのリセットリンクを表示
-Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-// パスワードリセットを処理
-Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
-
-
-
-// Haruka
-// Show sign-up page for event-owner
-// Route::get('/auth/event-owners/sign-up', function () {
-//     return view('auth.event-owners.sign-up');
-// });
-// Show sign-in page for event-owner
-// Route::get('/auth/event-owners/sign-in', function () {
-//     return view('auth.event-owners.sign-in');
-// });
-// Show sign-in page for user
-// Route::get('/auth/users/sign-in', function () {
-//     return view('auth.users.sign-in');
-// });
-// Show sign-up page for user
-// Route::get('/auth/users/sign-up', function () {
-//     return view('auth.users.sign-up');
-// });
-// Route::get('/event-owners/events/edit', function () {
-//     return view('event-owners.events.edit');
-// });
-
-
-
-// Naoki
-// Show event page for event-owner
-// Route::get('/owners/show-events', function () {
-//     return view('event-owners.events.show');
-// });
-// Show reservation page for event-owner
-// Route::get('/owners/reservation-list', function () {
-//     return view('event-owners.reservations.show');
-// });
-// Show reservation page for user
-// Route::get('/user/reservation-list', function () {
-//     return view('users.reservations.show');
-// });
-
-
-// kanako
-// Route::get('/users/profile/show', function () {
-//     return view('users.profile.show');
-// });
-
-// Route::get('/event-owners/profile/show', function () {
-//     return view('event-owners.profile.show');
-// });
-
-//Marika
-// Route::get('/home/show-event', function () {
-//     return view('home.show-event');
-// });
 
 ?>
 

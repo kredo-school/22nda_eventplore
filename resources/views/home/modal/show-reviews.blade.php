@@ -80,7 +80,9 @@
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1 me-2">
                                 <input type="text" id="comment" name="comment" class="form-control me-2" placeholder="Add comment">
-                                {{-- <input type="text" id="satisfaction" name="satisfaction" class="form-control me-2" placeholder="Add comment"> --}}
+                                @error('comment')
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                             <div>
                                 <button type="submit" class="btn btn-green">Add review</button>

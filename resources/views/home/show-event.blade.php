@@ -3,140 +3,112 @@
 @section('title', 'Show Event')
 
 @section('content')
+@vite(['resources/js/mapbox.js'])
+@vite(['resources/js/eventDetails'])
+
 
 <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
 <link rel="stylesheet" href="{{ asset('css/show-event/eventpage.css') }}">
 
-<div class="p-5 justify-content-center ">
+<div class="p-5 m-5 justify-content-center">
     {{-- Event name & date & cate --}}
     <div class="row align-items-center mb-3">
         <div class="col-md-6">
-            <h1 class="text-center">Sumidagawa Fireworks Festival</h1>
+            <h1 class="text-center">{{ $event->event_name }}</h1>
             <hr style="color: #0C2C04">
         </div>
         <div class="col-md-3 text-center">
-            <p class="mb-0 fw-bold fs-5">2024 / 07 / 27 (Sat.)<br> 19:00 - 20:30</p>
+            <p class="mb-0 fw-bold fs-5">
+                {{ \Carbon\Carbon::parse($event->start_date)->format('m/d') }} 〜 {{ \Carbon\Carbon::parse($event->finish_date)->format('m/d') }}
+                <br>
+                {{ \Carbon\Carbon::parse($event->start_time)->format('H:i') }} 〜 {{ \Carbon\Carbon::parse($event->finish_time)->format('H:i') }}
+            </p>
         </div>
+        @php
+        $loop_count = 0;
+        @endphp
         <div class="col-md-3 justify-content-end">
-            <div class="row mb-2">
-                <div class="col-6">
-                    <div class="tag border border-0 rounded-pill py-1 w-100">Free</div>
-                </div>
-                <div class="col-6">
-                    <div class="tag border border-0 rounded-pill py-1 w-100">Culture</div>
-                </div>
+            @forelse($event->eventCategories as $category)
+
+            @if($loop_count % 2 === 0)
+                @if($loop_count > 0)
+                    </div>
+                @endif
+                <div class="row mb-2">
+            @endif
+
+            <div class="col-6">
+                <div class="tag border border-0 rounded-pill py-1 w-100">{{ $category->category->name }}</div>
             </div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="tag border border-0 rounded-pill py-1 w-100">Food & Drink</div>
-                </div>
-                <div class="col-6">
-                    <div class="tag border border-0 rounded-pill py-1 w-100">Free</div>
-                </div>
+
+            @php
+                $loop_count++;
+            @endphp
+
+            @empty
+            <div class="col-6">
+                <div class="tag border bg-secondary text-white border-0 rounded-pill py-1 w-100">No category</div>
             </div>
+            @endforelse
         </div>
     </div>
 
     {{-- images --}}
     <div class="container-fluid p-0 mb-4">
-        <div class="d-flex flex-wrap w-100 mb-2" style="height: 100%;">
-            <div class="px-1 justify-content-center" style="flex: 1; min-width: 50%;">
-                <img src="{{ asset('images/event-test/sumida.jpg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; aspect-ratio: 1;" alt="Sumida Fireworks">
+        <div class="d-flex flex-wrap w-100 mb-2 image-part" style="height: 100%; overflow-x: auto;">
+            @php
+                $images = $event->eventImages;
+                $firstImage = $images->first();
+                $otherImages = $images->slice(1);
+                $totalOtherImages = $otherImages->count();
+            @endphp
+
+            {{-- メイン写真 --}}
+            <div class="justify-content-center p-1 main-image @if($totalOtherImages <= 2) w-75 @else w-50 @endif" style="flex: 1;">
+                <img src="{{ $firstImage->image }}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="#">
             </div>
-            <div class="d-flex flex-column w-50" style="gap: 10px;">
-                <div class="d-flex w-100" style="gap: 10px;">
-                    <div class="w-50">
-                        <img src="{{ asset('images/event-test/hanabi.jpg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; aspect-ratio: 1;" alt="Hanabi">
+
+            {{-- 他の画像 --}}
+            <div class="d-flex flex-wrap other-images @if($totalOtherImages <= 2) w-25 @else w-50 @endif">
+                @foreach($otherImages as $image)
+                    <div class="w-50 p-1">
+                        <img src="{{ $image->image }}" class="img-fluid" style="object-fit: cover; aspect-ratio: 1;" alt="#">
                     </div>
-                    <div class="w-50">
-                        <img src="{{ asset('images/event-test/skytree.jpg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; aspect-ratio: 1;" alt="Skytree">
-                    </div>
-                </div>
-                <div class="d-flex w-100" style="gap: 10px;">
-                    <div class="w-50">
-                        <img src="{{ asset('images/event-test/river.jpg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; aspect-ratio: 1;" alt="River">
-                    </div>
-                    <div class="w-50">
-                        <img src="{{ asset('images/event-test/yatai.jpg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; aspect-ratio: 1;" alt="Yatai">
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
+</div>
+
 
     {{-- introduction & reserve --}}
     <div class="row mb-md-4">
         {{-- introduction --}}
         <div class="col-md-6">
-            <div class="card p-2 mb-4" style="background-color: #0C2C04; max-height: 400px; overflow-y: auto;">
+            <div class="card p-2 mb-4" style="background-color: #0C2C04; height: 400px; overflow-y: auto;">
                 <div class="card-body">
                     <div class="text-white">
                         <h2>Introduction</h2>
-                        <p>The Sumida River Fireworks Festival, held annually in Tokyo, is one of Japan's most famous fireworks displays. It takes place on the last Saturday of July along the Sumida River, drawing over a million spectators.</p>
+                        <p>{{ $event->details }}</p>
 
                         <h2>History</h2>
-                        <p>The Sumida River Fireworks Festival, held annually in Tokyo, is one of Japan's most famous fireworks displays. It takes place on the last Saturday of July along the Sumida River, drawing over a million spectators.</p>
-                        <p><a href="https://www.sumidagawa-hanabi.com/" class="text-white">https://www.sumidagawa-hanabi.com/</a></p>
+                        <p>{{ $event->history }}</p>
+                        <p>
+                            Official link <i class="fa-solid fa-arrow-right"></i>&nbsp;<a href="{{ $event->official }}" class="text-white"> {{ $event->official }}</a>
+                        </p>
                         <div class="mt-4 text-end">
-                            <p class="text-white">Follow this event’s owner</p>
-                            <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-xl"></i></a>
-                            <a href="#" class="text-white me-3"><i class="fa-brands fa-x-twitter fa-xl"></i></a>
-                            <a href="#" class="text-white me-4"><i class="fab fa-instagram fa-xl"></i></a>
+                            <p class="text-white">Follow this event's owner</p>
+                            <a href="{{ $event->facebook_link }}" class="text-white me-3"><i class="fab fa-facebook fa-xl"></i></a>
+                            <a href="{{ $event->x_link }}" class="text-white me-3"><i class="fa-brands fa-x-twitter fa-xl"></i></a>
+                            <a href="{{ $event->insta_link }}" class="text-white me-4"><i class="fab fa-instagram fa-xl"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        {{-- Before Reservation --}}
-        {{-- <div class="col-md-6">
-            <div class="card px-5 pt-3 mb-4 shadow" style="height: 400px;">
-                <div class="card-body text-center">
-                    <div class="mb-3 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
-                            <i class="fa-solid fa-yen-sign icon-lg"></i>
-                        </div>
-                        <div class="ms-3 text-center flex-grow-1">
-                            <h3 class="mb-0">5,000 yen / per person</h3>
-                        </div>
-                    </div>
-                    <div class="mb-3 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
-                            <i class="fa-solid fa-users icon-lg"></i>
-                        </div>
-                        <div class="ms-3 text-start flex-grow-1">
-                            <select class="form-select">
-                                <option>1 person</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-3 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
-                            <i class="fa-solid fa-calendar-days icon-lg"></i>
-                        </div>
-                        <div class="ms-3 text-start flex-grow-1">
-                            <select class="form-select">
-                                <option>Select Date</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-3 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
-                            <i class="fa-regular fa-clock icon-lg"></i>
-                        </div>
-                        <div class="ms-3 text-start flex-grow-1">
-                            <select class="form-select">
-                                <option>Select Time</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
-                    <hr style="color: #0C2C04">
-                    <p class="align-middle text-center pt-2 fs-3 mb-0"><strong>Total</strong> 5,000 yen</p>
-                </div>
-            </div>
-        </div> --}}
 
+        @if(auth()->check() && $reservation != null)
         {{-- Reserved --}}
         <div class="col-md-6">
             <div class="card mb-4 shadow" style="min-height: 400px; max-height: 400px;">
@@ -150,7 +122,11 @@
                             <h4 class="mb-0">Total Price</h3>
                         </div>
                         <div class="ms-3 text-start" style="width: 20%;">
-                            <h4 class="mb-0">5,000 yen</h4>
+                            @if(isset($totalPrice))
+                            <h4 class="mb-0">{{ number_format($totalPrice) }}</h4>
+                            @else
+                                <h4 class="mb-0">N/A</h4>
+                            @endif
                         </div>
                     </div>
                     <div class="mb-2 d-flex justify-content-center align-items-center">
@@ -161,7 +137,7 @@
                             <h4 class="mb-0">People</h4>
                         </div>
                         <div class="ms-3 text-start" style="width: 20%;">
-                            <h4 class="mb-0">2</h4>
+                            <h4 class="mb-0">{{ $reservation->num_tickets }}</h4>
                         </div>
                     </div>
                     <div class="mb-2 d-flex justify-content-center align-items-center">
@@ -171,8 +147,8 @@
                         <div class="ms-3 text-start" style="width: 20%;">
                             <h4 class="mb-0">Date</h4>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%;">
-                            <h4 class="mb-0">2024/6/29</h4>
+                        <div class="ms-3 text-start">
+                            <h4 class="mb-0">{{ $reservation->reservation_date }}</h4>
                         </div>
                     </div>
                     <div class="mb-2 d-flex justify-content-center align-items-center">
@@ -183,16 +159,78 @@
                             <h4 class="mb-0">Time</h4>
                         </div>
                         <div class="ms-3 text-start" style="width: 20%;">
-                            <h4 class="mb-0">11:00</h4>
+                            <h4 class="mb-0">{{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</h4>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center my-4">
-                        <button class="btn btn-red custom-btn me-2" data-bs-toggle="modal" data-bs-target="#user-delete-reservation"><i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation</button>
-                        <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-target="#user-edit-reservation"><i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation</button>
+                        <button class="btn btn-red custom-btn me-2" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-delete-reservation' . $reservation->id : '#' }}"><i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation</button>
+                        <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-edit-reservation' . $reservation->id : '#' }}"><i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation</button>
+                        @include('users.reservations.modal.edit')
+                        @include('users.reservations.modal.delete')
                     </div>
                 </div>
             </div>
         </div>
+        @else
+        {{-- Before Reservation --}}
+        <div class="col-md-6">
+            <div class="card px-5 pt-3 mb-4 shadow" style="height: 400px;">
+                <div class="card-body text-center">
+                    <div class="mb-3 d-flex justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center" style="width: 50px;">
+                            <i class="fa-solid fa-yen-sign icon-lg"></i>
+                        </div>
+                        <div class="ms-3 text-center flex-grow-1">
+                            <h3 class="mb-0">{{ number_format($event->price) }} yen / per person</h3>
+                        </div>
+                    </div>
+                    <div class="mb-3 d-flex justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center" style="width: 50px;">
+                            <i class="fa-solid fa-users icon-lg"></i>
+                        </div>
+                        <div class="ms-3 text-start flex-grow-1">
+                            <select class="form-select" name="num_tickets" id="numTickets">
+                                <option value="1" hidden>1 person</option>
+                                @for ($i = 1; $i <= $availableSlots; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 d-flex justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center" style="width: 50px;">
+                            <i class="fa-solid fa-calendar-days icon-lg"></i>
+                        </div>
+                        <div class="ms-3 text-start flex-grow-1">
+                            <select class="form-select" name="event_date" >
+                                <option value="" hidden>Select Date</option>
+                                @foreach ($eventDates as $date)
+                                    <option value="{{ $date }}">{{ \Carbon\Carbon::parse($date)->format('Y/m/d') }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 d-flex justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center" style="width: 50px;">
+                            <i class="fa-regular fa-clock icon-lg"></i>
+                        </div>
+                        <div class="ms-3 text-start flex-grow-1">
+                            <select class="form-select mt-2" name="event_time">
+                                <option value="" hidden>Select Time</option>
+                                @foreach ($eventTimes as $time)
+                                    <option value="{{ $time }}">{{ $time }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
+                    @include('users.reservations.modal.confirm')
+                    <hr style="color: #0C2C04">
+                    <p class="align-middle text-center pt-2 fs-3 mb-0">Total <span id="totalPrice" data-price="{{ $event->price }}">{{ number_format($event->price) }}</span> yen</p>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 
 
@@ -205,43 +243,43 @@
                     <h2>Local Information</h2>
                     <ul class="list-unstyled">
                         <li class="fs-4 d-flex align-items-center mb-2">
-                            <div class="icon-container">
+                            <div class="icon-container" style="flex-shrink: 0; width: 40px;">
                                 <i class="fas fa-parking"></i>
                             </div>
-                            <div class="text-container">
-                                <span>No Parking</span>
+                            <div class="text-container ms-1">
+                                <span>{{ $event->parking }}</span>
                             </div>
                         </li>
                         <li class="fs-4 d-flex align-items-center mb-2">
-                            <div class="icon-container">
+                            <div class="icon-container" style="flex-shrink: 0; width: 40px;">
                                 <i class="fas fa-train"></i>
                             </div>
-                            <div class="text-container">
-                                <span>Near station: Asakusa station, Tokyo Skytree station, Kuramae station, Ryogoku station, Asakusabashi station</span>
+                            <div class="text-container ms-1">
+                                <span>{{ $event->train }}</span>
                             </div>
                         </li>
                         <li class="fs-4 d-flex align-items-center mb-2">
-                            <div class="icon-container">
+                            <div class="icon-container" style="flex-shrink: 0; width: 40px;">
                                 <i class="fas fa-restroom"></i>
                             </div>
-                            <div class="text-container">
-                                <span>Toilet: 30 toilets around here</span>
+                            <div class="text-container ms-1">
+                                <span>{{ $event->toilet }}</span>
                             </div>
                         </li>
                         <li class="fs-4 d-flex align-items-center mb-2">
-                            <div class="icon-container">
+                            <div class="icon-container" style="flex-shrink: 0; width: 40px;">
                                 <i class="fas fa-cloud-rain"></i>
                             </div>
-                            <div class="text-container">
-                                <span>Light rain, event will proceed (canceled in case of severe weather)</span>
+                            <div class="text-container ms-1">
+                                <span>{{ $event->weather }}</span>
                             </div>
                         </li>
                         <li class="fs-4 d-flex align-items-center mb-2">
-                            <div class="icon-container">
+                            <div class="icon-container" style="flex-shrink: 0; width: 40px;">
                                 <i class="fa-brands fa-first-order-alt"></i>
                             </div>
-                            <div class="text-container">
-                                <span>Number of launches : about 20,000</span>
+                            <div class="text-container ms-1">
+                                <span>{{ $event->add_info }}</span>
                             </div>
                         </li>
                     </ul>
@@ -256,7 +294,9 @@
                     <div class="text-white flex-grow-1">
                         <h2>Location</h2>
                         <div id="map-container">
-                            <img src="{{ asset('images/event-test/map.png') }}" alt="map" id="map-image">
+                            {{-- map --}}
+                            <div id="map"></div>
+                            {{-- <img src="{{ asset('images/event-test/map.png') }}" alt="map" id="map-image"> --}}
                             <div id="zoom-buttons">
                                 <button class="btn btn-sm btn-light"><i class="fas fa-plus"></i></button><br>
                                 <button class="btn btn-sm btn-light"><i class="fas fa-minus"></i></button>
@@ -264,8 +304,8 @@
                         </div>
                         <p class="mt-2" style="display: flex; align-items: center;">
                             Access by
-                            <a href="#" class="mx-2"><img src="{{ asset('images/event-test/luup.png') }}" alt="LUUP" style="width: 50px; height: auto;"></a>
-                            <a href="#"><img src="{{ asset('images/event-test/go.png') }}" alt="GO" style="width: 25px; height: auto;"></a>
+                            <a href="https://luup.sc/en/" class="mx-2"><img src="{{ asset('images/event-test/luup.png') }}" alt="LUUP" style="width: 50px; height: auto;"></a>
+                            <a href="https://go.goinc.jp/lp/inbound"><img src="{{ asset('images/event-test/go.png') }}" alt="GO" style="width: 25px; height: auto;"></a>
                         </p>
                     </div>
                 </div>
@@ -592,10 +632,6 @@
         </div>
     </div>
 </div>
-
-@include('users.reservations.modal.confirm')
-@include('users.reservations.modal.delete')
-@include('users.reservations.modal.edit')
 
 @endsection
 

@@ -1,6 +1,4 @@
 @vite(['resources/js/totalPrice.js'])
-@if ($reservation)
-
 <div class="modal fade" id="user-edit-reservation{{ $reservation->id }}" data-price="{{ $reservation->event->price }}">
     <div class="modal-dialog">
         <form action="{{ route('user.reservation.update', $reservation->id) }}" method="post">
@@ -103,4 +101,3 @@
         </form>
     </div>
 </div>
-@endif

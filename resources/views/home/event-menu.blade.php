@@ -25,7 +25,7 @@
                     {{-- event list --}}
                     @forelse ($events as $event)
                         <div class="col-lg-6 mb-4">
-                            <a href="" class="text-decoration-none">
+                            <a href="{{ route('event.details.show', $event->id) }}" class="text-decoration-none">
                                 {{-- event card --}}
                                 <div class="card shadow border-0" id="event-card-{{$event->id}}">
                                     @php

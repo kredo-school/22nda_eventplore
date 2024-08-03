@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Area;
 use App\Models\Review;
 use App\Models\Event;
-use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +13,9 @@ class ReviewController extends Controller
     {
         $request->validate([
             'star' => 'required|integer|min:1|max:5',
-            'comment' => 'nullable|string',
+            'comment' => 'nullable|string|max:255',
+        ], [
+            'comment.max' => 'The comment may not be greater than :max characters.',
         ]);
 
         $event = Event::with('reviews.user')->findOrFail($eventId);
@@ -30,6 +30,6 @@ class ReviewController extends Controller
         return redirect()->back();
     }
 
-    
+
 
 }

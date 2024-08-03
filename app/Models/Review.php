@@ -25,4 +25,12 @@ class Review extends Model
     {
         return $this->belongsTo(Event::class);
     }
+
+    //削除されていないイベントを取得
+    public function scopeForActiveEvents($query)
+    {
+        return $query->whereHas('event', function ($query) {
+            $query->whereNull('deleted_at');
+        });
+    }
 }
