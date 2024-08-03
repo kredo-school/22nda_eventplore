@@ -114,33 +114,6 @@ table, th, td {
 .map-pop:focus {
     outline: none;
   }
-.btn-detail {
-    background-color:#84947C;
-    color: #FFFFFF;
-    font-weight: bold;
-    font-family: "Raleway",sans-serif;
-    text-decoration: none;
-	width: 50px;
-	font-size: 10px;
-	padding: 3px 5px;
-}
-.btn-detail:hover {
-    color: #84947C;
-    border-color: #84947C;
-}
-.btn-detail:focus {
-    background-color:#84947C;
-    color: #FFFFFF;
-    font-weight: bold;
-    box-shadow: 0 0 0 0.15rem rgba(130, 155, 120, 0.5);
-}
-.detail-dot {
-    color: #0C2C04;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-}
 a:link { 
     text-decoration: none; 
 }

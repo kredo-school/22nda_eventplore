@@ -91,17 +91,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // PopupのHTML
         const popupContent = `
-            <a href="" class="map-pop">
+            <a href="/event/${event.id}/details-page" class="map-pop">
                 <div>
                     ${eventImageContent}
                     <div class="m-2 mb-3">
                         <div class="row align-items-center">
                             <div class="col-11 pe-0">
-                                <h4 class="mb-1 text-dark">${event.event_name}</h4>
+                                <h4 class="mb-1 text-dark text-break">${event.event_name}</h4>
                             </div>
-                            <div class="col d-flex justify-content-end mb-1 me-1">
-                                ${reviewContent}
-                            </div>
+                            <div class="col d-flex justify-content-end mb-1 me-1">${reviewContent}</div>
                         </div>
                         <div class="row align-items-center gx-1 mb-2">
                             <div class="col-4 overflow_dot text-dark">
@@ -114,14 +112,10 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
                             </div>
                             <div class="col-4 align-self-center">
-                                <div class="tag rounded-pill overflow_dot py-1 w-100">
-                                    ${dateContent}
-                                </div>
+                                <div class="tag rounded-pill overflow_dot py-1 w-100">${dateContent}</div>
                             </div>
                             <div class="col-4 align-self-center">
-                                <div class="tag rounded-pill overflow_dot py-1 w-100">
-                                    ${timeContent}
-                                </div>
+                                <div class="tag rounded-pill overflow_dot py-1 w-100">${timeContent}</div>
                             </div>
                         </div>
                     </div>

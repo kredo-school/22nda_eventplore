@@ -1,13 +1,28 @@
-
 // Mapbox
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
+
+// イベントデータを取得
+const event = window.eventData;
+
+// イベント位置を中心に地図を作成
 const map = new mapboxgl.Map({
     container: 'map', // Your map container ID
     style: 'mapbox://styles/mari-ka/clyeemvm700s001r4cviiefes', // Example style
-    center: [139.839478, 35.652832], // Center coordinates
+    center: [event.longitude, event.latitude], // Center coordinates
     // 経度、緯度
-    zoom: 8, // Zoom level
-  });
+    zoom: 13, // Zoom level
+});
+
+// 新しいマーカーを作成
+new mapboxgl.Marker({ color: '#F7142B' })
+    .setLngLat([event.longitude, event.latitude])
+    .addTo(map);
+
+// 全画面ボタン、ズームボタン、スケールを追加
+map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
+map.addControl(new mapboxgl.NavigationControl());
+map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
+
 
 // イベント詳細ページ
   document.addEventListener('DOMContentLoaded', function() {
