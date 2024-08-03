@@ -1,0 +1,166 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* 背景透過 */
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 80vh;
+    background-size: cover;
+    background-position: center;
+    opacity: 30%;
+}
+/* height: calc(100vh - 240px);
+    object-fit: cover; */
+
+/* ステータスアイコンバー */
+.timeline {
+    display: flex;
+    justify-content: space-between; /* アイテム間のスペースを均等に */
+    align-items: center;
+    position: relative;
+    width: 60%; /* タイムライン全体の幅を調整 */
+    margin: 50px auto; /* 中央揃えのために左右のマージンを自動に */
+}
+
+.timeline-item {
+    position: relative;
+    background-color: #f5e4d8; /* 背景色を設定 */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* アイコンを線の上に表示 */
+}
+
+.timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%; /* 線を右側に配置 */
+    width: 100%; /* 線の長さを調整 */
+    height: 2px; /* 線の太さを設定 */
+    background-color: #f5e4d8; /* 線の色を背景色と同じに設定 */
+    z-index: -1;
+}
+
+.icon-md{
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.icon-lg{
+    font-size: 2rem;
+    color: #0C2C04;
+}
+
+.icon-md-active {
+    font-size: 1.5rem;
+    color: #0C2C04; /* active icon color */
+}
+
+/* チェックボックスのサイズ */
+input[type="checkbox"] {
+    transform: scale(1.5);
+}
+/* チェックボックスのチェック時のカラー */
+input[type="checkbox"]:checked {
+    background-color: #84947C;
+    border-color: #84947C;
+}
+/* チェックボックスの選択時のカラー */
+.form-check-input:focus {
+    border-color: #84947C;
+    box-shadow: 0 0 0 0.15rem rgba(132, 148, 124, 0.5);
+}
+/* 入力・選択欄の選択時のカラー */
+.form-control:focus, .form-select:focus {
+    border-color: #84947C;
+    box-shadow: inset 0 1px 1px #0C2C04, 0 0 8px #84947C;
+}
+
+.mapboxgl-ctrl-geocoder {
+    width: 100% !important;
+    min-width: 0px !important;
+    max-width: 100vw !important;
+    box-shadow: none !important;
+    background-color: #FAF8FC !important;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+    width: 100% !important;
+    font-family: "EB Garamond" !important;
+    font-size: inherit;
+    border: 1px solid #84947C;
+    border-radius: .3rem !important;
+    box-sizing: border-box; /* 横幅を揃えるために追加 */
+}
+
+.mapboxgl-ctrl-geocoder--suggestion {
+    display: flex;
+    align-items: center;
+}
+
+.mapboxgl-ctrl-geocoder--suggestion-title {
+    margin-left: 10px;
+}
+
+/* edit image */
+.edit-image {
+    position: absolute;
+    right: 2rem;
+    top: 0.5rem;
+    color: #696969;
+    z-index: 1;
+    background-color: #d3d3d3;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    border: none; /* 枠線を削除 */
+}
+
+/* delete image */
+.delete-image {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    color: #696969;
+    z-index: 1;
+    background-color: #d3d3d3;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    border: none; /* 枠線を削除 */
+    outline: none; /* 枠線を削除 */
+}
+
+@media (max-width: 768px) {
+    .image-part{
+        overflow-x: auto;
+    }
+    .main-image {
+        width: 100% !important;
+    }
+    .other-images {
+        display: flex;
+        width: 100% !important;
+    }
+    .other-images .w-50 {
+        width: 50% !important;
+    }
+}

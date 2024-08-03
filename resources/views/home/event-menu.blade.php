@@ -3,15 +3,17 @@
 @section('title', 'Event Menu')
 
 @section('content')
-@vite(['resources/js/mapbox.js'])
+@vite(['resources/js/mapbox-search.js'])
 
     <link rel="stylesheet" href="{{ asset('css/show-event/event-menu.css') }}">
     <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
 
+    <script src="https://cdn.jsdelivr.net/npm/mapbox-gl-animated-popup@latest"></script>
+
     {{-- menu offcanvas --}}
     <div class="cp_cont">
         <div class="cp_offcanvas">
-            <input type="checkbox" id="cp_toggle" checked>
+            <input type="checkbox" id="cp_toggle" checked onclick="toggleMap()">
             <label for="cp_toggle"></label>
             <div class="cp_menu">
                 <div class="row ms-2 me-2">
@@ -24,12 +26,40 @@
                         <div class="col-lg-6 mb-4">
                             <a href="{{ route('event.details.show', $event->id) }}" class="text-decoration-none">
                                 {{-- event card --}}
-                                <div class="card shadow border-0">
+                                <div class="card shadow border-0" id="event-card-{{$event->id}}">
+                                    @php
+                                        $carouselId = 'carousel' . $event->id;
+                                    @endphp
+
                                     @if ($event->eventImages->isEmpty())
                                         <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
-                                    @else
+                                    @elseif ($event->eventImages->count() == 1)
                                         <img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                                    @else
+                                        <div id="{{ $carouselId }}" class="carousel slide">
+                                            <div class="carousel-indicators">
+                                                @foreach ($event->eventImages as $index => $image)
+                                                    <button type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" aria-current="true" aria-label="Slide {{ $index + 1 }}"></button>
+                                                @endforeach
+                                            </div>
+                                            <div class="carousel-inner">
+                                                @foreach ($event->eventImages as $index => $image)
+                                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                        <img src="{{ $image->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        </div>
                                     @endif
+
                                     <div class="card-body px-2">
                                         <div class="row align-items-center">
                                             {{-- event title --}}
@@ -104,8 +134,9 @@
     </div>
 
     {{-- map --}}
-    <div>
+    <div id="map-container">
         <div id="map"></div>
+        <script id="event-data" type="application/json">{!! $events->toJson() !!}</script>
     </div>
 
 @endsection

@@ -17,7 +17,7 @@
                                 <div class="col mb-1 px-1">
                                     <label for="username" class="form-label fw-bold mb-1">Username*</label>
                                     <input id="username" type="text" class="form-control" name="username" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C">
-
+                    
                                     @error('username')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -34,7 +34,7 @@
                                             <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer;"></i>
                                         </div>
                                     </div>
-
+                                    
                                     @error('password')
                                         <span class="invalid-feedback text-start" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -46,7 +46,7 @@
                                 <div class="col-6 mb-1 px-1">
                                     <label for="first-name" class="form-label fw-bold mb-1">First Name*</label>
                                     <input id="firstname" type="text" class="form-control" name="firstname" required autocomplete="firstname" autofocus placeholder="First name" style="border: 1px solid #84947C">
-
+                    
                                     @error('firstname')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -56,7 +56,7 @@
                                 <div class="col-6 mb-1 px-1">
                                     <label for="last-name" class="form-label fw-bold mb-1">Last Name*</label>
                                     <input id="lastname" type="text" class="form-control" name="lastname" required autocomplete="lastname" autofocus placeholder="Last name" style="border: 1px solid #84947C">
-
+                    
                                     @error('lastname')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -68,7 +68,7 @@
                                 <div class="col-6 mb-1 px-1">
                                     <label for="email" class="form-label fw-bold mb-1">Email*</label>
                                     <input type="email" name="email" id="email" class="form-control" required autocomplete="email" autofocus placeholder="email@eventplore.com" style="border: 1px solid #84947C">
-
+                    
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -78,7 +78,7 @@
                                 <div class="col-6 mb-1 px-1">
                                     <label for="phone_number" class="form-label fw-bold mb-1">Phone Number*</label>
                                     <input type="tel" name="phone_number" id="phone_number" class="form-control" required autocomplete="tel" autofocus placeholder="0xx-xxxx-xxxx" style="border: 1px solid #84947C">
-
+                    
                                     @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

@@ -75,7 +75,9 @@ Route::middleware(['auth:web'])->group(function () {
         Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
         Route::post('/event-owners/events/store', [EventController::class, 'store'])->name('events.store');
         Route::get('/event-owners/session-id', [EventController::class, 'getSessionId']);
-
+        Route::get('/event-owners/events/{id}/edit', [EventController::class, 'edit'])->name('events.edit');
+        Route::patch('/event-owners/events/{id}/update', [EventController::class, 'update'])->name('events.update');
+        Route::delete('/event-owners/images/{id}', [EventController::class, 'destroyImage'])->name('event-image.destroy');
     });
 
 
