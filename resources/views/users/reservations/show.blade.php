@@ -24,7 +24,7 @@
     @if ($errors->has('password'))
         <h5 class="alert alert-danger">{{ $errors->first('password') }}</h5>
     @endif
-    
+
     {{-- reservation table --}}
     <div class="table-responsive">
         <table class="table text-center align-middle shadow rounded-2 overflow-hidden mb-5 w-100">
@@ -93,4 +93,3 @@
 </div>
 
 @endsection
-

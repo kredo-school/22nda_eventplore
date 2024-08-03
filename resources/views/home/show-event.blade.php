@@ -285,76 +285,62 @@
                 <div style="height: 200px; border: 1px solid #0C2C04" class=" w-25 rounded d-flex flex-column justify-content-center align-items-center ms-5">
                     <div class="mb-2">
                         <i class="fa-solid fa-star fa-3x"></i>
-                        <span class="h1 ms-2 ">4.5</span>
+                        <span class="h1 ms-2 ">{{ number_format($averageRating, 1) }}</span>
                     </div>
                     <div class="text-center">
-                        <p class="h6">( The average score customers evaluated .)</p>
+                        <p class="h6">( The average score customers evaluated.)</p>
                     </div>
                 </div>
 
                 {{-- レビューの評価(グラフ) --}}
                 <dl class="bar-chart-002 ms-4 w-25 rounded">
+                @php
+                    $defaultStars = [5, 4, 3, 2, 1];
+                    $ratingCountsArray = $ratingCounts->toArray();
+
+                    $totalReviews = max($event->reviews->count(), 1);
+                @endphp
+
+                @foreach($defaultStars as $star)
                     <div>
-                        <dt>5:</dt>
-                        <dd><span style="width: 80%">80%</span></dd>
+                        <dt>{{ $star }}:</dt>
+                        @php
+                            // 評価のカウントを取得（存在しない場合は0）
+                            $count = $ratingCountsArray[$star] ?? 0;
+
+                            // 幅の計算（0%も表示されるように）
+                            $width = ($totalReviews > 0) ? ($count / $totalReviews) * 100 : 0;
+                            $widthInt = (int) floor($width);
+                        @endphp
+                        <dd>
+                            <span style="display: inline-block; width: {{ $width }}%;">
+                                {{ $widthInt }}%
+                            </span>
+                        </dd>
                     </div>
-                    <div>
-                        <dt>4:</dt>
-                        <dd><span style="width: 10%">10%</span></dd>
-                    </div>
-                    <div>
-                        <dt>3:</dt>
-                        <dd><span style="width: 5%">5%</span></dd>
-                    </div>
-                    <div>
-                        <dt>2:</dt>
-                        <dd><span style="width: 3%"> 3%</span></dd>
-                    </div>
-                    <div>
-                        <dt>1:</dt>
-                        <dd><span style="width: 2%">2%</span></dd>
-                    </div>
+                @endforeach
                 </dl>
             </div>
         </div>
         {{-- コメントが3件だけ見れる --}}
         <div class="d-flex justify-content-center mt-4 w-100 flex-wrap">
+        @foreach($latestReviews as $review)
             <div class="rounded p-2 col-12 col-md-6 col-lg-3 mb-3 me-2" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
                 <div class="d-flex justify-content-start align-items-center">
-                    <img src="{{ asset('images/Jackie.jpeg') }}" alt="Jackie" class="rounded-circle m-2" style="width: 36px; height: 36px;">
-                    <span class="h5 ms-2 d-flex align-items-center">John Smith</span>
+                    <img src="{{ $review->user->avatar }}" alt="{{ $review->user->name }}" class="rounded-circle avatar-md mb-2">
+                    <span class="h4 ms-2 d-flex align-items-center">{{ $review->user->username }}</span>
                 </div>
-                <i class="fa-solid fa-star"></i>
-                <span class="me-2 h5">5.0</span>
+                <h5><i class="fa-solid fa-star"></i>
+                    {{ number_format($review->star, 1) }}
+                </h5>
                 <div class="mt-2">
-                    <span>I was excited to watch fireworks!! I'm gonna go there next year. </span>
+                    <span class="overflow-ellipsis">{{ $review->comment }}</span>
                 </div>
             </div>
-            <div class="rounded p-2 col-12 col-md-6 col-lg-3 mb-3 me-2" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
-                <div class="d-flex justify-content-start align-items-center">
-                    <img src="{{ asset('images/Jackie.jpeg') }}" alt="Jackie" class="rounded-circle m-2" style="width: 36px; height: 36px;">
-                    <span class="h5 ms-2 d-flex align-items-center">John Smith</span>
-                </div>
-                <i class="fa-solid fa-star"></i>
-                <span class="me-2 h5">5.0</span>
-                <div class="mt-2">
-                    <span>I was excited to watch fireworks!! I'm gonna go there next year. </span>
-                </div>
-            </div>
-            <div class="rounded p-2 col-12 col-12 col-md-6 col-lg-3 me-2" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
-                <div class="d-flex justify-content-start align-items-center">
-                    <img src="{{ asset('images/Jackie.jpeg') }}" alt="Jackie" class="rounded-circle m-2" style="width: 36px; height: 36px;">
-                    <span class="h5 ms-2 d-flex align-items-center">John Smith</span>
-                </div>
-                <i class="fa-solid fa-star"></i>
-                <span class="me-2 h5">5.0</span>
-                <div class="mt-2">
-                    <span>I was excited to watch fireworks!! I'm gonna go there next year. </span>
-                </div>
-            </div>
+        @endforeach
         </div>
         <div class="ms-5 my-5">
-            <button class="btn btn-outline-dg" data-bs-toggle="modal" data-bs-target="#all-reviews-page">See all reviews(135)</button>
+            <button class="btn btn-outline-dg" data-bs-toggle="modal" data-bs-target="#all-reviews-page">See all reviews ({{ $totalReviews }})</button>
         </div>
         @include('home.modal.show-reviews')
     </div>

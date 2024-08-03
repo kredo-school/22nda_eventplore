@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
 use App\Models\Review;
 use App\Models\Event;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,4 +29,7 @@ class ReviewController extends Controller
 
         return redirect()->back();
     }
+
+    
+
 }

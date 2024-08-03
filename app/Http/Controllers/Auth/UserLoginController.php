@@ -145,7 +145,6 @@ class UserLoginController extends Controller
             // セッションの無効化とトークンの再生成
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-
             return redirect()->route('user.sign-in');
         } else {
             // パスワードが一致しない場合

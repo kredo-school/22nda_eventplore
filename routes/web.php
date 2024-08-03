@@ -12,12 +12,18 @@ use App\Http\Controllers\Auth\EventOwnerLoginController;
 use App\Http\Controllers\Auth\EventOwnerRegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\ReviewController;
 
 
 Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
 Route::post('/event-owners/events/store', [EventController::class, 'store'])->name('events.store');
 Route::get('/event-owners/session-id', [EventController::class, 'getSessionId']);
 
+Route::get('/guideline', [HomeController::class, 'guideline'])->name('gudeline');
+Route::get('/show-event/{id}', [HomeController::class, 'showEvent'])->name('show-event');
+Route::post('/events/{event}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+
+Route::get('/show-event/{id}', [HomeController::class, 'showEvent'])->name('show-event');
 
 
 // ユーザーのサインアップ
@@ -40,6 +46,8 @@ Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
 
 //navとHamburgerからのsearch
 Route::get('/events/search', [HomeController::class, 'search'])->name('events.search');
+//nav categoryからのsearch
+Route::get('/category/search', [HomeController::class, 'searchFromCategory'])->name('category.search');
 
 
 

@@ -101,14 +101,17 @@
                         </div>
 
                     @endauth
-                    <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                    @unless(Auth::guard('event_owner')->check())
+                        <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    @endunless
                 </div>
             {{-- </div> --}}
 
                 <!-- Hamburger Menu for smaller screens -->
-                <div class="collapse navbar-collapse" id="navbarHamburger">
+            @unless(Auth::guard('event_owner')->check())
+                <div class="col navbar-collapse" id="navbarHamburger">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0 d-md-none pt-2" style="background-color: white;">
                         @guest
                             @if (Route::has('login'))
@@ -136,154 +139,152 @@
                         <li class="nav-item">
                             <ul class="nav-list" style="max-height: 200px; overflow-y: auto;">
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-torii-gate"></i> Culture</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'culture']) }}"><i class="fa-solid fa-torii-gate"></i> Culture</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-brands fa-first-order-alt"></i> Fireworks</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'fireworks']) }}"><i class="fa-brands fa-first-order-alt"></i> Fireworks</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fas fa-theater-masks"></i> Festival</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'festival']) }}"><i class="fas fa-theater-masks"></i> Festival</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-utensils"></i> Food/Drink</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'food_drink']) }}"><i class="fa-solid fa-utensils"></i> Food/Drink</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-baseball-bat-ball"></i> Sport</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'sport']) }}"><i class="fa-solid fa-baseball-bat-ball"></i> Sport</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-paint-brush"></i> Art</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'art']) }}"><i class="fa-solid fa-paint-brush"></i> Art</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-music"></i> Music</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'music']) }}"><i class="fa-solid fa-music"></i> Music</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-leaf"></i> Nature</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'nature']) }}"><i class="fa-solid fa-leaf"></i> Nature</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-regular fa-lightbulb"></i> Illumination</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'illumination']) }}"><i class="fa-regular fa-lightbulb"></i> Illumination</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-film"></i> Movie</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'movie']) }}"><i class="fa-solid fa-film"></i> Movie</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-icons"></i> Hobby</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'hobby']) }}"><i class="fa-solid fa-icons"></i> Hobby</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-user-tie"></i> Business</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'business']) }}"><i class="fa-solid fa-user-tie"></i> Business</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-house-laptop"></i> Online</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'online']) }}"><i class="fa-solid fa-house-laptop"></i> Online</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fas fa-hand-holding-usd"></i> Free</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'free']) }}"><i class="fas fa-hand-holding-usd"></i> Free</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-brands fa-product-hunt"></i> Parking</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'parking']) }}"><i class="fa-brands fa-product-hunt"></i> Parking</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-restroom"></i> Toilet</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'toilet']) }}"><i class="fa-solid fa-restroom"></i> Toilet</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-train-subway"></i> Train/Bus</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'train_bus']) }}"><i class="fa-solid fa-train-subway"></i> Train/Bus</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-cloud-sun"></i> Outside</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'outside']) }}"><i class="fa-solid fa-cloud-sun"></i> Outside</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href=""><i class="fa-solid fa-house-user"></i> Inside</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'inside']) }}"><i class="fa-solid fa-house-user"></i> Inside</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
+            @endunless
+        </div>
+    </nav>
+        {{-- Show up only Event menu page --}}
+    @if (Route::currentRouteName() == 'event-menu' || Route::currentRouteName() == 'events.search' || Route::currentRouteName() == 'ham.search' || Route::currentRouteName() == 'category.search')
+        <nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height navbar-category d-none d-md-flex" style = "width: 100%;">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarCategory">
+                    <a href="{{ route('category.search', ['category' => 'culture']) }}" class="me-1 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-torii-gate fa-2xl"></i>
+                        <small class="d-block mt-2">Culture</small>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'fireworks']) }}" class="me-2 text-secondary text-decoration-none text-center">
+                        <i class="fa-brands fa-first-order-alt fa-2xl"></i>
+                        <small class="d-block mt-2">Fireworks</small>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'festival']) }}" class="me-2 text-secondary text-decoration-none text-center">
+                        <i class="fas fa-theater-masks fa-2xl"></i>
+                        <span class="d-block mt-2">Festival</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'food_drink']) }}" class="me-2 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-utensils fa-2xl"></i>
+                        <small class="d-block mt-2">Food/Drink</small>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'sport']) }}" class="me-2 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-baseball-bat-ball fa-2xl"></i>
+                        <span class="d-block mt-2">Sport</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'art']) }}" class="me-2 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-paint-brush fa-2xl"></i>
+                        <span class="d-block mt-2">Art</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'music']) }}" class="me-3 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-music fa-2xl"></i>
+                        <span class="d-block mt-2">Music</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'nature']) }}" class="me-2 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-leaf fa-2xl"></i>
+                        <span class="d-block mt-2">Nature</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'illumination']) }}" class="me-2 text-secondary text-decoration-none text-center">
+                        <i class="fa-regular fa-lightbulb fa-2xl"></i>
+                        <small class="d-block mt-2">Illumination</small>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'movie']) }}" class="me-2 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-film fa-2xl"></i>
+                        <span class="d-block mt-2">Movie</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'hobby']) }}" class="me-2 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-icons fa-2xl"></i>
+                        <span class="d-block mt-2">Hobby</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'business']) }}" class="mx-2 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-user-tie fa-2xl"></i>
+                        <span class="d-block mt-2">Business</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'online']) }}" class="me-2 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-house-laptop fa-2xl"></i>
+                        <span class="d-block mt-2">Online</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'free']) }}" class="me-1 text-secondary text-decoration-none text-center">
+                        <i class="fas fa-hand-holding-usd fa-xl"></i>
+                        <span class="d-block mt-2">Free</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'parking']) }}" class="ps-2 me-1 text-secondary text-decoration-none text-center border border-start border-end-0 border-top-0 border-bottom-0 border-3">
+                        <i class="fa-brands fa-product-hunt fa-2xl"></i>
+                        <span class="d-block mt-2">Parking</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'toilet']) }}" class="me-1 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-restroom fa-2xl"></i>
+                        <span class="d-block mt-2">Toilet</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'train_bus']) }}" class="me-1 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-train-subway fa-2xl"></i>
+                        <small class="d-block mt-2">Train/Bus</small>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'outside']) }}" class="me-1 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-cloud-sun fa-2xl"></i>
+                        <span class="d-block mt-2">Outside</span>
+                    </a>
+                    <a href="{{ route('category.search', ['category' => 'inside']) }}" class="me-2 text-secondary text-decoration-none text-center">
+                        <i class="fa-solid fa-house-user fa-2xl"></i>
+                        <span class="d-block mt-2">Inside</span>
+                    </a>
+                </div>
             </div>
         </nav>
-    </div>
-</form>
-
-
-{{-- Show up only Event menu page --}}
-@if (Route::currentRouteName() == 'event-menu' || Route::currentRouteName() == 'events.search')
-<nav class="navbar navbar-expand-md navbar-light bg-white navbar-bottom-border navbar-fixed-height navbar-category d-none d-md-flex" style = "width: 100%;">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarCategory">
-            <a href="" class="me-1 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-torii-gate fa-2xl"></i>
-                <small class="d-block mt-2">Culture</small>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-brands fa-first-order-alt fa-2xl"></i>
-                <small class="d-block mt-2">Fireworks</small>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fas fa-theater-masks fa-2xl"></i>
-                <span class="d-block mt-2">Festival</span>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-utensils fa-2xl"></i>
-                <small class="d-block mt-2">Food/Drink</small>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-baseball-bat-ball fa-2xl"></i>
-                <span class="d-block mt-2">Sport</span>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-paint-brush fa-2xl"></i>
-                <span class="d-block mt-2">Art</span>
-            </a>
-            <a href="" class="me-3 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-music fa-2xl"></i>
-                <span class="d-block mt-2">Music</span>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-leaf fa-2xl"></i>
-                <span class="d-block mt-2">Nature</span>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-regular fa-lightbulb fa-2xl"></i>
-                <small class="d-block mt-2">Illumination</small>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-film fa-2xl"></i>
-                <span class="d-block mt-2">Movie</span>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-icons fa-2xl"></i>
-                <span class="d-block mt-2">Hobby</span>
-            </a>
-            <a href="" class="mx-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-user-tie fa-2xl"></i>
-                <span class="d-block mt-2">Business</span>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-house-laptop fa-2xl"></i>
-                <span class="d-block mt-2">Online</span>
-            </a>
-            <a href="" class="me-1 text-secondary text-decoration-none text-center">
-                <i class="fas fa-hand-holding-usd fa-xl"></i>
-                <span class="d-block mt-2">Free</span>
-            </a>
-            <a href="" class="ps-2 me-1 text-secondary text-decoration-none text-center border border-start border-end-0 border-top-0 border-bottom-0 border-3">
-                <i class="fa-brands fa-product-hunt fa-2xl"></i>
-                <span class="d-block mt-2">Parking</span>
-            </a>
-            <a href="" class="me-1 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-restroom fa-2xl"></i>
-                <span class="d-block mt-2">Toilet</span>
-            </a>
-            <a href="" class="me-1 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-train-subway fa-2xl"></i>
-                <small class="d-block mt-2">Train/Bus</small>
-            </a>
-            <a href="" class="me-1 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-cloud-sun fa-2xl"></i>
-                <span class="d-block mt-2">Outside</span>
-            </a>
-            <a href="" class="me-2 text-secondary text-decoration-none text-center">
-                <i class="fa-solid fa-house-user fa-2xl"></i>
-                <span class="d-block mt-2">Inside</span>
-            </a>
-        </div>
-    </div>
-</nav>
-@endif
+    @endif
+</div>

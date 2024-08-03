@@ -1,5 +1,5 @@
 @vite(['resources/js/showPassword.js'])
-
+@if ($reservation)
 <div class="modal fade" id="user-delete-reservation{{ $reservation->id }}">
     <div class="modal-dialog">
         <form action="{{ route('user.reservation.destroy', $reservation->id) }}" method="post">
@@ -8,15 +8,15 @@
             <div class="modal-content">
                 <div class="modal-header border-0">
                     <div class="img-container modal-title w-100">
-                        @if ($reservation->event->eventImages->isEmpty())
+                        @if (is_null($reservation->event_image))
                             <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="w-100 rounded" style="object-fit: cover; height: 300px;">
                         @else
-                            <img src="{{ $reservation->event->eventImages->first()->image }}" alt="{{ $reservation->event->event_name }}" class="w-100 rounded" style="object-fit: cover; height: 300px;">
+                            <img src="{{ $reservation->event_image }}" alt="{{ $reservation->event_name }}" class="w-100 rounded" style="object-fit: cover; height: 300px;">
                         @endif
                     </div>
                 </div>
                 <div class="modal-body" style="font-family: EB Garamond">
-                    <p class="h5 text-center">Are you sure you want to cancel reservation of <b>{{ $reservation->event->event_name }}</b>?</p>
+                    <p class="h5 text-center">Are you sure you want to cancel reservation of <b>{{ $reservation->event_name }}</b>?</p>
                     <p class="text-center">All you selected  reservation will be deleted and you won't be able to see it.
                         <br>This action cannot be undone.
                     </p>
@@ -38,3 +38,4 @@
         </form>
     </div>
 </div>
+@endif

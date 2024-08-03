@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('title', 'Event Menu')
@@ -118,7 +119,7 @@
                                     </div>
                                 </div>
                             </a>
-                        </div> 
+                        </div>
                     @empty
                         {{-- No events --}}
                         <div class="text-center mt-5">
@@ -127,7 +128,7 @@
                             <a href="/" class="btn btn-green py-2 mt-3">Search again</a>
                         </div>
                     @endforelse
-        
+
                 </div>
             </div>
         </div>
