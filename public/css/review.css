@@ -31,3 +31,63 @@
     text-align: right;
     white-space: nowrap;
 }
+
+
+.stars {
+    display: flex;
+    align-items: center;
+}
+
+.stars .star {
+    cursor: pointer;
+    color: #a09a9a; /* Default star color */
+    transition: color 0.3s;
+}
+
+.stars .star.hover,
+.stars .star.selected {
+    color: #f0da61; /* Hover and selected color */
+}
+
+/* グラフ */
+.bar-chart {
+    display: flex;
+    flex-direction: column;
+}
+
+.bar-chart div {
+    display: flex;
+    align-items: center;
+}
+
+.bar-chart dt {
+    width: 2em;
+    font-weight: bold;
+}
+
+.bar-chart dd {
+    flex-grow: 1;
+    margin: 0;
+}
+
+.bar-chart dd span {
+    display: block;
+    height: 1.5em;
+    background-color: #0C2C04;
+    color: white;
+    text-align: right;
+    padding-right: 0.5em;
+    border-radius: 0.25em;
+    line-height: 1.5em;
+}
+
+/* comment */
+.overflow-ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* 表示する行数を制限 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    line-height: 1.5em;
+}

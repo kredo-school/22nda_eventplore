@@ -125,11 +125,9 @@ class EventOwnerLoginController extends Controller
 
             // ログアウト処理
             Auth::guard('event_owner')->logout();
-
             // セッションの無効化とトークンの再生成
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-
             return redirect()->route('event-owner.sign-in');
         } else {
             // パスワードが一致しない場合

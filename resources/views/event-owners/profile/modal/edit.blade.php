@@ -15,11 +15,10 @@
                             </span>
                         @endif
                         {{-- カメラアイコン→押すとファイル選択できる --}}
-                        <label for="file-input" style="position: absolute; right: 11.5rem; top:7rem; color: #696969; z-index: 1; background-color: #d3d3d3;  width: 36px; height: 36px; border-radius: 50%; display: inline-block; line-height: 36px; text-align: center; cursor: pointer;">
-                            <i class="fa-solid fa-camera-retro fa-xl" ></i>
+                        <label for="file-input" class="camera-icon">
+                            <i class="fa-solid fa-camera-retro fa-xl"></i>
                         </label>
                         <input type="file" name="avatar" id="file-input" style="display: none;">
-                        {{-- <img width="32" height="32" src="https://img.icons8.com/material-two-tone/24/000000/apple-camera.png" alt="apple-camera" > --}}
                     </div>
                 </div>
 

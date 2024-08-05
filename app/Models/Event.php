@@ -14,16 +14,6 @@ class Event extends Model
 {
     use HasFactory,SoftDeletes;
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function eventOwner()
-    {
-        return $this->belongsTo(EventOwner::class);
-    }
-
     public function eventCategories(){
         return $this->hasMany(EventCategory::class);
     }
@@ -54,6 +44,11 @@ class Event extends Model
                 $reservation->delete();
             }
         });
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'event_categories');
     }
 }
 

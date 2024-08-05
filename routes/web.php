@@ -1,5 +1,7 @@
 <?php
 
+
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -13,13 +15,14 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\EventOwnerLoginController;
 use App\Http\Controllers\Auth\EventOwnerRegisterController;
+use App\Http\Controllers\ReviewController;
 
 
 Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
 Route::post('/event-owners/events/store', [EventController::class, 'store'])->name('events.store');
 Route::get('/event-owners/session-id', [EventController::class, 'getSessionId']);
 
-
+Route::get('/guideline', [HomeController::class, 'guideline'])->name('gudeline');
 
 // ユーザーのサインアップ
 Route::get('/user/show-sign-up', [UserRegisterController::class, 'showUserSignUp'])->name('user.sign-up');
@@ -41,9 +44,15 @@ Route::get('/event-menu', [HomeController::class, 'show'])->name('event-menu');
 
 //navとHamburgerからのsearch
 Route::get('/events/search', [HomeController::class, 'search'])->name('events.search');
+//nav categoryからのsearch
+Route::get('/category/search', [HomeController::class, 'searchFromCategory'])->name('category.search');
 
 // 各イベント詳細ページ
 Route::get('/event/{id}/details-page', [EventShowController::class, 'show'])->name('event.details.show');
+
+// comment
+Route::post('/events/{event}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+
 
 // ユーザー認証後に見れる画面
 Route::middleware(['auth:web'])->group(function () {
@@ -91,59 +100,6 @@ Route::get('password/reset/{token}', [ResetPasswordController::class, 'showReset
 // パスワードリセットを処理
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
-
-
-// Haruka
-// Show sign-up page for event-owner
-// Route::get('/auth/event-owners/sign-up', function () {
-//     return view('auth.event-owners.sign-up');
-// });
-// Show sign-in page for event-owner
-// Route::get('/auth/event-owners/sign-in', function () {
-//     return view('auth.event-owners.sign-in');
-// });
-// Show sign-in page for user
-// Route::get('/auth/users/sign-in', function () {
-//     return view('auth.users.sign-in');
-// });
-// Show sign-up page for user
-// Route::get('/auth/users/sign-up', function () {
-//     return view('auth.users.sign-up');
-// });
-// Route::get('/event-owners/events/edit', function () {
-//     return view('event-owners.events.edit');
-// });
-
-
-
-// Naoki
-// Show event page for event-owner
-// Route::get('/owners/show-events', function () {
-//     return view('event-owners.events.show');
-// });
-// Show reservation page for event-owner
-// Route::get('/owners/reservation-list', function () {
-//     return view('event-owners.reservations.show');
-// });
-// Show reservation page for user
-// Route::get('/user/reservation-list', function () {
-//     return view('users.reservations.show');
-// });
-
-
-// kanako
-// Route::get('/users/profile/show', function () {
-//     return view('users.profile.show');
-// });
-
-// Route::get('/event-owners/profile/show', function () {
-//     return view('event-owners.profile.show');
-// });
-
-//Marika
-// Route::get('/home/show-event', function () {
-//     return view('home.show-event');
-// });
 
 ?>
 

@@ -81,6 +81,11 @@ class EventShowController extends Controller
             $startTime->addMinutes(30); // 次の30分単位に進む
         }
 
+        // $totalPrice が定義されている場合のみ追加
+        if ($totalPrice !== null) {
+            $data['totalPrice'] = $totalPrice;
+        }
+
         // related events
         // 現在のイベントのカテゴリーIDを取得
         $category_ids = $event->eventCategories->pluck('category_id')->toArray();
@@ -111,12 +116,34 @@ class EventShowController extends Controller
             return $related_event;
         })->sortByDesc('related_score')->take(6);
 
-        $data = compact('areas', 'categories', 'reservation','event', 'availableSlots','eventDates','eventTimes','related_events');
 
-        // $totalPrice が定義されている場合のみ追加
-        if ($totalPrice !== null) {
-            $data['totalPrice'] = $totalPrice;
+        //review comment
+        // 評価の集計
+        $ratingCounts = $event->reviews->groupBy('star')
+        ->mapWithKeys(function ($reviews, $star) {
+        // 各評価スターのカウントを取得
+            return [$star => $reviews->count()];
+        })->filter(function ($count, $star) {
+        // スター評価が1から5の範囲内にあるか確認
+            return in_array($star, [1, 2, 3, 4, 5]);
+        })->sortKeysDesc();
+
+        // デフォルトの評価星（5段階評価）
+        $defaultStars = [5, 4, 3, 2, 1];
+
+        $totalReviews = $event->reviews->count();
+        $averageRating = $event->reviews->avg('star');
+
+        $latestReviews = $event->reviews()->latest()->take(3)->get();
+
+        if (auth()->check()) {
+            $reservation = Reservation::where('user_id', auth()->id())
+                ->where('event_id', $id)
+                ->first();
         }
+        //end review
+
+        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews');
 
         return view('home.show-event', $data);
     }
@@ -128,7 +155,7 @@ class EventShowController extends Controller
             'num_tickets' => 'required|integer|min:1',
             'event_date' => 'required|date',
             'event_time' => 'required',
-            'event_id' => 'required|exists:events,id',
+            'eventId' => 'required|exists:events,id',
         ]);
 
         // 認証ユーザーのIDを取得

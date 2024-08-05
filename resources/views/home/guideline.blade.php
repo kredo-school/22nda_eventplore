@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Guideline')
+
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/guideline.css') }}">

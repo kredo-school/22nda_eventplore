@@ -84,7 +84,7 @@ class UserLoginController extends Controller
         $reservations = $user->reservations; // ユーザーの予約全てを取得
 
         $reservationCount = $user->reservations()->count(); // ユーザーの予約数をカウント
-        $commentCount = Review::where('user_id', $user->id)->count(); // コメント数のカウント
+        $commentCount = Review::forActiveEvents()->where('user_id', $user->id)->count();
 
         return view('users.profile.show', compact('areas', 'user', 'reservationCount', 'commentCount', 'reservations'));
     }
@@ -145,7 +145,6 @@ class UserLoginController extends Controller
             // セッションの無効化とトークンの再生成
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-
             return redirect()->route('user.sign-in');
         } else {
             // パスワードが一致しない場合

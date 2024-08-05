@@ -58,14 +58,12 @@ main {
     list-style: none;
 }
 
-
-@media (min-width: 768px) {
-    .btn-search-icon {
-        background: none;
-        border: none;
-        padding: 0;
+@media (max-width: 767.98px) {
+    .navbar-collapse {
+        display: none; /* ハンバーガーメニューが初期状態で非表示 */
     }
-    .btn-search-icon:hover {
-        background: none;
+
+    .navbar-collapse.show {
+        display: block; /* ハンバーガーメニューが展開されたときに表示 */
     }
 }

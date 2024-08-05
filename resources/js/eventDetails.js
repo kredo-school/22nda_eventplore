@@ -73,18 +73,47 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
             var selectedDate = document.querySelector('select[name="event_date"]').value;
             var selectedTime = document.querySelector('select[name="event_time"]').value;
 
+            // if (modalDate) {
+            //     var dateSelected = selectedDate ? new Date(selectedDate).toLocaleDateString() : 'Not selected';
+            //     modalDate.textContent = dateSelected;
+            //     const inputElement = document.getElementById('event_date');
+            //     inputElement.value = dateSelected;
+            // }
+            // if (modalTime) {
+            //     var timeSelected = selectedTime || 'Not selected';
+            //     modalTime.textContent = timeSelected;
+            //     const inputElement = document.getElementById('event_time');
+            //     inputElement.value = timeSelected;
+
+            // }
+
+
+            function formatDate(date) {
+                let d = new Date(date);
+                let year = d.getFullYear();
+                let month = ('0' + (d.getMonth() + 1)).slice(-2);
+                let day = ('0' + d.getDate()).slice(-2);
+                return `${year}-${month}-${day}`;
+            }
+
+            function formatTime(time) {
+                let [hours, minutes] = time.split(':');
+                hours = ('0' + hours).slice(-2);
+                minutes = ('0' + minutes).slice(-2);
+                return `${hours}:${minutes}`;
+            }
+
             if (modalDate) {
-                var dateSelected = selectedDate ? new Date(selectedDate).toLocaleDateString() : 'Not selected';
+                var dateSelected = selectedDate ? formatDate(selectedDate) : 'Not selected';
                 modalDate.textContent = dateSelected;
                 const inputElement = document.getElementById('event_date');
                 inputElement.value = dateSelected;
             }
             if (modalTime) {
-                var timeSelected = selectedTime || 'Not selected';
+                var timeSelected = selectedTime ? formatTime(selectedTime) : 'Not selected';
                 modalTime.textContent = timeSelected;
                 const inputElement = document.getElementById('event_time');
                 inputElement.value = timeSelected;
-
             }
         });
     }

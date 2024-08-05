@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\Event;
-use App\Models\Reservation;
 use App\Models\Category;
 use Illuminate\Http\Request;
+
 
 class HomeController extends Controller
 {
@@ -43,7 +43,7 @@ class HomeController extends Controller
     {
         $areas = Area::all();
         $categories = Category::all();
-        
+
         $date       = $request->input('date');
         $keyword    = $request->input('keyword');
         $area       = $request->input('area');
@@ -114,24 +114,27 @@ class HomeController extends Controller
             });
         }
 
-        $query->where('app_deadline', '>', now());
-
         // Retrieve distinct events
         $events = $query->distinct()->get();
 
         return view('home.event-menu', compact('events', 'areas'));
     }
 
-    public function showEvent($id){
+    public function searchFromCategory(Request $request)
+    {
         $areas = Area::all();
-        $reservation = Reservation::find($id);
-        $event = Event::with('reviews')->findOrFail($id);
-        $averageRating = $event->reviews->avg('star');
-        $ratingDistribution = $event->reviews->groupBy('star')->map->count();
+        $category = $request->query('category');
 
-        if (!$reservation) {
-            return redirect()->back();
-        }
-        return view('home.show-event', compact('areas', 'reservation', 'event', 'averageRating', 'ratingDistribution'));
+        $events = Event::whereHas('categories', function ($query) use ($category) {
+            $query->where('name', $category);
+        })->get();
+
+        return view('home.event-menu', compact('events', 'areas'));
+    }
+
+    public function guideline(){
+        $areas = Area::all();
+
+        return view('home.guideline', compact('areas'));
     }
 }
