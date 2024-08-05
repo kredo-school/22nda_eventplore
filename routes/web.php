@@ -1,20 +1,21 @@
 <?php
 
-use App\Http\Controllers\Auth\EventOwnerLoginController;
-use App\Http\Controllers\Auth\EventOwnerRegisterController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\Auth\UserLoginController;
-use App\Http\Controllers\Auth\UserRegisterController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\EventShowController;
-use App\Http\Controllers\HomeController;
+
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventShowController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\UserLoginController;
+use App\Http\Controllers\Auth\UserRegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\EventOwnerLoginController;
+use App\Http\Controllers\Auth\EventOwnerRegisterController;
+use App\Http\Controllers\ReviewController;
 
 
 Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');

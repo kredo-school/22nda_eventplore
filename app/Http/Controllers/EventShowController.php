@@ -86,6 +86,36 @@ class EventShowController extends Controller
             $data['totalPrice'] = $totalPrice;
         }
 
+        // related events
+        // 現在のイベントのカテゴリーIDを取得
+        $category_ids = $event->eventCategories->pluck('category_id')->toArray();
+
+        // 関連イベントを取得
+        $related_events = Event::where('id', '!=', $event->id) // 現在のイベントを除外
+        ->where(function ($query) use ($category_ids, $event) {
+            $query->whereHas('eventCategories', function ($query) use ($category_ids) {
+                $query->whereIn('category_id', $category_ids);
+            })
+            ->orWhere('area_id', $event->area_id)
+            ->orWhere('event_owner_id', $event->event_owner_id);
+        })
+        ->with(['eventCategories'])
+        ->get();
+
+        // 関連度を計算してソート
+        $related_events = $related_events->map(function ($related_event) use ($category_ids, $event) {
+            // 共通するカテゴリーの数を計算
+            $common_categories_count = $related_event->eventCategories->pluck('category_id')->intersect($category_ids)->count();
+            // 同じエリアか判定
+            $same_area = $related_event->area_id == $event->area_id;
+            // 同じイベントオーナーか判定
+            $same_owner = $related_event->event_owner_id == $event->event_owner_id;
+            // 関連度を計算 (カテゴリーの一致 3ポイント、エリアの一致 2ポイント、オーナーの一致 1ポイント)
+            $related_event->related_score = (3 * $common_categories_count) + ($same_area ? 2 : 0) + ($same_owner ? 1 : 0);
+
+            return $related_event;
+        })->sortByDesc('related_score')->take(6);
+
 
         //review comment
         // 評価の集計
@@ -113,11 +143,9 @@ class EventShowController extends Controller
         }
         //end review
 
-
-        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'eventTimes', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews');
+        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews');
 
         return view('home.show-event', $data);
-
     }
 
     public function storeUserReservation(Request $request)
@@ -127,7 +155,7 @@ class EventShowController extends Controller
             'num_tickets' => 'required|integer|min:1',
             'event_date' => 'required|date',
             'event_time' => 'required',
-            'event_id' => 'required|exists:events,id',
+            'eventId' => 'required|exists:events,id',
         ]);
 
         // 認証ユーザーのIDを取得
