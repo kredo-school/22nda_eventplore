@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
 <link rel="stylesheet" href="{{ asset('css/show-event/eventpage.css') }}">
 
-<div class="m-5 justify-content-center">
+<div class="p-5 m-5 justify-content-center">
     {{-- Event name & date & cate --}}
-    <div class="row align-items-center mb-3">
-        <div class="col-md-6">
+    <div class="row d-flex align-items-center jutstify-content-center mb-3 ">
+        <div class="col-md-6 px-md-1">
             <h1 class="text-center">{{ $event->event_name }}</h1>
             <hr style="color: #0C2C04">
         </div>
@@ -25,7 +25,7 @@
         @php
         $loop_count = 0;
         @endphp
-        <div class="col-md-3 justify-content-end">
+        <div class="col-md-3 justify-content-end mb-2">
             @forelse($event->eventCategories as $category)
 
             @if($loop_count % 2 === 0)
@@ -52,7 +52,7 @@
     </div>
 
     {{-- images --}}
-    <div class="container-fluid p-0 mb-4">
+    <div class="container-fluid mb-4 p-0">
         <div class="d-flex flex-wrap w-100 mb-2 image-part" style="height: 100%; overflow-x: auto;">
             @php
                 $images = $event->eventImages;
@@ -62,25 +62,42 @@
             @endphp
 
             {{-- メイン写真 --}}
-            <div class="justify-content-center p-1 main-image @if($totalOtherImages <= 2) w-75 @else w-50 @endif" style="flex: 1;">
-                <img src="{{ $firstImage->image }}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="#">
+            <div class="main-image @if($totalOtherImages <= 2) w-75 @else w-50 @endif " style="padding: 5px;">
+                @if ($firstImage)
+                    <img src="{{ $firstImage->image }}" class="w-100 h-100 pe-2 main-image-img" style="object-fit: cover;" alt="#">
+                @else
+                    <p>No image available</p>
+                @endif
             </div>
 
             {{-- 他の画像 --}}
-            <div class="d-flex flex-wrap other-images @if($totalOtherImages <= 2) w-25 @else w-50 @endif">
-                @foreach($otherImages as $image)
-                    <div class="w-50 p-1">
-                        <img src="{{ $image->image }}" class="img-fluid" style="object-fit: cover; aspect-ratio: 1;" alt="#">
+            <div class="other-images @if($totalOtherImages <= 2) w-25 @else w-50 @endif">
+                @if($totalOtherImages <= 2)
+                    @foreach($otherImages as $image)
+                        <div class="w-100" style="padding: 5px;">
+                            <img src="{{ $image->image }}" class="w-100" style="object-fit: cover; aspect-ratio: 1;" alt="#">
+                        </div>
+                    @endforeach
+                @else
+                    <div class="row">
+                        @foreach($otherImages as $image)
+                            <div class="col-6 p-0">
+                                <div class="w-100 h-100" style="padding: 5px; aspect-ratio: 1;">
+                                    <img src="{{ $image->image }}" class="w-100 h-100" style="object-fit: cover;" alt="#">
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
+                @endif
             </div>
         </div>
     </div>
 
+
     {{-- introduction & reserve --}}
-    <div class="row mb-md-4">
+    <div class="row mb-md-4 no-gutter ">
         {{-- introduction --}}
-        <div class="col-md-6">
+        <div class="col-md-6 px-md-1">
             <div class="card p-2 mb-4" style="background-color: #0C2C04; height: 400px; overflow-y: auto;">
                 <div class="card-body">
                     <div class="text-white">
@@ -106,7 +123,7 @@
 
         @if(auth()->check() && $reservation != null)
         {{-- Reserved --}}
-        <div class="col-md-6">
+        <div class="col-md-6 px-md-1">
             <div class="card mb-4 shadow" style="min-height: 400px; max-height: 400px;">
                 <div class="card-body text-center">
                     <h2 class="card-title border-top border-bottom py-2 mx-5 my-3" style="color: #84947C"><i class="fa-solid fa-check"></i>Already Reseved!</h2>
@@ -159,8 +176,8 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center my-4">
-                        <button class="btn btn-red custom-btn me-2" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-delete-reservation' . $reservation->id : '#' }}"><i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation</button>
-                        <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-edit-reservation' . $reservation->id : '#' }}"><i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation</button>
+                        <button class="btn btn-red custom-btn me-2" data-bs-toggle="modal" data-bs-target="#user-delete-reservation"><i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation</button>
+                        <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#user-edit-reservation"><i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation</button>
                         @include('users.reservations.modal.edit')
                         @include('users.reservations.modal.delete')
                     </div>
@@ -169,7 +186,7 @@
         </div>
         @else
         {{-- Before Reservation --}}
-        <div class="col-md-6">
+        <div class="col-md-6 px-md-1">
             <div class="card px-5 pt-3 mb-4 shadow" style="height: 400px;">
                 <div class="card-body text-center">
                     <div class="mb-3 d-flex justify-content-center align-items-center">
@@ -230,9 +247,9 @@
     </div>
 
     {{-- info & map --}}
-    <div class="row">
+    <div class="row mb-3 no-gutter">
         {{-- info --}}
-        <div class="col-md-6">
+        <div class="col-md-6 px-md-1">
             <div class="card p-2 mb-4 shadow" style="height: 400px; overflow-y: auto;">
                 <div class="card-body">
                     <h2>Local Information</h2>
@@ -283,7 +300,7 @@
         </div>
 
         {{-- location --}}
-        <div class="col-md-6">
+        <div class="col-md-6 px-md-1">
             <div class="card p-2" style="background-color: #0C2C04; height: 400px;">
                 <div class="card-body">
                     <div class="text-white flex-grow-1">
@@ -312,9 +329,9 @@
         <h2 class="ms-3">Reviews</h2>
         <div style="font-family: EB Garamond">
 
-            <div class="align-items-center justify-content-center flex-row d-flex">
+            <div class="align-items-center justify-content-center flex-row d-flex flex-wrap">
                 {{--  レビューの星　--}}
-                <div style="height: 200px; border: 1px solid #0C2C04" class=" w-25 rounded d-flex flex-column justify-content-center align-items-center ms-5">
+                <div style="height: 200px; border: 1px solid #0C2C04" class="review-star-container w-25 rounded d-flex flex-column justify-content-center align-items-center">
                     <div class="mb-2">
                         <i class="fa-solid fa-star fa-3x"></i>
                         <span class="h1 ms-2 ">{{ number_format($averageRating, 1) }}</span>
@@ -326,14 +343,6 @@
 
                 {{-- レビューの評価(グラフ) --}}
                 <dl class="bar-chart-002 ms-4 w-25 rounded">
-                @php
-                    $defaultStars = [5, 4, 3, 2, 1];
-                    $ratingCountsArray = $ratingCounts->toArray();
-
-                    $totalReviews = $event->reviews->count();
-                @endphp
-
-                @foreach($defaultStars as $star)
                     <div>
                         <dt>{{ $star }}:</dt>
                         @php
@@ -372,7 +381,7 @@
         @endforeach
         </div>
         <div class="ms-5 my-5">
-            <button class="btn btn-outline-dg" data-bs-toggle="modal" data-bs-target="#all-reviews-page">See all reviews ({{ $totalReviews }})</button>
+            <button class="btn btn-outline-dg" data-bs-toggle="modal" data-bs-target="#all-reviews-page">See all reviews(135)</button>
         </div>
         @include('home.modal.show-reviews')
     </div>

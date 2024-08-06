@@ -26,9 +26,10 @@
         {{-- event list --}}
         <div class="row">
             @forelse ($events as $event)
-                <div class="col-lg-4 col-md-6 mb-4">
-                    {{-- event card --}}
-                    <div class="card shadow border-0">
+            <div class="col-lg-4 col-md-6 mb-4">
+                {{-- event card --}}
+                <div class="card shadow border-0">
+                    <a href="{{ route('event.details.show', $event->id) }}">
                         @php
                             $carouselId = 'carousel' . $event->id;
                         @endphp
@@ -133,8 +134,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
+            </div>
             @empty
                 {{-- No events --}}
                 @if ($events->isEmpty())
