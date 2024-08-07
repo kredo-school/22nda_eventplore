@@ -18,7 +18,7 @@
                                 <span class="h1 ms-2">{{ number_format($averageRating, 1) }}</span>
                             </div>
                             <div class="text-center">
-                                <p class="h6">( The average score customers evaluated.)</p>
+                                <p class="h6">( The average score customers evaluated. )</p>
                             </div>
                         </div>
 
@@ -54,50 +54,57 @@
                     </div>
 
                     {{-- レビュー書く欄 --}}
-                    <div class="w-full mt-3 rounded p-2" style="border: 2px solid rgba(132, 148, 124, 0.5); ">
-                        <div class="mb-2 d-flex align-items-center">
-                            <label class="satisfaction" class="form-label">Customer Satisfaction</label>
-                            <div class="stars ms-2">
-                                <span class="star" data-value="1">
-                                    <i class="fa-solid fa-star fa-2x"></i>
-                                </span>
-                                <span class="star" data-value="2">
-                                    <i class="fa-solid fa-star fa-2x"></i>
-                                </span>
-                                <span class="star" data-value="3">
-                                    <i class="fa-solid fa-star fa-2x"></i>
-                                </span>
-                                <span class="star" data-value="4">
-                                    <i class="fa-solid fa-star fa-2x"></i>
-                                </span>
-                                <span class="star" data-value="5">
-                                    <i class="fa-solid fa-star fa-2x"></i>
-                                </span>
-                            </div>
-                            <input type="hidden" id="selected-star" name="star" value="">
-                        </div>
+                    @auth
+                        @if (Auth::user()->id != $event->owner_id)
+                            <div class="w-full mt-3 rounded p-2" style="border: 2px solid rgba(132, 148, 124, 0.5); ">
+                                <div class="mb-2 d-flex align-items-center">
+                                    <label class="satisfaction" class="form-label">Customer Satisfaction</label>
+                                    <div class="stars ms-2">
+                                        <span class="star" data-value="1">
+                                            <i class="fa-solid fa-star fa-2x"></i>
+                                        </span>
+                                        <span class="star" data-value="2">
+                                            <i class="fa-solid fa-star fa-2x"></i>
+                                        </span>
+                                        <span class="star" data-value="3">
+                                            <i class="fa-solid fa-star fa-2x"></i>
+                                        </span>
+                                        <span class="star" data-value="4">
+                                            <i class="fa-solid fa-star fa-2x"></i>
+                                        </span>
+                                        <span class="star" data-value="5">
+                                            <i class="fa-solid fa-star fa-2x"></i>
+                                        </span>
+                                    </div>
+                                    <input type="hidden" id="selected-star" name="star" value="">
+                                </div>
 
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1 me-2">
-                                <input type="text" id="comment" name="comment" class="form-control me-2" placeholder="Add comment">
-                                @error('comment')
-                                    <strong class="text-danger">{{ $message }}</strong>
-                                @enderror
-                            </div>
-                            <div>
-                                <button type="submit" class="btn btn-green">Add review</button>
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1 me-2">
+                                        <input type="text" id="comment" name="comment" class="form-control me-2" placeholder="Add comment">
+                                        @error('comment')
+                                            <strong class="text-danger">{{ $message }}</strong>
+                                        @enderror
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="btn btn-green">Add review</button>
 
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
+                        @endif
+                    @endauth
                     <p class="h5 mt-3">{{ $event->reviews->count() }} reviews</p>
                     {{-- 全てのコメントが見れる欄 --}}
                     <div style="overflow-y: auto; max-height: 400px;">
                     @foreach($event->reviews->sortByDesc('created_at') as $review)
                         <div class="w-full mt-3 rounded p-2" style="border: 2px solid rgba(132, 148, 124, 0.5); ">
                             <div class="d-flex align-items-end">
-                                <img src="{{ $review->user->avatar }}" alt="{{ $review->user->name }}" class="rounded-circle avatar-sm">
+                                @if ($review->user->avatar)
+                                    <img src="{{ $review->user->avatar }}" alt="{{ $review->user->name }}" class="rounded-circle avatar-sm">
+                                @else
+                                    <i class="fa-solid fa-circle-user avatar-sm m-0"></i>
+                                @endif
                                 <span class="h5 ms-2 my-0 fs-4">{{ $review->user->username }}</span>
                                 <span class="ms-2">{{ $review->user->created_at->format('Y-m-d') }}</span>
                             </div>

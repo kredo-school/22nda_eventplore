@@ -17,8 +17,7 @@
 
                 <!-- Desktop Menu -->
                 <div class="col-md-8">
-                    {{-- @auth --}}
-                        @if ((Auth::check() && Auth::user()->role == 'user') && !request()->is('/') )
+                    @if ((!Auth::check() || Auth::user()->role == 'user') && !request()->is('/'))
                         <div class="d-none d-md-flex justify-content-center flex-grow-1">
                             <form action="{{ route('events.search') }}" method="GET" class="d-flex w-75">
                                 <select class="form-select me-2" id="area" name="area">
@@ -33,8 +32,7 @@
                                 </button>
                             </form>
                         </div>
-                        @endif
-                    {{-- @endauth --}}
+                    @endif
                 </div>
 
                     <!-- User & Owner Icon  -->
@@ -106,7 +104,7 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     @endunless --}}
-                    @if (!Auth::guard('event_owner')->check())
+                    @if (!Auth::guard('event_owner')->check() && Route::currentRouteName() != 'home')
                         <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>

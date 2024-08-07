@@ -230,7 +230,7 @@
     </div>
 
     {{-- info & map --}}
-    <div class="row">
+    <div class="row mb-3">
         {{-- info --}}
         <div class="col-md-6">
             <div class="card p-2 mb-4 shadow" style="height: 400px; overflow-y: auto;">
@@ -320,7 +320,7 @@
                         <span class="h1 ms-2 ">{{ number_format($averageRating, 1) }}</span>
                     </div>
                     <div class="text-center">
-                        <p class="h6">( The average score customers evaluated.)</p>
+                        <p class="h6">( The average score customers evaluated. )</p>
                     </div>
                 </div>
 
@@ -359,10 +359,14 @@
         @foreach($latestReviews as $review)
             <div class="rounded p-2 col-12 col-md-6 col-lg-3 mb-3 me-2" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
                 <div class="d-flex justify-content-start align-items-center">
-                    <img src="{{ $review->user->avatar }}" alt="{{ $review->user->name }}" class="rounded-circle avatar-md mb-2">
-                    <span class="h4 ms-2 d-flex align-items-center">{{ $review->user->username }}</span>
+                    @if ($review->user->avatar)
+                        <img src="{{ $review->user->avatar }}" alt="{{ $review->user->name }}" class="rounded-circle avatar-md mb-2">
+                    @else
+                        <i class="fa-solid fa-circle-user avatar-md mb-2"></i>
+                    @endif
+                    <span class="h4 ms-2 m-0 d-flex align-items-center">{{ $review->user->username }}</span>
                 </div>
-                <h5><i class="fa-solid fa-star"></i>
+                <h5 class="mt-1"><i class="fa-solid fa-star"></i>
                     {{ number_format($review->star, 1) }}
                 </h5>
                 <div class="mt-2">
