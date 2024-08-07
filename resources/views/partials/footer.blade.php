@@ -1,8 +1,8 @@
-<footer class="footer py-4">
-    <div class="container-fluied px-3">
-        <div class="row">
+<footer class="footer">
+    <div class="container-fluid px-3">
+        <div class="row align-items-center" style="height: 80px">
             <div class="col-4">
-                <div class="d-flex">
+                <div class="d-flex align-items-center">
                     <a href="https://www.facebook.com" class="me-3 text-secondary text-decoration-none" target="_blank">
                         <i class="fab fa-facebook fa-xl"></i>
                     </a>
@@ -17,7 +17,7 @@
             <div class="col-4 text-center">
                 <small>Copyright © 2024 Eventplore</small>
             </div>
-            <div class="col-4 d-flex justify-content-end">
+            <div class="col-4 d-flex justify-content-end align-items-center">
                 <a href="{{ route('gudeline') }}" class="me-3 text-decoration-none" style="color: #84947C">Terms of service</a>
                 <a href="#" class="text-decoration-none" style="color: #84947C">Support</a>
             </div>
