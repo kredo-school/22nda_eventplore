@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Show reservations')
+@section('title', 'Reservation')
 
 @section('content')
 
@@ -32,12 +32,12 @@
                 <tr>
                     <th class="table-dg">#</th>
                     <th class="table-dg">Event Name</th>
-                    <th class="table-dg">Tickets</th>
+                    <th class="table-dg">Ticket</th>
                     <th class="table-dg">Price</th>
                     <th class="table-dg">Date</th>
                     <th class="table-dg">Time</th>
-                    <th class="table-dg">Created At</th>
-                    <th class="table-dg">Updated At</th>
+                    <th class="table-dg">Created Date</th>
+                    <th class="table-dg">Updated Date</th>
                     <th class="table-dg"></th>
                 </tr>
             </thead>
@@ -46,7 +46,9 @@
                 @forelse ($reservations as $reservation)
                     <tr>
                         <td>{{ $loop->iteration + ($reservations->currentPage() - 1) * $reservations->perPage() }}</td>
-                        <td>{{ $reservation->event->event_name }}</td>
+                        <td>
+                            <a href="{{ route('event.details.show', $reservation->event_id) }}" class="text-dark">{{ $reservation->event->event_name }}</a>
+                        </td>
                         <td>{{ $reservation->num_tickets }}</td>
                         <td>
                             @if ($reservation->event->price == 0)

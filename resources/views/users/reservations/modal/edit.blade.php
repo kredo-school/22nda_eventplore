@@ -24,7 +24,7 @@
                         {{-- 価格 --}}
                         <div class="row ms-3 mb-3">
                             <div class="col-2 px-0">
-                                <label for="price" class="col-form-label me-1"><i class="fa-solid fa-sack-dollar fa-xl"></i></label>
+                                <div class="col-form-label me-1"><i class="fa-solid fa-sack-dollar fa-xl"></i></div>
                             </div>
                             <div class="col-5 h6 text-dark my-auto">
                                 Ticket Price

@@ -30,7 +30,7 @@
                         <div class="text-start mb-3">
                             <label for="password" class="form-label fw-bold mb-2">Password*</label>
                             <div class="input-group">
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                                <input id="password" type="password" name="password" required autocomplete="new-password" class="form-control" placeholder="Password">
                                 <div class="input-group-text d-flex justify-content-center align-items-center mb-0" style="width: 40px; height: 38px;">
                                     <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer; "></i>
                                 </div>
@@ -44,17 +44,7 @@
                     </div>
                 </div>
 
-                {{-- <div class="d-flex mb-3 justify-content-center">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                        <label class="form-check-label" for="remember">
-                            {{ __('Remember Me') }}
-                        </label>
-                    </div>
-                </div> --}}
-
-                <div class="d-flex flex-column mb-5 justify-content-center text-center">
+                <div class="d-flex flex-column mb-3 justify-content-center text-center">
                     <div class="d-flex justify-content-center mb-2">
                         <button type="submit" class="btn btn-yellow px-5">
                             {{ __('Sign in') }}
@@ -75,8 +65,8 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-6 p-0">
-            <img src="{{ asset('images/sign-in/product-school-ITF7fD0TSCY-unsplash.jpg') }}" alt="register event owner photo" class="w-100 h-100" style="object-fit: cover;">
+        <div class="col p-0">
+            <img src="{{ asset('images/sign-in/product-school-ITF7fD0TSCY-unsplash.jpg') }}" alt="sign-in event owner photo" class="w-100 h-100" style="object-fit: cover;">
         </div>
     </div>
 </div>

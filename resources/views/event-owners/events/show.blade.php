@@ -33,40 +33,41 @@
                         @php
                             $carouselId = 'carousel' . $event->id;
                         @endphp
-
-                        @if ($event->eventImages->isEmpty())
-                            <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
-                        @elseif ($event->eventImages->count() == 1)
-                            <img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
-                        @else
-                            <div id="{{ $carouselId }}" class="carousel slide">
-                                <div class="carousel-indicators">
-                                    @foreach ($event->eventImages as $index => $image)
-                                        <button type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" aria-current="true" aria-label="Slide {{ $index + 1 }}"></button>
-                                    @endforeach
+                        <a href="{{ route('event.details.show', $event->id) }}">
+                            @if ($event->eventImages->isEmpty())
+                                <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
+                            @elseif ($event->eventImages->count() == 1)
+                                <img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                            @else
+                                <div id="{{ $carouselId }}" class="carousel slide">
+                                    <div class="carousel-indicators">
+                                        @foreach ($event->eventImages as $index => $image)
+                                            <button type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" aria-current="true" aria-label="Slide {{ $index + 1 }}"></button>
+                                        @endforeach
+                                    </div>
+                                    <div class="carousel-inner">
+                                        @foreach ($event->eventImages as $index => $image)
+                                            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                <img src="{{ $image->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
                                 </div>
-                                <div class="carousel-inner">
-                                    @foreach ($event->eventImages as $index => $image)
-                                        <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                            <img src="{{ $image->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        @endif
+                            @endif
+                        </a>
                         <div class="card-body">
                             <div class="row align-items-center mb-3">
                                 {{-- event title --}}
                                 <div class="col-11 pe-0">
-                                    <h4 class="overflow_dot"><a href="#" class="text-dark text-decoration-none">{{ $event->event_name }}</a></h4>
+                                    <h4 class="overflow_dot"><a href="{{ route('event.details.show', $event->id) }}" class="text-dark text-decoration-none">{{ $event->event_name }}</a></h4>
                                 </div>
                                 <div class="col d-flex justify-content-end">
                                     {{-- participants --}}

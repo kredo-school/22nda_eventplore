@@ -44,8 +44,8 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-6 mb-1 px-1">
-                                    <label for="first-name" class="form-label fw-bold mb-1">First Name*</label>
-                                    <input id="firstname" type="text" class="form-control" name="firstname" required autocomplete="firstname" autofocus placeholder="First name" style="border: 1px solid #84947C">
+                                    <label for="firstname" class="form-label fw-bold mb-1">First Name*</label>
+                                    <input id="firstname" type="text" class="form-control" name="firstname" required autocomplete="given-name" autofocus placeholder="First name" style="border: 1px solid #84947C">
                     
                                     @error('firstname')
                                         <span class="invalid-feedback" role="alert">
@@ -54,8 +54,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-6 mb-1 px-1">
-                                    <label for="last-name" class="form-label fw-bold mb-1">Last Name*</label>
-                                    <input id="lastname" type="text" class="form-control" name="lastname" required autocomplete="lastname" autofocus placeholder="Last name" style="border: 1px solid #84947C">
+                                    <label for="lastname" class="form-label fw-bold mb-1">Last Name*</label>
+                                    <input id="lastname" type="text" class="form-control" name="lastname" required autocomplete="family-name" autofocus placeholder="Last name" style="border: 1px solid #84947C">
                     
                                     @error('lastname')
                                         <span class="invalid-feedback" role="alert">
@@ -110,19 +110,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-                {{-- <div class="d-flex mb-3 justify-content-center">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                        <label class="form-check-label" for="remember">
-                            {{ __('Remember Me') }}
-                        </label>
-                    </div>
-                </div> --}}
-
 
                 <div class="mb-3 justify-content-center text-center w-100 mt-3">
                     <a href="{{ route('event-owner.sign-in') }}" class="btn btn-yellow me-5 px-4">Back</a>
