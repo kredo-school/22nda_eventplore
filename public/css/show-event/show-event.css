@@ -60,6 +60,13 @@ tbody tr:nth-child(even) td {
 	overflow: hidden;
 	white-space: nowrap;
 }
+.review-star-container {
+    margin-right: 4rem; /* Adjust the margin as needed */
+}
+
+.no-gutter{
+    --bs-gutter-x: 0;
+}
 
 /* 画像サイズ　768px未満のとき */
 @media (max-width: 768px) {
@@ -75,6 +82,30 @@ tbody tr:nth-child(even) td {
     }
     .other-images .w-50 {
         width: 50% !important;
+    }
+    .main-image-img {
+        padding-right: 0 !important;
+    }
+    /* 画面サイズが小さい時は、スター評価とグラフを縦1列に並べる */
+    .review-star-container, .bar-chart-002 {
+        width: 100% !important;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .review-star-container {
+        margin-bottom: 1rem;
+    }
+
+    .bar-chart-002 div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .bar-chart-002 dd {
+        flex: 1;
+        text-align: left;
+        margin-left: 1rem;
     }
 }
 

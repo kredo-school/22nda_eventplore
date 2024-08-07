@@ -7,8 +7,8 @@
             <div class="modal-content">
                 <div class="modal-header border-0 m-0">
                     <div class="img-container w-100">
-                        {{-- 花火の写真 --}}
-                        <img src="{{ asset('images/fireworks.jpg') }}" alt="fireworks" class="w-100 rounded" style="object-fit: cover; height: 300px;">
+                        {{-- 写真 --}}
+                        <img src="{{ $firstImage->image }}" alt="#" class="w-100 rounded" style="object-fit: cover; height: 300px;">
                     </div>
                 </div>
 

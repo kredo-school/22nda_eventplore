@@ -4,6 +4,7 @@
 <div class="p-0 overflow-auto full-height">
     <div class="row d-flex justify-content-center align-items-stretch full-height">
         <div class="col-md-6 p-0 d-flex flex-column justify-content-center form-container">
+
             <form action="{{ route('user.login') }}" method="POST" >
                 @csrf
 
@@ -13,6 +14,12 @@
                     <div class="d-flex justify-content-center mb-3">
                         <div class="w-100"><p>Don't you have an account yet ?&nbsp;<a href="{{ route('user.sign-up')}}" class="fw-bold text-decoration-none" style="color: #84947C">Sign Up</a></p></div>
                     </div>
+                    @if (session('message'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
 
                     <div class="d-flex justify-content-center flex-column w-50">
                         <div class="text-start mb-3">

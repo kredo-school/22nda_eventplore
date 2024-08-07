@@ -145,11 +145,22 @@ class EventShowController extends Controller
 
         $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews');
 
+        $firstImage = $event->getFirstEventImage();
+        if ($firstImage) {
+            $data['firstImage'] = $firstImage;
+        }
+
         return view('home.show-event', $data);
     }
 
     public function storeUserReservation(Request $request)
     {
+        // 認証ユーザーのIDを取得
+        $userId = auth()->id();
+        if ($userId == null) {
+            return redirect()->route('user.sign-in')->with('message', 'To make a reservation, you need to sign in!');
+        }
+
         // 入力データのバリデーション
         $request->validate([
             'num_tickets' => 'required|integer|min:1',
@@ -158,9 +169,6 @@ class EventShowController extends Controller
             'eventId' => 'required|exists:events,id',
         ]);
 
-        // 認証ユーザーのIDを取得
-        $userId = null;
-        $userId = auth()->id();
 
         // 新しい予約の作成
         $reservation = new Reservation();
