@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\EventImage;
-use App\Models\EventCategory;
-use App\Models\Reservation;
 use App\Models\Review;
+use App\Models\EventImage;
+use App\Models\Reservation;
+use App\Models\EventCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -55,5 +56,12 @@ class Event extends Model
     {
         return $this->eventImages()->orderBy('id', 'asc')->first();
     }
-}
 
+    public function bookmarks(){
+        return $this->hasMany(Bookmark::class);
+    }
+
+    public function isBookmarked(){
+        return $this->bookmarks()->where('user_id', Auth::user()->id)->exists();
+    }
+}

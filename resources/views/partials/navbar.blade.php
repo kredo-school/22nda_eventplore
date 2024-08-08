@@ -57,6 +57,9 @@
                             <a class="dropdown-item" href="{{ route('user.reservation.show') }}">
                                 <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; My Events
                             </a>
+                            <a class="dropdown-item" href="{{ route('user.bookmark.show') }}">
+                                <i class="fa-regular fa-bookmark fa-xl"></i>&nbsp; My Wishlist
+                            </a>
                             <hr>
                             <a class="dropdown-item" href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; Logout
