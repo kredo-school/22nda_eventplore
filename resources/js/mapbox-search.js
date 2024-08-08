@@ -184,17 +184,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // マーカーのバウンディングボックスを計算
-    const bounds = new mapboxgl.LngLatBounds();
-    markers.forEach(marker => {
-        bounds.extend(marker.getLngLat());
-    });
+    if (markers.length > 0) {
+        // マーカーのバウンディングボックスを計算
+        const bounds = new mapboxgl.LngLatBounds();
+        markers.forEach(marker => {
+            bounds.extend(marker.getLngLat());
+        });
 
-    // マップのバウンディングボックスを設定し、ズームを自動調整
-    map.fitBounds(bounds, {
-        padding: { top: 100, bottom: 100, left: 100, right: 100 }, // パディングを設定
-        maxZoom: 13 // 最大ズームレベルを指定
-    });
+        // マップのバウンディングボックスを設定し、ズームを自動調整
+        map.fitBounds(bounds, {
+            padding: { top: 100, bottom: 100, left: 100, right: 100 }, // パディングを設定
+            maxZoom: 13 // 最大ズームレベルを指定
+        });
+    }
 
     // トグルクリック時に地図サイズの切り替え
     window.toggleMap = function() {

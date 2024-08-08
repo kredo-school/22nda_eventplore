@@ -23,7 +23,7 @@
 
     <div class="row">
         <div class="col-md-4 mb-4">
-            <a href="#" class="text-decoration-none">
+            <a href="{{ route('event.details.show', $event->id) }}" class="text-decoration-none">
                 {{-- event list --}}
                 <div class="card shadow border-0 w-100 me-2">
                     @php
@@ -173,11 +173,11 @@
                     <tr>
                         <th class="table-dg">#</th>
                         <th class="table-dg">User Name</th>
-                        <th class="table-dg">Tickets</th>
+                        <th class="table-dg">Ticket</th>
                         <th class="table-dg">Price</th>
                         <th class="table-dg">Date</th>
                         <th class="table-dg">Time</th>
-                        <th class="table-dg">Created At</th>
+                        <th class="table-dg">Created Date</th>
                         <th class="table-dg"></th>
                     </tr>
                 </thead>

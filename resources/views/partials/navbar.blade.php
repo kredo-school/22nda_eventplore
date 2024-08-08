@@ -85,7 +85,7 @@
                                 <i class="fa-solid fa-circle-user fa-xl"></i>&nbsp; Profile
                             </a>
                             <a class="dropdown-item" href="{{ route('event-list.show') }}">
-                                <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; Event Lists
+                                <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; Event List
                             </a>
                             <hr>
                             <a class="dropdown-item" href="{{ route('event-owner.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-owner').submit();">
