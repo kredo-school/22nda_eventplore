@@ -21,7 +21,7 @@
                         <br>This action cannot be undone.
                     </p>
                     <div class="w-75 mb-3 mx-auto">
-                        <label for="password"><b>Password</b></label>
+                        <label for="password{{$event->id}}"><b>Password</b></label>
                         <div class="input-group">
                             <input type="password" id="password{{$event->id}}" name="password" class="form-control" required>
                             <div class="input-group-text">

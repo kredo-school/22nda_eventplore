@@ -27,21 +27,21 @@
                         {{-- User name --}}
                         <div class="row d-flex align-items-center justify-content-between w-75">
                             <div class="col-4">
-                                <label for="username" class="form-label me-3">User Name</label>
+                                <label for="username" class="form-label">Username</label>
                             </div>
                             <div class="d-flex col-8">
-                                <input type="text" id="username" name="username" class="form-control input" value="{{ $user->username }}">
+                                <input type="text" id="username" name="username" class="form-control input" value="{{ $user->username }}" required autocomplete="username">
                             </div>
                         </div>
                         <hr class="w-100">
                         <div class="row d-flex align-items-center justify-content-between w-75">
                             {{-- Full name --}}
                             <div class="col-4">
-                                <label for="name" class="form-label">Full Name</label>
+                                <label for="first-name" class="form-label">Full Name</label>
                             </div>
                             <div class="d-flex col-8">
-                                <input type="text" id="first-name" name="first_name" class="form-control me-2 input" placeho value="{{ $user->first_name }}">
-                                <input type="text" id="last-name" name="last_name" class="form-control input" value="{{ $user->last_name }}">
+                                <input type="text" id="first-name" name="first_name" class="form-control me-2 input" placeho value="{{ $user->first_name }}" required autocomplete="given-name">
+                                <input type="text" id="last-name" name="last_name" class="form-control input" value="{{ $user->last_name }}" required autocomplete="family-name">
                             </div>
                         </div>
                         <hr class="w-100">
@@ -51,17 +51,17 @@
                                 <label for="address" class="form-label">Address</label>
                             </div>
                             <div class="d-flex col-8">
-                                <input type="text" id="address" name="address" class="form-control me-2 input" value="{{ $user->address }}">
+                                <input type="text" id="address" name="address" class="form-control input" value="{{ $user->address }}" required autocomplete="address">
                             </div>
                         </div>
                         <hr class="w-100">
                         <div class="row d-flex align-items-center justify-content-between w-75">
                             {{-- Phone number --}}
                             <div class="col-4">
-                               <label for="phone" class="form-label">Phone</label>
+                               <label for="phone-number" class="form-label">Phone</label>
                             </div>
                             <div class="d-flex col-8">
-                                <input type="number" id="phone-number" name="phone_number" class="form-control input" value="{{ $user->phone_number }}"">
+                                <input type="tel" id="phone-number" name="phone_number" class="form-control input" value="{{ $user->phone_number }}" required autocomplete="tel">
                             </div>
                        </div>
                        <hr class="w-100">
@@ -71,7 +71,7 @@
                                 <label for="email" class="form-label">Email</label>
                             </div>
                             <div class="d-flex col-8">
-                                <input type="email" id="email" name="email" class="form-control input" value="{{ $user->email }}">
+                                <input type="email" id="email" name="email" class="form-control input" value="{{ $user->email }}" required autocomplete="email">
                             </div>
                        </div>
                     </div>

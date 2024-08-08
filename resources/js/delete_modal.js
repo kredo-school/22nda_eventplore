@@ -11,4 +11,3 @@ function togglePasswordVisibility() {
     }
 }
 window.togglePasswordVisibility=togglePasswordVisibility;
-
