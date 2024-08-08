@@ -29,11 +29,11 @@
                     </div>
                     <p class="h3 mt-2">{{ $user->username }}</p>
 
-                    <div class="text-start">
-                        <label for="form-label" class="form-label"><b>Password</b></label>
-                        <div class="input-group mb-3 position-relative">
+                    <div class="text-start w-75 mb-3 mx-auto">
+                        <label for="password" class="form-label"><b>Password</b></label>
+                        <div class="input-group">
                             <input id="password" type="password" name="password" required autocomplete="new-password" class="form-control" placeholder="Password">
-                            <div class="input-group-text d-flex justify-content-center align-items-center mb-0" style="width: 40px; height: 38px;">
+                            <div class="input-group-text">
                                 <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer;"></i>
                             </div>
                             {{-- <div class="d-flex h-100 end-0 p-2 position-absolute justify-content-center align-items-center" >

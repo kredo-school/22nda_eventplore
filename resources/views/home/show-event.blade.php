@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
 <link rel="stylesheet" href="{{ asset('css/show-event/eventpage.css') }}">
 
-<div class="p-5 m-5 justify-content-center">
+<div class="p-5 mx-md-4 justify-content-center">
     {{-- Event name & date & cate --}}
-    <div class="row d-flex align-items-center jutstify-content-center mb-3 ">
+    <div class="row d-flex align-items-center jutstify-content-center mb-3">
         <div class="col-md-6 px-md-1">
             <h1 class="text-center">{{ $event->event_name }}</h1>
             <hr style="color: #0C2C04">
@@ -176,8 +176,8 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center my-4">
-                        <button class="btn btn-red custom-btn me-2" data-bs-toggle="modal" data-bs-target="#user-delete-reservation"><i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation</button>
-                        <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#user-edit-reservation"><i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation</button>
+                        <button class="btn btn-red custom-btn me-2" data-bs-toggle="modal" data-bs-target="#user-delete-reservation{{ $reservation->id }}"><i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation</button>
+                        <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#user-edit-reservation{{ $reservation->id }}"><i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation</button>
                         @include('users.reservations.modal.edit')
                         @include('users.reservations.modal.delete')
                     </div>

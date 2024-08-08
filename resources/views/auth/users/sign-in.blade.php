@@ -36,7 +36,7 @@
                     <div class="d-flex justify-content-center flex-column w-50">
                         <div class="text-start mb-3">
                             <label for="password" class="form-label fw-bold mb-2">Password*</label>
-                            <div class="input-group mb-2">
+                            <div class="input-group">
                                 <input id="password" type="password" name="password" required autocomplete="new-password" class="form-control" placeholder="Password">
                                 <div class="input-group-text d-flex justify-content-center align-items-center mb-0" style="width: 40px; height: 38px;">
                                     <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer; "></i>
@@ -70,7 +70,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-6 p-0 img-container">
+        <div class="col p-0 img-container">
             <img src="{{ asset('images/sign-in/tengku-nadia-fz8_SONkBB8-unsplash.jpg') }}" alt="sign-in user photo" class="img-fluid h-100">
         </div>
     </div>

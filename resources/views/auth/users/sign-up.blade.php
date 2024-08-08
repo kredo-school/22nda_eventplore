@@ -48,9 +48,9 @@
                                     </span>
                                 @enderror
                             </div>
-                            <label for="first-name" class="form-label fw-bold mb-2">First Name*</label>
+                            <label for="firstname" class="form-label fw-bold mb-2">First Name*</label>
                             <div class="mb-3">
-                                <input id="firstname" type="text" class="form-control" name="firstname" required autocomplete="firstname" autofocus placeholder="First name" style="border: 1px solid #84947C">
+                                <input id="firstname" type="text" class="form-control" name="firstname" required autocomplete="given-name" autofocus placeholder="First name" style="border: 1px solid #84947C">
 
                                 @error('firstname')
                                     <span class="invalid-feedback" role="alert">
@@ -58,9 +58,9 @@
                                     </span>
                                 @enderror
                             </div>
-                            <label for="last-name" class="form-label fw-bold mb-2">Last Name*</label>
+                            <label for="lastname" class="form-label fw-bold mb-2">Last Name*</label>
                             <div class="mb-3">
-                                <input id="lastname" type="text" class="form-control" name="lastname" required autocomplete="lastname" autofocus placeholder="Last name" style="border: 1px solid #84947C">
+                                <input id="lastname" type="text" class="form-control" name="lastname" required autocomplete="family-name" autofocus placeholder="Last name" style="border: 1px solid #84947C">
 
                                 @error('lastname')
                                     <span class="invalid-feedback" role="alert">
@@ -81,16 +81,6 @@
                     </div>
                 </div>
 
-                {{-- <div class="d-flex mb-3 justify-content-center">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                        <label class="form-check-label" for="remember">
-                            {{ __('Remember Me') }}
-                        </label>
-                    </div>
-                </div> --}}
-
                 <div class="mb-3 justify-content-center text-center">
                     <a href="{{ route('user.sign-in') }}" class="btn btn-yellow me-5 px-4">Back</a>
 
@@ -100,7 +90,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-6 p-0">
+        <div class="col p-0">
             <img src="{{ asset('images/sign-up/juan-manuel-nunez-mendez-EIo0V6oZJtQ-unsplash.jpg') }}" alt="register event owner photo" class="w-100 h-100" style="object-fit: cover;">
         </div>
     </div>
@@ -122,5 +112,3 @@
         }
     }
 </script>
-
-

@@ -21,7 +21,7 @@
                         <br>This action cannot be undone.
                     </p>
                     <div class="w-75 mb-3 mx-auto">
-                        <label for="password" class="d-flex justify-content-start"><b>Password</b></label>
+                        <label for="password{{$reservation->id}}" class="d-flex justify-content-start"><b>Password</b></label>
                         <div class="input-group">
                             <input type="password" id="password{{$reservation->id}}" name="password" class="form-control" required>
                             <div class="input-group-text">

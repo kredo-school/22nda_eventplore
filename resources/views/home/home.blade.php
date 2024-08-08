@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{{ asset('css/show-event/home.css') }}">
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
-    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.14/index.global.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/mapbox-gl-animated-popup@latest"></script>
 
     <div class="row m-0">
@@ -16,7 +15,7 @@
 
                 {{-- calendar --}}
                 <div class="ms-3 mt-4 mb-4 me-2" id="calendar"></div>
-                <input type="hidden" id="date" name="date"> {{-- hidden input to store selected date --}}
+                <input type="hidden" id="caleandarDate" name="date"> {{-- hidden input to store selected date --}}
 
                 {{-- keyword --}}
                 <div class="ms-3 me-2">
