@@ -33,7 +33,7 @@
 
                     {{-- パスワード入力欄 --}}
                     <div class="text-start">
-                        <label for="form-label" class="form-label"><b>Password</b></label>
+                        <label for="password" class="form-label"><b>Password</b></label>
                         <div class="input-group mb-3 position-relative">
                             <input id="password" type="password" name="password" required autocomplete="new-password" class="form-control" placeholder="Password">
                             <div class="input-group-text d-flex justify-content-center align-items-center mb-0" style="width: 40px; height: 38px;">
@@ -43,9 +43,11 @@
                                 <i class="fa-solid fa-eye-slash"></i>
                             </div> --}}
                         </div>
-                        @error('password')
-                            <strong class="text-danger">{{ $message }}</strong>
-                        @enderror
+                        <div id="error-container" data-has-errors="{{ $errors->any() ? 'true' : 'false' }}"  class="text-danger">
+                            @error('password')
+                                <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
 
                 </div>
@@ -59,4 +61,3 @@
         </form>
     </div>
 </div>
-

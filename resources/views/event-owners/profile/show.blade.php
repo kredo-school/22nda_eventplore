@@ -31,8 +31,8 @@
                         <i class="fa-solid fa-circle-user fa-8x mb-2"></i>
                     </span>
                 @endif
-                    <h1 class="card-title">{{ $user->username }}</h1>
-                    <p class="text-muted">{{ $user->first_name }} {{ $user->last_name }}</p>
+                    <h1 class="card-title mb-0">{{ $user->username }}</h1>
+                    <p class="text-muted fs-4 mb-3">{{ $user->first_name }} {{ $user->last_name }}</p>
                 </div>
 
                 <div class="d-flex justify-content-center align-items-center mb-2">
