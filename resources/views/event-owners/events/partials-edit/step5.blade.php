@@ -18,41 +18,38 @@
                     <i class="fa-solid fa-camera-retro"></i>
                 </label>
                 <input type="file" name="image[]" id="file-input-main" class="form-control d-none" onchange="previewImage(this, 'main-image-preview')">
-                {{-- 削除アイコン --}}
-                <button type="button" class="delete-image" data-image-id="{{ $firstImage->id }}">
-                    <i class="fa-solid fa-times"></i>
-                </button>
             </div>
             {{-- 他の画像 --}}
             <div class="d-flex flex-wrap other-images">
                 @foreach($otherImages as $index => $image)
-                    <div class="w-50 p-1" id="{{ $image->id }}" style="position: relative;">
+                    <div class="p-1 other-image-old" id="{{ $image->id }}" style="position: relative;">
                         <img src="{{ $image->image }}" class="img-fluid other-image-preview-{{ $index }}"  style="object-fit: cover; aspect-ratio: 1;" alt="#">
                         {{-- カメラアイコン→押すとファイル選択できる --}}
                         <label for="file-input-{{ $index }}" class="edit-image">
                             <i class="fa-solid fa-camera-retro"></i>
                         </label>
-                        <input type="file" name="{{$image->id}}" id="file-input-{{ $index }}" class="form-control d-none" onchange="previewImage(this, 'other-image-preview-{{ $index }}')">
+                        <input type="file" name="image[]" id="file-input-{{ $index }}" class="form-control d-none" onchange="previewImage(this, 'other-image-preview-{{ $index }}')">
                         {{-- 削除アイコン --}}
                         <button type="button" class="delete-image" data-image-id="{{ $image->id }}">
                             <i class="fa-solid fa-times"></i>
                         </button>
                     </div>
                 @endforeach
+                @for ($i = $totalImages; $i < 5; $i++)
+                    <div class="w-50 p-1">
+                        {{-- +マーク→押すとファイル選択できる --}}
+                        <label for="file-input-new-{{ $i }}" class="new-image-input">
+                            <i class="fa-solid fa-plus"></i>
+                        </label>
+                        <input type="file" name="new-image[]" id="file-input-new-{{ $i }}" class="form-control d-none" style="border: 1px solid #84947C"
+                        onchange="updateImageFields()"
+                        >
+                    </div>
+                @endfor
             </div>
         </div>
     </div>
-
-    @if($totalImages < 5)
-        <label for="form-label" class="fw-bold mb-2 text-start">New image</label>
-        <div class="col-12 mb-3">
-            <input type="file" name="new-image" id="image" class="form-control" style="border: 1px solid #84947C">
-            @error('image')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-    @endif
 </div>
+
+
 

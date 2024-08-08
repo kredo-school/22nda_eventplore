@@ -25,16 +25,17 @@
     </div>
     <div class="col-6 mb-3">
         {{-- hidden latitude --}}
-        <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude', $event->latitude) }}">
+        <input type="" name="latitude" id="latitude" value="{{ old('latitude', $event->latitude) }}">
     </div>
     <div class="col-6 mb-3">
         {{-- hidden longitude --}}
-        <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude', $event->longitude) }}">
+        <input type="" name="longitude" id="longitude" value="{{ old('longitude', $event->longitude) }}">
     </div>
 </div>
 {{-- show map --}}
 <div class="row justify-content-center mx-5 px-5 mb-5">
     <div id="map-container" class="col-12" style="height: 300px;">
         <div id="map" class="w-100 h-100 rounded"></div>
+        <script>window.eventData = @json($event); </script>
     </div>
 </div>

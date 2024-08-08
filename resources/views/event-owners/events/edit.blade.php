@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{{ asset('css/edit-event/edit-event.css') }}">
 
 <!-- Scripts -->
-@vite(['resources/js/register.js'])
+@vite(['resources/js/edit-event.js'])
 
 <div id="multi-step-form" class="container-fluid d-flex justify-content-center p-0 position-relative">
     {{-- 背景画像 --}}
