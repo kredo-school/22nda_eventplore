@@ -326,18 +326,39 @@
 
     {{-- Review --}}
     <div class="contaner-fluid">
-        <h2 class="ms-3">Reviews</h2>
+        <h2 class="h1 ms-3">Reviews</h2>
         <div style="font-family: EB Garamond">
 
             <div class="align-items-center justify-content-center flex-row d-flex flex-wrap">
                 {{--  レビューの星　--}}
                 <div style="height: 200px; border: 1px solid #0C2C04" class="review-star-container w-25 rounded d-flex flex-column justify-content-center align-items-center">
-                    <div class="mb-2">
-                        <i class="fa-solid fa-star fa-3x"></i>
-                        <span class="h1 ms-2 ">{{ number_format($averageRating, 1) }}</span>
+                    @php
+                        $averageRating = number_format($averageRating, 1);
+                        $fullStars = floor($averageRating);
+                        $halfStar = ($averageRating > $fullStars);
+                    @endphp
+                    <div>
+                        <span class="h1 mb-2">{{ $averageRating }}</span>
+                    </div>
+                    <div class="mb-2 d-flex align-items-center">
+                        {{-- フルの星 --}}
+                        @for ($i = 1; $i <= $fullStars; $i++)
+                            <i class="fa-solid fa-star fa-2x"></i>
+                        @endfor
+
+                        {{-- 半分の星 --}}
+                        @if ($halfStar)
+                            <i class="fa-solid fa-star fa-2x half-filled"></i>
+                        @endif
+
+                        {{-- 空の星 --}}
+                        @for ($i = $fullStars + ($halfStar ? 1 : 0); $i < 5; $i++)
+                            <i class="fa-solid fa-star fa-2x empty"></i>
+                        @endfor
+
                     </div>
                     <div class="text-center">
-                        <p class="h6">( The average score customers evaluated.)</p>
+                        <p class="h6">( The average score customers evaluated. )</p>
                     </div>
                 </div>
 
@@ -375,12 +396,18 @@
         @foreach($latestReviews as $review)
             <div class="rounded p-2 col-12 col-md-6 col-lg-3 mb-3 me-2" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
                 <div class="d-flex justify-content-start align-items-center">
-                    <img src="{{ $review->user->avatar }}" alt="{{ $review->user->name }}" class="rounded-circle avatar-md mb-2">
-                    <span class="h4 ms-2 d-flex align-items-center">{{ $review->user->username }}</span>
+                    @if ($review->user->avatar)
+                        <img src="{{ $review->user->avatar }}" alt="{{ $review->user->name }}" class="rounded-circle avatar-md mb-2">
+                    @else
+                        <i class="fa-solid fa-circle-user avatar-md mb-2"></i>
+                    @endif
+                    <span class="h4 ms-2 m-0 d-flex align-items-center">{{ $review->user->username }}</span>
                 </div>
-                <h5><i class="fa-solid fa-star"></i>
-                    {{ number_format($review->star, 1) }}
-                </h5>
+                <div class="star-rating">
+                    @for ($i = 1; $i <= 5; $i++)
+                        <i class="fa-solid fa-star {{ $i <= $review->star ? 'filled' : '' }}"></i>
+                    @endfor
+                </div>
                 <div class="mt-2">
                     <span class="overflow-ellipsis">{{ $review->comment }}</span>
                 </div>
@@ -388,7 +415,7 @@
         @endforeach
         </div>
         <div class="ms-5 my-5">
-            <button class="btn btn-outline-dg" data-bs-toggle="modal" data-bs-target="#all-reviews-page">See all reviews(135)</button>
+            <button class="btn btn-outline-dg" data-bs-toggle="modal" data-bs-target="#all-reviews-page">See all reviews({{ $totalReviews }})</button>
         </div>
         @include('home.modal.show-reviews')
     </div>
@@ -448,7 +475,7 @@
                                         @if ($event->reviews->isEmpty())
                                             <h6 class="text-muted overflow_cut">No Reviews</h6><h4 style="visibility: hidden">.</h4>
                                         @else
-                                            <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1"></i>{{ number_format($event->reviews->avg('star'), 1) }}</h4>
+                                            <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1 star-color"></i>{{ number_format($event->reviews->avg('star'), 1) }}</h4>
                                         @endif
                                     </div>
                                 </div>

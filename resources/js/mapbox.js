@@ -15,11 +15,11 @@ function addEventMarkers(events) {
     // イベントごとにピンを追加
     events.forEach(event => {
         const reviews = event.reviews || [];
-        const avgStar = reviews.length > 0 
+        const avgStar = reviews.length > 0
             ? (reviews.reduce((sum, review) => sum + review.star, 0) / reviews.length).toFixed(1)
             : "No Reviews";
-        const reviewContent = reviews.length > 0 
-            ? `<h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1"></i>${avgStar}</h4>`
+        const reviewContent = reviews.length > 0
+            ? `<h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1 star-color"></i>${avgStar}</h4>`
             : `<h6 class="text-muted overflow_cut">No Reviews</h6><h4 style="visibility: hidden">.</h4>`;
 
         let eventCategories = '';
@@ -40,7 +40,7 @@ function addEventMarkers(events) {
         const startDate = new Date(event.start_date);
         const finishDate = new Date(event.finish_date);
 
-        const dateContent = startDate.toDateString() === finishDate.toDateString() 
+        const dateContent = startDate.toDateString() === finishDate.toDateString()
             ? `${startDate.toLocaleDateString('ja-JP', { month: '2-digit', day: '2-digit' })}`
             : `${startDate.toLocaleDateString('ja-JP', { month: '2-digit', day: '2-digit' })}~${finishDate.toLocaleDateString('ja-JP', { month: '2-digit', day: '2-digit' })}`;
 
@@ -121,7 +121,7 @@ function addEventMarkers(events) {
         // 新しいマーカーを作成
         const marker = new mapboxgl.Marker({ color: '#0C2C04' }) // ピンの色
             .setLngLat([event.longitude, event.latitude])
-            .setPopup(new AnimatedPopup({ 
+            .setPopup(new AnimatedPopup({
                 // Popupのアニメーション
                 openingAnimation: {
                 duration: 500,

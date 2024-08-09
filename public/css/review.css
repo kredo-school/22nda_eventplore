@@ -46,7 +46,7 @@
 
 .stars .star.hover,
 .stars .star.selected {
-    color: #f0da61; /* Hover and selected color */
+    color: #f4d734; /* Hover and selected color */
 }
 
 /* グラフ */
@@ -81,6 +81,27 @@
     line-height: 1.5em;
 }
 
+.review-form-container {
+    width: 100%;
+    margin-top: 1rem; /* mt-3 equivalent */
+    padding: .5rem;
+    border: 2px solid rgba(132, 148, 124, 0.5);
+    border-radius: .375rem;
+}
+
+.reviews-list-container {
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.review-item {
+    width: 100%;
+    margin-top: 1rem;
+    padding: .5rem;
+    border: 2px solid rgba(132, 148, 124, 0.5);
+    border-radius: .375rem;
+}
+
 /* comment */
 .overflow-ellipsis {
     display: -webkit-box;
@@ -90,4 +111,69 @@
     text-overflow: ellipsis;
     max-width: 100%;
     line-height: 1.5em;
+}
+
+/* コメント一覧の☆ */
+.star-rating {
+    display: flex;
+    direction: row-reverse;
+    font-size: 1.5rem; /
+}
+
+.star-rating .fa-star {
+    color: lightgray; /* デフォルトの色 */
+    margin: 0 1px;
+}
+
+.star-rating .fa-star.filled {
+    color: #f4d734; /* 評価☆の色 */
+}
+
+/* show-review page */
+.star-rating-1 {
+    display: flex;
+    direction: row-reverse;
+    font-size: 1rem; /
+}
+
+.star-rating-1 .fa-star {
+    color: lightgray; /* デフォルトの色 */
+    margin: 0 0.7px;
+}
+
+.star-rating-1 .fa-star.filled {
+    color: #f4d734; /* 評価☆の色 */
+}
+
+
+/* avarage star */
+.review-star-container {
+    font-size: 1rem;
+    width: 320px;
+    height: 180px;
+    border: 1px solid #0C2C04;
+    border-radius: .375rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1.25rem;
+}
+
+.review-star-container .fa-star,
+.review-star-container .half-filled {
+    margin: 0 1px;
+    position: relative;
+    color: #f4d734;
+}
+
+.review-star-container .fa-star.empty {
+    color: lightgray;
+}
+
+.review-star-container .half-filled {
+    background: linear-gradient(to right, #f4d734 50%, lightgray 50%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* 背景色をクリアにするために透明 */
 }
