@@ -17,6 +17,7 @@ const geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
     mapboxgl: mapboxgl,
     placeholder: "Enter address", // Placeholder text for the search bar
+    marker: false,
     proximity: {
         longitude: 139.839478,
         latitude: 35.652832,
