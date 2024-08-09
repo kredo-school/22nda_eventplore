@@ -31,7 +31,7 @@
     </div>
     <div class="col-lg-6 mb-3 text-start">
         <label for="start_time" class="fw-bold mb-2 text-start">Start Time*</label>
-        <input type="time" name="start_time" id="start_time" class="form-control @error('start_time') is-invalid @enderror" required autocomplete="start_time" autofocus style="border: 1px solid #84947C">
+        <input type="time" name="start_time" step="1800" value="00:00" id="start_time" class="form-control @error('start_time') is-invalid @enderror" required autocomplete="start_time" autofocus style="border: 1px solid #84947C">
         @error('start_time')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -40,7 +40,7 @@
     </div>
     <div class="col-lg-6 mb-3 text-start">
         <label for="finish_time" class="fw-bold mb-2 text-start">Finish Time*</label>
-        <input type="time" name="finish_time" id="finish_time" class="form-control @error('finish_time') is-invalid @enderror" required autocomplete="finish_time" autofocus style="border: 1px solid #84947C">
+        <input type="time" name="finish_time" step="1800" value="00:00" id="finish_time" class="form-control @error('finish_time') is-invalid @enderror" required autocomplete="finish_time" autofocus style="border: 1px solid #84947C">
         @error('finish_time')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
