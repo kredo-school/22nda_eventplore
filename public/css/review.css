@@ -81,6 +81,27 @@
     line-height: 1.5em;
 }
 
+.review-form-container {
+    width: 100%;
+    margin-top: 1rem; /* mt-3 equivalent */
+    padding: .5rem;
+    border: 2px solid rgba(132, 148, 124, 0.5);
+    border-radius: .375rem;
+}
+
+.reviews-list-container {
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.review-item {
+    width: 100%;
+    margin-top: 1rem;
+    padding: .5rem;
+    border: 2px solid rgba(132, 148, 124, 0.5);
+    border-radius: .375rem;
+}
+
 /* comment */
 .overflow-ellipsis {
     display: -webkit-box;
@@ -128,6 +149,15 @@
 /* avarage star */
 .review-star-container {
     font-size: 1rem;
+    width: 320px;
+    height: 180px;
+    border: 1px solid #0C2C04;
+    border-radius: .375rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1.25rem;
 }
 
 .review-star-container .fa-star,

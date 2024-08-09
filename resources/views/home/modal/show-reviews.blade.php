@@ -9,14 +9,14 @@
                 <div class="modal-header border-0 d-flex justify-content-center align-items-center mt-3">
                     <button type="button" class="btn-close me-2" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" style="font-family: EB Garamond">
+                <div class="modal-body">
                     <div class="align-items-center justify-content-center flex-row d-flex">
                         {{--  レビューの星　--}}
-                        <div style="width: 320px; height: 180px; border: 1px solid #0C2C04" class="review-star-container rounded d-flex flex-column justify-content-center align-items-center ms-5">
+                        <div class="review-star-container rounded d-flex flex-column justify-content-center align-items-center ms-5">
                             @php
                             $averageRating = number_format($averageRating, 1);
                             $fullStars = floor($averageRating);
-                            $halfStar = ($averageRating > $fullStars) ? true : false;
+                            $halfStar = ($averageRating > $fullStars);
                             @endphp
                             <div>
                                 <span class="h1 mb-2">{{ $averageRating }}</span>
@@ -77,7 +77,7 @@
                     {{-- レビュー書く欄 --}}
                     @auth
                         @if (Auth::user()->id != $event->owner_id)
-                            <div class="w-full mt-3 rounded p-2" style="border: 2px solid rgba(132, 148, 124, 0.5); ">
+                            <div class="review-form-container">
                                 <div class="mb-2 d-flex align-items-center">
                                     <label class="satisfaction" class="form-label">Customer Satisfaction</label>
                                     <div class="stars ms-2">
@@ -119,9 +119,9 @@
                     @endauth
                     <p class="h5 mt-3">{{ $event->reviews->count() }} reviews</p>
                     {{-- 全てのコメントが見れる欄 --}}
-                    <div style="overflow-y: auto; max-height: 400px;">
+                    <div class="reviews-list-container">
                     @foreach($event->reviews->sortByDesc('created_at') as $review)
-                        <div class="w-full mt-3 rounded p-2" style="border: 2px solid rgba(132, 148, 124, 0.5); ">
+                        <div class="review-item">
                             <div class="d-flex align-items-end">
                                 @if ($review->user->avatar)
                                     <img src="{{ $review->user->avatar }}" alt="{{ $review->user->name }}" class="rounded-circle avatar-sm">
