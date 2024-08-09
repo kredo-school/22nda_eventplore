@@ -62,6 +62,8 @@ class EventController extends Controller
         'insta_link' => 'nullable|url',
         'x_link' => 'nullable|url',
         'official' => 'nullable|url',
+        'image' => 'array', // 画像のバリデーション（配列であること）
+        'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048' // 各画像ファイルのバリデーション
     ]);
 
         $event = new Event();
@@ -93,15 +95,18 @@ class EventController extends Controller
         $event->longitude = $request->longitude;
         $event->save();
 
+        // 保存したイベントに関連する画像の処理
         $event_images = [];
-        foreach($request->file("image") as $img){
-            $image = new EventImage();
-            $image->image="data:image/".explode(".",$img->getClientOriginalName())[1].
-            ";base64,".base64_encode(file_get_contents($img));
-            $image->event_id = $event->id;
-            $event_images [] = ['image' => $image->image,'event_id' => $event->id];
+        if($request->hasFile('image')) {
+            foreach($request->file("image") as $img){
+                $image = new EventImage();
+                $image->image = "data:image/" . $img->getClientOriginalExtension() .
+                ";base64," . base64_encode(file_get_contents($img));
+                $image->event_id = $event->id;
+                $event_images[] = ['image' => $image->image, 'event_id' => $event->id];
+            }
+            $event->eventImages()->createMany($event_images);
         }
-        $event->eventImages()->createMany($event_images);
 
         $event_categories = [];
         foreach($request->categories as $category_id){
@@ -172,26 +177,32 @@ class EventController extends Controller
          * 2. Update the images
          * 3. Uplaod image if it doesn't exist
          */
-        
-        // Step 1
-        $event_images = $event_a->eventImages;
-         // Step 2
-        foreach ($request->file() as $key => $img)
-        {
-            // New uploaded image
-            if ($key == "new-image")
-            {
-                $image = new EventImage();
-                $image->image = "data:image/" . explode(".", $img->getClientOriginalName())[1] . ";base64," . base64_encode(file_get_contents($img));
-                $image->event_id = $event_a->id;
-                $image->save();
+        // 画像の更新処理
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $key => $img) {
+                if ($img) {
+                    // 既存の画像を更新
+                    $otherImages = $event_a->eventImages->slice(1);
+                    if($key == 0){
+                        $otherImages = $event_a->eventImages;
+                    }
+                    $image = EventImage::where('id', $otherImages[$key]->id)->where('event_id', $event_a->id)->first();
+                    if ($image) {
+                        $image->image = "data:image/" . $img->getClientOriginalExtension() . ";base64," . base64_encode(file_get_contents($img));
+                        $image->save();
+                    }
+                }
             }
-            // Update existing image
-            else
-            {
-                $image = $event_images->where('id', $key)->first();
-                $image->image = "data:image/" . explode(".", $img->getClientOriginalName())[1] . ";base64," . base64_encode(file_get_contents($img));
-                $image->save();
+        }
+
+        if ($request->hasFile('new-image')) {
+            foreach ($request->file('new-image') as $newImg) {
+                if ($newImg) {
+                    $newImage = new EventImage();
+                    $newImage->image = "data:image/" . $newImg->getClientOriginalExtension() . ";base64," . base64_encode(file_get_contents($newImg));
+                    $newImage->event_id = $event_a->id;
+                    $newImage->save();
+                }
             }
         }
 
