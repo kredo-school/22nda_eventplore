@@ -42,7 +42,7 @@
                             <i class="fa-solid fa-plus"></i>
                         </label>
                         <input type="file" name="new-image[]" id="file-input-new-{{ $i }}" class="form-control d-none" style="border: 1px solid #84947C"
-                        onchange="updateImageFields()"
+                        onchange="updateImageFields({{$i}})"
                         >
                     </div>
                 @endfor
