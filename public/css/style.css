@@ -162,3 +162,8 @@ input[type="checkbox"]:checked {
 .dropdown-item:active {
     background-color: #84947C;
 }
+
+
+.star-color {
+    color: #f4d734;
+}

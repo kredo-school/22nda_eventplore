@@ -335,7 +335,7 @@
                     @php
                         $averageRating = number_format($averageRating, 1);
                         $fullStars = floor($averageRating);
-                        $halfStar = ($averageRating > $fullStars) ? true : false;
+                        $halfStar = ($averageRating > $fullStars);
                     @endphp
                     <div>
                         <span class="h1 mb-2">{{ $averageRating }}</span>
@@ -475,7 +475,7 @@
                                         @if ($event->reviews->isEmpty())
                                             <h6 class="text-muted overflow_cut">No Reviews</h6><h4 style="visibility: hidden">.</h4>
                                         @else
-                                            <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1" style="color: #f4d734"></i>{{ number_format($event->reviews->avg('star'), 1) }}</h4>
+                                            <h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1 star-color"></i>{{ number_format($event->reviews->avg('star'), 1) }}</h4>
                                         @endif
                                     </div>
                                 </div>
