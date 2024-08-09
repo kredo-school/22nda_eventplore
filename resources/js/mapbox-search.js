@@ -20,12 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // イベントごとにピンを追加
     events.forEach(event => {
         const reviews = event.reviews || [];
-        const avgStar = reviews.length > 0 
+        const avgStar = reviews.length > 0
             ? (reviews.reduce((sum, review) => sum + review.star, 0) / reviews.length).toFixed(1)
             : "No Reviews";
 
-        const reviewContent = reviews.length > 0 
-            ? `<h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1"></i>${avgStar}</h4>`
+        const reviewContent = reviews.length > 0
+            ? `<h4 class="h4 text-dark overflow_cut"><i class="fa-solid fa-star me-1" style="color: #f4d734"></i>${avgStar}</h4>`
             : `<h6 class="text-muted overflow_cut">No Reviews</h6><h4 style="visibility: hidden">.</h4>`;
 
         let eventCategories = '';
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .setMaxWidth('270px')
             .setHTML(popupContent))
             .addTo(map);
-        
+
         // マーカーを配列に追加
         markers.push(marker);
 

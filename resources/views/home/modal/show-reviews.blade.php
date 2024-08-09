@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="{{ asset('css/review.css') }}">
 @vite(['resources/js/star.js'])
 
-<div class="modal fade" id="all-reviews-page">
+<div class="modal fade" id="all-reviews-page" tabindex="-1" aria-labelledby="all-reviews-pageLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-        <form action="{{ route('reviews.store', $event->id) }}" method="post">
+        <form action="{{ route('reviews.store', $event->id) }}" method="post" id="review-form">
             @csrf
             <div class="modal-content mt-5">
                 <div class="modal-header border-0 d-flex justify-content-center align-items-center mt-3">
@@ -12,10 +12,31 @@
                 <div class="modal-body" style="font-family: EB Garamond">
                     <div class="align-items-center justify-content-center flex-row d-flex">
                         {{--  レビューの星　--}}
-                        <div style="width: 320px; height: 180px; border: 1px solid #0C2C04" class="rounded d-flex flex-column justify-content-center align-items-center ms-5">
-                            <div class="mb-2">
-                                <i class="fa-solid fa-star fa-3x"></i>
-                                <span class="h1 ms-2">{{ number_format($averageRating, 1) }}</span>
+                        <div style="width: 320px; height: 180px; border: 1px solid #0C2C04" class="review-star-container rounded d-flex flex-column justify-content-center align-items-center ms-5">
+                            @php
+                            $averageRating = number_format($averageRating, 1);
+                            $fullStars = floor($averageRating);
+                            $halfStar = ($averageRating > $fullStars) ? true : false;
+                            @endphp
+                            <div>
+                                <span class="h1 mb-2">{{ $averageRating }}</span>
+                            </div>
+                            <div class="mb-2 d-flex align-items-center">
+                                {{-- フルの星 --}}
+                                @for ($i = 1; $i <= $fullStars; $i++)
+                                    <i class="fa-solid fa-star fa-2x"></i>
+                                @endfor
+
+                                {{-- 半分の星 --}}
+                                @if ($halfStar)
+                                    <i class="fa-solid fa-star fa-2x half-filled"></i>
+                                @endif
+
+                                {{-- 空の星 --}}
+                                @for ($i = $fullStars + ($halfStar ? 1 : 0); $i < 5; $i++)
+                                    <i class="fa-solid fa-star fa-2x empty"></i>
+                                @endfor
+
                             </div>
                             <div class="text-center">
                                 <p class="h6">( The average score customers evaluated. )</p>
@@ -82,13 +103,15 @@
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 me-2">
                                         <input type="text" id="comment" name="comment" class="form-control me-2" placeholder="Add comment">
-                                        @error('comment')
-                                            <strong class="text-danger">{{ $message }}</strong>
-                                        @enderror
+
+                                        <div id="error-container" data-has-errors="{{ $errors->any() ? 'true' : 'false' }}" data-review-submitted="{{ session('reviewSubmitted') ? 'true' : 'false' }}" class="text-danger">
+                                            @error('comment')
+                                                <strong>{{ $message }}</strong>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div>
                                         <button type="submit" class="btn btn-green">Add review</button>
-
                                     </div>
                                 </div>
                             </div>
@@ -106,17 +129,19 @@
                                     <i class="fa-solid fa-circle-user avatar-sm m-0"></i>
                                 @endif
                                 <span class="h5 ms-2 my-0 fs-4">{{ $review->user->username }}</span>
-                                <span class="ms-2">{{ $review->user->created_at->format('Y-m-d') }}</span>
+                                <span class="ms-2">{{ $review->created_at->format('Y-m-d') }}</span>
                             </div>
-                            <div class="ms-1 mt-1 align-items-start">
-                                <i class="fa-solid fa-star"></i>
-                                <span class="me-2">{{ number_format($review->star, 1) }}</span>
-                                <span>{{ $review->comment }}</span>
+                            <div class="ms-1 mt-1 align-items-start d-flex align-items-center">
+                                <span class="star-rating-1">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <i class="fa-solid fa-star {{ $i <= $review->star ? 'filled' : '' }}"></i>
+                                    @endfor
+                                </span>
+                                <span class="ms-2">{{ $review->comment }}</span>
                             </div>
                         </div>
                     @endforeach
                     </div>
-
                 </div>
             </div>
         </form>

@@ -46,7 +46,7 @@
 
 .stars .star.hover,
 .stars .star.selected {
-    color: #f0da61; /* Hover and selected color */
+    color: #f4d734; /* Hover and selected color */
 }
 
 /* グラフ */
@@ -90,4 +90,60 @@
     text-overflow: ellipsis;
     max-width: 100%;
     line-height: 1.5em;
+}
+
+/* コメント一覧の☆ */
+.star-rating {
+    display: flex;
+    direction: row-reverse;
+    font-size: 1.5rem; /
+}
+
+.star-rating .fa-star {
+    color: lightgray; /* デフォルトの色 */
+    margin: 0 1px;
+}
+
+.star-rating .fa-star.filled {
+    color: #f4d734; /* 評価☆の色 */
+}
+
+/* show-review page */
+.star-rating-1 {
+    display: flex;
+    direction: row-reverse;
+    font-size: 1rem; /
+}
+
+.star-rating-1 .fa-star {
+    color: lightgray; /* デフォルトの色 */
+    margin: 0 0.7px;
+}
+
+.star-rating-1 .fa-star.filled {
+    color: #f4d734; /* 評価☆の色 */
+}
+
+
+/* avarage star */
+.review-star-container {
+    font-size: 1rem;
+}
+
+.review-star-container .fa-star,
+.review-star-container .half-filled {
+    margin: 0 1px;
+    position: relative;
+    color: #f4d734;
+}
+
+.review-star-container .fa-star.empty {
+    color: lightgray;
+}
+
+.review-star-container .half-filled {
+    background: linear-gradient(to right, #f4d734 50%, lightgray 50%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* 背景色をクリアにするために透明 */
 }
