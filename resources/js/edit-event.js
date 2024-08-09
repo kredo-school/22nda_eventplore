@@ -42,7 +42,7 @@ document.getElementById("search_address").remove();
 const event = window.eventData;
 
 // 新しいマーカーを作成
-const marker = new mapboxgl.Marker({ color: '#F7142B' })
+const marker = new mapboxgl.Marker({ color: "#F7142B" })
     .setLngLat([event.longitude, event.latitude])
     .addTo(map);
 
@@ -131,19 +131,19 @@ function validateStep(step) {
             ) {
                 input.parentNode.appendChild(error);
             }
-            } else if (input.type === "number" && parseFloat(input.value) < 0) {
-                // Check if the number is negative
-                valid = false;
-                input.classList.add("is-invalid");
-                const error = document.createElement("div");
-                error.className = "invalid-feedback";
-                error.innerText = "Please enter a positive number.";
-                if (
-                    !input.nextElementSibling ||
-                    !input.nextElementSibling.classList.contains("invalid-feedback")
-                ) {
-                    input.parentNode.appendChild(error);
-                }
+        } else if (input.type === "number" && parseFloat(input.value) < 0) {
+            // Check if the number is negative
+            valid = false;
+            input.classList.add("is-invalid");
+            const error = document.createElement("div");
+            error.className = "invalid-feedback";
+            error.innerText = "Please enter a positive number.";
+            if (
+                !input.nextElementSibling ||
+                !input.nextElementSibling.classList.contains("invalid-feedback")
+            ) {
+                input.parentNode.appendChild(error);
+            }
         } else {
             input.classList.remove("is-invalid");
             if (
@@ -266,29 +266,7 @@ $.ajax({
 
 updateTimeline(step);
 
-function previewImage(input, imageClass) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            previewElement.src = e.target.result;
-            previewElement.classList.remove("d-none"); // プレビュー画像を表示
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
 document.addEventListener("DOMContentLoaded", function () {
-    // 既存の画像入力フィールドにイベントリスナーを追加
-    document
-        .querySelectorAll(".other-image-old input[type='file']")
-        .forEach((input, index) => {
-            const previewElement = document.querySelector(
-                `.other-image-preview-${index}`
-            );
-            input.addEventListener("change", function () {
-                previewImage(this, previewElement);
-            });
-        });
     // すべての新しい画像インプットフィールドにイベントリスナーを追加
     document
         .querySelectorAll('.new-image-input-container input[type="file"]')
@@ -321,15 +299,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-
-    updateImageFields();
 });
 
-function updateImageFields() {
+function updateImageFields(index) {
     const maxImages = 5;
-    const currentImageCount = document.querySelectorAll(
-        ".other-images .other-image-old"
-    ).length;
+    const currentImageCount =
+        document.querySelectorAll(".other-images .other-image-old").length + 1;
     const otherImagesContainer = document.querySelector(".other-images");
 
     // 追加されている新しい画像入力フィールドをすべて削除
@@ -338,51 +313,68 @@ function updateImageFields() {
         .forEach((el) => el.remove());
 
     // 追加可能なフィールド数を計算（5枚になるまで）
-    const fieldsToAdd = Math.max(0, maxImages - currentImageCount -1); // 現在の画像数を超えないように修正
-console.log(fieldsToAdd, maxImages, currentImageCount);
+    const fieldsToAdd = Math.max(0, maxImages - currentImageCount - 1); // 現在の画像数を超えないように修正
+
     // 新しい入力フィールドを追加
-    for (let i = 0; i < fieldsToAdd; i++) {
-        const newInputContainer = document.createElement("div");
-        newInputContainer.classList.add(
-            "w-50",
-            "p-1",
-            "new-image-input-container"
-        );
 
-        const newLabel = document.createElement("label");
-        newLabel.setAttribute("for", `file-input-new-${i}`);
-        newLabel.classList.add("new-image-input");
+    const selectedInput =
+        otherImagesContainer.children[currentImageCount - 1].children[1];
 
-        const newIcon = document.createElement("i");
-        newIcon.classList.add("fa-solid", "fa-plus");
-        newLabel.appendChild(newIcon);
+    // Append new image
+    const imageContainer = document.createElement("div");
+    const image = document.createElement("img");
+    const label = document.createElement("label");
+    const cameraIcon = document.createElement("i");
+    const input = document.createElement("input");
+    const button = document.createElement("button");
+    const deleteIcon = document.createElement("i");
 
-        const newInput = document.createElement("input");
-        newInput.setAttribute("type", "file");
-        newInput.setAttribute("name", "new-image[]");
-        newInput.setAttribute("id", `file-input-new-${i}`);
-        newInput.classList.add("form-control", "d-none");
+    // Set element attributes
+    imageContainer.classList.add("p-1", "other-image-old");
+    imageContainer.style.position = "relative";
+    image.classList.add("img-fluid", `other-image-preview-${index}`);
+    image.style.objectFit = "cover";
+    image.style.aspectRatio = "1";
+    image.alt = "#";
+    image.src = URL.createObjectURL(selectedInput.files[0]);
+    label.setAttribute("for", `file-input-${index}`);
+    label.classList.add("edit-image");
+    cameraIcon.classList.add("fa-solid", "fa-camera-retro");
+    input.setAttribute("type", "file");
+    input.name = "image[]";
+    input.id = `file-input-${index}`;
+    input.classList.add("form-control", "d-none");
+    input.onchange = `previewImage(this, other-image-preview-${index})`;
+    // button.setAttribute("data-image-id", `${index}`);
+    button.classList.add("delete-image");
+    button.type = "button";
+    deleteIcon.classList.add("fa-solid", "fa-times");
 
-        // 画像プレビュー用の要素
-        const newImagePreview = document.createElement("img");
-        newImagePreview.classList.add("img-fluid", "d-none");
-        newImagePreview.style.objectFit = "cover";
-        newImagePreview.style.width = "100%";
-        newImagePreview.style.height = "100%";
+    // Hide current input
+    selectedInput.classList.add("d-none");
 
-        newLabel.appendChild(newInput);
-        newInputContainer.appendChild(newImagePreview); // 追加
-        newInputContainer.appendChild(newLabel);
+    // Label
+    label.appendChild(cameraIcon);
 
-        otherImagesContainer.appendChild(newInputContainer);
+    // Button
+    button.appendChild(deleteIcon);
 
-        // イベントリスナーを追加して画像プレビュー機能を有効化
-        newInput.addEventListener("change", function () {
-            previewImage(newInput, newImagePreview);
-        });
-    }
+    // Append all child to container
+    imageContainer.append(image, label, input, button, selectedInput);
+
+    // Replace selected container
+    otherImagesContainer.replaceChild(imageContainer, otherImagesContainer.children[currentImageCount - 1]);
 }
 
+function previewImage(input, imageClass) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.querySelector("." + imageClass).src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 
 window.updateImageFields = updateImageFields;
 window.previewImage = previewImage;
