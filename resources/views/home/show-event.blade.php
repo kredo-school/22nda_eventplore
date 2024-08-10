@@ -74,7 +74,7 @@
                 @endif"
                 style="padding: 5px;">
                     <img src="{{ $firstImage->image }}" class="w-100 h-100 pe-2 main-image-img" style="object-fit: cover;" alt="#">
-                
+
                 {{-- bookmark --}}
                 <div class="heart-icon-lg">
                     @if (Auth::check())
@@ -243,7 +243,7 @@
                         </div>
                         <div class="ms-3 text-start flex-grow-1">
                             <select class="form-select" name="num_tickets" id="numTickets">
-                                <option value="1" hidden>1 person</option>
+                                <option value="" hidden>1 person</option>
                                 @for ($i = 1; $i <= $availableSlots; $i++)
                                 <option value="{{ $i }}">{{ $i }}</option>
                                 @endfor

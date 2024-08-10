@@ -40,6 +40,9 @@
     {{-- ajax --}}
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
+    {{-- ApexCharts --}}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sign-inup/sign-inup.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
