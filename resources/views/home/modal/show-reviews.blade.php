@@ -6,13 +6,13 @@
         <form action="{{ route('reviews.store', $event->id) }}" method="post" id="review-form">
             @csrf
             <div class="modal-content mt-5">
-                <div class="modal-header border-0 d-flex justify-content-center align-items-center mt-3">
+                <div class="modal-header border-0 d-flex justify-content-center align-items-center">
                     <button type="button" class="btn-close me-2" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="align-items-center justify-content-center flex-row d-flex">
+                    <div class="align-items-center justify-content-center flex-row d-flex mb-4">
                         {{--  レビューの星　--}}
-                        <div class="review-star-container rounded d-flex flex-column justify-content-center align-items-center ms-5">
+                        <div class="review-star-container rounded d-flex flex-column justify-content-center align-items-center m-0">
                             @php
                             $averageRating = number_format($averageRating, 1);
                             $fullStars = floor($averageRating);
@@ -44,7 +44,7 @@
                         </div>
 
                         {{-- レビューの評価(グラフ) --}}
-                        <dl class="bar-chart-002 ms-4 w-25 rounded mt-3">
+                        <dl class="bar-chart-002 rounded mb-0">
                         @php
                             $defaultStars = [5, 4, 3, 2, 1];
                             $ratingCountsArray = $ratingCounts->toArray();
@@ -79,7 +79,7 @@
                         @if (Auth::user()->id != $event->owner_id)
                             <div class="review-form-container">
                                 <div class="mb-2 d-flex align-items-center">
-                                    <label class="satisfaction" class="form-label">Customer Satisfaction</label>
+                                    <div class="satisfaction" class="form-label">Customer Satisfaction</div>
                                     <div class="stars ms-2">
                                         <span class="star" data-value="1">
                                             <i class="fa-solid fa-star fa-2x"></i>
@@ -106,6 +106,11 @@
 
                                         <div id="error-container" data-has-errors="{{ $errors->any() ? 'true' : 'false' }}" data-review-submitted="{{ session('reviewSubmitted') ? 'true' : 'false' }}" class="text-danger">
                                             @error('comment')
+                                                <strong>{{ $message }}</strong>
+                                            @enderror
+                                        </div>
+                                        <div id="star-error" class="text-danger">
+                                            @error('star')
                                                 <strong>{{ $message }}</strong>
                                             @enderror
                                         </div>

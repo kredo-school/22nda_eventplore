@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-6">
                         <div class="content">
-                            <a href="#" class="text-decoration-none">
+                            <a href="{{ route('comment') }}" class="text-decoration-none">
                                 <div class="card custom-bg border border-0 custom-card">
                                     <div class="card-body">
                                         <p class="card-text">Comments</p>

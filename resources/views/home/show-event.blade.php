@@ -7,6 +7,7 @@
 
 <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
 <link rel="stylesheet" href="{{ asset('css/show-event/eventpage.css') }}">
+<link rel="stylesheet" href="{{ asset('css/review.css') }}">
 
 <div class="p-5 m-5 justify-content-center">
     {{-- Event name & date & cate --}}
@@ -74,7 +75,7 @@
                 @endif"
                 style="padding: 5px;">
                     <img src="{{ $firstImage->image }}" class="w-100 h-100 pe-2 main-image-img" style="object-fit: cover;" alt="#">
-                
+
                 {{-- bookmark --}}
                 <div class="heart-icon-lg">
                     @if (Auth::check())
@@ -373,67 +374,66 @@
     {{-- Review --}}
     <div class="contaner-fluid">
         <h2 class="h1 ms-3">Reviews</h2>
-        <div style="font-family: EB Garamond">
-
+        <div style="font-family: EB Garamond" class="review-container">
             <div class="align-items-center justify-content-center flex-row d-flex flex-wrap">
                 {{--  レビューの星　--}}
-                <div style="height: 200px; border: 1px solid #0C2C04" class="review-star-container w-25 rounded d-flex flex-column justify-content-center align-items-center">
-                    @php
-                        $averageRating = number_format($averageRating, 1);
-                        $fullStars = floor($averageRating);
-                        $halfStar = ($averageRating > $fullStars);
-                    @endphp
-                    <div>
-                        <span class="h1 mb-2">{{ $averageRating }}</span>
+                {{-- <div class="review-container"> --}}
+                    <div class="review-star-container rounded d-flex flex-column justify-content-center align-items-center m-0">
+                        @php
+                            $averageRating = number_format($averageRating, 1);
+                            $fullStars = floor($averageRating);
+                            $halfStar = ($averageRating > $fullStars);
+                        @endphp
+                        <div>
+                            <span class="h1 mb-2">{{ $averageRating }}</span>
+                        </div>
+                        <div class="mb-2 d-flex align-items-center">
+                            {{-- フルの星 --}}
+                            @for ($i = 1; $i <= $fullStars; $i++)
+                                <i class="fa-solid fa-star fa-2x"></i>
+                            @endfor
+
+                            {{-- 半分の星 --}}
+                            @if ($halfStar)
+                                <i class="fa-solid fa-star fa-2x half-filled"></i>
+                            @endif
+
+                            {{-- 空の星 --}}
+                            @for ($i = $fullStars + ($halfStar ? 1 : 0); $i < 5; $i++)
+                                <i class="fa-solid fa-star fa-2x empty"></i>
+                            @endfor
+
+                        </div>
+                        <div class="text-center">
+                            <p class="h6">( The average score customers evaluated. )</p>
+                        </div>
                     </div>
-                    <div class="mb-2 d-flex align-items-center">
-                        {{-- フルの星 --}}
-                        @for ($i = 1; $i <= $fullStars; $i++)
-                            <i class="fa-solid fa-star fa-2x"></i>
-                        @endfor
-
-                        {{-- 半分の星 --}}
-                        @if ($halfStar)
-                            <i class="fa-solid fa-star fa-2x half-filled"></i>
-                        @endif
-
-                        {{-- 空の星 --}}
-                        @for ($i = $fullStars + ($halfStar ? 1 : 0); $i < 5; $i++)
-                            <i class="fa-solid fa-star fa-2x empty"></i>
-                        @endfor
-
-                    </div>
-                    <div class="text-center">
-                        <p class="h6">( The average score customers evaluated. )</p>
-                    </div>
-                </div>
-
+                {{-- </div> --}}
                 {{-- レビューの評価(グラフ) --}}
-                <dl class="bar-chart-002 ms-4 w-25 rounded">
+                <dl class="bar-chart-002 rounded mt-3 mb-0">
                     @php
                         $defaultStars = [5, 4, 3, 2, 1];
                         $ratingCountsArray = $ratingCounts->toArray();
                         $totalReviews = $event->reviews->count();
                     @endphp
-                 @foreach($defaultStars as $star)
-                 <div>
-                     <dt>{{ $star }}:</dt>
-                     @php
-                         // 評価のカウントを取得（存在しない場合は0）
-                         $count = $ratingCountsArray[$star] ?? 0;
-                         // 幅の計算（0%も表示されるように）
-                         $width = ($totalReviews > 0) ? ($count / $totalReviews) * 100 : 0;
-                         $widthInt = (int) floor($width);
-                     @endphp
-                     <dd>
-                         <span style="display: inline-block; width: {{ $width }}%;">
-                             {{ $widthInt }}%
-                         </span>
-                     </dd>
-                 </div>
-                @endforeach
+                    @foreach($defaultStars as $star)
+                    <div>
+                        <dt>{{ $star }}:</dt>
+                        @php
+                            // 評価のカウントを取得（存在しない場合は0）
+                            $count = $ratingCountsArray[$star] ?? 0;
+                            // 幅の計算（0%も表示されるように）
+                            $width = ($totalReviews > 0) ? ($count / $totalReviews) * 100 : 0;
+                            $widthInt = (int) floor($width);
+                        @endphp
+                        <dd>
+                            <span style="display: inline-block; width: {{ $width }}%;">
+                                {{ $widthInt }}%
+                            </span>
+                        </dd>
+                    </div>
+                    @endforeach
                 </dl>
-
             </div>
         </div>
         {{-- コメントが3件だけ見れる --}}
