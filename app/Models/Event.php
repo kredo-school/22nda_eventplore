@@ -51,7 +51,7 @@ class Event extends Model
     {
         return $this->belongsToMany(Category::class, 'event_categories');
     }
-    
+
     public function getFirstEventImage()
     {
         return $this->eventImages()->orderBy('id', 'asc')->first();

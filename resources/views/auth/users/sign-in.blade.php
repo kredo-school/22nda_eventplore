@@ -14,13 +14,7 @@
                     <div class="d-flex justify-content-center mb-3">
                         <div class="w-100"><p>Don't you have an account yet ?&nbsp;<a href="{{ route('user.sign-up')}}" class="fw-bold text-decoration-none" style="color: #84947C">Sign Up</a></p></div>
                     </div>
-                    @if (session('message'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ session('message') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
+                    {{-- If you don't sign in as a user, the event details page and favorites are redirected and show this page with error. --}}
                     @if (request()->has('message'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             {{ request()->get('message') }}

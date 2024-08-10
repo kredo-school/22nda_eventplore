@@ -10,8 +10,8 @@
 
 <div class="p-5 mx-md-4 justify-content-center">
     {{-- Event name & date & cate --}}
-    <div class="row d-flex align-items-center jutstify-content-center mb-3">
-        <div class="col-md-6 px-md-1">
+    <div class="row align-items-center mb-3">
+        <div class="col-md-6">
             <h1 class="text-center">{{ $event->event_name }}</h1>
             <hr style="color: #0C2C04">
         </div>
@@ -62,13 +62,19 @@
             @endphp
 
             {{-- メイン写真 --}}
-            <div class="image-container main-image @if($totalOtherImages <= 2) w-75 @else w-50 @endif " style="padding: 5px;">
-                @if ($firstImage)
-                    <img src="{{ $firstImage->image }}" class="w-100 h-100 pe-2 main-image-img" style="object-fit: cover;" alt="#">
+            <div class="image-container main-image
+                @if($totalOtherImages == 0)
+                    w-100
+                @elseif($totalOtherImages == 1)
+                    w-50
+                @elseif($totalOtherImages == 2)
+                    w-75
                 @else
-                    <p>No image available</p>
-                @endif
-
+                    w-50
+                @endif"
+                style="padding: 5px;">
+                    <img src="{{ $firstImage->image }}" class="w-100 h-100 pe-2 main-image-img" style="object-fit: cover;" alt="#">
+                
                 {{-- bookmark --}}
                 <div class="heart-icon-lg">
                     @if (Auth::check())
@@ -96,8 +102,16 @@
                 </div>
             </div>
 
+
             {{-- 他の画像 --}}
-            <div class="other-images @if($totalOtherImages <= 2) w-25 @else w-50 @endif">
+            <div class="other-images
+                @if($totalOtherImages == 1)
+                    w-50
+                @elseif($totalOtherImages <= 2)
+                    w-25
+                @else
+                    w-50
+                @endif">
                 @if($totalOtherImages <= 2)
                     @foreach($otherImages as $image)
                         <div class="w-100" style="padding: 5px;">
@@ -202,8 +216,8 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center my-4">
-                        <button class="btn btn-red custom-btn me-2" data-bs-toggle="modal" data-bs-target="#user-delete-reservation{{ $reservation->id }}"><i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation</button>
-                        <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#user-edit-reservation{{ $reservation->id }}"><i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation</button>
+                        <button class="btn btn-red custom-btn me-2" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-delete-reservation' . $reservation->id : '#' }}"><i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation</button>
+                        <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-edit-reservation' . $reservation->id : '#' }}"><i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation</button>
                         @include('users.reservations.modal.edit')
                         @include('users.reservations.modal.delete')
                     </div>
@@ -262,8 +276,14 @@
                             </select>
                         </div>
                     </div>
-                    <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
-                    @include('users.reservations.modal.confirm')
+                    @auth('web')
+                        <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
+                        @include('users.reservations.modal.confirm')
+                    @else
+                        <a href="{{ route('user.sign-in', ['message' => 'To make a reservation, you need to sign in!']) }}" class="btn btn-green px-5 py-1">
+                            JOIN EVENT <div class="small">after sign-in</div>
+                        </a>
+                    @endauth
                     <hr style="color: #0C2C04">
                     <p class="align-middle text-center pt-2 fs-3 mb-0">Total <span id="totalPrice" data-price="{{ $event->price }}">{{ number_format($event->price) }}</span> yen</p>
                 </div>
@@ -390,31 +410,30 @@
 
                 {{-- レビューの評価(グラフ) --}}
                 <dl class="bar-chart-002 ms-4 w-25 rounded">
-                @php
-                    $defaultStars = [5, 4, 3, 2, 1];
-                    $ratingCountsArray = $ratingCounts->toArray();
-                    $totalReviews = $event->reviews->count();
-                @endphp
-
-                @foreach($defaultStars as $star)
-                    <div>
-                        <dt>{{ $star }}:</dt>
-                        @php
-                            // 評価のカウントを取得（存在しない場合は0）
-                            $count = $ratingCountsArray[$star] ?? 0;
-
-                            // 幅の計算（0%も表示されるように）
-                            $width = ($totalReviews > 0) ? ($count / $totalReviews) * 100 : 0;
-                            $widthInt = (int) floor($width);
-                        @endphp
-                        <dd>
-                            <span style="display: inline-block; width: {{ $width }}%;">
-                                {{ $widthInt }}%
-                            </span>
-                        </dd>
-                    </div>
+                    @php
+                        $defaultStars = [5, 4, 3, 2, 1];
+                        $ratingCountsArray = $ratingCounts->toArray();
+                        $totalReviews = $event->reviews->count();
+                    @endphp
+                 @foreach($defaultStars as $star)
+                 <div>
+                     <dt>{{ $star }}:</dt>
+                     @php
+                         // 評価のカウントを取得（存在しない場合は0）
+                         $count = $ratingCountsArray[$star] ?? 0;
+                         // 幅の計算（0%も表示されるように）
+                         $width = ($totalReviews > 0) ? ($count / $totalReviews) * 100 : 0;
+                         $widthInt = (int) floor($width);
+                     @endphp
+                     <dd>
+                         <span style="display: inline-block; width: {{ $width }}%;">
+                             {{ $widthInt }}%
+                         </span>
+                     </dd>
+                 </div>
                 @endforeach
                 </dl>
+
             </div>
         </div>
         {{-- コメントが3件だけ見れる --}}
@@ -440,7 +459,7 @@
             </div>
         @endforeach
         </div>
-        <div class="ms-5 my-5">
+        <div class="my-5">
             <button class="btn btn-outline-dg" data-bs-toggle="modal" data-bs-target="#all-reviews-page">See all reviews({{ $totalReviews }})</button>
         </div>
         @include('home.modal.show-reviews')
