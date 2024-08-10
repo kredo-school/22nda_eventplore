@@ -14,6 +14,7 @@
                     <div class="d-flex justify-content-center mb-3">
                         <div class="w-100"><p>Don't you have an account yet ?&nbsp;<a href="{{ route('user.sign-up')}}" class="fw-bold text-decoration-none" style="color: #84947C">Sign Up</a></p></div>
                     </div>
+                    {{-- If you don't sign in, the event details page is redirected and show this page with below error. --}}
                     @if (session('message'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             {{ session('message') }}
