@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{{ asset('css/show-event/show-event.css') }}">
 <link rel="stylesheet" href="{{ asset('css/show-event/eventpage.css') }}">
 
-<div class="p-5 mx-md-4 justify-content-center">
+<div class="p-5 m-5 justify-content-center">
     {{-- Event name & date & cate --}}
     <div class="row align-items-center mb-3">
         <div class="col-md-6">
