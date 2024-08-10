@@ -1,37 +1,60 @@
+
+/* レビューの星コンテナ */
+.review-star-container {
+    font-size: 1rem;
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    border: 1px solid #0C2C04;
+    border-radius: .375rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* グラフ */
 .bar-chart-002 {
     font-size: .9em;
+    width: 100%;
+    max-width: 320px;
+    box-sizing: border-box; /* パディングとボーダーを含むサイズ計算 */
 }
 
 .bar-chart-002 > div {
     display: flex;
     align-items: center;
-    margin-bottom: 7px;
+    margin-bottom: 4px;
 }
 
 .bar-chart-002 dt {
-    width: 20px;
-    min-width: 20px;
+    width: 2.5em; /* dtの幅を調整 */
+    text-align: right;
+    margin-right: 1rem;
 }
 
 .bar-chart-002 dd {
-    width: 100%;
+    flex-grow: 1;
     margin: 0;
-    border-radius: 3px;
+    border-radius: .375rem;
     background-color: #c0c0c0;
+    position: relative;
 }
 
 .bar-chart-002 span {
-    display: inline-block;
-    padding-right: 5px;
+    display: block;
+    height: 1.5em;
     border-radius: inherit;
     background-color: #696969;
     color: #fff;
     font-weight: 600;
-    line-height: 20px;
+    line-height: 1.5em;
     text-align: right;
     white-space: nowrap;
 }
-
 
 .stars {
     display: flex;
@@ -117,7 +140,7 @@
 .star-rating {
     display: flex;
     direction: row-reverse;
-    font-size: 1.5rem; /
+    font-size: 1.5rem;
 }
 
 .star-rating .fa-star {
@@ -133,7 +156,7 @@
 .star-rating-1 {
     display: flex;
     direction: row-reverse;
-    font-size: 1rem; /
+    font-size: 1rem;
 }
 
 .star-rating-1 .fa-star {
@@ -145,20 +168,6 @@
     color: #f4d734; /* 評価☆の色 */
 }
 
-
-/* avarage star */
-.review-star-container {
-    font-size: 1rem;
-    width: 320px;
-    height: 180px;
-    border: 1px solid #0C2C04;
-    border-radius: .375rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-left: 1.25rem;
-}
 
 .review-star-container .fa-star,
 .review-star-container .half-filled {

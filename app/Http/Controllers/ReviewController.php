@@ -14,8 +14,9 @@ class ReviewController extends Controller
     {
         $request->validate([
             'star' => 'required|integer|min:1|max:5',
-            'comment' => 'nullable|string|max:255',
+            'comment' => 'required|string|max:255',
         ], [
+            'star.required' => 'The star rating is required.',
             'comment.max' => 'The comment may not be greater than :max characters.',
         ]);
 
