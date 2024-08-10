@@ -244,7 +244,7 @@
                         </div>
                         <div class="ms-3 text-start flex-grow-1">
                             <select class="form-select" name="num_tickets" id="numTickets">
-                                <option value="1" hidden>1 person</option>
+                                <option value="" hidden>1 person</option>
                                 @for ($i = 1; $i <= $availableSlots; $i++)
                                 <option value="{{ $i }}">{{ $i }}</option>
                                 @endfor

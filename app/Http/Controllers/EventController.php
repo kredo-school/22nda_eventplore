@@ -172,7 +172,7 @@ class EventController extends Controller
 
         /**
          * TODO:
-         * 
+         *
          * 1. Get the images
          * 2. Update the images
          * 3. Uplaod image if it doesn't exist
@@ -259,10 +259,33 @@ class EventController extends Controller
         $reservations = Reservation::where('event_id', $id)->paginate(10);
         $eventOwner   = auth()->guard('event_owner')->user();
 
+
+        // 分析グラフのパート
+        $maxParticipants  = $event->max_participants;
+        // 開始時間と終了時間を取得
+        $startTime = strtotime($event->start_time);
+        $endTime   = strtotime($event->finish_time);
+
+        // 時間帯ごとの集計を初期化
+        $timeSlots = [];
+        for ($time = $startTime; $time <= $endTime; $time = strtotime('+1 hour', $time)) {
+            $formattedTime = date('H:00', $time);
+            $timeSlots[$formattedTime] = 0;
+        }
+
+        // 各予約について人数を時間帯ごとにカウント
+        $allReservations = Reservation::where('event_id', $id)->get();
+        foreach ($allReservations as $reservation) {
+            $reservationTime = strtotime($reservation->time);
+            $timeSlot = date('H:00', $reservationTime);
+            if (isset($timeSlots[$timeSlot])) {
+                $timeSlots[$timeSlot] += $reservation->num_tickets;
+            }
+        }
         if ($eventOwner->id !== $event->event_owner_id) {
             return back();
         } else {
-            return view('event-owners.reservations.show', compact('event', 'reservations', 'areas'));
+            return view('event-owners.reservations.show', compact('event', 'reservations', 'areas', 'timeSlots', 'maxParticipants'));
         }
     }
 
@@ -314,7 +337,7 @@ class EventController extends Controller
 
         if (Hash::check($request->input('password'), $user->password)) {
             $this->reservation->destroy($id);
-    
+
             return redirect()->route('user.reservation.show')->with('success', 'Reservation deleted successfully.');
         } else {
             return redirect()->back()->withErrors(['password' => 'The password is incorrect.']);
