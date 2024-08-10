@@ -66,6 +66,8 @@ Route::middleware(['auth:web'])->group(function () {
     Route::delete('/user/reservation/{id}/destroy', [EventController::class, 'destroyUserReservation'])->name('user.reservation.destroy');
     Route::patch('/user/reservation/{id}/update', [EventController::class, 'updateUserReservation'])->name('user.reservation.update');
     Route::post('/user/reservation/store', [EventShowController::class, 'storeUserReservation'])->name('user.reservation.store');
+    Route::get('/comment', [ReviewController::class, 'show'])->name('comment');
+    Route::delete('/comments/{id}', [ReviewController::class, 'destroy'])->name('comments.destroy');
     });
 
 // イベントオーナー認証後に見れる画面
