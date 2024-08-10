@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\EventShowController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -15,7 +17,6 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\EventOwnerLoginController;
 use App\Http\Controllers\Auth\EventOwnerRegisterController;
-use App\Http\Controllers\ReviewController;
 
 
 Route::get('/event-owners/events/register', [EventController::class, 'create'])->name('events.register');
@@ -66,6 +67,10 @@ Route::middleware(['auth:web'])->group(function () {
     Route::delete('/user/reservation/{id}/destroy', [EventController::class, 'destroyUserReservation'])->name('user.reservation.destroy');
     Route::patch('/user/reservation/{id}/update', [EventController::class, 'updateUserReservation'])->name('user.reservation.update');
     Route::post('/user/reservation/store', [EventShowController::class, 'storeUserReservation'])->name('user.reservation.store');
+
+    Route::get('/user/wishlist', [BookmarkController::class, 'show'])->name('user.bookmark.show');
+    Route::post('/user/wishlist/{id}/store', [BookmarkController::class,'store'])->name('user.bookmark.store');
+    Route::delete('/user/wishlist/{id}/destroy', [BookmarkController::class,'destroy'])->name('user.bookmark.destroy');
     });
 
 // イベントオーナー認証後に見れる画面

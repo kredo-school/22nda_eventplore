@@ -62,7 +62,7 @@
             @endphp
 
             {{-- メイン写真 --}}
-            <div class="main-image
+            <div class="image-container main-image
                 @if($totalOtherImages == 0)
                     w-100
                 @elseif($totalOtherImages == 1)
@@ -74,6 +74,32 @@
                 @endif"
                 style="padding: 5px;">
                     <img src="{{ $firstImage->image }}" class="w-100 h-100 pe-2 main-image-img" style="object-fit: cover;" alt="#">
+                
+                {{-- bookmark --}}
+                <div class="heart-icon-lg">
+                    @if (Auth::check())
+                        @if ($event->isBookmarked())
+                            <form action="{{ route('user.bookmark.destroy', $event->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn text-danger">
+                                    <i class="fa-solid fa-heart"></i>
+                                </button>
+                            </form>
+                        @else
+                            <form action="{{ route('user.bookmark.store', $event->id) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn text-dark">
+                                    <i class="fa-regular fa-heart"></i>
+                                </button>
+                            </form>
+                        @endif
+                    @else
+                        <a href="{{ route('user.sign-in', ['message' => 'To have favorites, you need to sign in!']) }}" class="btn text-dark p-0 rounded-circle">
+                            <i class="fa-regular fa-heart"></i>
+                        </a>
+                    @endif
+                </div>
             </div>
 
 
@@ -250,8 +276,14 @@
                             </select>
                         </div>
                     </div>
-                    <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
-                    @include('users.reservations.modal.confirm')
+                    @auth('web')
+                        <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
+                        @include('users.reservations.modal.confirm')
+                    @else
+                        <a href="{{ route('user.sign-in', ['message' => 'To make a reservation, you need to sign in!']) }}" class="btn btn-green px-5 py-1">
+                            JOIN EVENT <div class="small">after sign-in</div>
+                        </a>
+                    @endauth
                     <hr style="color: #0C2C04">
                     <p class="align-middle text-center pt-2 fs-3 mb-0">Total <span id="totalPrice" data-price="{{ $event->price }}">{{ number_format($event->price) }}</span> yen</p>
                 </div>
