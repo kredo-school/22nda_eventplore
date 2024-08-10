@@ -150,6 +150,11 @@ class EventShowController extends Controller
             $data['firstImage'] = $firstImage;
         }
 
+        $firstImage = $event->getFirstEventImage();
+        if ($firstImage) {
+            $data['firstImage'] = $firstImage;
+        }
+
         return view('home.show-event', $data);
     }
 
