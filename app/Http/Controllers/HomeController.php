@@ -49,7 +49,9 @@ class HomeController extends Controller
         $area       = $request->input('area');
         $categories = $request->input('categories');
 
-        $query = Event::query();
+        $query = Event::query()
+                ->withSum('reservations', 'num_tickets') // 各イベントのチケット数を計算
+                ->orderBy('reservations_sum_num_tickets', 'desc'); // 予約が多い順に並び替え
 
         // 日付選択時
         if (!empty($date)) {
@@ -97,7 +99,9 @@ class HomeController extends Controller
         $area = $request->input('area');
 
         // Query to fetch events
-        $query = Event::query();
+        $query = Event::query()
+                ->withSum('reservations', 'num_tickets')
+                ->orderBy('reservations_sum_num_tickets', 'desc');
 
         // Filter by date if provided
         if (!empty($date)) {

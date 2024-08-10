@@ -213,6 +213,57 @@ document.addEventListener('DOMContentLoaded', function () {
         map.resize();
     };
 
+    // マップがロードされた後にソースとレイヤーを追加
+    map.on('load', function() {
+        // ユーザーの位置情報の取得に成功した時
+        function success(position) {
+            const { latitude, longitude } = position.coords;
+
+            // 現在地に青い点を追加
+            map.addSource('current-location', {
+                type: 'geojson',
+                data: {
+                    type: 'FeatureCollection',
+                    features: [{
+                        type: 'Feature',
+                        geometry: {
+                            type: 'Point',
+                            coordinates: [longitude, latitude]
+                        }
+                    }]
+                }
+            });
+
+            map.addLayer({
+                id: 'current-location-layer',
+                type: 'circle',
+                source: 'current-location',
+                paint: {
+                    'circle-color': '#4264fb',
+                    'circle-radius': 7,
+                    'circle-stroke-width': 4,
+                    'circle-stroke-color': '#ffffff',
+                }
+            });
+
+            addEventMarkers(events);
+        }
+
+        // ユーザーの位置情報の取得に失敗した時
+        function error() {
+            // alert('Failed to acquire location information.');
+            addEventMarkers(events);
+        }
+
+        // ユーザーの位置情報を取得
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+            alert('Your browser does not support location data acquisition.');
+            addEventMarkers(events);
+        }
+    });
+
     // ズームボタン、スケール、インフォメーションを追加
     map.addControl(new mapboxgl.NavigationControl());
     map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
