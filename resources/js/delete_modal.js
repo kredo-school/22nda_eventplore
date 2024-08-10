@@ -11,3 +11,18 @@ function togglePasswordVisibility() {
     }
 }
 window.togglePasswordVisibility=togglePasswordVisibility;
+
+
+//delete modalを保持したままエラー表示
+document.addEventListener('DOMContentLoaded', function() {
+    const errorContainer = document.getElementById('error-container');
+    const hasErrors = errorContainer.dataset.hasErrors === 'true';
+
+    if (hasErrors) {
+        $('#user-profile-delete').modal('show');
+    }
+
+    if (hasErrors) {
+        $('#eventowner-profile-delete').modal('show');
+    }
+});

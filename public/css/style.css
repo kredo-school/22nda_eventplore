@@ -101,14 +101,17 @@ color-black:#000000;
 .avatar-sm{
     width: 2rem;
     height: 2rem;
+    font-size: 2rem;
     object-fit: cover;
     border-radius: 50%;
 }
 .avatar-md{
     width: 3.5rem;
     height: 3.5rem;
+    font-size: 3.5rem;
     object-fit: cover;
     border-radius: 50%;
+    display: inline-block;
 }
 .avatar-lg{
     width: 9rem;
@@ -158,4 +161,9 @@ input[type="checkbox"]:checked {
 /* ドロップダウンのリンククリック時のカラー */
 .dropdown-item:active {
     background-color: #84947C;
+}
+
+
+.star-color {
+    color: #f4d734;
 }

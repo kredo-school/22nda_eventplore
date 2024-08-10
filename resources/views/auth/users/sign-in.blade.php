@@ -21,6 +21,13 @@
                         </div>
                     @endif
 
+                    @if (request()->has('message'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ request()->get('message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
                     <div class="d-flex justify-content-center flex-column w-50">
                         <div class="text-start mb-3">
                             <label for="email" class="form-label fw-bold mb-2">Email*</label>

@@ -34,9 +34,51 @@
                                 @endphp
 
                                 @if ($event->eventImages->isEmpty())
-                                    <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
+                                    <div class="image-container">
+                                        <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
+                                        {{-- bookmark --}}
+                                        <div class="heart-icon">
+                                            @if ($event->isBookmarked())
+                                                <form action="{{ route('user.bookmark.destroy', $event->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn text-danger">
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('user.bookmark.store', $event->id) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn text-dark">
+                                                        <i class="fa-regular fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </div>
                                 @elseif ($event->eventImages->count() == 1)
-                                    <img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                                    <div class="image-container">
+                                        <img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                                        {{-- bookmark --}}
+                                        <div class="heart-icon">
+                                            @if ($event->isBookmarked())
+                                                <form action="{{ route('user.bookmark.destroy', $event->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn text-danger">
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('user.bookmark.store', $event->id) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn text-dark">
+                                                        <i class="fa-regular fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </div>
                                 @else
                                     <div id="{{ $carouselId }}" class="carousel slide">
                                         <div class="carousel-indicators">
@@ -59,26 +101,27 @@
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Next</span>
                                         </button>
+                                        {{-- bookmark --}}
+                                        <div class="heart-icon">
+                                            @if ($event->isBookmarked())
+                                                <form action="{{ route('user.bookmark.destroy', $event->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn text-danger">
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('user.bookmark.store', $event->id) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn text-dark">
+                                                        <i class="fa-regular fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </div>
                                     </div>
                                 @endif
-                                <div>
-                                    @if ($event->isBookmarked())
-                                        <form action="{{ route('user.bookmark.destroy', $event->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn text-danger">
-                                                <i class="fa-solid fa-heart"></i>
-                                            </button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('user.bookmark.store', $event->id) }}" method="post">
-                                            @csrf
-                                            <button type="submit" class="btn text-danger">
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                        </form>
-                                    @endif
-                                </div>
                                 <div class="card-body">
                                     <div class="row align-items-center mb-3">
                                         {{-- event title --}}

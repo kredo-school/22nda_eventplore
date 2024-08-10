@@ -17,8 +17,7 @@
 
                 <!-- Desktop Menu -->
                 <div class="col-md-8">
-                    {{-- @auth --}}
-                        @if ((Auth::check() && Auth::user()->role == 'user') && !request()->is('/') )
+                    @if ((!Auth::check() || Auth::user()->role == 'user') && !request()->is('/'))
                         <div class="d-none d-md-flex justify-content-center flex-grow-1">
                             <form action="{{ route('events.search') }}" method="GET" class="d-flex w-75">
                                 <select class="form-select me-2" id="area" name="area">
@@ -33,8 +32,7 @@
                                 </button>
                             </form>
                         </div>
-                        @endif
-                    {{-- @endauth --}}
+                    @endif
                 </div>
 
                     <!-- User & Owner Icon  -->
@@ -109,7 +107,7 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     @endunless --}}
-                    @if (!Auth::guard('event_owner')->check())
+                    @if (!Auth::guard('event_owner')->check() && Route::currentRouteName() != 'home')
                         <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHamburger" aria-controls="navbarHamburger" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -156,7 +154,7 @@
                                     <a class="dropdown-item" href="{{ route('category.search', ['category' => 'festival']) }}"><i class="fas fa-theater-masks"></i> Festival</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'food_drink']) }}"><i class="fa-solid fa-utensils"></i> Food/Drink</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'food/drink']) }}"><i class="fa-solid fa-utensils"></i> Food/Drink</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('category.search', ['category' => 'sport']) }}"><i class="fa-solid fa-baseball-bat-ball"></i> Sport</a>
@@ -195,7 +193,7 @@
                                     <a class="dropdown-item" href="{{ route('category.search', ['category' => 'toilet']) }}"><i class="fa-solid fa-restroom"></i> Toilet</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'train_bus']) }}"><i class="fa-solid fa-train-subway"></i> Train/Bus</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'train/bus']) }}"><i class="fa-solid fa-train-subway"></i> Train/Bus</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('category.search', ['category' => 'outside']) }}"><i class="fa-solid fa-cloud-sun"></i> Outside</a>
@@ -227,7 +225,7 @@
                         <i class="fas fa-theater-masks fa-2xl"></i>
                         <span class="d-block mt-2">Festival</span>
                     </a>
-                    <a href="{{ route('category.search', ['category' => 'food_drink']) }}" class="me-2 text-secondary text-decoration-none text-center">
+                    <a href="{{ route('category.search', ['category' => 'food/drink']) }}" class="me-2 text-secondary text-decoration-none text-center">
                         <i class="fa-solid fa-utensils fa-2xl"></i>
                         <small class="d-block mt-2">Food/Drink</small>
                     </a>
@@ -279,7 +277,7 @@
                         <i class="fa-solid fa-restroom fa-2xl"></i>
                         <span class="d-block mt-2">Toilet</span>
                     </a>
-                    <a href="{{ route('category.search', ['category' => 'train_bus']) }}" class="me-1 text-secondary text-decoration-none text-center">
+                    <a href="{{ route('category.search', ['category' => 'train/bus']) }}" class="me-1 text-secondary text-decoration-none text-center">
                         <i class="fa-solid fa-train-subway fa-2xl"></i>
                         <small class="d-block mt-2">Train/Bus</small>
                     </a>

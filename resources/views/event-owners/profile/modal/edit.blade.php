@@ -6,11 +6,12 @@
             <div class="modal-content">
                 <div class="modal-header border-0 mt-3">
                     <div class="img-container w-100 d-flex justify-content-center align-items-center position-relative">
-                        {{--　イベントオーナーのアイコン写真 --}}
+                        {{-- イベントオーナーのアイコン写真 --}}
                         @if (Auth::user()->avatar)
-                            <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle" style="width: 128px; height: 128px;">
+                            <img src="{{ Auth::user()->avatar }}" alt="" id="image-preview" class="rounded-circle" style="width: 128px; height: 128px;">
                         @else
-                            <span class="d-flex align-items-center justify-content-center" style="position: relative;">
+                            <img src="" alt="Image Preview" id="image-preview" class="rounded-circle" style="width: 128px; height: 128px; display: none;">
+                            <span class="d-flex align-items-center justify-content-center" id="default-icon" style="position: relative;">
                                 <i class="fa-solid fa-circle-user fa-8x"></i>
                             </span>
                         @endif
@@ -18,7 +19,7 @@
                         <label for="file-input" class="camera-icon">
                             <i class="fa-solid fa-camera-retro fa-xl"></i>
                         </label>
-                        <input type="file" name="avatar" id="file-input" style="display: none;">
+                        <input type="file" name="avatar" id="file-input" style="display: none;" class="form-control d-none" onchange="previewImage(this)">
                     </div>
                 </div>
 
@@ -87,3 +88,23 @@
         </form>
     </div>
 </div>
+
+<script>
+function previewImage(input) {
+    const preview = document.getElementById('image-preview');
+    const defaultIcon = document.getElementById('default-icon');
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+            if (defaultIcon) {
+                defaultIcon.style.display = 'none';
+                // Force the display property to be applied
+                defaultIcon.classList.add('hidden');
+            }
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>

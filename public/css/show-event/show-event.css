@@ -109,3 +109,60 @@ tbody tr:nth-child(even) td {
     }
 }
 
+/* bookmarkのコンテナ設定 */
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* カードのbookmarkアイコン */
+.heart-icon {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 10;
+}
+
+.heart-icon button {
+    background: none;
+    border: none;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.heart-icon i {
+    font-size: 17px;
+    background-color: #ffffffb4;
+    border-radius: 50%;
+    padding: 7px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* イベントページのbookmarkアイコン */
+.heart-icon-lg {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+.heart-icon-lg button {
+    background: none;
+    border: none;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.heart-icon-lg i {
+    font-size: 20px;
+    background-color: #ffffffb4;
+    border-radius: 50%;
+    padding: 9px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

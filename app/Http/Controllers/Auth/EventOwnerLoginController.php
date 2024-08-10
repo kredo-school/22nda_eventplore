@@ -132,7 +132,7 @@ class EventOwnerLoginController extends Controller
         } else {
             // パスワードが一致しない場合
             return back()->withErrors([
-                'password' => 'The entered password is incorrect.',
+                'password' => 'The entered password is incorrect, try it again.',
             ])->withInput();
         }
     }

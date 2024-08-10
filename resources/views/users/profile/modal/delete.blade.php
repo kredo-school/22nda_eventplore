@@ -42,9 +42,11 @@
                                 <i class="fa-solid fa-eye-slash"></i>
                             </div> --}}
                         </div>
-                        @error('password')
-                            <strong class="text-danger">{{ $message }}</strong>
-                        @enderror
+                        <div id="error-container" data-has-errors="{{ $errors->any() ? 'true' : 'false' }}"  class="text-danger">
+                            @error('password')
+                                <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
                     </div>
 
                 </div>
@@ -58,4 +60,3 @@
         </form>
     </div>
 </div>
-

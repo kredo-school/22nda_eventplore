@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const stars = Array.from(document.getElementsByClassName("star"));
     const selectedStarInput = document.getElementById("selected-star");
+    const reviewForm = document.getElementById("review-form");
+    const modal = document.getElementById("user-profile-delete");
     let selectedValue = null;
 
     function updateStarColors(index) {
@@ -61,4 +63,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+    //modalを再表示
+    window.onload = function() {
+        const errorContainer = document.getElementById('error-container');
+        const hasErrors = errorContainer.dataset.hasErrors === 'true';
+        const reviewSubmitted = errorContainer.dataset.reviewSubmitted === 'true';
+
+        if (hasErrors || reviewSubmitted) {
+            $('#all-reviews-page').modal('show');
+        }
+    }
 });
