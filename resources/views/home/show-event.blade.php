@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{{ asset('css/show-event/eventpage.css') }}">
 <link rel="stylesheet" href="{{ asset('css/review.css') }}">
 
-<div class="p-5 m-5 justify-content-center">
+<div class="p-4 m-4 justify-content-center">
     {{-- Event name & date & cate --}}
     <div class="row align-items-center mb-3">
         <div class="col-md-6">
@@ -54,7 +54,7 @@
 
     {{-- images --}}
     <div class="container-fluid mb-4 p-0">
-        <div class="d-flex flex-wrap w-100 mb-2 image-part" style="height: 100%; overflow-x: auto;">
+        <div class="d-flex flex-wrap w-100 mb-2 image-part" style="height: 100%;">
             @php
                 $images = $event->eventImages;
                 $firstImage = $images->first();
@@ -74,7 +74,7 @@
                     w-50
                 @endif"
                 style="padding: 5px;">
-                    <img src="{{ $firstImage->image }}" class="w-100 h-100 pe-2 main-image-img" style="object-fit: cover;" alt="#">
+                    <img src="{{ $firstImage->image }}" class="w-100 h-100 pe-1 main-image-img" style="object-fit: cover;" alt="#">
 
                 {{-- bookmark --}}
                 <div class="heart-icon-lg">
@@ -112,7 +112,7 @@
                     w-25
                 @else
                     w-50
-                @endif">
+                @endif" style="overflow: hidden;">
                 @if($totalOtherImages <= 2)
                     @foreach($otherImages as $image)
                         <div class="w-100" style="padding: 5px;">
@@ -147,15 +147,25 @@
 
                         <h2>History</h2>
                         <p>{{ $event->history }}</p>
-                        <p>
-                            Official link <i class="fa-solid fa-arrow-right"></i>&nbsp;<a href="{{ $event->official }}" class="text-white"> {{ $event->official }}</a>
-                        </p>
-                        <div class="mt-4 text-end">
-                            <p class="text-white">Follow this event's owner</p>
-                            <a href="{{ $event->facebook_link }}" class="text-white me-3" target="_blank"><i class="fab fa-facebook fa-xl"></i></a>
-                            <a href="{{ $event->x_link }}" class="text-white me-3" target="_blank"><i class="fa-brands fa-x-twitter fa-xl"></i></a>
-                            <a href="{{ $event->insta_link }}" class="text-white me-4" target="_blank"><i class="fab fa-instagram fa-xl"></i></a>
-                        </div>
+                        @if($event->official)
+                            <p>
+                                Official link <i class="fa-solid fa-arrow-right"></i>&nbsp;<a href="{{ $event->official }}" class="text-white" target="_blank"> {{ $event->official }}</a>
+                            </p>
+                        @endif
+                        @if($event->facebook_link || $event->x_link || $event->insta_link)
+                            <div class="mt-4 text-end">
+                                <p class="text-white me-3">Follow this event's owner</p>
+                                @if($event->facebook_link)
+                                    <a href="{{ $event->facebook_link }}" class="text-white me-3" target="_blank"><i class="fab fa-facebook fa-xl"></i></a>
+                                @endif
+                                @if($event->x_link)
+                                    <a href="{{ $event->x_link }}" class="text-white me-3" target="_blank"><i class="fa-brands fa-x-twitter fa-xl"></i></a>
+                                @endif
+                                @if($event->insta_link)
+                                    <a href="{{ $event->insta_link }}" class="text-white me-3" target="_blank"><i class="fab fa-instagram fa-xl"></i></a>
+                                @endif
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -481,9 +491,63 @@
                             @endphp
 
                             @if ($event->eventImages->isEmpty())
-                                <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
+                                <div class="image-container">
+                                    <img src="{{ asset('images/event-test/noimage.png') }}" alt="no image" class="rounded-top-only card-img-top card-img-sm">
+                                    {{-- bookmark --}}
+                                    <div class="heart-icon">
+                                        @if (Auth::check())
+                                            @if ($event->isBookmarked())
+                                                <form action="{{ route('user.bookmark.destroy', $event->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn text-danger">
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('user.bookmark.store', $event->id) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn text-dark">
+                                                        <i class="fa-regular fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        @else
+                                            <a href="{{ route('user.sign-in', ['message' => 'To have favorites, you need to sign in!']) }}" class="btn text-dark p-0 rounded-circle">
+                                                <i class="fa-regular fa-heart"></i>
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
                             @elseif ($event->eventImages->count() == 1)
-                                <img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                                <div class="image-container">
+                                    <img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="rounded-top-only card-img-top card-img-sm">
+                                    {{-- bookmark --}}
+                                    <div class="heart-icon">
+                                        @if (Auth::check())
+                                            @if ($event->isBookmarked())
+                                                <form action="{{ route('user.bookmark.destroy', $event->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn text-danger">
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('user.bookmark.store', $event->id) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn text-dark">
+                                                        <i class="fa-regular fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        @else
+                                            <a href="{{ route('user.sign-in', ['message' => 'To have favorites, you need to sign in!']) }}" class="btn text-dark p-0 rounded-circle">
+                                                <i class="fa-regular fa-heart"></i>
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
                             @else
                                 <div id="{{ $carouselId }}" class="carousel slide">
                                     <div class="carousel-indicators">
@@ -506,6 +570,31 @@
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="visually-hidden">Next</span>
                                     </button>
+                                    {{-- bookmark --}}
+                                    <div class="heart-icon">
+                                        @if (Auth::check())
+                                            @if ($event->isBookmarked())
+                                                <form action="{{ route('user.bookmark.destroy', $event->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn text-danger">
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('user.bookmark.store', $event->id) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn text-dark">
+                                                        <i class="fa-regular fa-heart"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        @else
+                                            <a href="{{ route('user.sign-in', ['message' => 'To have favorites, you need to sign in!']) }}" class="btn text-dark p-0 rounded-circle">
+                                                <i class="fa-regular fa-heart"></i>
+                                            </a>
+                                        @endif
+                                    </div>
                                 </div>
                             @endif
 
