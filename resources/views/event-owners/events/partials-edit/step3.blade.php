@@ -1,7 +1,7 @@
 {{-- STEP3 --}}
 {{-- category --}}
 <div class="row justify-content-center mx-5 px-5 mb-3">
-    <label for="form-label" class="fw-bold mb-2 text-start">Category*</label>
+    <div class="fw-bold mb-2 text-start">Category*</div>
     <div class="col-lg-6 col-sm-12">
         @forelse ($all_categories as $index => $category)
             @if ($index < 10)

@@ -1,9 +1,9 @@
 {{-- STEP1 --}}
 {{-- 基本情報 --}}
 <div class="row justify-content-center mx-5 px-5">
-    <label for="form-label" class="fw-bold mb-2 text-start">Event Name*</label>
+    <label for="event_name" class="fw-bold mb-2 text-start">Event Name*</label>
     <div class="col-12 mb-3">
-        <input id="event_name" type="text" class="form-control" name="event_name" required autocomplete="event_name" autofocus value="{{ old('event_name', $event->event_name) }}" style="border: 1px solid #84947C">
+        <input id="event_name" type="text" class="form-control" name="event_name" required autocomplete="off" autofocus value="{{ old('event_name', $event->event_name) }}" style="border: 1px solid #84947C">
         @error('event_name')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -32,7 +32,7 @@
 </div>
 {{-- Content --}}
 <div class="row justify-content-center mx-5 px-5">
-    <label for="form-label" class="fw-bold mb-2 text-start">Content*</label>
+    <label for="details" class="fw-bold mb-2 text-start">Content*</label>
     <div class="col-12 mb-3">
         <textarea name="details" id="details" rows="3" class="form-control" required style="border: 1px solid #84947C">{{ old('details', $event->details) }}</textarea>
         @error('details')
@@ -44,7 +44,7 @@
 </div>
 {{-- History --}}
 <div class="row justify-content-center mx-5 px-5">
-    <label for="form-label" class="fw-bold mb-2 text-start">History*</label>
+    <label for="history" class="fw-bold mb-2 text-start">History*</label>
     <div class="col-12 mb-3">
         <textarea name="history" id="history" rows="3" class="form-control" required style="border: 1px solid #84947C">{{ old('history', $event->history) }}</textarea>
         @error('history')

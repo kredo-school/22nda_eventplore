@@ -4,7 +4,7 @@
 
 {{-- area --}}
 <div class="row justify-content-center mx-5 px-5 mb-3">
-    <label for="area" class="form-label fw-bold mb-2 text-start">Area*</label>
+    <label for="area_id" class="form-label fw-bold mb-2 text-start">Area*</label>
     <div class="col-12">
         <select class="form-select me-2 form-control" id="area_id" name="area_id" style="border: 1px solid #84947C">
             <option value="" hidden selected>Select Area</option>
@@ -18,10 +18,10 @@
 <div class="row justify-content-center mx-5 px-5 mb-3">
     <label for="address" class="form-label fw-bold mb-2 text-start">Address*</label>
     <div class="mb-3 position-relative" id="search-container">
-        <input type="text" id="search_address" class="form-control" style="border: 1px solid #84947C"/>
+        <input type="text" id="search_address" name="search_address" class="form-control" style="border: 1px solid #84947C"/>
     </div>
     <div class="mb-3">
-        <input type="text" name="address" id="address" class="form-control" style="border: 1px solid #84947C" placeholder="Enter full address">
+        <input type="text" name="address" id="address" class="form-control" style="border: 1px solid #84947C" placeholder="Enter full address" autocomplete="street-address">
     </div>
     <div class="col-6 mb-3">
         {{-- hidden latitude --}}

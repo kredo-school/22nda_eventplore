@@ -1,7 +1,7 @@
 <div class="row justify-content-center mx-5 px-5">
-    <label for="form-label" class="fw-bold mb-2 text-start">Event Name*</label>
+    <label for="event_name" class="fw-bold mb-2 text-start">Event Name*</label>
     <div class="col-12 mb-3">
-        <input id="event_name" type="text" class="form-control @error('event_name') is-invalid @enderror" name="event_name" required autocomplete="event_name" autofocus placeholder="Event Name" style="border: 1px solid #84947C">
+        <input id="event_name" type="text" class="form-control @error('event_name') is-invalid @enderror" name="event_name" required autocomplete="off" autofocus placeholder="Event Name" style="border: 1px solid #84947C">
         @error('event_name')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
 </div>
 
 <div class="row justify-content-center mx-5 px-5">
-    <label for="form-label" class="fw-bold mb-2 text-start">Content*</label>
+    <label for="details" class="fw-bold mb-2 text-start">Content*</label>
     <div class="col-12 mb-3">
         <textarea name="details" id="details" rows="3" class="form-control @error('details') is-invalid @enderror" required placeholder="Content" style="border: 1px solid #84947C"></textarea>
         @error('details')
@@ -62,7 +62,7 @@
 </div>
 
 <div class="row justify-content-center mx-5 px-5">
-    <label for="form-label" class="fw-bold mb-2 text-start">History*</label>
+    <label for="history" class="fw-bold mb-2 text-start">History*</label>
     <div class="col-12 mb-3">
         <textarea name="history" id="history" rows="3" class="form-control @error('history') is-invalid @enderror" required placeholder="History" style="border: 1px solid #84947C"></textarea>
         @error('history')
