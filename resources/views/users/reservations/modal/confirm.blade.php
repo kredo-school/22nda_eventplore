@@ -28,7 +28,7 @@
                                 <span>Total Price</span>
                             </div>
                             <div class="d-flex flex-row">
-                                <span id="modalTotalPrice"></span> yen
+                                <span id="modalTotalPrice"></span> &nbsp;yen
                             </div>
                         </div>
                         <div class="d-flex flex-row justify-content-between w-50 mb-2">

@@ -40,13 +40,25 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
     var hiddenEventTime = document.getElementById('hiddenEventTime');
 
     function updateTotalPrice() {
-        var numTickets = parseInt(numTicketsSelect.value) || 1;
-        var totalPrice = numTickets * eventPrice;
-        if (totalPriceElement) {
-            totalPriceElement.textContent = new Intl.NumberFormat().format(totalPrice);
-        }
-        if (modalTotalPrice) {
-            modalTotalPrice.textContent = new Intl.NumberFormat().format(totalPrice);
+        var numTickets = parseInt(numTicketsSelect.value);
+        if (isNaN(numTickets) || numTickets <= 0) {
+            if (modalNumTickets) {
+                modalNumTickets.textContent = 'Not selected';
+            }
+            if (modalTotalPrice) {
+                modalTotalPrice.textContent = '0';
+            }
+        } else {
+            var totalPrice = numTickets * eventPrice;
+            if (totalPriceElement) {
+                totalPriceElement.textContent = new Intl.NumberFormat().format(totalPrice);
+            }
+            if (modalTotalPrice) {
+                modalTotalPrice.textContent = new Intl.NumberFormat().format(totalPrice);
+            }
+            if (modalNumTickets) {
+                modalNumTickets.textContent = numTickets;
+            }
         }
     }
 
@@ -138,8 +150,13 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
     }
 
     document.querySelector('form').addEventListener('submit', function(event) {
-        hiddenNumTickets.value = numTicketsSelect.value;
-        hiddenEventDate.value = document.querySelector('select[name="event_date"]').value;
-        hiddenEventTime.value = document.querySelector('select[name="event_time"]').value;
+        event.preventDefault(); // デフォルトのフォーム送信を防ぐ
+
+        const numTicketsValue = numTicketsSelect.value;
+        const eventDateValue = document.querySelector('select[name="event_date"]').value;
+        const eventTimeValue = document.querySelector('select[name="event_time"]').value;
+
     });
+
+
 });
