@@ -15,7 +15,7 @@
     </div>
 </div>
 <div class="row justify-content-center mx-5 px-5">
-    <label for="form-label" class="fw-bold mb-2 text-start">Official Website</label>
+    <label for="official" class="fw-bold mb-2 text-start">Official Website</label>
     <div class="col-12 mb-3">
         <input type="url" name="official" id="official" class="form-control" value="{{ old('official', $event->official) }}" style="border: 1px solid #84947C">
     </div>
