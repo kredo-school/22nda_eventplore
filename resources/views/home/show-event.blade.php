@@ -9,10 +9,17 @@
 <link rel="stylesheet" href="{{ asset('css/show-event/eventpage.css') }}">
 <link rel="stylesheet" href="{{ asset('css/review.css') }}">
 
-<div class="p-4 m-4 justify-content-center">
+<div class="p-5 mx-5 justify-content-center">
     {{-- Event name & date & cate --}}
     <div class="row align-items-center mb-3">
         <div class="col-md-6">
+            @if ($errors->any())
+                <div class="alert alert-danger ">
+                    @foreach ($errors->all() as $error)
+                    <i class="fa-solid fa-triangle-exclamation"></i> {{ $error }}
+                    @endforeach
+                </div>
+            @endif
             <h1 class="text-center">{{ $event->event_name }}</h1>
             <hr style="color: #0C2C04">
         </div>
@@ -254,7 +261,7 @@
                         </div>
                         <div class="ms-3 text-start flex-grow-1">
                             <select class="form-select" name="num_tickets" id="numTickets">
-                                <option value="" hidden>1 person</option>
+                                <option value="" selected hidden>Select number of tickets</option>
                                 @for ($i = 1; $i <= $availableSlots; $i++)
                                 <option value="{{ $i }}">{{ $i }}</option>
                                 @endfor
@@ -288,15 +295,20 @@
                         </div>
                     </div>
                     @auth('web')
-                        <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
-                        @include('users.reservations.modal.confirm')
+                        @if ($currentDate->lte($appDeadline))
+                            <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
+                            @include('users.reservations.modal.confirm')
+                        @else
+                            <button class="btn btn-secondary px-5 py-2 fw-bold" style="font-family: Raleway,sans-serif;" disabled>Reservation Closed</button>
+                            <p class="text-danger mt-2" style="font-family: Raleway,sans-serif;">The reservation deadline has passed.</p>
+                        @endif
                     @else
                         <a href="{{ route('user.sign-in', ['message' => 'To make a reservation, you need to sign in!']) }}" class="btn btn-green px-5 py-1">
                             JOIN EVENT <div class="small">after sign-in</div>
                         </a>
                     @endauth
                     <hr style="color: #0C2C04">
-                    <p class="align-middle text-center pt-2 fs-3 mb-0">Total <span id="totalPrice" data-price="{{ $event->price }}">{{ number_format($event->price) }}</span> yen</p>
+                    <p class="align-middle text-center fs-3 mb-0">Total <span id="totalPrice" data-price="{{ $event->price }}">{{ number_format($event->price) }}</span> yen</p>
                 </div>
             </div>
         </div>
@@ -471,8 +483,10 @@
         </div>
         <div class="my-5">
             <button class="btn btn-outline-dg" data-bs-toggle="modal" data-bs-target="#all-reviews-page">See all reviews({{ $totalReviews }})</button>
+            @if (!$errors->any())
+                @include('home.modal.show-reviews')
+            @endif
         </div>
-        @include('home.modal.show-reviews')
     </div>
 
     <hr>

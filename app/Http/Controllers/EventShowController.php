@@ -54,16 +54,15 @@ class EventShowController extends Controller
 
 
         // 日付範囲を生成
-        $startDate = Carbon::parse($event->start_date);
+        $startDate = Carbon::tomorrow();
         $endDate = Carbon::parse($event->finish_date);
         $appDeadline = Carbon::parse($event->app_deadline);
+        $currentDate = \Carbon\Carbon::now();
 
         // 開始日から終了日までの日付を生成
         $eventDates = [];
         while ($startDate->lte($endDate)) {
-            if ($startDate->lt($appDeadline)) {
-                $eventDates[] = $startDate->format('Y-m-d'); // 'Y-m-d' 形式でフォーマット
-            }
+            $eventDates[] = $startDate->format('Y-m-d'); // 'Y-m-d' 形式でフォーマット
             $startDate->addDay();
         }
 
@@ -143,7 +142,8 @@ class EventShowController extends Controller
         }
         //end review
 
-        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews');
+
+        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews','currentDate','appDeadline');
 
         $firstImage = $event->getFirstEventImage();
         if ($firstImage) {
