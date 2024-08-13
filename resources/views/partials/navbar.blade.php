@@ -1,6 +1,6 @@
 <div class="sticky-top">
     <nav class="navbar navbar-expand-md navbar-light bg-white navbar-top-bottom-border navbar-fixed-height p-0" style="font-family: 'EB Garamond', serif;">
-        <div class="container-fluid">
+        <div class="container-fluid" style="background-color: {{ Auth::guard('event_owner')->user() ? '#F6E7D2' : '#FFFFFF' }};">
             {{-- Logo --}}
             {{-- <div class="row"> --}}
                 <div class="col-md-2 d-flex align-items-center">

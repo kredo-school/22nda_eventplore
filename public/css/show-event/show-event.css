@@ -170,3 +170,28 @@ tbody tr:nth-child(even) td {
     padding: 9px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+/* イベントページの画像サイズ */
+.ratio-2-2 {
+    aspect-ratio: 2.2;
+    object-fit: cover;
+}
+
+.ratio-1-5 {
+    aspect-ratio: 1.45;
+    object-fit: cover;
+}
+
+.ratio-1-1 {
+    aspect-ratio: 1.1;
+    object-fit: cover;
+}
+
+/* 画面サイズ767px未満 */
+@media (max-width: 767px) {
+    .ratio-2-2,
+    .ratio-1-5,
+    .ratio-1-1 {
+        aspect-ratio: 1.6;
+    }
+}

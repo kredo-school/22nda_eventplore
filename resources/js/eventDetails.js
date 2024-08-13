@@ -157,6 +157,22 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
         const eventTimeValue = document.querySelector('select[name="event_time"]').value;
 
     });
+});
 
+// Topに戻るボタンの表示
+document.addEventListener("DOMContentLoaded", function() {
+    var backToTopButton = document.getElementById('back-to-top');
 
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 700) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    });
+
+    backToTopButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    });
 });

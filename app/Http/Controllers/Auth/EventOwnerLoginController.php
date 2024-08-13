@@ -119,8 +119,9 @@ class EventOwnerLoginController extends Controller
         if (Hash::check($request->input('password'), $eventOwner->password)) {
 
             // 関連するイベントを削除
-            $eventOwner->events()->delete();
-
+            $eventOwner->events()->each(function ($event) {
+                $event->delete();
+            });
             $eventOwner->delete();
 
             // ログアウト処理
