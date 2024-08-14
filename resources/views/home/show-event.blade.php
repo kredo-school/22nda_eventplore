@@ -461,9 +461,9 @@
         </div>
         <div class="my-4">
             <button class="btn btn-outline-dg" data-bs-toggle="modal" data-bs-target="#all-reviews-page">See all reviews({{ $totalReviews }})</button>
-            {{-- @if (!$errors->any()) --}}
+            @if (!$errors->any())
                 @include('home.modal.show-reviews')
-            {{-- @endif --}}
+            @endif
         </div>
     </div>
 

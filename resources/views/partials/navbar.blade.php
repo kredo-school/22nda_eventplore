@@ -73,7 +73,7 @@
                                 <img src="{{ Auth::guard('event_owner')->user()->avatar }}" alt="" class="rounded-circle avatar-md">
                             @else
                                 <span class="d-flex align-items-center justify-content-center">
-                                    <i class="fa-solid fa-circle-user fa-3x me-2" style="color: #0C2C04; font-size: 2.5em;"></i>
+                                    <i class="fa-solid fa-circle-user fa-2xl me-2" style="color: #0C2C04; font-size: 2.5em;"></i>
                                 </span>
                             @endif
                         </a>
