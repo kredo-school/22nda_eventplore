@@ -148,6 +148,8 @@ class EventShowController extends Controller
                 ->where('event_id', $id)
                 ->first();
         }
+
+        $userHasReviewed = $event->reviews()->where('user_id', Auth::id())->exists();
         //end review
 
 

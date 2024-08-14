@@ -1,6 +1,6 @@
 <footer class="footer">
     <div class="container-fluid px-3">
-        <div class="row align-items-center" style="height: 80px">
+        <div class="row align-items-center">
             <div class="col-4">
                 <div class="d-flex align-items-center">
                     <a href="https://www.facebook.com" class="me-3 text-secondary text-decoration-none" target="_blank">
