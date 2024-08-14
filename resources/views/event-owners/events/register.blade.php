@@ -14,7 +14,7 @@
     {{-- 背景画像 --}}
     <div class="background-image" style="background-image: url('{{ asset('images/event-register/manuel-cosentino-n--CMLApjfI-unsplash.jpg') }}');"></div>
     {{-- 入力フォーム --}}
-    <div class="card my-5 w-50 text-align-center bg-light bg-opacity-75 border-0 shadow" style="min-width: 480px; height: fit-content;">
+    <div class="card my-5 w-50 text-align-center bg-light bg-opacity-75 border-0 shadow" style="min-width: 360px; height: fit-content;">
         <div class="card-body border-0 text-center py-4">
             <form method="POST" action="{{ route('events.store') }}" enctype="multipart/form-data">
                 @csrf
