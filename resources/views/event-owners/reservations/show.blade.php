@@ -176,7 +176,7 @@
                         </div>
                     </div>
                     {{-- 混雑予想グラフ --}}
-                    <div id="chart" class="card"></div>
+                    <div id="chart" class="p-3 card"></div>
                     <div id="time-slots-data" data-time-slots="{{ json_encode($timeSlots) }}"></div>
                     <div id="max-participants-data" data-max-participants="{{ $maxParticipants }}"></div>
                 </div>

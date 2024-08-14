@@ -184,15 +184,15 @@
         <div class="col-md-6 px-md-1">
             <div class="card mb-4 shadow" style="min-height: 400px; max-height: 400px;">
                 <div class="card-body text-center">
-                    <h2 class="card-title border-top border-bottom py-2 mx-5 my-3" style="color: #84947C"><i class="fa-solid fa-check"></i>Already Reseved!</h2>
-                    <div class="mb-2 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
+                    <h2 class="card-title border-top border-bottom py-2 mx-5 my-3" style="color: #84947C"><i class="fa-solid fa-check"></i> Already Reserved!</h2>
+                    <div class="mb-2 d-flex justify-content-center align-items-center mx-auto w-50">
+                        <div class="d-flex justify-content-center" style="width: 15%;">
                             <i class="fa-solid fa-yen-sign icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%;">
-                            <h4 class="mb-0">Total Price</h3>
+                        <div class="text-start" style="width: 45%;">
+                            <h4 class="mb-0">Total Price</h4>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%;">
+                        <div class="text-start" style="width: 40%;">
                             @if(isset($totalPrice))
                             <h4 class="mb-0">{{ number_format($totalPrice) }}</h4>
                             @else
@@ -200,45 +200,53 @@
                             @endif
                         </div>
                     </div>
-                    <div class="mb-2 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
+                    <div class="mb-2 d-flex justify-content-center align-items-center mx-auto w-50">
+                        <div class="d-flex justify-content-center" style="width: 15%;">
                             <i class="fa-solid fa-users icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%;">
+                        <div class="text-start" style="width: 45%;">
                             <h4 class="mb-0">People</h4>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%;">
+                        <div class="text-start" style="width: 40%;">
                             <h4 class="mb-0">{{ $reservation->num_tickets }}</h4>
                         </div>
                     </div>
-                    <div class="mb-2 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
+                    <div class="mb-2 d-flex justify-content-center align-items-center mx-auto w-50">
+                        <div class="d-flex justify-content-center" style="width: 15%;">
                             <i class="fa-solid fa-calendar-days icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%;">
+                        <div class="text-start" style="width: 45%;">
                             <h4 class="mb-0">Date</h4>
                         </div>
-                        <div class="ms-3 text-start">
+                        <div class="text-start" style="width: 40%;">
                             <h4 class="mb-0">{{ $reservation->reservation_date }}</h4>
                         </div>
                     </div>
-                    <div class="mb-2 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
+                    <div class="mb-2 d-flex justify-content-center align-items-center mx-auto w-50">
+                        <div class="d-flex justify-content-center" style="width: 15%;">
                             <i class="fa-regular fa-clock icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%;">
+                        <div class="text-start" style="width: 45%;">
                             <h4 class="mb-0">Time</h4>
                         </div>
-                        <div class="ms-3 text-start" style="width: 20%;">
+                        <div class="text-start" style="width: 40%;">
                             <h4 class="mb-0">{{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</h4>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center my-4">
-                        <button class="btn btn-red custom-btn me-2" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-delete-reservation' . $reservation->id : '#' }}"><i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation</button>
-                        <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-edit-reservation' . $reservation->id : '#' }}"><i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation</button>
-                        @include('users.reservations.modal.edit')
-                        @include('users.reservations.modal.delete')
-                    </div>
+                    <hr>
+                    @auth('web')
+                    @if ($currentDate->lte($appDeadline))
+                        <div class="d-flex justify-content-center my-4">
+                            <button class="btn btn-red custom-btn me-2" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-delete-reservation' . $reservation->id : '#' }}"><i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation</button>
+                            <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-edit-reservation' . $reservation->id : '#' }}"><i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation</button>
+                            @include('users.reservations.modal.edit')
+                            @include('users.reservations.modal.delete')
+                        </div>
+                    @else
+                        <button class="btn btn-secondary px-5 py-2 fw-bold" style="font-family: Raleway,sans-serif;" disabled>Reservation Closed</button>
+                        <p class="text-danger mt-2" style="font-family: Raleway,sans-serif;">Enjoy this event! <i class="fa-regular fa-face-smile"></i></p>
+                    @endif
+                    @endauth
                 </div>
             </div>
         </div>
@@ -247,19 +255,19 @@
         <div class="col-md-6 px-md-1">
             <div class="card px-5 pt-3 mb-4 shadow" style="height: 400px;">
                 <div class="card-body text-center">
-                    <div class="mb-3 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
+                    <div class="mb-3 d-flex align-items-center">
+                        <div style="width: 20%;">
                             <i class="fa-solid fa-yen-sign icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-center flex-grow-1">
+                        <div class="text-center flex-grow-1">
                             <h3 class="mb-0">{{ number_format($event->price) }} yen / per person</h3>
                         </div>
                     </div>
-                    <div class="mb-3 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
+                    <div class="mb-3 d-flex align-items-center">
+                        <div style="width: 20%;">
                             <i class="fa-solid fa-users icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start flex-grow-1">
+                        <div class="text-start flex-grow-1">
                             <select class="form-select" name="num_tickets" id="numTickets">
                                 <option value="" selected hidden>Select number of tickets</option>
                                 @for ($i = 1; $i <= $availableSlots; $i++)
@@ -268,11 +276,11 @@
                             </select>
                         </div>
                     </div>
-                    <div class="mb-3 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
+                    <div class="mb-3 d-flex align-items-center">
+                        <div style="width: 20%;">
                             <i class="fa-solid fa-calendar-days icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start flex-grow-1">
+                        <div class="text-start flex-grow-1">
                             <select class="form-select" name="event_date" >
                                 <option value="" hidden>Select Date</option>
                                 @foreach ($eventDates as $date)
@@ -281,11 +289,11 @@
                             </select>
                         </div>
                     </div>
-                    <div class="mb-3 d-flex justify-content-center align-items-center">
-                        <div class="d-flex justify-content-center" style="width: 50px;">
+                    <div class="mb-3 d-flex align-items-center">
+                        <div style="width: 20%;">
                             <i class="fa-regular fa-clock icon-lg"></i>
                         </div>
-                        <div class="ms-3 text-start flex-grow-1">
+                        <div class="text-start flex-grow-1">
                             <select class="form-select mt-2" name="event_time">
                                 <option value="" hidden>Select Time</option>
                                 @foreach ($eventTimes as $time)

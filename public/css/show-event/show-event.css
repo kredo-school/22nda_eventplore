@@ -108,7 +108,7 @@ tbody tr:nth-child(even) td {
         margin-left: 1rem;
     }
     .responsive-container {
-        overflow: hidden; 
+        overflow: hidden;
     }
 
 }

@@ -47,6 +47,11 @@ class EventShowController extends Controller
         $totalPrice = null;
         $totalPrice = $reservation ? $reservation->num_tickets * $event->price : null;
 
+        // $totalPrice が定義されている場合のみ追加
+        if ($totalPrice !== null) {
+            $data['totalPrice'] = $totalPrice;
+        }
+
         // 予約済の人数を計算
         $reservedCount = Reservation::where('event_id', $eventId)
                                 ->sum('num_tickets');
@@ -54,15 +59,22 @@ class EventShowController extends Controller
 
 
         // 日付範囲を生成
-        $startDate = Carbon::tomorrow();
+        $startDate = Carbon::parse($event->start_date);
         $endDate = Carbon::parse($event->finish_date);
         $appDeadline = Carbon::parse($event->app_deadline);
-        $currentDate = \Carbon\Carbon::now();
+        $currentDate = Carbon::now();
+
+        // イベント開始日が今日以前の場合、予約は明日以降からにする
+        if ($startDate->lte($currentDate)) {
+            $startDate = $currentDate->copy()->addDay(); // 明日の日付に設定
+        }
 
         // 開始日から終了日までの日付を生成
         $eventDates = [];
-        while ($startDate->lte($endDate)) {
-            $eventDates[] = $startDate->format('Y-m-d'); // 'Y-m-d' 形式でフォーマット
+        $totalDays = $startDate->diffInDays($endDate) + 1; // 開始日から終了日までの総日数を計算
+
+        for ($i = 0; $i < $totalDays; $i++) {
+            $eventDates[] = $startDate->format('Y-m-d');
             $startDate->addDay();
         }
 
@@ -80,10 +92,6 @@ class EventShowController extends Controller
             $startTime->addMinutes(30); // 次の30分単位に進む
         }
 
-        // $totalPrice が定義されている場合のみ追加
-        if ($totalPrice !== null) {
-            $data['totalPrice'] = $totalPrice;
-        }
 
         // related events
         // 現在のイベントのカテゴリーIDを取得
@@ -143,7 +151,7 @@ class EventShowController extends Controller
         //end review
 
 
-        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews','currentDate','appDeadline');
+        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'totalPrice','eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews','currentDate','appDeadline');
 
         $firstImage = $event->getFirstEventImage();
         if ($firstImage) {
