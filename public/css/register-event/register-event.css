@@ -9,8 +9,8 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    min-height: 80vh;
+    width: 100%;
+    min-height: 100%;
     background-size: cover;
     background-position: center;
     opacity: 30%;
