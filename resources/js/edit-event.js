@@ -376,6 +376,34 @@ function previewImage(input, imageClass) {
     }
 }
 
+// validate categories
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+function getCount(){
+    let checked = 0;
+    for (const checkbox of checkboxes) {
+        if (checkbox.checked) {
+            checked++;
+        }
+    }
+    return checked;
+}
+let checkedCount = getCount();
+
+checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+            checkedCount++;
+            if (checkedCount > 4) {
+                checkbox.checked = false;
+                checkedCount--;
+                alert("You can only select up to 4 options.");
+            }
+        } else {
+            checkedCount--;
+        }
+    });
+});
+
 window.updateImageFields = updateImageFields;
 window.previewImage = previewImage;
 window.next = next;
