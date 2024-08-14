@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Sign-in')
+
 @section('content')
 <div class="p-0 overflow-auto full-height">
     <div class="row d-flex justify-content-center align-items-stretch full-height">

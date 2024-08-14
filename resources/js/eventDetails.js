@@ -162,12 +162,22 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
 // Topに戻るボタンの表示
 document.addEventListener("DOMContentLoaded", function() {
     var backToTopButton = document.getElementById('back-to-top');
+    var footer = document.querySelector('footer');
 
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 700) {
+        var scrollPosition = window.scrollY + window.innerHeight;
+        var footerTop = footer.getBoundingClientRect().top + window.scrollY;
+
+        if (window.scrollY > 500) {
             backToTopButton.classList.add('show');
         } else {
             backToTopButton.classList.remove('show');
+        }
+
+        if (scrollPosition >= footerTop) {
+            backToTopButton.style.bottom = (scrollPosition - footerTop + 8) + 'px';
+        } else {
+            backToTopButton.style.bottom = '14px';
         }
     });
 

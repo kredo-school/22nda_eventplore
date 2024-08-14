@@ -23,6 +23,8 @@ table.rounded-corners {
 th.table-dg {
     background-color: #0C2C04;
     color: white;
+    vertical-align: middle;
+    text-align: center;
 }
 
 td.table-yellow {
@@ -108,7 +110,7 @@ tbody tr:nth-child(even) td {
         margin-left: 1rem;
     }
     .responsive-container {
-        overflow: hidden; 
+        overflow: hidden;
     }
 
 }

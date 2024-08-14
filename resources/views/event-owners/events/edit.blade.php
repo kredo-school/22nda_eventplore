@@ -10,12 +10,11 @@
 <!-- Scripts -->
 @vite(['resources/js/edit-event.js'])
 
-<div id="multi-step-form" class="container-fluid d-flex justify-content-center p-0 position-relative">
-    {{-- 背景画像 --}}
-    <div class="background-image object-fit-cover h-100 w-100" style="background-image: url('{{ asset('images/event-register/sorasak-_UIN-pFfJ7c-unsplash.jpg') }}');"></div>
+<div id="multi-step-form" class="container-fluid d-flex justify-content-center p-0 position-relative back h-100">
+    <div class="background-image" style="background-image: url('{{ asset('images/event-register/sorasak-_UIN-pFfJ7c-unsplash.jpg') }}');"></div>
     {{-- 入力フォーム --}}
-    <div class="card my-5 w-50 text-align-center bg-light bg-opacity-75 border-0 shadow" style="min-width: 480px">
-        <div class="card-body border-0 text-center py-4">
+    <div class="card my-5 w-50 text-align-center bg-light bg-opacity-75 border-0 shadow" style="min-width: 360px; height: fit-content;">
+        <div class="border-0 text-center py-4">
             <form method="POST" action="{{ route('events.update', $event->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')

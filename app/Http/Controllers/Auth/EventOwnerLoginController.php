@@ -44,6 +44,11 @@ class EventOwnerLoginController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
+        
+        // userでログインしている場合、ログアウトさせる
+        if (Auth::guard('web')->check()) {
+            Auth::guard('web')->logout();
+        }
 
         if (Auth::guard('event_owner')->attempt($credentials)) {
             if (Auth::guard('event_owner')->user()->role == 'event-owner') {

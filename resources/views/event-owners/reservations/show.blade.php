@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-md-4 mb-5">
             <a href="{{ route('event.details.show', $event->id) }}" class="text-decoration-none">
-                {{-- event list --}}
+                {{-- event card --}}
                 <div class="card shadow border-0 w-100 me-2">
                     @php
                         $carouselId = 'carousel' . $event->id;
@@ -117,10 +117,8 @@
                     </div>
                 </div>
             </a>
-
         </div>
 
-        {{-- reservation table --}}
         <div class="col-md-8 mb-3">
             {{-- total people & sales --}}
             <div class="d-grid mx-auto mb-3" style="width: 90%;">
@@ -176,61 +174,64 @@
                         </div>
                     </div>
                     {{-- 混雑予想グラフ --}}
-                    <div id="chart" class="card"></div>
+                    <div id="chart" class="p-3 card"></div>
                     <div id="time-slots-data" data-time-slots="{{ json_encode($timeSlots) }}"></div>
                     <div id="max-participants-data" data-max-participants="{{ $maxParticipants }}"></div>
                 </div>
             </div>
-
         </div>
-        <table class="table text-center align-middle shadow rounded-2 overflow-hidden me-2 mt-0">
-            <thead>
-                <tr>
-                    <th class="table-dg">#</th>
-                    <th class="table-dg">User Name</th>
-                    <th class="table-dg">Ticket</th>
-                    <th class="table-dg">Price</th>
-                    <th class="table-dg">Date</th>
-                    <th class="table-dg">Time</th>
-                    <th class="table-dg">Created Date</th>
-                    <th class="table-dg"></th>
-                </tr>
-            </thead>
 
-            <tbody>
-                @forelse ($reservations as $reservation)
+        {{-- reservation table --}}
+        <div class="table-responsive">
+            <table class="table text-center align-middle shadow rounded-2 overflow-hidden w-100 mt-0">
+                <thead>
                     <tr>
-                        <td>{{ $loop->iteration + ($reservations->currentPage() - 1) * $reservations->perPage() }}</td>
-                        <td>{{ $reservation->user->first_name }} {{ $reservation->user->last_name }}</td>
-                        <td>{{ $reservation->num_tickets }}</td>
-                        <td>
-                            @if ($reservation->event->price == 0)
-                                Free
-                            @else
-                                ¥{{ number_format($reservation->event->price * $reservation->num_tickets) }}
-                            @endif
-                        </td>
-                        <td>{{ date('Y/m/d', strtotime($reservation->reservation_date)) }}</td>
-                        <td>{{ date('H:i', strtotime($reservation->time)) }}</td>
-                        <td>{{ date('Y/m/d', strtotime($reservation->created_at)) }}</td>
-                        <td>
-                            <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation{{ $reservation->id }}">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                            @include('event-owners.reservations.modal.delete', ['reservation' => $reservation])
-                        </td>
+                        <th class="table-dg">#</th>
+                        <th class="table-dg">User Name</th>
+                        <th class="table-dg">Ticket</th>
+                        <th class="table-dg">Price</th>
+                        <th class="table-dg">Date</th>
+                        <th class="table-dg">Time</th>
+                        <th class="table-dg">Created Date</th>
+                        <th class="table-dg"></th>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="8">
-                            <h4 class="h4 my-3">No reservations yet.</h4>
-                        </td>
-                    </tr>
-                @endforelse
+                </thead>
 
-            </tbody>
-        </table>
-        {{ $reservations->links('vendor.pagination.event-pagination') }}
+                <tbody>
+                    @forelse ($reservations as $reservation)
+                        <tr>
+                            <td>{{ $loop->iteration + ($reservations->currentPage() - 1) * $reservations->perPage() }}</td>
+                            <td>{{ $reservation->user->first_name }} {{ $reservation->user->last_name }}</td>
+                            <td>{{ $reservation->num_tickets }}</td>
+                            <td>
+                                @if ($reservation->event->price == 0)
+                                    Free
+                                @else
+                                    ¥{{ number_format($reservation->event->price * $reservation->num_tickets) }}
+                                @endif
+                            </td>
+                            <td>{{ date('Y/m/d', strtotime($reservation->reservation_date)) }}</td>
+                            <td>{{ date('H:i', strtotime($reservation->time)) }}</td>
+                            <td>{{ date('Y/m/d', strtotime($reservation->created_at)) }}</td>
+                            <td>
+                                <button class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#eventowner-delete-reservation{{ $reservation->id }}">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                                @include('event-owners.reservations.modal.delete', ['reservation' => $reservation])
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="8">
+                                <h4 class="h4 my-3">No reservations yet.</h4>
+                            </td>
+                        </tr>
+                    @endforelse
+
+                </tbody>
+            </table>
+            {{ $reservations->links('vendor.pagination.event-pagination') }}
+        </div>
     </div>
 </div>
 

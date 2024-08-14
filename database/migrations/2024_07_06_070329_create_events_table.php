@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('event_name', 50);
+            $table->string('event_name', 255);
             $table->string('address', 255);
             $table->float('latitude');
             $table->float('longitude');

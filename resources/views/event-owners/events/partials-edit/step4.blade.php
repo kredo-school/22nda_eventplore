@@ -25,11 +25,11 @@
     </div>
     <div class="col-6 mb-3">
         {{-- hidden latitude --}}
-        <input type="" name="latitude" id="latitude" value="{{ old('latitude', $event->latitude) }}">
+        <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude', $event->latitude) }}">
     </div>
     <div class="col-6 mb-3">
         {{-- hidden longitude --}}
-        <input type="" name="longitude" id="longitude" value="{{ old('longitude', $event->longitude) }}">
+        <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude', $event->longitude) }}">
     </div>
 </div>
 {{-- show map --}}

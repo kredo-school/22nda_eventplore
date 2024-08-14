@@ -43,24 +43,24 @@
                                 <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle avatar-md">
                             @else
                                 <span class="d-flex align-items-center justify-content-center">
-                                    <i class="fa-solid fa-circle-user fa-2xl me-2"></i>
+                                    <i class="fa-solid fa-circle-user fa-2xl me-2" style="font-size: 2.5em;"></i>
                                 </span>
                             @endif
                         </a>
                         {{-- droplist for user --}}
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
-                            <a class="dropdown-item" href="{{ route('users.profile.show') }}">
-                                <i class="fa-solid fa-circle-user fa-xl"></i>&nbsp; Profile
+                            <a class="dropdown-item mb-1" href="{{ route('users.profile.show') }}">
+                                <i class="fa-solid fa-circle-user fa-xl icon-align"></i>&nbsp; Profile
                             </a>
-                            <a class="dropdown-item" href="{{ route('user.reservation.show') }}">
-                                <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; My Events
+                            <a class="dropdown-item mb-1" href="{{ route('user.reservation.show') }}">
+                                <i class="fa-solid fa-clipboard-list fa-xl icon-align"></i>&nbsp; Reservation
                             </a>
-                            <a class="dropdown-item" href="{{ route('user.bookmark.show') }}">
-                                <i class="fa-regular fa-bookmark fa-xl"></i>&nbsp; My Wishlist
+                            <a class="dropdown-item mb-1" href="{{ route('user.bookmark.show') }}">
+                                <i class="fa-regular fa-bookmark fa-xl icon-align"></i>&nbsp; Wishlist
                             </a>
-                            <hr>
+                            <hr class="my-2">
                             <a class="dropdown-item" href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; Logout
+                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl icon-align"></i>&nbsp; Logout
                             </a>
                             <form id="logout-form" action="{{ route('user.logout') }}" method="POST" class="d-none">
                                 @csrf
@@ -73,21 +73,21 @@
                                 <img src="{{ Auth::guard('event_owner')->user()->avatar }}" alt="" class="rounded-circle avatar-md">
                             @else
                                 <span class="d-flex align-items-center justify-content-center">
-                                    <i class="fa-solid fa-circle-user fa-2xl me-2" style="color: #0C2C04"></i>
+                                    <i class="fa-solid fa-circle-user fa-3x me-2" style="color: #0C2C04; font-size: 2.5em;"></i>
                                 </span>
                             @endif
                         </a>
                         {{-- droplist for event owner --}}
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownOwner">
-                            <a class="dropdown-item" href="{{ route('event-owners.profile.show') }}">
-                                <i class="fa-solid fa-circle-user fa-xl"></i>&nbsp; Profile
+                            <a class="dropdown-item mb-1" href="{{ route('event-owners.profile.show') }}">
+                                <i class="fa-solid fa-circle-user fa-xl icon-align"></i>&nbsp; Profile
                             </a>
-                            <a class="dropdown-item" href="{{ route('event-list.show') }}">
-                                <i class="fa-solid fa-clipboard-list fa-xl"></i>&nbsp; Event List
+                            <a class="dropdown-item mb-1" href="{{ route('event-list.show') }}">
+                                <i class="fa-solid fa-clipboard-list fa-xl icon-align"></i>&nbsp; Event List
                             </a>
-                            <hr>
+                            <hr class="my-2">
                             <a class="dropdown-item" href="{{ route('event-owner.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-owner').submit();">
-                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl"></i>&nbsp; Logout
+                                <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 fa-xl icon-align"></i>&nbsp; Logout
                             </a>
                             <form id="logout-form-owner" action="{{ route('event-owner.logout') }}" method="POST" class="d-none">
                                 @csrf
@@ -115,7 +115,7 @@
                 </div>
             {{-- </div> --}}
 
-                <!-- Hamburger Menu for smaller screens -->
+            <!-- Hamburger Menu for smaller screens -->
             @if(!Auth::guard('event_owner')->check())
                 <div class="col navbar-collapse" id="navbarHamburger">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0 d-md-none pt-2" style="background-color: white;">
@@ -145,61 +145,61 @@
                         <li class="nav-item">
                             <ul class="nav-list" style="max-height: 200px; overflow-y: auto;">
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'culture']) }}"><i class="fa-solid fa-torii-gate"></i> Culture</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'culture']) }}"><i class="fa-solid fa-torii-gate icon-align"></i>&nbsp; Culture</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'fireworks']) }}"><i class="fa-brands fa-first-order-alt"></i> Fireworks</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'fireworks']) }}"><i class="fa-brands fa-first-order-alt icon-align"></i>&nbsp; Fireworks</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'festival']) }}"><i class="fas fa-theater-masks"></i> Festival</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'festival']) }}"><i class="fas fa-theater-masks icon-align"></i>&nbsp; Festival</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'food/drink']) }}"><i class="fa-solid fa-utensils"></i> Food/Drink</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'food/drink']) }}"><i class="fa-solid fa-utensils icon-align"></i>&nbsp; Food/Drink</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'sport']) }}"><i class="fa-solid fa-baseball-bat-ball"></i> Sport</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'sport']) }}"><i class="fa-solid fa-baseball-bat-ball icon-align"></i>&nbsp; Sport</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'art']) }}"><i class="fa-solid fa-paint-brush"></i> Art</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'art']) }}"><i class="fa-solid fa-paint-brush icon-align"></i>&nbsp; Art</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'music']) }}"><i class="fa-solid fa-music"></i> Music</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'music']) }}"><i class="fa-solid fa-music icon-align"></i>&nbsp; Music</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'nature']) }}"><i class="fa-solid fa-leaf"></i> Nature</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'nature']) }}"><i class="fa-solid fa-leaf icon-align"></i>&nbsp; Nature</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'illumination']) }}"><i class="fa-regular fa-lightbulb"></i> Illumination</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'illumination']) }}"><i class="fa-regular fa-lightbulb icon-align"></i>&nbsp; Illumination</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'movie']) }}"><i class="fa-solid fa-film"></i> Movie</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'movie']) }}"><i class="fa-solid fa-film icon-align"></i>&nbsp; Movie</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'hobby']) }}"><i class="fa-solid fa-icons"></i> Hobby</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'hobby']) }}"><i class="fa-solid fa-icons icon-align"></i>&nbsp; Hobby</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'business']) }}"><i class="fa-solid fa-user-tie"></i> Business</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'business']) }}"><i class="fa-solid fa-user-tie icon-align"></i>&nbsp; Business</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'online']) }}"><i class="fa-solid fa-house-laptop"></i> Online</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'online']) }}"><i class="fa-solid fa-house-laptop icon-align"></i>&nbsp; Online</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'free']) }}"><i class="fas fa-hand-holding-usd"></i> Free</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'free']) }}"><i class="fas fa-hand-holding-usd icon-align"></i>&nbsp; Free</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'parking']) }}"><i class="fa-brands fa-product-hunt"></i> Parking</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'parking']) }}"><i class="fa-brands fa-product-hunt icon-align"></i>&nbsp; Parking</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'toilet']) }}"><i class="fa-solid fa-restroom"></i> Toilet</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'toilet']) }}"><i class="fa-solid fa-restroom icon-align"></i>&nbsp; Toilet</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'train/bus']) }}"><i class="fa-solid fa-train-subway"></i> Train/Bus</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'train/bus']) }}"><i class="fa-solid fa-train-subway icon-align"></i>&nbsp; Train/Bus</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'outside']) }}"><i class="fa-solid fa-cloud-sun"></i> Outside</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'outside']) }}"><i class="fa-solid fa-cloud-sun icon-align"></i>&nbsp; Outside</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'inside']) }}"><i class="fa-solid fa-house-user"></i> Inside</a>
+                                    <a class="dropdown-item" href="{{ route('category.search', ['category' => 'inside']) }}"><i class="fa-solid fa-house-user icon-align"></i>&nbsp; Inside</a>
                                 </li>
                             </ul>
                         </li>

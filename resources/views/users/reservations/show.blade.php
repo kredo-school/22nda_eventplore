@@ -9,7 +9,7 @@
 <div class="container py-4">
     {{-- title --}}
     <div class="mb-4 d-grid mx-auto">
-        <h2 class="h1 text-center mb-1"><i class="fa-solid fa-clipboard-list me-2"></i>Reservation list</h2>
+        <h2 class="h1 text-center mb-1"><i class="fa-solid fa-clipboard-list me-2"></i>My reservation list</h2>
     </div>
 
     <!-- update/delete success -->
@@ -27,7 +27,7 @@
 
     {{-- reservation table --}}
     <div class="table-responsive">
-        <table class="table text-center align-middle shadow rounded-2 overflow-hidden mb-5 w-100">
+        <table class="table text-center align-middle shadow rounded-2 overflow-hidden w-100 mb-5">
             <thead>
                 <tr>
                     <th class="table-dg">#</th>
@@ -89,7 +89,6 @@
                 @endforelse
             </tbody>
         </table>
-
         {{ $reservations->links('vendor.pagination.event-pagination') }}
     </div>
 </div>

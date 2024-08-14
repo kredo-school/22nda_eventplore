@@ -23,7 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'bar',
             toolbar: {
                 show: false
-            }
+            },
+            width: '100%', // 幅を親要素に合わせる
+            offsetX: 0, // X方向のオフセット
+            offsetY: 0
         },
         plotOptions: {
             bar: {
@@ -101,22 +104,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 color: '#dcdcdc' // 目盛りの色を指定する
             },
             labels: {
-                show: true,
                 formatter: function (val) {
+                    if (val % 1 !== 0) {
+                        return ' ';  // 小数点以下がある場合はスペースを返す
+                    }
                     return val;
-                }
+                },
+                style: {
+                    fontSize: '12px',
+                },
+                minWidth: 50, 
+                maxWidth: 50
             },
             title: {
                 text: 'Number of Tickets', // 縦軸表示単位ラベル
                 style: {
                     fontSize: '14px',
-                    color: '#444'
+                    color: '#444',
+                    offsetX: 0,
+                    offsetY: 0
+
                 }
-            }
+            },
+            tickAmount: 5
         },
         title: {
-            text: 'Congestion Forecast',
-            floating: true,
+            text: '',
+            floating: false,
             offsetY: 400,
             align: 'center',
             style: {

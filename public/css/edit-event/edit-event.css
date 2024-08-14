@@ -6,14 +6,14 @@ html, body {
 
 /* 背景透過 */
 .background-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    min-height: 80vh;
     background-size: cover;
     background-position: center;
     opacity: 30%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    width: 100%;
 }
 /* height: calc(100vh - 240px);
     object-fit: cover; */
@@ -190,4 +190,48 @@ input[type="checkbox"]:checked {
     .other-images .w-50 {
         width: 50% !important;
     }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 100%;
+        min-width: 320px; /* 最低幅を320pxに設定 */
+    }
+
+    .row.justify-content-center {
+        width: 100%;
+        margin: 0 auto !important; /* 親要素を中央揃え */
+        padding: 0 !important;
+        display: flex; /* フレックスボックスで中央揃え */
+        flex-direction: column; /* 要素を縦に並べる */
+        align-items: center; /* 中央揃え */
+    }
+
+    .row.justify-content-center {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    .row.justify-content-center .col-4 {
+        width: 100%;
+        padding: 0;
+    }
+
+    .map-container {
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        width: 100%; /* フォームコントロールの幅を100%に */
+        min-width: 0; 
+        margin: 0 auto; /* インプットフィールド自体を中央揃え */
+    }
+
+    .btn {
+        width: 100%; 
+        max-width: 100%; 
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
 }

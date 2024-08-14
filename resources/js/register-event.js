@@ -259,6 +259,35 @@ $.ajax({
 
 updateTimeline(step);
 
+// validate images
+function validateImages(event){
+    const files = event.files;
+    if(files.length > 4){
+        alert("Maximum files is 4.");
+        event.value = "";
+    }
+}
+
+// validate categories
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+let checkedCount = 0;
+
+checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+            checkedCount++;
+            if (checkedCount > 4) {
+                checkbox.checked = false;
+                checkedCount--;
+                alert("You can only select up to 4 options.");
+            }
+        } else {
+            checkedCount--;
+        }
+    });
+});
+
 window.next = next;
 window.back = back;
+window.validateImages = validateImages;
 
