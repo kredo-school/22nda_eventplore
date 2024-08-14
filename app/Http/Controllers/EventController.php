@@ -40,7 +40,7 @@ class EventController extends Controller
     public function store(Request $request){
     // Validation rules
     $validatedData = $request->validate([
-        'event_name' => 'required|string|max:50',
+        'event_name' => 'required|string|max:255',
         'start_date' => 'required|date',
         'finish_date' => 'required|date|after_or_equal:start_date',
         'start_time' => 'required|date_format:H:i',

@@ -39,6 +39,7 @@ main {
     background-color: #FFFFFF;
     color: #84947C;
     text-align: center;
+    z-index: 100;
 }
 
 .navbar-category {
