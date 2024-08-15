@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Event Owner/Sign-up')
+@section('title', 'Event Owner/Sign Up')
 
 @section('content')
 <div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
@@ -18,7 +18,7 @@
                             <div class="row mb-2">
                                 <div class="col mb-1 px-1">
                                     <label for="username" class="form-label fw-bold mb-1">Username*</label>
-                                    <input id="username" type="text" class="form-control" name="username" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C">
+                                    <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C">
                     
                                     @error('username')
                                         <span class="invalid-feedback" role="alert">
@@ -31,7 +31,7 @@
                                 <div class="col mb-1 px-1">
                                     <label for="password" class="form-label fw-bold mb-1">Password*</label>
                                     <div class="input-group">
-                                        <input type="password" id="password" name="password" class="form-control" style="border: 1px solid #84947C" placeholder="Password" required>
+                                        <input type="password" id="password" name="password" autocomplete="new-password" class="form-control" style="border: 1px solid #84947C" placeholder="Password" required>
                                         <div class="input-group-text">
                                             <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer;"></i>
                                         </div>
@@ -47,7 +47,7 @@
                             <div class="row mb-2">
                                 <div class="col-6 mb-1 px-1">
                                     <label for="firstname" class="form-label fw-bold mb-1">First Name*</label>
-                                    <input id="firstname" type="text" class="form-control" name="firstname" required autocomplete="given-name" autofocus placeholder="First name" style="border: 1px solid #84947C">
+                                    <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" required autocomplete="given-name" placeholder="First name" style="border: 1px solid #84947C">
                     
                                     @error('firstname')
                                         <span class="invalid-feedback" role="alert">
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="col-6 mb-1 px-1">
                                     <label for="lastname" class="form-label fw-bold mb-1">Last Name*</label>
-                                    <input id="lastname" type="text" class="form-control" name="lastname" required autocomplete="family-name" autofocus placeholder="Last name" style="border: 1px solid #84947C">
+                                    <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" required autocomplete="family-name" placeholder="Last name" style="border: 1px solid #84947C">
                     
                                     @error('lastname')
                                         <span class="invalid-feedback" role="alert">
@@ -69,7 +69,7 @@
                             <div class="row mb-2">
                                 <div class="col-6 mb-1 px-1">
                                     <label for="email" class="form-label fw-bold mb-1">Email*</label>
-                                    <input type="email" name="email" id="email" class="form-control" required autocomplete="email" autofocus placeholder="email@eventplore.com" style="border: 1px solid #84947C">
+                                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required autocomplete="email" placeholder="email@eventplore.com" style="border: 1px solid #84947C">
                     
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="col-6 mb-1 px-1">
                                     <label for="phone_number" class="form-label fw-bold mb-1">Phone Number*</label>
-                                    <input type="tel" name="phone_number" id="phone_number" class="form-control" required autocomplete="tel" autofocus placeholder="0xx-xxxx-xxxx" style="border: 1px solid #84947C">
+                                    <input type="tel" name="phone_number" id="phone_number" class="form-control" value="{{ old('phone_number') }}" required autocomplete="tel" placeholder="0xx-xxxx-xxxx" style="border: 1px solid #84947C">
                     
                                     @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
@@ -91,7 +91,7 @@
                             <div class="row mb-2">
                                 <div class="col mb-1 px-1">
                                     <label for="address" class="form-label fw-bold mb-1">Address*</label>
-                                    <input type="text" name="address" id="address" class="form-control" required autocomplete="address" autofocus placeholder="1-1-1 Minato-ku, Tokyo, Japan" style="border: 1px solid #84947C">
+                                    <input type="text" name="address" id="address" class="form-control" value="{{ old('address') }}" required autocomplete="address" placeholder="1-1-1 Minato-ku, Tokyo, Japan" style="border: 1px solid #84947C">
                                     @error('address')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

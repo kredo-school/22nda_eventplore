@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sign-up')
+@section('title', 'Sign Up')
 
 @section('content')
 <div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
@@ -17,7 +17,7 @@
                         <div class="w-75 text-start">
                             <label for="username" class="form-label fw-bold mb-2">Username*</label>
                             <div class="mb-3">
-                                <input id="username" type="text" class="form-control" name="username" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C">
+                                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Username" style="border: 1px solid #84947C">
 
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
@@ -27,7 +27,7 @@
                             </div>
                             <label for="email" class="form-label fw-bold mb-2">Email*</label>
                             <div class="mb-3">
-                                <input id="email" type="email" class="form-control" name="email" required autocomplete="email" placeholder="Email" style="border: 1px solid #84947C">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email" style="border: 1px solid #84947C">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -52,7 +52,7 @@
                             </div>
                             <label for="firstname" class="form-label fw-bold mb-2">First Name*</label>
                             <div class="mb-3">
-                                <input id="firstname" type="text" class="form-control" name="firstname" required autocomplete="given-name" autofocus placeholder="First name" style="border: 1px solid #84947C">
+                                <input id="firstname" type="text" class="form-control" name="firstname" value="{{ old('firstname') }}" required autocomplete="given-name" placeholder="First name" style="border: 1px solid #84947C">
 
                                 @error('firstname')
                                     <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
                             </div>
                             <label for="lastname" class="form-label fw-bold mb-2">Last Name*</label>
                             <div class="mb-3">
-                                <input id="lastname" type="text" class="form-control" name="lastname" required autocomplete="family-name" autofocus placeholder="Last name" style="border: 1px solid #84947C">
+                                <input id="lastname" type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" required autocomplete="family-name" placeholder="Last name" style="border: 1px solid #84947C">
 
                                 @error('lastname')
                                     <span class="invalid-feedback" role="alert">
