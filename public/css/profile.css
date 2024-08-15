@@ -27,6 +27,7 @@
 
 .card {
     background-color: #ffff;
+    width: 50%;
 }
 
 .custom-bg {
@@ -137,4 +138,30 @@
 
 .hidden {
     display: none !important;
+}
+
+@media (max-width: 390px) {
+    
+    .card.mx-auto {
+        min-width: 100%; /* カード全体の幅を画面幅に合わせる */
+        width: 100%;
+    }
+    
+    .position-absolute {
+        position: relative;
+        right: auto; /* 絶対配置を解除 */
+        top: auto;
+        margin-top: 10px; /* 必要に応じてマージンを調整 */
+    }
+
+    .custom-dropdown-container {
+        display: flex;
+        justify-content: flex-end; /* ボタンを右揃えに */
+        width: 100%; /* 親要素の幅を100%に */
+    }
+
+    .custom-dropdown {
+        width: auto; /* ボタンの幅を自動調整 */
+        margin-right: 20px; /* 必要なら余白を調整 */
+    }
 }

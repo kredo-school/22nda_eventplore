@@ -76,6 +76,11 @@
 .fc-highlight {
     background-color: #f4dab5 !important;
 }
+/* 過去の日付の書式 */
+.past-date .fc-daygrid-day-number {
+    color: #b0b0b0;
+    pointer-events: none;
+}
 /* ボタンの書式 */
 .fc-today-button,
 .fc-prev-button,

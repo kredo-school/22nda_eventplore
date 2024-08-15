@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer" style="background-color: {{ Auth::guard('event_owner')->user() ? '#F6E7D2' : '#FFFFFF' }};">
     <div class="container-fluid px-3">
         <div class="row align-items-center">
             <div class="col-4">

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Sign In')
+
 @section('content')
 <div class="p-0 overflow-auto full-height">
     <div class="row d-flex justify-content-center align-items-stretch full-height">
@@ -10,7 +12,7 @@
 
                 <div class="d-flex flex-column align-items-center my-4 text-center">
                     <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="logo" class="mt-5 mb-2 w-25">
-                    <h2 class="h1 mb-2 text-align-center">Sign in</h2>
+                    <h2 class="h1 mb-2 text-align-center">Sign In</h2>
                     <div class="d-flex justify-content-center mb-3">
                         <div class="w-100"><p>Don't you have an account yet ?&nbsp;<a href="{{ route('user.sign-up')}}" class="fw-bold text-decoration-none" style="color: #84947C">Sign Up</a></p></div>
                     </div>
@@ -25,7 +27,7 @@
                     <div class="d-flex justify-content-center flex-column w-50">
                         <div class="text-start mb-3">
                             <label for="email" class="form-label fw-bold mb-2">Email*</label>
-                            <input id="email" type="email" class="form-control w-100 @error('email') is-invalid @enderror" name="email" required autocomplete="email" placeholder="Email">
+                            <input id="email" type="email" class="form-control w-100 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email" autofocus>
                             @error('email')
                                 <span class="invalid-feedback text-start" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -38,7 +40,7 @@
                         <div class="text-start mb-3">
                             <label for="password" class="form-label fw-bold mb-2">Password*</label>
                             <div class="input-group">
-                                <input id="password" type="password" name="password" required autocomplete="new-password" class="form-control" placeholder="Password">
+                                <input id="password" type="password" name="password" required autocomplete="current-password" class="form-control" placeholder="Password">
                                 <div class="input-group-text d-flex justify-content-center align-items-center mb-0" style="width: 40px; height: 38px;">
                                     <i class="fa-solid fa-eye-slash toggle-password" onclick="togglePasswordVisibility()" style="cursor: pointer; "></i>
                                 </div>

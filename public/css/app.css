@@ -2,8 +2,6 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
 #app {
@@ -70,4 +68,11 @@ footer.footer {
     .navbar-collapse.show {
         display: block; /* ハンバーガーメニューが展開されたときに表示 */
     }
+}
+
+/* ドロップダウンリストのアイコン位置 */
+.icon-align {
+    width: 1.5rem;
+    text-align: center;
+    vertical-align: middle;
 }
