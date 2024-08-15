@@ -103,18 +103,7 @@
 
                                     <div class="d-flex align-items-center">
                                         <div class="flex-grow-1 me-2">
-                                            <input type="text" id="comment" name="comment" class="form-control me-2" placeholder="Add comment">
-
-                                            <div id="error-container" data-has-errors="{{ $errors->any() ? 'true' : 'false' }}" data-review-submitted="{{ session('reviewSubmitted') ? 'true' : 'false' }}" class="text-danger">
-                                                @error('comment')
-                                                    <strong>{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                            <div id="star-error" class="text-danger">
-                                                @error('star')
-                                                    <strong>{{ $message }}</strong>
-                                                @enderror
-                                            </div>
+                                            <input type="text" id="comment" name="comment" class="form-control me-2" placeholder="Add comment" required>
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-green">Add review</button>
