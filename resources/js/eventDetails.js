@@ -74,7 +74,7 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
     var modal = document.getElementById('user-confirm-reservation');
     if (modal) {
         modal.addEventListener('shown.bs.modal', function() {
-            var numTickets = parseInt(numTicketsSelect.value) || 1;
+            var numTickets = numTicketsSelect.value;
             if (modalNumTickets) {
                 modalNumTickets.textContent = numTickets;
                 const inputElement = document.getElementById('num_tickets');
@@ -149,14 +149,32 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
         });
     }
 
+    document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault(); // デフォルトのフォーム送信を防ぐ
+        var selectedDate = document.querySelector('select[name="event_date"]').value;
+        var selectedTime = document.querySelector('select[name="event_time"]').value;
 
-        const numTicketsValue = numTicketsSelect.value;
-        const eventDateValue = document.querySelector('select[name="event_date"]').value;
-        const eventTimeValue = document.querySelector('select[name="event_time"]').value;
+        var hasError = false;
 
+        // 日付の検証
+        if (selectedDate === '') {
+            alert('Please select a valid date.');
+            hasError = true;
+        }
+
+        // 時間の検証
+        if (selectedTime === '') {
+            alert('Please select a valid time.');
+            hasError = true;
+        }
+
+        if (hasError) {
+            event.preventDefault(); // フォーム送信を防ぐ
+        }
     });
+});
+
+
 
 
 });
