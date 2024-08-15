@@ -10,7 +10,7 @@
 <!-- Scripts -->
 @vite(['resources/js/register-event.js'])
 
-<div id="multi-step-form" class="container-fluid d-flex justify-content-center p-0 position-relative back h-100">
+<div id="multi-step-form" class="d-flex flex-grow-1 justify-content-center p-0 position-relative" style="min-height: 100vh">
     {{-- 背景画像 --}}
     <div class="background-image" style="background-image: url('{{ asset('images/event-register/manuel-cosentino-n--CMLApjfI-unsplash.jpg') }}');"></div>
     {{-- 入力フォーム --}}
