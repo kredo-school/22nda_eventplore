@@ -10,7 +10,8 @@
 <!-- Scripts -->
 @vite(['resources/js/edit-event.js'])
 
-<div id="multi-step-form" class="container-fluid d-flex justify-content-center p-0 position-relative back h-100">
+<div id="multi-step-form" class="d-flex flex-grow-1 justify-content-center p-0 position-relative" style="min-height: 100vh">
+    {{-- 背景画像 --}}
     <div class="background-image" style="background-image: url('{{ asset('images/event-register/sorasak-_UIN-pFfJ7c-unsplash.jpg') }}');"></div>
     {{-- 入力フォーム --}}
     <div class="card my-5 w-50 text-align-center bg-light bg-opacity-75 border-0 shadow" style="min-width: 360px; height: fit-content;">
