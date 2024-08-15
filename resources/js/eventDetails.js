@@ -25,7 +25,7 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
 
 
 // イベント詳細ページ
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     var numTicketsSelect = document.getElementById('numTickets');
     var totalPriceElement = document.getElementById('totalPrice');
     var eventPrice = parseFloat(totalPriceElement.getAttribute('data-price'));
@@ -35,9 +35,9 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
     var modalDate = document.getElementById('modalDate');
     var modalTime = document.getElementById('modalTime');
 
-    var hiddenNumTickets = document.getElementById('hiddenNumTickets');
-    var hiddenEventDate = document.getElementById('hiddenEventDate');
-    var hiddenEventTime = document.getElementById('hiddenEventTime');
+    var hiddenNumTickets = document.getElementById('num_tickets');
+    var hiddenEventDate = document.getElementById('event_date');
+    var hiddenEventTime = document.getElementById('event_time');
 
     function updateTotalPrice() {
         var numTickets = parseInt(numTicketsSelect.value);
@@ -77,7 +77,7 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
             var numTickets = parseInt(numTicketsSelect.value) || 1;
             if (modalNumTickets) {
                 modalNumTickets.textContent = numTickets;
-                const inputElement = document.getElementById('num_tickets');
+                const inputElement = hiddenNumTickets;
                 inputElement.value = numTickets;
             }
             updateTotalPrice();
@@ -118,15 +118,17 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
             if (modalDate) {
                 var dateSelected = selectedDate ? formatDate(selectedDate) : 'Not selected';
                 modalDate.textContent = dateSelected;
-                const inputElement = document.getElementById('event_date');
+                const inputElement = hiddenEventDate;
                 inputElement.value = dateSelected;
             }
             if (modalTime) {
                 var timeSelected = selectedTime ? formatTime(selectedTime) : 'Not selected';
                 modalTime.textContent = timeSelected;
-                const inputElement = document.getElementById('event_time');
+                const inputElement = hiddenEventTime;
                 inputElement.value = timeSelected;
             }
+
+
         });
     }
 
@@ -156,6 +158,26 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
         const eventDateValue = document.querySelector('select[name="event_date"]').value;
         const eventTimeValue = document.querySelector('select[name="event_time"]').value;
 
+        // 必要な情報がすべて入力されているかチェック
+        if (!numTicketsValue || !eventDateValue || !eventTimeValue) {
+            // エラーメッセージを表示
+            alert('Please fill out all fields.');
+            return;
+        }
+
+        // 隠しフィールドに値を設定
+        if (hiddenNumTickets) {
+            hiddenNumTickets.value = numTicketsValue;
+        }
+        if (hiddenEventDate) {
+            hiddenEventDate.value = eventDateValue;
+        }
+        if (hiddenEventTime) {
+            hiddenEventTime.value = eventTimeValue;
+        }
+
+        // フォームの送信処理をここに記述
+        event.target.submit();
     });
 });
 

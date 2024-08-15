@@ -65,12 +65,12 @@
             $images = $event->eventImages;
             $totalImages = $images->count();
         @endphp
-    
+
         <div class="row m-0 p-0">
             {{-- メイン写真 --}}
             <div class="{{ $totalImages == 1 ? 'col-12' : ($totalImages == 3 ? 'col-md-8' : 'col-md-6') }} image-container m-0 p-1">
                 <img src="{{ $images->first()->image }}" class="w-100 h-100 rounded {{ $totalImages == 1 ? 'ratio-2-2' : ($totalImages == 3 ? 'ratio-1-5' : 'ratio-1-1') }}" alt="#">
-                
+
                 {{-- bookmark --}}
                 <div class="heart-icon-lg">
                     @if (Auth::check())
@@ -97,7 +97,7 @@
                     @endif
                 </div>
             </div>
-        
+
             {{-- 他の画像 --}}
             <div class="{{ $totalImages >= 4 ? 'col-md-6' : ($totalImages == 3 ? 'col-md-4' : 'col-md-6') }} m-0 p-0">
                 <div class="row m-0 p-0">
@@ -461,9 +461,7 @@
         </div>
         <div class="my-4">
             <button class="btn btn-outline-dg" data-bs-toggle="modal" data-bs-target="#all-reviews-page">See all reviews({{ $totalReviews }})</button>
-            @if (!$errors->any())
                 @include('home.modal.show-reviews')
-            @endif
         </div>
     </div>
 

@@ -63,15 +63,4 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
-    //modalを再表示
-    window.onload = function() {
-        const errorContainer = document.getElementById('error-container');
-        const hasErrors = errorContainer.dataset.hasErrors === 'true';
-        const reviewSubmitted = errorContainer.dataset.reviewSubmitted === 'true';
-
-        if (hasErrors || reviewSubmitted) {
-            $('#all-reviews-page').modal('show');
-        }
-    }
 });
