@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Show Event')
+@section('title', $event->event_name)
 
 @section('content')
 @vite(['resources/js/eventDetails'])
@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{{ asset('css/show-event/eventpage.css') }}">
 <link rel="stylesheet" href="{{ asset('css/review.css') }}">
 
-<div class="p-5 mx-5 justify-content-center">
+<div class="p-4 mx-md-5 justify-content-center">
     {{-- Event name & date & cate --}}
     <div class="row align-items-center mb-3">
         <div class="col-md-6">
@@ -62,27 +62,15 @@
 
     {{-- images --}}
     <div class="container-fluid mb-4 p-0">
-        <div class="d-flex flex-wrap w-100 mb-2 image-part" style="height: 100%;">
-            @php
-                $images = $event->eventImages;
-                $firstImage = $images->first();
-                $otherImages = $images->slice(1);
-                $totalOtherImages = $otherImages->count();
-            @endphp
+        @php
+            $images = $event->eventImages;
+            $totalImages = $images->count();
+        @endphp
 
+        <div class="row m-0 p-0">
             {{-- メイン写真 --}}
-            <div class="image-container main-image
-                @if($totalOtherImages == 0)
-                    w-100
-                @elseif($totalOtherImages == 1)
-                    w-50
-                @elseif($totalOtherImages == 2)
-                    w-75
-                @else
-                    w-50
-                @endif"
-                style="padding: 5px;">
-                    <img src="{{ $firstImage->image }}" class="w-100 h-100 pe-1 main-image-img" style="object-fit: cover;" alt="#">
+            <div class="{{ $totalImages == 1 ? 'col-12' : ($totalImages == 3 ? 'col-md-8' : 'col-md-6') }} image-container m-0 p-1">
+                <img src="{{ $images->first()->image }}" class="w-100 h-100 rounded {{ $totalImages == 1 ? 'ratio-2-2' : ($totalImages == 3 ? 'ratio-1-5' : 'ratio-1-1') }}" alt="#">
 
                 {{-- bookmark --}}
                 <div class="heart-icon-lg">
@@ -111,42 +99,24 @@
                 </div>
             </div>
 
-
             {{-- 他の画像 --}}
-            <div class="other-images
-                @if($totalOtherImages == 1)
-                    w-50
-                @elseif($totalOtherImages <= 2)
-                    w-25
-                @else
-                    w-50
-                @endif" style="overflow: hidden;">
-                @if($totalOtherImages <= 2)
-                    @foreach($otherImages as $image)
-                        <div class="w-100" style="padding: 5px;">
-                            <img src="{{ $image->image }}" class="w-100" style="object-fit: cover; aspect-ratio: 1;" alt="#">
+            <div class="{{ $totalImages >= 4 ? 'col-md-6' : ($totalImages == 3 ? 'col-md-4' : 'col-md-6') }} m-0 p-0">
+                <div class="row m-0 p-0">
+                    @foreach($images->slice(1) as $image)
+                        <div class="{{ $totalImages >= 4 ? 'col-6' : ($totalImages == 3 ? 'col-6 col-md-12' : 'col-12') }} m-0 p-1">
+                            <img src="{{ $image->image }}" class="w-100 h-100 rounded {{ $totalImages == 3 ? 'ratio-1-5' : 'ratio-1-1' }}" alt="#">
                         </div>
                     @endforeach
-                @else
-                    <div class="row">
-                        @foreach($otherImages as $image)
-                            <div class="col-6 p-0">
-                                <div class="w-100 h-100" style="padding: 5px; aspect-ratio: 1;">
-                                    <img src="{{ $image->image }}" class="w-100 h-100" style="object-fit: cover;" alt="#">
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
+                </div>
             </div>
         </div>
     </div>
 
 
     {{-- introduction & reserve --}}
-    <div class="row mb-md-4 no-gutter ">
+    <div class="row no-gutter mt-3">
         {{-- introduction --}}
-        <div class="col-md-6 px-md-1">
+        <div class="col-md-6 px-1">
             <div class="card p-2 mb-4" style="background-color: #0C2C04; height: 400px; overflow-y: auto;">
                 <div class="card-body">
                     <div class="text-white">
@@ -182,7 +152,7 @@
 
         @if(auth()->check() && $reservation != null)
         {{-- Reserved --}}
-        <div class="col-md-6 px-md-1">
+        <div class="col-md-6 px-1">
             <div class="card mb-4 shadow" style="min-height: 400px; max-height: 400px;">
                 <div class="card-body text-center">
                     <h2 class="card-title border-top border-bottom py-2 mx-5 my-3" style="color: #84947C"><i class="fa-solid fa-check"></i> Already Reserved!</h2>
@@ -253,7 +223,7 @@
         </div>
         @else
         {{-- Before Reservation --}}
-        <div class="col-md-6 px-md-1">
+        <div class="col-md-6 px-1">
             <div class="card px-5 pt-3 mb-4 shadow" style="height: 400px;">
                 <div class="card-body text-center">
                     <div class="mb-3 d-flex align-items-center">
@@ -327,7 +297,7 @@
     {{-- info & map --}}
     <div class="row mb-3 no-gutter">
         {{-- info --}}
-        <div class="col-md-6 px-md-1">
+        <div class="col-md-6 px-1">
             <div class="card p-2 mb-4 shadow" style="height: 400px; overflow-y: auto;">
                 <div class="card-body">
                     <h2>Local Information</h2>
@@ -378,7 +348,7 @@
         </div>
 
         {{-- location --}}
-        <div class="col-md-6 px-md-1">
+        <div class="col-md-6 mb-4 px-1">
             <div class="card p-2" style="background-color: #0C2C04; height: 400px;">
                 <div class="card-body">
                     <div class="text-white flex-grow-1">
@@ -403,8 +373,8 @@
     <hr>
 
     {{-- Review --}}
-    <div class="contaner-fluid">
-        <h2 class="h1 ms-3">Reviews</h2>
+    <div class="contaner-fluid mb-3">
+        <h2 class="h1 mt-2">Reviews</h2>
         <div style="font-family: EB Garamond" class="review-container">
             <div class="align-items-center justify-content-center flex-row d-flex flex-wrap">
                 {{--  レビューの星　--}}
@@ -470,7 +440,7 @@
         {{-- コメントが3件だけ見れる --}}
         <div class="d-flex justify-content-center mt-4 w-100 flex-wrap">
         @foreach($latestReviews as $review)
-            <div class="rounded p-2 col-12 col-md-6 col-lg-3 mb-3 me-2" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
+            <div class="rounded p-2 col-12 col-md-5 col-lg-3 mb-3 me-2" style="border: 2px solid rgba(132, 148, 124, 0.5); height: 200px;">
                 <div class="d-flex justify-content-start align-items-center">
                     @if ($review->user->avatar)
                         <img src="{{ $review->user->avatar }}" alt="{{ $review->user->name }}" class="rounded-circle avatar-md mb-2">
@@ -490,18 +460,16 @@
             </div>
         @endforeach
         </div>
-        <div class="my-5">
+        <div class="my-4">
             <button class="btn btn-outline-dg" data-bs-toggle="modal" data-bs-target="#all-reviews-page">See all reviews({{ $totalReviews }})</button>
-            @if (!$errors->any())
                 @include('home.modal.show-reviews')
-            @endif
         </div>
     </div>
 
     <hr>
 
     {{-- Related events --}}
-    <div class="container-fluid">
+    <div class="container-fluid mb-4">
         <h2 class="h1 my-3">Related Events</h2>
         <div class="row">
             @forelse ($related_events as $event)
@@ -689,5 +657,8 @@
         </div>
     </div>
 </div>
+
+{{-- Topに戻るボタン --}}
+<a href="#" id="back-to-top"><i class="fa-solid fa-circle-chevron-up"></i></a>
 
 @endsection

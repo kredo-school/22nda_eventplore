@@ -77,49 +77,45 @@
                     {{-- レビュー書く欄 --}}
                     @auth
                         @if (Auth::user()->id != $event->owner_id)
-                            <div class="review-form-container">
-                                <div class="mb-2 d-flex align-items-center">
-                                    <div class="satisfaction" class="form-label">Customer Satisfaction</div>
-                                    <div class="stars ms-2">
-                                        <span class="star" data-value="1">
-                                            <i class="fa-solid fa-star fa-2x"></i>
-                                        </span>
-                                        <span class="star" data-value="2">
-                                            <i class="fa-solid fa-star fa-2x"></i>
-                                        </span>
-                                        <span class="star" data-value="3">
-                                            <i class="fa-solid fa-star fa-2x"></i>
-                                        </span>
-                                        <span class="star" data-value="4">
-                                            <i class="fa-solid fa-star fa-2x"></i>
-                                        </span>
-                                        <span class="star" data-value="5">
-                                            <i class="fa-solid fa-star fa-2x"></i>
-                                        </span>
-                                    </div>
-                                    <input type="hidden" id="selected-star" name="star" value="">
-                                </div>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 me-2">
-                                        <input type="text" id="comment" name="comment" class="form-control me-2" placeholder="Add comment">
-
-                                        <div id="error-container" data-has-errors="{{ $errors->any() ? 'true' : 'false' }}" data-review-submitted="{{ session('reviewSubmitted') ? 'true' : 'false' }}" class="text-danger">
-                                            @error('comment')
-                                                <strong>{{ $message }}</strong>
-                                            @enderror
+                            @if (!$userHasReviewed)
+                                <div class="review-form-container">
+                                    <div class="mb-2 d-flex align-items-center">
+                                        <div class="satisfaction" class="form-label">Customer Satisfaction</div>
+                                        <div class="stars ms-2">
+                                            <span class="star" data-value="1">
+                                                <i class="fa-solid fa-star fa-2x"></i>
+                                            </span>
+                                            <span class="star" data-value="2">
+                                                <i class="fa-solid fa-star fa-2x"></i>
+                                            </span>
+                                            <span class="star" data-value="3">
+                                                <i class="fa-solid fa-star fa-2x"></i>
+                                            </span>
+                                            <span class="star" data-value="4">
+                                                <i class="fa-solid fa-star fa-2x"></i>
+                                            </span>
+                                            <span class="star" data-value="5">
+                                                <i class="fa-solid fa-star fa-2x"></i>
+                                            </span>
                                         </div>
-                                        <div id="star-error" class="text-danger">
-                                            @error('star')
-                                                <strong>{{ $message }}</strong>
-                                            @enderror
+                                        <input type="hidden" id="selected-star" name="star" value="">
+                                    </div>
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 me-2">
+                                            <input type="text" id="comment" name="comment" class="form-control me-2" placeholder="Add comment" required>
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="btn btn-green">Add review</button>
                                         </div>
                                     </div>
-                                    <div>
-                                        <button type="submit" class="btn btn-green">Add review</button>
-                                    </div>
                                 </div>
-                            </div>
+                            @else
+                                <p class="h5">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    You have already submitted a review for this event.
+                                </p>
+                            @endif
                         @endif
                     @endauth
                     <p class="h5 mt-3">{{ $event->reviews->count() }} reviews</p>

@@ -25,7 +25,7 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
 
 
 // イベント詳細ページ
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     var numTicketsSelect = document.getElementById('numTickets');
     var totalPriceElement = document.getElementById('totalPrice');
     var eventPrice = parseFloat(totalPriceElement.getAttribute('data-price'));
@@ -35,9 +35,9 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
     var modalDate = document.getElementById('modalDate');
     var modalTime = document.getElementById('modalTime');
 
-    var hiddenNumTickets = document.getElementById('hiddenNumTickets');
-    var hiddenEventDate = document.getElementById('hiddenEventDate');
-    var hiddenEventTime = document.getElementById('hiddenEventTime');
+    var hiddenNumTickets = document.getElementById('num_tickets');
+    var hiddenEventDate = document.getElementById('event_date');
+    var hiddenEventTime = document.getElementById('event_time');
 
     function updateTotalPrice() {
         var numTickets = parseInt(numTicketsSelect.value);
@@ -77,7 +77,7 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
             var numTickets = numTicketsSelect.value;
             if (modalNumTickets) {
                 modalNumTickets.textContent = numTickets;
-                const inputElement = document.getElementById('num_tickets');
+                const inputElement = hiddenNumTickets;
                 inputElement.value = numTickets;
             }
             updateTotalPrice();
@@ -118,15 +118,17 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
             if (modalDate) {
                 var dateSelected = selectedDate ? formatDate(selectedDate) : 'Not selected';
                 modalDate.textContent = dateSelected;
-                const inputElement = document.getElementById('event_date');
+                const inputElement = hiddenEventDate;
                 inputElement.value = dateSelected;
             }
             if (modalTime) {
                 var timeSelected = selectedTime ? formatTime(selectedTime) : 'Not selected';
                 modalTime.textContent = timeSelected;
-                const inputElement = document.getElementById('event_time');
+                const inputElement = hiddenEventTime;
                 inputElement.value = timeSelected;
             }
+
+
         });
     }
 
@@ -170,11 +172,56 @@ map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
 
         if (hasError) {
             event.preventDefault(); // フォーム送信を防ぐ
+        // 必要な情報がすべて入力されているかチェック
+        if (!numTicketsValue || !eventDateValue || !eventTimeValue) {
+            // エラーメッセージを表示
+            alert('Please fill out all fields.');
+            return;
+        }
+
+        // 隠しフィールドに値を設定
+        if (hiddenNumTickets) {
+            hiddenNumTickets.value = numTicketsValue;
+        }
+        if (hiddenEventDate) {
+            hiddenEventDate.value = eventDateValue;
+        }
+        if (hiddenEventTime) {
+            hiddenEventTime.value = eventTimeValue;
+        }
+
+        // フォームの送信処理をここに記述
+        event.target.submit();
+    };
+});
+
+// Topに戻るボタンの表示
+document.addEventListener("DOMContentLoaded", function() {
+    var backToTopButton = document.getElementById('back-to-top');
+    var footer = document.querySelector('footer');
+
+    window.addEventListener('scroll', function() {
+        var scrollPosition = window.scrollY + window.innerHeight;
+        var footerTop = footer.getBoundingClientRect().top + window.scrollY;
+
+        if (window.scrollY > 500) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+
+        if (scrollPosition >= footerTop) {
+            backToTopButton.style.bottom = (scrollPosition - footerTop + 8) + 'px';
+        } else {
+            backToTopButton.style.bottom = '14px';
         }
     });
 });
 
 
 
-
+    backToTopButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    });
 });

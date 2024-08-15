@@ -148,10 +148,12 @@ class EventShowController extends Controller
                 ->where('event_id', $id)
                 ->first();
         }
+
+        $userHasReviewed = $event->reviews()->where('user_id', Auth::id())->exists();
         //end review
 
 
-        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'totalPrice','eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews','currentDate','appDeadline');
+        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews','currentDate','appDeadline', 'userHasReviewed');
 
         $firstImage = $event->getFirstEventImage();
         if ($firstImage) {

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Profile')
+
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
@@ -7,7 +9,7 @@
 <div class="profile-container">
     <div class="background-image" style="background-image: url('{{ asset('images/profile/profileback.jpg') }}');"></div>
     <div class="content">
-        <div class="card mx-auto w-50" style="min-width: 480px; min-height: 450px;">
+        <div class="card mx-auto" style="min-width: 480px; min-height: 450px;">
             <div class="card-body text-center">
                 <div class="position-absolute top-0 end-0 mt-2 me-5">
                     <div class="dropdown custom-dropdown-container">

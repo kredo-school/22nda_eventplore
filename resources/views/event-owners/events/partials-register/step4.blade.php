@@ -7,7 +7,7 @@
     <label for="area_id" class="form-label fw-bold mb-2 text-start">Area*</label>
     <div class="col-12">
         <select class="form-select me-2 form-control" id="area_id" name="area_id" style="border: 1px solid #84947C">
-            <option value="" hidden selected>Select Area</option>
+            <option value="{{ old('area_id') }}" hidden selected>Select Area</option>
             @foreach ($areas as $area)
                 <option value="{{ $area->id }}">{{ $area->name }}</option>
             @endforeach
@@ -21,15 +21,15 @@
         <input type="text" id="search_address" name="search_address" class="form-control" style="border: 1px solid #84947C"/>
     </div>
     <div class="mb-3">
-        <input type="text" name="address" id="address" class="form-control" style="border: 1px solid #84947C" placeholder="Enter full address" autocomplete="street-address">
+        <input type="text" name="address" id="address" class="form-control" required value="{{ old('address') }}" style="border: 1px solid #84947C" placeholder="Enter full address" autocomplete="street-address">
     </div>
     <div class="col-6 mb-3">
         {{-- hidden latitude --}}
-        <input type="hidden" name="latitude" id="latitude">
+        <input type="hidden" required name="latitude" id="latitude" value="{{ old('latitude') }}">
     </div>
     <div class="col-6 mb-3">
         {{-- hidden longitude --}}
-        <input type="hidden" name="longitude" id="longitude">
+        <input type="hidden" required name="longitude" id="longitude" value="{{ old('longitude') }}">
     </div>
 </div>
 {{-- show map --}}
