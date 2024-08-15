@@ -17,7 +17,7 @@
             <input type="checkbox" id="cp_toggle" checked onclick="toggleMap()">
             <label for="cp_toggle"></label>
             <div class="cp_menu">
-                <div class="row ms-2 me-2">
+                <div class="row mx-1">
                     {{-- title --}}
                     <div class="mb-3">
                         <h2 class="h1 ms-1 mt-3"><i class="fa-solid fa-clipboard-list me-2"></i>Event menu list</h2>

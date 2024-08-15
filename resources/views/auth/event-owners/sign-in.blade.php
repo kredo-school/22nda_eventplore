@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Event Owner/Sign In')
+
 @section('content')
 <div class="p-0 overflow-auto full-height">
     <div class="row d-flex justify-content-center align-items-stretch full-height">
@@ -17,7 +19,7 @@
                     <div class="d-flex justify-content-center flex-column w-50">
                         <div class="text-start mb-3">
                             <label for="email" class="form-label fw-bold mb-2">Email*</label>
-                            <input id="email" type="email" class="form-control w-100 @error('email') is-invalid @enderror" name="email" required autocomplete="email" placeholder="Email">
+                            <input id="email" type="email" class="form-control w-100 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email" autofocus>
                             @error('email')
                                 <span class="invalid-feedback text-start" role="alert">
                                     <strong>{{ $message }}</strong>

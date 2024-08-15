@@ -59,6 +59,11 @@ class UserLoginController extends Controller
 
         $credentials = $request->only('email', 'password');
 
+        // event_ownerでログインしている場合、ログアウトさせる
+        if (Auth::guard('event_owner')->check()) {
+            Auth::guard('event_owner')->logout();
+        }
+
         if (Auth::guard('web')->attempt($credentials)) {
             if (Auth::guard('web')->user()->role == 'user') {
                 return redirect()->intended($this->redirectTo);
@@ -136,8 +141,11 @@ class UserLoginController extends Controller
 
         if (Hash::check($request->input('password'), $user->password)) {
 
-            $user->reservations()->delete();
+            $user->reservations()->each(function ($reservation) {
+                $reservation->delete();
+            });
             $user->reviews()->delete();
+            $user->bookmarks()->delete();
             $user->delete();
 
             Auth::guard('web')->logout();
