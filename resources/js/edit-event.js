@@ -117,6 +117,25 @@ function validateStep(step) {
     );
     let valid = true;
 
+    // Category is not null
+    if (step === 3) {
+        const checkboxes = document.querySelectorAll(
+            'input[name="categories[]"]'
+        );
+        let checked = false;
+
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                checked = true;
+            }
+        });
+
+        if (!checked) {
+            valid = false;
+            alert("Please select at least one category.");
+        }
+    }
+
     inputs.forEach((input) => {
         // Check if the field is empty
         if (!input.value.trim()) {
