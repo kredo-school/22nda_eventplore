@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="p-0 overflow-auto full-height">
-        <div class="row d-flex justify-content-center align-items-stretch full-height">
+        <div class="row m-0 d-flex justify-content-center align-items-stretch full-height">
             <div class="col-md-6 p-0 d-flex flex-column justify-content-center form-container">
                 <form method="POST" action="{{ route('password.email') }}">
                     @csrf

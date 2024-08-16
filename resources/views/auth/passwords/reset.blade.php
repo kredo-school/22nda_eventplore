@@ -3,8 +3,9 @@
 @section('title', 'Reset password')
 
 @section('content')
+@vite(['resources/js/delete_modal.js'])
 <div class="p-0 overflow-auto full-height">
-    <div class="row d-flex justify-content-center align-items-stretch full-height">
+    <div class="row m-0 d-flex justify-content-center align-items-stretch full-height">
         <div class="col-md-6 p-0 d-flex flex-column justify-content-center form-container">
             <form method="POST" action="{{ route('password.update') }}">
                 @csrf
@@ -75,25 +76,3 @@
     </div>
 </div>
 @endsection
-
-<script>
-    function togglePasswordVisibility(event) {
-        const inputGroup = event.target.closest('.input-group');
-        const passwordInput = inputGroup.querySelector('input');
-        const toggleIcon = event.target;
-
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
-        } else {
-            passwordInput.type = 'password';
-            toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.toggle-password').forEach(icon => {
-            icon.addEventListener('click', togglePasswordVisibility);
-        });
-    });
-</script>
