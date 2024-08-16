@@ -39,6 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var hiddenEventDate = document.getElementById('event_date');
     var hiddenEventTime = document.getElementById('event_time');
 
+    // var hiddenNumTickets = document.getElementById('hiddenNumTickets');
+    // var hiddenEventDate = document.getElementById('hiddenEventDate');
+    // var hiddenEventTime = document.getElementById('hiddenEventTime');
+
     function updateTotalPrice() {
         var numTickets = parseInt(numTicketsSelect.value);
         if (isNaN(numTickets) || numTickets <= 0) {
@@ -172,12 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (hasError) {
             event.preventDefault(); // フォーム送信を防ぐ
-        // 必要な情報がすべて入力されているかチェック
-        if (!numTicketsValue || !eventDateValue || !eventTimeValue) {
-            // エラーメッセージを表示
-            alert('Please fill out all fields.');
-            return;
         }
+
 
         // 隠しフィールドに値を設定
         if (hiddenNumTickets) {
@@ -192,7 +192,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // フォームの送信処理をここに記述
         event.target.submit();
-    };
+    });
+
+    });
+
 });
 
 // Topに戻るボタンの表示
@@ -216,12 +219,9 @@ document.addEventListener("DOMContentLoaded", function() {
             backToTopButton.style.bottom = '14px';
         }
     });
-});
-
-
-
     backToTopButton.addEventListener('click', function(event) {
         event.preventDefault();
         window.scrollTo({top: 0, behavior: 'smooth'});
     });
+
 });
