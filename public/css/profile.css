@@ -120,33 +120,52 @@
     max-width: calc(100% - 40px); /* アイコンのスペースを引いた幅にする */
 }
 
+
+.img-container {
+    position: relative; /* カメラアイコンのposition: absoluteを基準にするため */
+    display: inline-block; /* コンテナのサイズをアイコンのサイズに合わせる */
+}
+
 .camera-icon {
     position: absolute;
-    right: 11rem;
-    top: 5.5rem;
-    color: #696969;
-    z-index: 1;
+    right: 38%;
+    bottom: 10%;
     background-color: #d3d3d3;
+    color: #696969;
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    display: inline-block;
-    line-height: 36px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transform: translate(25%, 25%); /* アイコンを画像の外側に少し出す */
+    z-index: 1; /* アイコンが画像の上に表示されるようにする */
 }
+
+
 
 .hidden {
     display: none !important;
 }
 
+.modal-footer {
+    display: flex;
+    flex-wrap: wrap; /* ボタンが2段になるのを防ぐ */
+    justify-content: center;
+}
+
+.btn {
+    margin: 5px; /* ボタンの間隔を調整 */
+}
+
 @media (max-width: 390px) {
-    
+
     .card.mx-auto {
         min-width: 100%; /* カード全体の幅を画面幅に合わせる */
         width: 100%;
     }
-    
+
     .position-absolute {
         position: relative;
         right: auto; /* 絶対配置を解除 */
@@ -164,4 +183,9 @@
         width: auto; /* ボタンの幅を自動調整 */
         margin-right: 20px; /* 必要なら余白を調整 */
     }
+    .camera-icon {
+        right: 32%;
+        bottom: 10%;
+    }
+
 }

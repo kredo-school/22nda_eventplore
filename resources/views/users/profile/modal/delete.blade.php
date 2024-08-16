@@ -52,7 +52,7 @@
                 </div>
                 {{-- 確認ボタン --}}
                 <div class="modal-footer justify-content-center border-0 mb-3">
-                    <button type="button" class="btn btn-outline-red me-5 px-5 py-2" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-red me-2 px-4 py-2" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-red px-5 py-2">Delete</button>
                 </div>
 

@@ -153,7 +153,7 @@ class EventShowController extends Controller
         //end review
 
 
-        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews','currentDate','appDeadline', 'userHasReviewed');
+        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews','currentDate','appDeadline', 'userHasReviewed', 'totalPrice');
 
         $firstImage = $event->getFirstEventImage();
         if ($firstImage) {

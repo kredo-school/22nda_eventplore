@@ -80,9 +80,9 @@
                 </div>
 
                 {{-- 確認ボタン --}}
-                <div class="modal-footer justify-content-center border-0 m-3">
-                    <button type="button" class="btn btn-yellow me-5 p-2" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-green p-2 ">Save</button>
+                <div class="modal-footer justify-content-center border-0 mb-3">
+                    <button type="button" class="btn btn-yellow me-2 px-4 py-2" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-green px-4 py-2">Save</button>
                 </div>
             </div>
         </form>
