@@ -154,6 +154,18 @@ input[type="checkbox"]:checked {
         margin-bottom: 10px;
     }
     
+    .info {
+        margin-bottom: 10px;
+    }
+
+    .info-icon {
+        margin-bottom: 4px;
+    }
+    
+    .info-category {
+        width: 50% !important;
+        margin-bottom: 4px;
+    }
 }
 
 
