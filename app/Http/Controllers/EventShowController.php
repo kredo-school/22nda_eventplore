@@ -180,8 +180,13 @@ class EventShowController extends Controller
         $request->validate([
             'num_tickets' => 'required|integer|min:1',
             'event_date' => 'required|date',
-            'event_time' => 'required',
+            'event_time' => 'required|date_format:H:i',
             'eventId' => 'required|exists:events,id',
+        ], [
+            'event_time.date_format' => 'The selected time is invalid. Please choose time.',
+            'num_tickets.required' => 'The number of tickets is required.',
+            'num_tickets.integer' => 'The number of tickets must be an integer.',
+            'num_tickets.min' => 'The number of tickets must be at least 1.',
         ]);
 
 
