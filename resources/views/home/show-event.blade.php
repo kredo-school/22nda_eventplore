@@ -650,8 +650,8 @@
                 </div>
             @empty
                 {{-- No related events --}}
-                <div class="ms-5">
-                    <h5>No Related events Found.</h5>
+                <div>
+                    <h5 class="ms-4">No Related events Found.</h5>
                 </div>
             @endforelse
         </div>

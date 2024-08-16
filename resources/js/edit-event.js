@@ -117,25 +117,6 @@ function validateStep(step) {
     );
     let valid = true;
 
-    // Category is not null
-    if (step === 3) {
-        const checkboxes = document.querySelectorAll(
-            'input[name="categories[]"]'
-        );
-        let checked = false;
-
-        checkboxes.forEach((checkbox) => {
-            if (checkbox.checked) {
-                checked = true;
-            }
-        });
-
-        if (!checked) {
-            valid = false;
-            alert("Please select at least one category.");
-        }
-    }
-
     inputs.forEach((input) => {
         // Check if the field is empty
         if (!input.value.trim()) {
@@ -173,6 +154,97 @@ function validateStep(step) {
             }
         }
     });
+
+    // Event Name length validation (max 255 characters)
+    const eventNameInput = document.getElementById("event_name");
+    if (eventNameInput && eventNameInput.value.length > 255) {
+        valid = false;
+        eventNameInput.classList.add("is-invalid");
+        const error = document.createElement("div");
+        error.className = "invalid-feedback";
+        error.innerText = "Event Name must be 255 characters or less.";
+        if (
+            !eventNameInput.nextElementSibling ||
+            !eventNameInput.nextElementSibling.classList.contains(
+                "invalid-feedback"
+            )
+        ) {
+            eventNameInput.parentNode.appendChild(error);
+        }
+    }
+
+    // Content length validation (max 255 characters)
+    const detailsInput = document.getElementById("details");
+    if (detailsInput && detailsInput.value.length > 255) {
+        valid = false;
+        detailsInput.classList.add("is-invalid");
+        const error = document.createElement("div");
+        error.className = "invalid-feedback";
+        error.innerText = "Content must be 255 characters or less.";
+        if (
+            !detailsInput.nextElementSibling ||
+            !detailsInput.nextElementSibling.classList.contains(
+                "invalid-feedback"
+            )
+        ) {
+            detailsInput.parentNode.appendChild(error);
+        }
+    }
+
+    // History length validation (max 255 characters)
+    const historyInput = document.getElementById("history");
+    if (historyInput && historyInput.value.length > 255) {
+        valid = false;
+        historyInput.classList.add("is-invalid");
+        const error = document.createElement("div");
+        error.className = "invalid-feedback";
+        error.innerText = "History must be 255 characters or less.";
+        if (
+            !historyInput.nextElementSibling ||
+            !historyInput.nextElementSibling.classList.contains(
+                "invalid-feedback"
+            )
+        ) {
+            historyInput.parentNode.appendChild(error);
+        }
+    }
+
+    // Max Participants validation (greater than 0)
+    const maxParticipantsInput = document.getElementById("max_participants");
+    if (maxParticipantsInput && parseInt(maxParticipantsInput.value) <= 0) {
+        valid = false;
+        maxParticipantsInput.classList.add("is-invalid");
+        const error = document.createElement("div");
+        error.className = "invalid-feedback";
+        error.innerText = "Max Participants must be greater than 0.";
+        if (
+            !maxParticipantsInput.nextElementSibling ||
+            !maxParticipantsInput.nextElementSibling.classList.contains(
+                "invalid-feedback"
+            )
+        ) {
+            maxParticipantsInput.parentNode.appendChild(error);
+        }
+    }
+
+    // Category is not null
+    if (step === 3) {
+        const checkboxes = document.querySelectorAll(
+            'input[name="categories[]"]'
+        );
+        let checked = false;
+
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                checked = true;
+            }
+        });
+
+        if (!checked) {
+            valid = false;
+            alert("Please select at least one category.");
+        }
+    }
 
     // Compare start_date and finish_date
     const startDate = document.getElementById("start_date").value;
