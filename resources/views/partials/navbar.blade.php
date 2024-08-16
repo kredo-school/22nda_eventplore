@@ -17,7 +17,7 @@
 
                 <!-- Desktop Menu -->
                 <div class="col-md-8">
-                    @if ((!Auth::check() || Auth::user()->role == 'user') && !request()->is('/'))
+                    @if(!Auth::guard('event_owner')->check() && !request()->is('/'))
                         <div class="d-none d-md-flex justify-content-center flex-grow-1">
                             <form action="{{ route('events.search') }}" method="GET" class="d-flex w-75">
                                 <select class="form-select me-2" id="area" name="area">

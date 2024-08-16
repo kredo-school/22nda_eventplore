@@ -350,7 +350,7 @@
         {{-- location --}}
         <div class="col-md-6 mb-4 px-1">
             <div class="card p-2" style="background-color: #0C2C04; height: 400px;">
-                <div class="card-body">
+                <div class="card-body" style="overflow-y: auto">
                     <div class="text-white flex-grow-1">
                         <h2>Location</h2>
                         <p class="mb-2">Address: {{ $event->address }}</p>

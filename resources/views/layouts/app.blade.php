@@ -60,7 +60,7 @@
         </main>
 
         {{-- footer --}}
-        @if (!in_array(Route::currentRouteName(), ['home', 'event-menu', 'user.sign-in', 'user.sign-up', 'event-owner.sign-in', 'event-owner.sign-up','password.request','password.reset', 'category.search']))
+        @if (!in_array(Route::currentRouteName(), ['home', 'event-menu', 'user.sign-in', 'user.sign-up', 'event-owner.sign-in', 'event-owner.sign-up','password.request','password.reset', 'category.search', 'events.search']))
             @include('partials.footer')
         @endif
 
