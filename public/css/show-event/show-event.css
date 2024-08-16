@@ -20,6 +20,10 @@ table.rounded-corners {
   border-radius: 10px;
 }
 
+thead, thead tr {
+    background-color: #0C2C04;
+}
+
 th.table-dg {
     background-color: #0C2C04;
     color: white;

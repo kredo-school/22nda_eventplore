@@ -67,11 +67,17 @@
                                     @php
                                         $startTime = strtotime($reservation->event->start_time);
                                         $finishTime = strtotime($reservation->event->finish_time);
-                                        $adjustedFinishTime = strtotime('-1 hour', $finishTime);
+                                        $adjustedFinishTime = strtotime('-30 minutes', $finishTime);
 
-                                        for ($time = $startTime; $time <= $adjustedFinishTime; $time = strtotime('+1 hour', $time)) {
-                                            $formattedTime = date('H:i', $time);
+                                        // イベントが30分未満の場合
+                                        if ($adjustedFinishTime < $startTime) {
+                                            $formattedTime = date('H:i', $startTime);
                                             echo "<option value=\"{$formattedTime}\"" . ($reservation->time == $formattedTime ? ' selected' : '') . ">{$formattedTime}</option>";
+                                        } else {
+                                            for ($time = $startTime; $time <= $adjustedFinishTime; $time = strtotime('+30 minutes', $time)) {
+                                                $formattedTime = date('H:i', $time);
+                                                echo "<option value=\"{$formattedTime}\"" . ($reservation->time == $formattedTime ? ' selected' : '') . ">{$formattedTime}</option>";
+                                            }
                                         }
                                     @endphp
                                 </select>

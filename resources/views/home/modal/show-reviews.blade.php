@@ -103,7 +103,7 @@
 
                                     <div class="d-flex align-items-center">
                                         <div class="flex-grow-1 me-2">
-                                            <input type="text" id="comment" name="comment" class="form-control me-2" placeholder="Add comment" required>
+                                            <input type="text" id="comment" name="comment" class="form-control me-2" placeholder="Add comment" maxlength="255" required>
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-green">Add review</button>

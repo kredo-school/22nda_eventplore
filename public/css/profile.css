@@ -2,7 +2,7 @@
 .profile-container {
     position: relative;
     width: 100%;
-    height: calc(100vh - 160px);
+    height: calc(100vh - 144px);
     overflow: hidden;
 }
 
