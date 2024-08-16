@@ -5,23 +5,24 @@
             @method('PATCH')
             <div class="modal-content">
                 <div class="modal-header border-0 mt-3">
-                    <div class="img-container w-100 d-flex justify-content-center align-items-center position-relative">
+                    <div class="img-container w-100 d-flex justify-content-center align-items-center">
                         {{-- ユーザーのアイコン写真 --}}
                         @if (Auth::user()->avatar)
-                            <img src="{{ Auth::user()->avatar }}" alt="" id="image-preview" class="rounded-circle" style="width: 128px; height: 128px;">
+                            <img src="{{ Auth::user()->avatar }}" alt="avatar" id="image-preview" class="rounded-circle" style="width: 128px; height: 128px;">
                         @else
                             <img src="" alt="Image Preview" id="image-preview" class="rounded-circle" style="width: 128px; height: 128px; display: none;">
                             <span class="d-flex align-items-center justify-content-center" id="default-icon" style="position: relative;">
                                 <i class="fa-solid fa-circle-user fa-8x"></i>
                             </span>
                         @endif
-                        {{-- カメラアイコン→押すとファイル選択できる --}}
+                        {{-- カメラアイコン → 押すとファイル選択できる --}}
                         <label for="file-input" class="camera-icon">
                             <i class="fa-solid fa-camera-retro fa-xl"></i>
                         </label>
-                        <input type="file" name="avatar" id="file-input" style="display: none;" class="form-control d-none" onchange="previewImage(this)">
+                        <input type="file" name="avatar" id="file-input" class="d-none" onchange="previewImage(this)">
                     </div>
                 </div>
+
 
                 <div class="modal-body" style="font-family: EB Garamond">
                     <div class="d-flex justify-content-center align-items-center flex-column w-100">
@@ -49,9 +50,9 @@
                 </div>
 
                 {{-- 確認ボタン --}}
-                <div class="modal-footer justify-content-center border-0 m-3">
-                    <button type="button" class="btn btn-yellow me-5 p-2" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-green p-2">Save</button>
+                <div class="modal-footer justify-content-center border-0 mb-3">
+                    <button type="button" class="btn btn-yellow me-2 px-4 py-2" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-green px-4 py-2">Save</button>
                 </div>
             </div>
         </form>
