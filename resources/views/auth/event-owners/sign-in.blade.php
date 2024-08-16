@@ -3,8 +3,9 @@
 @section('title', 'Event Owner/Sign In')
 
 @section('content')
+@vite(['resources/js/delete_modal.js'])
 <div class="p-0 overflow-auto full-height">
-    <div class="row d-flex justify-content-center align-items-stretch full-height">
+    <div class="row m-0 d-flex justify-content-center align-items-stretch full-height">
         <div class="col-md-6 p-0 d-flex flex-column justify-content-center form-container">
             <form action="{{ route('event-owner.login') }}" method="POST">
                 @csrf
@@ -75,18 +76,3 @@
 @endsection
 
 
-{{-- 通常の切り替え --}}
-<script>
-    function togglePasswordVisibility() {
-        const passwordInput = document.getElementById('password');
-        const toggleIcon = document.querySelector('.toggle-password');
-
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
-        } else {
-            passwordInput.type = 'password';
-            toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
-        }
-    }
-</script>
