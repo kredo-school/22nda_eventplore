@@ -6,7 +6,7 @@
 <div class="row justify-content-center mx-5 px-5 mb-3">
     <label for="area_id" class="form-label fw-bold mb-2 text-start">Area*</label>
     <div class="col-12">
-        <select class="form-select me-2 form-control" id="area_id" name="area_id" style="border: 1px solid #84947C">
+        <select class="form-select me-2 form-control" id="area_id" name="area_id" required style="border: 1px solid #84947C">
             <option value="{{ old('area_id') }}" hidden selected>Select Area</option>
             @foreach ($areas as $area)
                 <option value="{{ $area->id }}">{{ $area->name }}</option>
