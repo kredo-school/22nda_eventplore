@@ -6,7 +6,7 @@
             <input type="hidden" name="eventId" value="{{ $event->id }}">
             <div class="modal-content">
                 <div class="modal-header border-0 m-0">
-                    <div class="img-container w-100">
+                    <div class="img-fluid w-100">
                         {{-- 写真 --}}
                         <img src="{{ $firstImage->image }}" alt="#" class="w-100 rounded" style="object-fit: cover; height: 300px;">
                     </div>
@@ -74,9 +74,9 @@
                 </div>
 
                 {{-- 確認ボタン --}}
-                <div class="modal-footer justify-content-center border-0">
-                    <button type="button" class="btn btn-yellow me-5 px-5 py-2" data-bs-dismiss="modal">Back</button>
-                    <button type="submit" class="btn btn-green px-5 py-2">Reserve</button>
+                <div class="modal-footer d-flex justify-content-center border-0 px-4">
+                    <button type="button" class="btn btn-yellow me-5 " data-bs-dismiss="modal">Back</button>
+                    <button type="submit" class="btn btn-green ">Reserve</button>
                 </div>
             </div>
         </form>

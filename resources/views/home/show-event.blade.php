@@ -17,6 +17,7 @@
                 <div class="alert alert-danger ">
                     @foreach ($errors->all() as $error)
                     <i class="fa-solid fa-triangle-exclamation"></i> {{ $error }}
+                    <br>
                     @endforeach
                 </div>
             @endif
@@ -238,8 +239,8 @@
                             <i class="fa-solid fa-users icon-lg"></i>
                         </div>
                         <div class="text-start flex-grow-1">
-                            <select class="form-select" name="num_tickets" id="numTickets">
-                                <option value="" selected hidden>Select number of tickets</option>
+                            <select class="form-select" name="num_tickets" id="numTickets" required>
+                                <option value="" hidden>Select number of tickets</option>
                                 @for ($i = 1; $i <= $availableSlots; $i++)
                                 <option value="{{ $i }}">{{ $i }}</option>
                                 @endfor
@@ -252,7 +253,7 @@
                         </div>
                         <div class="text-start flex-grow-1">
                             <select class="form-select" name="event_date" >
-                                <option value="" hidden>Select Date</option>
+                                <option value="" selected hidden>Select Date</option>
                                 @foreach ($eventDates as $date)
                                     <option value="{{ $date }}">{{ \Carbon\Carbon::parse($date)->format('Y/m/d') }}</option>
                                 @endforeach
@@ -265,7 +266,7 @@
                         </div>
                         <div class="text-start flex-grow-1">
                             <select class="form-select mt-2" name="event_time">
-                                <option value="" hidden>Select Time</option>
+                                <option value="" selected hidden>Select Time</option>
                                 @foreach ($eventTimes as $time)
                                     <option value="{{ $time }}">{{ $time }}</option>
                                 @endforeach

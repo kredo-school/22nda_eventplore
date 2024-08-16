@@ -39,6 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var hiddenEventDate = document.getElementById('event_date');
     var hiddenEventTime = document.getElementById('event_time');
 
+    // var hiddenNumTickets = document.getElementById('hiddenNumTickets');
+    // var hiddenEventDate = document.getElementById('hiddenEventDate');
+    // var hiddenEventTime = document.getElementById('hiddenEventTime');
+
     function updateTotalPrice() {
         var numTickets = parseInt(numTicketsSelect.value);
         if (isNaN(numTickets) || numTickets <= 0) {
@@ -74,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('user-confirm-reservation');
     if (modal) {
         modal.addEventListener('shown.bs.modal', function() {
-            var numTickets = parseInt(numTicketsSelect.value) || 1;
+            var numTickets = numTicketsSelect.value;
             if (modalNumTickets) {
                 modalNumTickets.textContent = numTickets;
                 const inputElement = hiddenNumTickets;
@@ -151,19 +155,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault(); // デフォルトのフォーム送信を防ぐ
+        var selectedDate = document.querySelector('select[name="event_date"]').value;
+        var selectedTime = document.querySelector('select[name="event_time"]').value;
 
-        const numTicketsValue = numTicketsSelect.value;
-        const eventDateValue = document.querySelector('select[name="event_date"]').value;
-        const eventTimeValue = document.querySelector('select[name="event_time"]').value;
+        var hasError = false;
 
-        // 必要な情報がすべて入力されているかチェック
-        if (!numTicketsValue || !eventDateValue || !eventTimeValue) {
-            // エラーメッセージを表示
-            alert('Please fill out all fields.');
-            return;
+        // 日付の検証
+        if (selectedDate === '') {
+            alert('Please select a valid date.');
+            hasError = true;
         }
+
+        // 時間の検証
+        if (selectedTime === '') {
+            alert('Please select a valid time.');
+            hasError = true;
+        }
+
+        if (hasError) {
+            event.preventDefault(); // フォーム送信を防ぐ
+        }
+
 
         // 隠しフィールドに値を設定
         if (hiddenNumTickets) {
@@ -179,6 +193,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // フォームの送信処理をここに記述
         event.target.submit();
     });
+
+    });
+
 });
 
 // Topに戻るボタンの表示
@@ -202,9 +219,9 @@ document.addEventListener("DOMContentLoaded", function() {
             backToTopButton.style.bottom = '14px';
         }
     });
-
     backToTopButton.addEventListener('click', function(event) {
         event.preventDefault();
         window.scrollTo({top: 0, behavior: 'smooth'});
     });
+
 });
