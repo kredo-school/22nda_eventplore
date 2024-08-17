@@ -8,7 +8,7 @@
                     <div class="img-container w-100 d-flex justify-content-center align-items-center position-relative">
                         {{-- イベントオーナーのアイコン写真 --}}
                         @if (Auth::user()->avatar)
-                            <img src="{{ Auth::user()->avatar }}" alt="" id="image-preview" class="rounded-circle" style="width: 128px; height: 128px;">
+                            <img src="{{ Auth::user()->avatar }}" alt="avatar" id="image-preview" class="rounded-circle" style="width: 128px; height: 128px;">
                         @else
                             <img src="" alt="Image Preview" id="image-preview" class="rounded-circle" style="width: 128px; height: 128px; display: none;">
                             <span class="d-flex align-items-center justify-content-center" id="default-icon" style="position: relative;">

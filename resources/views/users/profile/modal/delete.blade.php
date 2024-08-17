@@ -21,7 +21,7 @@
                     {{-- ユーザーのアイコン --}}
                     <div class="d-flex justify-content-center">
                     @if (Auth::user()->avatar)
-                        <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle avatar-lg">
+                        <img src="{{ Auth::user()->avatar }}" alt="avatar" class="rounded-circle avatar-lg">
                     @else
                         <span class="d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-circle-user fa-8x"></i>
@@ -53,7 +53,7 @@
                 {{-- 確認ボタン --}}
                 <div class="modal-footer justify-content-center border-0 mb-3">
                     <button type="button" class="btn btn-outline-red me-2 px-4 py-2" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-red px-5 py-2">Delete</button>
+                    <button type="submit" class="btn btn-red px-4 py-2">Delete</button>
                 </div>
 
             </div>
