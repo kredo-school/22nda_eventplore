@@ -36,6 +36,7 @@ class EventShowController extends Controller
             ['user_id', '=', $userId],
             ])->first();
 
+
         // dd($reservation);
 
         $event = Event::with(['eventImages' => function($query) {
@@ -51,11 +52,6 @@ class EventShowController extends Controller
         if ($totalPrice !== null) {
             $data['totalPrice'] = $totalPrice;
         }
-
-        // 予約済の人数を計算
-        $reservedCount = Reservation::where('event_id', $eventId)
-                                ->sum('num_tickets');
-        $availableSlots = max($event->max_participants - $reservedCount, 0);
 
 
         // 日付範囲を生成
@@ -77,6 +73,13 @@ class EventShowController extends Controller
             $eventDates[] = $startDate->format('Y-m-d');
             $startDate->addDay();
         }
+
+
+     // 予約済の人数を計算
+        $reservedCount = Reservation::where('event_id', $eventId)
+            ->sum('num_tickets');
+        $availableSlots = max($event->max_participants - $reservedCount, 0);
+
 
         // 時間範囲を作る
         $startTime = Carbon::parse($event->start_time);
@@ -153,7 +156,7 @@ class EventShowController extends Controller
         //end review
 
 
-        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews','currentDate','appDeadline', 'userHasReviewed', 'totalPrice');
+        $data = compact('areas', 'categories', 'reservation', 'event',  'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews','currentDate','appDeadline', 'userHasReviewed', 'totalPrice');
 
         $firstImage = $event->getFirstEventImage();
         if ($firstImage) {
