@@ -59,7 +59,7 @@
 {{-- category --}}
 <div class="row justify-content-center mx-5 px-5 mb-4">
     <div class="col-3 info-category">
-        <select name="category" id="category" class="form-select me-2 required">
+        <select name="category" id="category" required class="form-select me-2 required">
             <option value="" disabled {{ is_null(old('category', $event->category_id)) ? 'selected' : '' }}>Category</option>
             @foreach ($categories as $category)
                 <option value="{{ $category->id }}"
