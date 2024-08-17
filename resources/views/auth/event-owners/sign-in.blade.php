@@ -68,7 +68,7 @@
                 </div>
             </form>
         </div>
-        <div class="col p-0">
+        <div class="col-md-6 p-0">
             <img src="{{ asset('images/sign-in/product-school-ITF7fD0TSCY-unsplash.jpg') }}" alt="sign-in event owner photo" class="w-100 h-100" style="object-fit: cover;">
         </div>
     </div>

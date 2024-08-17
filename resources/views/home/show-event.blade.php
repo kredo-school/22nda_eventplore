@@ -21,6 +21,9 @@
                     @endforeach
                 </div>
             @endif
+            @if (session('success'))
+                <h5 class="alert alert-success">{{ session('success') }}</h5>
+            @endif
             <h1 class="text-center">{{ $event->event_name }}</h1>
             <hr style="color: #0C2C04">
         </div>
