@@ -109,6 +109,7 @@ class EventShowController extends Controller
             ->orWhere('area_id', $event->area_id)
             ->orWhere('event_owner_id', $event->event_owner_id);
         })
+        ->where('app_deadline', '>=', now()) // 申し込み可能なイベントに絞り込み
         ->with(['eventCategories'])
         ->get();
 

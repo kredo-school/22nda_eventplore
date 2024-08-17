@@ -99,9 +99,9 @@ footer.footer .d-flex {
 
 @media (max-width: 767.98px) {
     footer.footer {
-        padding-top: 10px;
+        padding-top: 7px;
         line-height: 25px;
-        height: 80px;
+        height: 65px;
     }
 
     footer.footer .row {

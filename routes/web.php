@@ -1,7 +1,5 @@
 <?php
 
-
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -9,8 +7,6 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\EventShowController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -62,7 +58,6 @@ Route::middleware(['auth:web'])->group(function () {
     Route::patch('/users/profile/update', [UserLoginController::class, 'update'])->name('users.profile.update');
     Route::delete('/users/delete', [UserLoginController::class, 'destroy'])->name('users.delete');
 
-    Route::get('/user/reservation-list', [UserLoginController::class, 'showReservations'])->name('user.reservation.list');
     Route::get('/user/reservation', [EventController::class, 'showUserReservation'])->name('user.reservation.show');
     Route::delete('/user/reservation/{id}/destroy', [EventController::class, 'destroyUserReservation'])->name('user.reservation.destroy');
     Route::patch('/user/reservation/{id}/update', [EventController::class, 'updateUserReservation'])->name('user.reservation.update');
@@ -96,7 +91,6 @@ Route::middleware(['auth:web'])->group(function () {
     });
 
 
-
 // パスワードのリセット関係
 // パスワードリセットリンクのリクエストフォームを表示
 Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
@@ -107,6 +101,4 @@ Route::get('password/reset/{token}', [ResetPasswordController::class, 'showReset
 // パスワードリセットを処理
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
-
 ?>
-
