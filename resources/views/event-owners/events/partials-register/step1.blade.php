@@ -1,3 +1,4 @@
+{{-- step1 --}}
 <div class="row justify-content-center mx-5 px-5">
     <label for="event_name" class="fw-bold mb-2 text-start">Event Name*</label>
     <div class="col-12 mb-3">

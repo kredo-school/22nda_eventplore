@@ -2,7 +2,7 @@
     <div class="container-fluid px-3">
         <div class="row">
             <!-- Icons -->
-            <div class="col-6 col-md-4 d-flex justify-content-center justify-content-md-start order-1 ps-3">
+            <div class="col-6 col-md-4 d-flex justify-content-center justify-content-md-start order-1 p-0 ps-md-3">
                 <a href="https://www.facebook.com" class="me-3 text-secondary text-decoration-none" target="_blank">
                     <i class="fab fa-facebook fa-xl"></i>
                 </a>
@@ -18,7 +18,7 @@
                 <small>Copyright © 2024 Eventplore</small>
             </div>
             <!-- Terms and Support -->
-            <div class="col-6 col-md-4 d-flex justify-content-start justify-content-md-end align-items-center order-2 order-md-3 pe-2">
+            <div class="col-6 col-md-4 d-flex justify-content-center justify-content-md-end align-items-center order-2 order-md-3 p-0 pe-md-3">
                 <a href="{{ route('gudeline') }}" class="me-3 text-decoration-none" style="color: #84947C">Terms of service</a>
                 <a href="#" class="text-decoration-none" style="color: #84947C">Support</a>
             </div>

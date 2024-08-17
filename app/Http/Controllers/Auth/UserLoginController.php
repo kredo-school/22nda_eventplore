@@ -113,13 +113,6 @@ class UserLoginController extends Controller
         return redirect()->route('users.profile.show');
     }
 
-
-    public function showReservations()
-    {
-        $areas = Area::all();
-        return view('users.reservations.show', compact('areas'));
-    }
-
     public function userLogout(Request $request)
     {
         Auth::guard('web')->logout();

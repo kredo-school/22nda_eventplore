@@ -180,6 +180,107 @@ function validateStep(step) {
         }
     }
 
+    // Compare start_date and finish_date
+    const startDate = document.getElementById("start_date").value;
+    const finishDate = document.getElementById("finish_date").value;
+    if (startDate && finishDate) {
+        if (new Date(startDate) > new Date(finishDate)) {
+            valid = false;
+            const finishDateInput = document.getElementById("finish_date");
+            finishDateInput.classList.add("is-invalid");
+            const error = document.createElement("div");
+            error.className = "invalid-feedback";
+            error.innerText =
+                "Finish date must be the same as or after the start date.";
+            if (
+                !finishDateInput.nextElementSibling ||
+                !finishDateInput.nextElementSibling.classList.contains(
+                    "invalid-feedback"
+                )
+            ) {
+                finishDateInput.parentNode.appendChild(error);
+            }
+        }
+    }
+
+    // Compare start_time and finish_time
+    const startTimeInput = document.getElementById("start_time");
+    const finishTimeInput = document.getElementById("finish_time");
+
+    if (startTimeInput && finishTimeInput) {
+        const startTime = startTimeInput.value;
+        const finishTime = finishTimeInput.value;
+
+        if (startTime && finishTime) {
+            const [startHours, startMinutes] = startTime.split(":");
+            const [finishHours, finishMinutes] = finishTime.split(":");
+
+            const startDate = new Date();
+            startDate.setHours(startHours, startMinutes, 0, 0);
+
+            const finishDate = new Date();
+            finishDate.setHours(finishHours, finishMinutes, 0, 0);
+
+            if (startDate >= finishDate) {
+                valid = false;
+                finishTimeInput.classList.add("is-invalid");
+                let error = finishTimeInput.nextElementSibling;
+
+                if (!error || !error.classList.contains("invalid-feedback")) {
+                    error = document.createElement("div");
+                    error.className = "invalid-feedback";
+                    error.innerText =
+                        "Finish time must be after the start time.";
+                    finishTimeInput.parentNode.appendChild(error);
+                }
+            } else {
+                finishTimeInput.classList.remove("is-invalid");
+                if (
+                    finishTimeInput.nextElementSibling &&
+                    finishTimeInput.nextElementSibling.classList.contains(
+                        "invalid-feedback"
+                    )
+                ) {
+                    finishTimeInput.nextElementSibling.remove();
+                }
+            }
+        }
+    }
+
+    // Validate that app_deadline is before finish_date and finish_time
+    const appDeadlineInput = document.getElementById("app_deadline");
+    const finishDateInput = document.getElementById("finish_date");
+    if (appDeadlineInput && finishDateInput && finishTimeInput) {
+        const appDeadline = new Date(appDeadlineInput.value);
+        const finishDateTime = new Date(
+            finishDateInput.value + "T" + finishTimeInput.value
+        );
+
+        if (appDeadline > finishDateTime) {
+            valid = false;
+            appDeadlineInput.classList.add("is-invalid");
+            let error = appDeadlineInput.nextElementSibling;
+
+            if (!error || !error.classList.contains("invalid-feedback")) {
+                error = document.createElement("div");
+                error.className = "invalid-feedback";
+                error.innerText =
+                    "The reservation deadline cannot be later than the finish date and time.";
+                appDeadlineInput.parentNode.appendChild(error);
+            }
+        } else {
+            appDeadlineInput.classList.remove("is-invalid");
+            if (
+                appDeadlineInput.nextElementSibling &&
+                appDeadlineInput.nextElementSibling.classList.contains(
+                    "invalid-feedback"
+                )
+            ) {
+                appDeadlineInput.nextElementSibling.remove();
+            }
+        }
+    }
+
     // Content length validation (max 255 characters)
     const detailsInput = document.getElementById("details");
     if (detailsInput && detailsInput.value.length > 255) {
@@ -252,30 +353,6 @@ function validateStep(step) {
             alert("Please select at least one category.");
         }
     }
-
-    // Compare start_date and finish_date
-    const startDate = document.getElementById("start_date").value;
-    const finishDate = document.getElementById("finish_date").value;
-    if (startDate && finishDate) {
-        if (new Date(startDate) > new Date(finishDate)) {
-            valid = false;
-            const finishDateInput = document.getElementById("finish_date");
-            finishDateInput.classList.add("is-invalid");
-            const error = document.createElement("div");
-            error.className = "invalid-feedback";
-            error.innerText =
-                "Finish date must be the same as or after the start date.";
-            if (
-                !finishDateInput.nextElementSibling ||
-                !finishDateInput.nextElementSibling.classList.contains(
-                    "invalid-feedback"
-                )
-            ) {
-                finishDateInput.parentNode.appendChild(error);
-            }
-        }
-    }
-
     return valid;
 }
 

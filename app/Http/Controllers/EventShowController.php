@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Area;
-use App\Models\Category;
-use App\Models\Event;
-use App\Models\Reservation;
 use Carbon\Carbon;
+use App\Models\Area;
+use App\Models\Event;
+use App\Models\Category;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class EventShowController extends Controller
 {
@@ -52,6 +52,11 @@ class EventShowController extends Controller
         if ($totalPrice !== null) {
             $data['totalPrice'] = $totalPrice;
         }
+
+        // 予約済の人数を計算
+        $reservedCount = Reservation::where('event_id', $eventId)
+                                ->sum('num_tickets');
+        $availableSlots = max($event->max_participants - $reservedCount, 0);
 
 
         // 日付範囲を生成
@@ -109,6 +114,7 @@ class EventShowController extends Controller
             ->orWhere('area_id', $event->area_id)
             ->orWhere('event_owner_id', $event->event_owner_id);
         })
+        ->where('app_deadline', '>=', now()) // 申し込み可能なイベントに絞り込み
         ->with(['eventCategories'])
         ->get();
 
@@ -146,17 +152,10 @@ class EventShowController extends Controller
 
         $latestReviews = $event->reviews()->latest()->take(3)->get();
 
-        if (auth()->check()) {
-            $reservation = Reservation::where('user_id', auth()->id())
-                ->where('event_id', $id)
-                ->first();
-        }
-
         $userHasReviewed = $event->reviews()->where('user_id', Auth::id())->exists();
         //end review
 
-
-        $data = compact('areas', 'categories', 'reservation', 'event',  'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews','currentDate','appDeadline', 'userHasReviewed', 'totalPrice');
+        $data = compact('areas', 'categories', 'reservation', 'event', 'availableSlots', 'eventDates', 'eventTimes','related_events', 'ratingCounts', 'defaultStars', 'totalReviews', 'averageRating', 'latestReviews','currentDate','appDeadline', 'userHasReviewed', 'totalPrice');
 
         $firstImage = $event->getFirstEventImage();
         if ($firstImage) {

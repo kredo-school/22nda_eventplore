@@ -59,7 +59,7 @@
 {{-- category --}}
 <div class="row justify-content-center mx-5 px-5 mb-4">
     <div class="col-3 info-category">
-        <select name="category" id="category" class="form-select me-2 required">
+        <select name="category" id="category" required class="form-select me-2 required">
             <option value="{{ old('category_id') }}" hidden>Category</option>
             @foreach ($categories as $index => $category)
             <option value="{{ $category->id }}">{{ $category->name }}</option>

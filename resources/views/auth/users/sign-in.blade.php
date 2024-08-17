@@ -74,7 +74,7 @@
                 </div>
             </form>
         </div>
-        <div class="col p-0 img-container">
+        <div class="col-md-6 p-0 img-container">
             <img src="{{ asset('images/sign-in/tengku-nadia-fz8_SONkBB8-unsplash.jpg') }}" alt="sign-in user photo" class="img-fluid h-100">
         </div>
     </div>

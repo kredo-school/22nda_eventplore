@@ -23,6 +23,9 @@
                     @endforeach
                 </div>
             @endif
+            @if (session('success'))
+                <h5 class="alert alert-success">{{ session('success') }}</h5>
+            @endif
             <h1 class="text-center">{{ $event->event_name }}</h1>
             <hr style="color: #0C2C04">
         </div>
@@ -72,7 +75,7 @@
         <div class="row m-0 p-0">
             {{-- メイン写真 --}}
             <div class="{{ $totalImages == 1 ? 'col-12' : ($totalImages == 3 ? 'col-md-8' : 'col-md-6') }} image-container m-0 p-1">
-                <img src="{{ $images->first()->image }}" class="w-100 h-100 rounded {{ $totalImages == 1 ? 'ratio-2-2' : ($totalImages == 3 ? 'ratio-1-5' : 'ratio-1-1') }}" alt="#">
+                <img src="{{ $images->first()->image }}" class="w-100 h-100 rounded {{ $totalImages == 1 ? 'ratio-2-2' : ($totalImages == 3 ? 'ratio-1-5' : 'ratio-1-1') }}" alt="{{ $event->event_name }}">
 
                 {{-- bookmark --}}
                 <div class="heart-icon-lg">
@@ -106,7 +109,7 @@
                 <div class="row m-0 p-0">
                     @foreach($images->slice(1) as $image)
                         <div class="{{ $totalImages >= 4 ? 'col-6' : ($totalImages == 3 ? 'col-6 col-md-12' : 'col-12') }} m-0 p-1">
-                            <img src="{{ $image->image }}" class="w-100 h-100 rounded {{ $totalImages == 3 ? 'ratio-1-5' : 'ratio-1-1' }}" alt="#">
+                            <img src="{{ $image->image }}" class="w-100 h-100 rounded {{ $totalImages == 3 ? 'ratio-1-5' : 'ratio-1-1' }}" alt="{{ $event->event_name }}">
                         </div>
                     @endforeach
                 </div>
@@ -361,7 +364,7 @@
 
         {{-- location --}}
         <div class="col-md-6 mb-4 px-1">
-            <div class="card p-2" style="background-color: #0C2C04; height: 400px;">
+            <div class="card pt-2 px-2 pb-0" style="background-color: #0C2C04; height: 400px;">
                 <div class="card-body" style="overflow-y: auto">
                     <div class="text-white flex-grow-1">
                         <h2>Location</h2>
@@ -371,7 +374,7 @@
                             <div id="map" class="w-100 h-100"></div>
                             <script>window.eventData = @json($event); </script>
                         </div>
-                        <p class="my-2" style="display: flex; align-items: center;">
+                        <p class="mt-3 mb-0" style="display: flex; align-items: center;">
                             Access by
                             <a href="https://luup.sc/en/" class="mx-2" target="_blank"><img src="{{ asset('images/event-test/luup.png') }}" alt="LUUP" style="width: 50px; height: auto;"></a>
                             <a href="https://go.goinc.jp/lp/inbound" target="_blank"><img src="{{ asset('images/event-test/go.png') }}" alt="GO" style="width: 25px; height: auto;"></a>
