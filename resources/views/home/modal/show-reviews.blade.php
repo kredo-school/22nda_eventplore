@@ -118,19 +118,30 @@
                             @endif
                         @endif
                     @endauth
-                    <p class="h5 mt-3">{{ $event->reviews->count() }} reviews</p>
+                    <p class="h5 mt-3">
+                        {{ $event->reviews->count() }} review{{ $event->reviews->count() === 1 ? '' : 's' }}
+                    </p>
                     {{-- 全てのコメントが見れる欄 --}}
                     <div class="reviews-list-container">
                     @foreach($event->reviews->sortByDesc('created_at') as $review)
                         <div class="review-item">
-                            <div class="d-flex align-items-end">
-                                @if ($review->user->avatar)
-                                    <img src="{{ $review->user->avatar }}" alt="{{ $review->user->name }}" class="rounded-circle avatar-sm">
-                                @else
-                                    <i class="fa-solid fa-circle-user avatar-sm m-0"></i>
-                                @endif
-                                <span class="h5 ms-2 my-0 fs-4">{{ $review->user->username }}</span>
-                                <span class="ms-2">{{ $review->created_at->format('Y-m-d') }}</span>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-end">
+                                    @if ($review->user->avatar)
+                                        <img src="{{ $review->user->avatar }}" alt="{{ $review->user->name }}" class="rounded-circle avatar-sm">
+                                    @else
+                                        <i class="fa-solid fa-circle-user avatar-sm m-0"></i>
+                                    @endif
+                                    <span class="h5 ms-2 my-0 fs-4">{{ $review->user->username }}</span>
+                                    <span class="ms-2">{{ $review->created_at->format('Y-m-d') }}</span>
+                                </div>
+                                @auth
+                                    @if (Auth::id() === $review->user_id)
+                                    <button type="button" class="trash-btn border-0" data-bs-toggle="modal" data-bs-target="#user-delete-comment{{ $review->id }}">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                    @endif
+                                @endauth
                             </div>
                             <div class="ms-1 mt-1 align-items-start d-flex align-items-center">
                                 <span class="star-rating-1">
@@ -148,3 +159,8 @@
         </form>
     </div>
 </div>
+@foreach($event->reviews as $review)
+    @include('users.comments.modal.delete', ['review' => $review])
+@endforeach
+
+
