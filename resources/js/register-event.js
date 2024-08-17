@@ -109,7 +109,6 @@ function validateStep(step) {
         "input[required], select[required], textarea[required]"
     );
     let valid = true;
-    console.log("Validating step: ", step);
 
     inputs.forEach((input) => {
         // Check if the field is empty
@@ -340,7 +339,6 @@ function validateStep(step) {
             alert("Please select at least one category.");
         }
     }
-    console.log("Final validation state: ", valid);
     return valid;
 }
 

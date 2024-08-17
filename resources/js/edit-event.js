@@ -239,7 +239,7 @@ function validateStep(step) {
             }
         }
     }
-    
+
     // Validate that app_deadline is before finish_date and finish_time
     const appDeadlineInput = document.getElementById("app_deadline");
     const finishDateInput = document.getElementById("finish_date");
