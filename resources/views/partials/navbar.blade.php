@@ -40,7 +40,7 @@
                     @auth('web')
                         <a id="navbarDropdownUser" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @if (Auth::user()->avatar)
-                                <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle avatar-md">
+                                <img src="{{ Auth::user()->avatar }}" alt="avatar" class="rounded-circle avatar-md">
                             @else
                                 <span class="d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-circle-user fa-2xl me-2" style="font-size: 2.5em;"></i>
@@ -70,7 +70,7 @@
                     @elseauth('event_owner')
                         <a id="navbarDropdownOwner" class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @if (Auth::guard('event_owner')->user()->avatar)
-                                <img src="{{ Auth::guard('event_owner')->user()->avatar }}" alt="" class="rounded-circle avatar-md">
+                                <img src="{{ Auth::guard('event_owner')->user()->avatar }}" alt="avatar" class="rounded-circle avatar-md">
                             @else
                                 <span class="d-flex align-items-center justify-content-center">
                                     <i class="fa-solid fa-circle-user fa-2xl me-2" style="color: #0C2C04; font-size: 2.5em;"></i>

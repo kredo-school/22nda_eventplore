@@ -8,7 +8,7 @@
                 <div class="modal-header border-0 m-0">
                     <div class="img-fluid w-100">
                         {{-- 写真 --}}
-                        <img src="{{ $firstImage->image }}" alt="#" class="w-100 rounded" style="object-fit: cover; height: 300px;">
+                        <img src="{{ $event->eventImages->first()->image }}" alt="{{ $event->event_name }}" class="w-100 rounded" style="object-fit: cover; height: 300px;">
                     </div>
                 </div>
 
