@@ -23,7 +23,21 @@ const geocoder = new MapboxGeocoder({
         latitude: 35.652832,
     }, // Coordinates of Tokyo
     flyTo: false,
+    language: 'en' //言語を英語指定
 });
+
+map.addControl(geocoder);
+
+// 住所データを取得して表示
+geocoder.on('result', (event) => {
+  const address = event.result.place_name;
+
+  // 住所を手動で正規化
+  const normalizedAddress = address.replace(/六本木/g, 'Roppongi'); // 日本語の部分を手動で置き換え
+
+  console.log('Normalized Address:', normalizedAddress);
+});
+
 
 document.getElementById("search-container").appendChild(geocoder.onAdd(map));
 

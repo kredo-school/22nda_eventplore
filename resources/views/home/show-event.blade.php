@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="{{ asset('css/show-event/eventpage.css') }}">
 <link rel="stylesheet" href="{{ asset('css/review.css') }}">
 
+
+
 <div class="p-4 mx-md-5 justify-content-center">
     {{-- Event name & date & cate --}}
     <div class="row align-items-center mb-3">
@@ -156,69 +158,74 @@
         @if(auth()->check() && $reservation != null)
         {{-- Reserved --}}
         <div class="col-md-6 px-1">
-            <div class="card mb-4 shadow" style="min-height: 400px; max-height: 400px;">
-                <div class="card-body text-center">
-                    <h2 class="card-title border-top border-bottom py-2 mx-5 my-3" style="color: #84947C"><i class="fa-solid fa-check"></i> Already Reserved!</h2>
-                    <div class="mb-2 d-flex justify-content-center align-items-center mx-auto w-50">
-                        <div class="d-flex justify-content-center" style="width: 15%;">
+            <div class="card mb-4 shadow d-flex flex-column justify-content-center align-items-center" style="height: 400px; overflow-y: auto;">
+                <h2 class="card-title border-top border-bottom mt-4 py-2 w-75 text-center" style="color: #84947C">
+                    <i class="fa-solid fa-check"></i> Already Reserved!
+                </h2>
+                <div class="card-body text-center mt-4 w-75">
+                    <div class="mb-2 d-flex justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center" style="width: 20%;">
                             <i class="fa-solid fa-yen-sign icon-lg"></i>
                         </div>
-                        <div class="text-start" style="width: 45%;">
-                            <h4 class="mb-0">Total Price</h4>
+                        <div class="text-start" style="width: 35%;">
+                            <h4 class="small-text mb-0">Total Price</h4>
                         </div>
-                        <div class="text-start" style="width: 40%;">
+                        <div class="d-flex justify-content-center" style="width: 50%;">
                             @if(isset($totalPrice))
-                            <h4 class="mb-0">{{ number_format($totalPrice) }}</h4>
+                            <h4 class="small-text mb-0">{{ number_format($totalPrice) }}</h4>
                             @else
-                                <h4 class="mb-0">N/A</h4>
+                                <h4 class="small-text mb-0">N/A</h4>
                             @endif
                         </div>
                     </div>
-                    <div class="mb-2 d-flex justify-content-center align-items-center mx-auto w-50">
-                        <div class="d-flex justify-content-center" style="width: 15%;">
+                    <div class="mb-2 d-flex justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center" style="width: 20%;">
                             <i class="fa-solid fa-users icon-lg"></i>
                         </div>
-                        <div class="text-start" style="width: 45%;">
-                            <h4 class="mb-0">People</h4>
+                        <div class="text-start" style="width: 35%;">
+                            <h4 class="small-text mb-0">People</h4>
                         </div>
-                        <div class="text-start" style="width: 40%;">
-                            <h4 class="mb-0">{{ $reservation->num_tickets }}</h4>
+                        <div class="d-flex justify-content-center" style="width: 50%;">
+                            <h4 class="small-text mb-0">{{ $reservation->num_tickets }}</h4>
                         </div>
                     </div>
-                    <div class="mb-2 d-flex justify-content-center align-items-center mx-auto w-50">
-                        <div class="d-flex justify-content-center" style="width: 15%;">
+                    <div class="mb-2 d-flex justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center" style="width: 20%;">
                             <i class="fa-solid fa-calendar-days icon-lg"></i>
                         </div>
-                        <div class="text-start" style="width: 45%;">
-                            <h4 class="mb-0">Date</h4>
+                        <div class="text-start" style="width: 35%;">
+                            <h4 class="small-text mb-0">Date</h4>
                         </div>
-                        <div class="text-start" style="width: 40%;">
-                            <h4 class="mb-0">{{ $reservation->reservation_date }}</h4>
+                        <div class="d-flex justify-content-center" style="width: 50%;">
+                            <h4 class="small-text mb-0">{{ $reservation->reservation_date }}</h4>
                         </div>
                     </div>
-                    <div class="mb-2 d-flex justify-content-center align-items-center mx-auto w-50">
-                        <div class="d-flex justify-content-center" style="width: 15%;">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center" style="width: 20%;">
                             <i class="fa-regular fa-clock icon-lg"></i>
                         </div>
-                        <div class="text-start" style="width: 45%;">
-                            <h4 class="mb-0">Time</h4>
+                        <div class="text-start" style="width: 35%;">
+                            <h4 class="small-text mb-0">Time</h4>
                         </div>
-                        <div class="text-start" style="width: 40%;">
-                            <h4 class="mb-0">{{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</h4>
+                        <div class="d-flex justify-content-center" style="width: 50%;">
+                            <h4 class="small-text mb-0">{{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</h4>
                         </div>
                     </div>
-                    <hr>
                     @auth('web')
                     @if ($currentDate->lte($appDeadline))
-                        <div class="d-flex justify-content-center my-4">
-                            <button class="btn btn-red custom-btn me-2" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-delete-reservation' . $reservation->id : '#' }}"><i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation</button>
-                            <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-edit-reservation' . $reservation->id : '#' }}"><i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation</button>
+                        <div class="d-flex justify-content-center mt-5">
+                            <button class="btn btn-red custom-btn " data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-delete-reservation' . $reservation->id : '#' }}">
+                                <i class="fa-regular fa-trash-can p-1"></i> Cancel Reservation
+                            </button>
+                            <button class="btn btn-green custom-btn ms-2" data-bs-toggle="modal" data-bs-target="{{ isset($reservation) ? '#user-edit-reservation' . $reservation->id : '#' }}">
+                                <i class="fa-solid fa-pen-to-square p-1"></i> Edit Reservation
+                            </button>
                             @include('users.reservations.modal.edit')
                             @include('users.reservations.modal.delete')
                         </div>
                     @else
-                        <button class="btn btn-secondary px-5 py-2 fw-bold" style="font-family: Raleway,sans-serif;" disabled>Reservation Closed</button>
-                        <p class="text-danger mt-2" style="font-family: Raleway,sans-serif;">Enjoy this event! <i class="fa-regular fa-face-smile"></i></p>
+                    <button class="btn btn-secondary px-5 py-2 fw-bold mt-4" style="font-family: Raleway, sans-serif;" disabled>Reservation Closed</button>
+                    <p class="text-danger mt-2" style="font-family: Raleway, sans-serif;">Enjoy! <i class="fa-regular fa-face-smile"></i></p>
                     @endif
                     @endauth
                 </div>
@@ -227,7 +234,7 @@
         @else
         {{-- Before Reservation --}}
         <div class="col-md-6 px-1">
-            <div class="card px-5 pt-3 mb-4 shadow" style="height: 400px;">
+            <div class="card px-5 pt-3 mb-4 shadow" style="height: 400px; overflow-y: auto;">
                 <div class="card-body text-center">
                     <div class="mb-3 d-flex align-items-center">
                         <div style="width: 20%;">
@@ -284,10 +291,15 @@
                             <button class="btn btn-secondary px-5 py-2 fw-bold" style="font-family: Raleway,sans-serif;" disabled>Reservation Closed</button>
                             <p class="text-danger mt-2" style="font-family: Raleway,sans-serif;">The reservation deadline has passed.</p>
                         @endif
-                    @else
-                        <a href="{{ route('user.sign-in', ['message' => 'To make a reservation, you need to sign in!']) }}" class="btn btn-green px-5 py-1">
-                            JOIN EVENT <div class="small">after sign-in</div>
-                        </a>
+                        @else
+                        @if($availableSlots > 0)
+                            <a href="{{ route('user.sign-in', ['message' => 'To make a reservation, you need to sign in!']) }}" class="btn btn-green px-5 py-1">
+                                JOIN EVENT <div class="small">after sign-in</div>
+                            </a>
+                        @else
+                            <button class="btn btn-secondary px-5 py-2 fw-bold" style="font-family: Raleway,sans-serif;" disabled>Reservation Closed</button>
+                            <p class="text-danger mt-2 fw-bold" style="font-family: Raleway,sans-serif;">Sold Out.&nbsp;Thank you! <i class="fa-regular fa-face-smile"></i></p>
+                        @endif
                     @endauth
                     <hr style="color: #0C2C04">
                     <p class="align-middle text-center fs-3 mb-0">Total <span id="totalPrice" data-price="{{ $event->price }}">{{ number_format($event->price) }}</span> yen</p>
