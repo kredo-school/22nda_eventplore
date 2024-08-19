@@ -15,7 +15,7 @@
                         Are you sure you want to delete this comment?<br>
                         This action cannot be undone.
                     </p>
-                    <p class="h5">{{ $review->comment }}</p>
+                    <p class="h5 text-center">{{ $review->comment }}</p>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-outline-red me-5 px-5 py-2" data-bs-dismiss="modal">Cancel</button>
