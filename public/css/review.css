@@ -1,7 +1,7 @@
 
 /* レビューの星コンテナ */
 .review-star-container {
-    font-size: 1rem;
+    font-size: 1.2rem;
     max-width: 320px;
     width: 100%;
     height: auto;
@@ -185,4 +185,12 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent; /* 背景色をクリアにするために透明 */
+}
+
+
+@media (max-width: 576px) {
+    .review-star-container .fa-star,
+    .review-star-container .half-filled {
+        font-size: 1.2rem;
+    }
 }
