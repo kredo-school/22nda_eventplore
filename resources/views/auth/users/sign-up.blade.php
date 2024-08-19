@@ -6,11 +6,11 @@
 @vite(['resources/js/delete_modal.js'])
 <div class="p-0 overflow-auto" style="width: 100vw; height: 100vh;">
     <div class="row m-0 d-flex justify-content-center align-items-stretch w-100 h-100" style="width: 100vw; height: 100vh;">
-        <div class="col-md-6 p-0 d-flex flex-column justify-content-center">
+        <div class="col-md-6 px-0 py-4 d-flex flex-column justify-content-center form-container">
             <form method="post" action="{{ route('user.register') }}" enctype="multipart/form-data">
                 @csrf
 
-                <div class="d-flex flex-column align-items-center my-4 text-center">
+                <div class="d-flex flex-column align-items-center mt-3 text-center">
                     <img src="{{ asset('images/eventplore-logo_final-nobg_480.png') }}" alt="logo" class="mb-2 w-25">
                     <h2 class="h1 mb-2 text-align-center">Sign Up</h2>
 
@@ -84,9 +84,8 @@
                     </div>
                 </div>
 
-                <div class="mb-3 justify-content-center text-center">
+                <div class="mb-3 justify-content-center text-center w-100 mt-3">
                     <a href="{{ route('user.sign-in') }}" class="btn btn-yellow me-5 px-4">Back</a>
-
                     <button type="submit" class="btn btn-green px-5">
                         Sign Up
                     </button>
