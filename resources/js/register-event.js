@@ -26,19 +26,6 @@ const geocoder = new MapboxGeocoder({
     language: 'en' //言語を英語指定
 });
 
-map.addControl(geocoder);
-
-// 住所データを取得して表示
-geocoder.on('result', (event) => {
-  const address = event.result.place_name;
-
-  // 住所を手動で正規化
-  const normalizedAddress = address.replace(/六本木/g, 'Roppongi'); // 日本語の部分を手動で置き換え
-
-  console.log('Normalized Address:', normalizedAddress);
-});
-
-
 document.getElementById("search-container").appendChild(geocoder.onAdd(map));
 
 // Geocoderのデフォルトの検索インプットフィールドを取得し、スタイルを適用
@@ -281,14 +268,14 @@ function validateStep(step) {
         }
     }
 
-    // Content length validation (max 255 characters)
+    // Content length validation (max 1000 characters)
     const detailsInput = document.getElementById("details");
-    if (detailsInput && detailsInput.value.length > 255) {
+    if (detailsInput && detailsInput.value.length > 1000) {
         valid = false;
         detailsInput.classList.add("is-invalid");
         const error = document.createElement("div");
         error.className = "invalid-feedback";
-        error.innerText = "Content must be 255 characters or less.";
+        error.innerText = "Content must be 1000 characters or less.";
         if (
             !detailsInput.nextElementSibling ||
             !detailsInput.nextElementSibling.classList.contains(
@@ -299,14 +286,14 @@ function validateStep(step) {
         }
     }
 
-    // History length validation (max 255 characters)
+    // History length validation (max 1000 characters)
     const historyInput = document.getElementById("history");
-    if (historyInput && historyInput.value.length > 255) {
+    if (historyInput && historyInput.value.length > 1000) {
         valid = false;
         historyInput.classList.add("is-invalid");
         const error = document.createElement("div");
         error.className = "invalid-feedback";
-        error.innerText = "History must be 255 characters or less.";
+        error.innerText = "History must be 1000 characters or less.";
         if (
             !historyInput.nextElementSibling ||
             !historyInput.nextElementSibling.classList.contains(
