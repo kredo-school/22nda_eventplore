@@ -322,6 +322,19 @@ function validateStep(step) {
         }
     }
 
+    // Image types validation
+    const imageInputs = document.querySelectorAll(
+        'input[type="file"][name="image[]"]'
+    );
+    let imageValid = true;
+
+    // Validate each image input
+    imageInputs.forEach((input) => {
+        if (!validateImages(input)) {
+            imageValid = false;
+        }
+    });
+
     // Category is not null
     if (step === 3) {
         const checkboxes = document.querySelectorAll(
@@ -431,10 +444,42 @@ updateTimeline(step);
 // validate images
 function validateImages(event){
     const files = event.files;
-    if(files.length > 4){
-        alert("Maximum files is 4.");
-        event.value = "";
+    const allowedFormats = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/gif",
+    ];
+    const maxSize = 2 * 1024 * 1024; // 2MB
+    let valid = true;
+    let errorMessage = "";
+
+    if (files.length > 4) {
+        errorMessage = "You can upload a maximum of 4 files.";
+        valid = false;
+    } else {
+        for (let i = 0; i < files.length; i++) {
+            if (!allowedFormats.includes(files[i].type)) {
+                errorMessage =
+                    "Invalid file format. Only jpeg, jpg, png, and gif are allowed.";
+                valid = false;
+                break;
+            }
+            if (files[i].size > maxSize) {
+                errorMessage =
+                    "File size is too large. Maximum allowed size is 2MB.";
+                valid = false;
+                break;
+            }
+        }
     }
+
+    if (!valid) {
+        alert(errorMessage);
+        input.value = ""; // Clear the input
+    }
+
+    return valid;
 }
 
 // validate categories
