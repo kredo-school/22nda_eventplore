@@ -285,13 +285,18 @@
                     </div>
                     @auth('web')
                         @if ($currentDate->lte($appDeadline))
-                            <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
-                            @include('users.reservations.modal.confirm')
+                            @if($availableSlots > 0)
+                                <button class="btn btn-green px-5 py-2" data-bs-toggle="modal" data-bs-target="#user-confirm-reservation">JOIN EVENT</button>
+                                @include('users.reservations.modal.confirm')
+                            @else
+                                <button class="btn btn-secondary px-5 py-2 fw-bold" style="font-family: Raleway,sans-serif;" disabled>Reservation Closed</button>
+                                <p class="text-danger mt-2 fw-bold" style="font-family: Raleway,sans-serif;">Sold Out.&nbsp;Thank you! <i class="fa-regular fa-face-smile"></i></p>
+                            @endif
                         @else
                             <button class="btn btn-secondary px-5 py-2 fw-bold" style="font-family: Raleway,sans-serif;" disabled>Reservation Closed</button>
                             <p class="text-danger mt-2" style="font-family: Raleway,sans-serif;">The reservation deadline has passed.</p>
                         @endif
-                        @else
+                    @else
                         @if($availableSlots > 0)
                             <a href="{{ route('user.sign-in', ['message' => 'To make a reservation, you need to sign in!']) }}" class="btn btn-green px-5 py-1">
                                 JOIN EVENT <div class="small">after sign-in</div>
