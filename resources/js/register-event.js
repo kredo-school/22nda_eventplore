@@ -76,7 +76,7 @@ map.on("click", function (e) {
 
     // クリックした位置の住所を取得してインプットフォームに表示
     fetch(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${coordinates[0]},${coordinates[1]}.json?access_token=${accessToken}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${coordinates[0]},${coordinates[1]}.json?access_token=${accessToken}&language=en`
     )
         .then((response) => response.json())
         .then((data) => {
