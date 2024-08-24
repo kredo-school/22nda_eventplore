@@ -26,19 +26,6 @@ const geocoder = new MapboxGeocoder({
     language: 'en' //言語を英語指定
 });
 
-map.addControl(geocoder);
-
-// 住所データを取得して表示
-geocoder.on('result', (event) => {
-  const address = event.result.place_name;
-
-  // 住所を手動で正規化
-  const normalizedAddress = address.replace(/六本木/g, 'Roppongi'); // 日本語の部分を手動で置き換え
-
-  console.log('Normalized Address:', normalizedAddress);
-});
-
-
 document.getElementById("search-container").appendChild(geocoder.onAdd(map));
 
 // Geocoderのデフォルトの検索インプットフィールドを取得し、スタイルを適用
@@ -281,14 +268,14 @@ function validateStep(step) {
         }
     }
 
-    // Content length validation (max 255 characters)
+    // Content length validation (max 1000 characters)
     const detailsInput = document.getElementById("details");
-    if (detailsInput && detailsInput.value.length > 255) {
+    if (detailsInput && detailsInput.value.length > 1000) {
         valid = false;
         detailsInput.classList.add("is-invalid");
         const error = document.createElement("div");
         error.className = "invalid-feedback";
-        error.innerText = "Content must be 255 characters or less.";
+        error.innerText = "Content must be 1000 characters or less.";
         if (
             !detailsInput.nextElementSibling ||
             !detailsInput.nextElementSibling.classList.contains(
@@ -299,14 +286,14 @@ function validateStep(step) {
         }
     }
 
-    // History length validation (max 255 characters)
+    // History length validation (max 1000 characters)
     const historyInput = document.getElementById("history");
-    if (historyInput && historyInput.value.length > 255) {
+    if (historyInput && historyInput.value.length > 1000) {
         valid = false;
         historyInput.classList.add("is-invalid");
         const error = document.createElement("div");
         error.className = "invalid-feedback";
-        error.innerText = "History must be 255 characters or less.";
+        error.innerText = "History must be 1000 characters or less.";
         if (
             !historyInput.nextElementSibling ||
             !historyInput.nextElementSibling.classList.contains(
@@ -334,6 +321,19 @@ function validateStep(step) {
             maxParticipantsInput.parentNode.appendChild(error);
         }
     }
+
+    // Image types validation
+    const imageInputs = document.querySelectorAll(
+        'input[type="file"][name="image[]"]'
+    );
+    let imageValid = true;
+
+    // Validate each image input
+    imageInputs.forEach((input) => {
+        if (!validateImages(input)) {
+            imageValid = false;
+        }
+    });
 
     // Category is not null
     if (step === 3) {
@@ -444,10 +444,42 @@ updateTimeline(step);
 // validate images
 function validateImages(event){
     const files = event.files;
-    if(files.length > 4){
-        alert("Maximum files is 4.");
-        event.value = "";
+    const allowedFormats = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/gif",
+    ];
+    const maxSize = 2 * 1024 * 1024; // 2MB
+    let valid = true;
+    let errorMessage = "";
+
+    if (files.length > 4) {
+        errorMessage = "You can upload a maximum of 4 files.";
+        valid = false;
+    } else {
+        for (let i = 0; i < files.length; i++) {
+            if (!allowedFormats.includes(files[i].type)) {
+                errorMessage =
+                    "Invalid file format. Only jpeg, jpg, png, and gif are allowed.";
+                valid = false;
+                break;
+            }
+            if (files[i].size > maxSize) {
+                errorMessage =
+                    "File size is too large. Maximum allowed size is 2MB.";
+                valid = false;
+                break;
+            }
+        }
     }
+
+    if (!valid) {
+        alert(errorMessage);
+        input.value = ""; // Clear the input
+    }
+
+    return valid;
 }
 
 // validate categories
