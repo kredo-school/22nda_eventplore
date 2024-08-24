@@ -25,9 +25,9 @@
                     {{-- event list --}}
                     @forelse ($events as $event)
                         <div class="col-lg-6 mb-4">
-                            <a href="{{ route('event.details.show', $event->id) }}" class="text-decoration-none">
-                                {{-- event card --}}
-                                <div class="card shadow border-0" id="event-card-{{$event->id}}">
+                            {{-- event card --}}
+                            <div class="card shadow border-0" id="event-card-{{$event->id}}">
+                                <a href="{{ route('event.details.show', $event->id) }}" class="text-decoration-none">
                                     @php
                                         $carouselId = 'carousel' . $event->id;
                                     @endphp
@@ -139,7 +139,8 @@
                                             </div>
                                         </div>
                                     @endif
-
+                                </a>
+                                <a href="{{ route('event.details.show', $event->id) }}" class="text-decoration-none">
                                     <div class="card-body px-2">
                                         <div class="row align-items-center">
                                             {{-- event title --}}
@@ -157,7 +158,7 @@
                                         </div>
                                         {{-- information --}}
                                         <div class="row align-items-center gx-1 mb-2">
-                                            <div class="col-4 overflow_dot">
+                                            <div class="col-4 overflow_dot text-dark">
                                                 <i class="fa-solid fa-location-dot me-1"></i>{{ $event->area->name }} area
                                             </div>
                                             @php
@@ -179,7 +180,7 @@
                                             @endforelse
                                         </div>
                                         <div class="row align-items-center gx-1">
-                                            <div class="col-4">
+                                            <div class="col-4 text-dark">
                                                 <i class="fa-solid fa-calendar-days me-1"></i>Date/Time
                                             </div>
                                             <div class="col-4 align-self-center">
@@ -196,8 +197,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
                     @empty
                         {{-- No events --}}
